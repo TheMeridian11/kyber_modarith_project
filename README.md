@@ -25,7 +25,9 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-002 accepted validation and assembly](notes/runs/EXP-002-RUN-0001.md)
 - [EXP-001 versus EXP-002 timing protocol](notes/incremental_timing.md)
 - [EXP-002 measured timing results](notes/runs/EXP-002-RUN-0002.md)
-- [EXP-003 inverse-NTT plan, bounds and manual replacement](notes/experiments/EXP-003-staged-invntt.md)
+- [EXP-003 inverse-NTT plan, bounds and applied replacement](notes/experiments/EXP-003-staged-invntt.md)
+- [EXP-003 accepted validation and security/assembly findings](notes/runs/EXP-003-RUN-0001.md)
+- [EXP-002 versus EXP-003 timing protocol](notes/invntt_timing.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -38,7 +40,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 - external/kyber-official/: pinned upstream checkout; preserve its source.
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
-- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul and EXP-002 vector-dot-product changes.
+- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul, EXP-002 vector-dot-product and EXP-003 inverse-NTT changes.
 - scripts/: environment collection and benchmark automation.
 - benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
@@ -62,13 +64,15 @@ All 45 paired comparisons favoured EXP-002, including both execution orders. I v
 | EXP-000: baseline preparation | Complete | What does the unchanged reference do? |
 | EXP-001: base multiplication | Initial validation and timings accepted | Does fusion inside each coefficient pair help? |
 | EXP-002: vector-wide fusion | Initial validation and timings accepted | Does fusion across vector components improve further? |
-| EXP-003/RUN-0001: inverse-NTT schedule | Plan/support ready; manual arithmetic edit pending | Can I reduce less often while preserving bounds and outputs? |
-| EXP-003 timings | Later, after candidate validation and assembly | Does that additional change improve on EXP-002? |
+| EXP-003/RUN-0001: inverse-NTT schedule | Correctness, counts and scoped assembly accepted | Can I reduce less often while preserving bounds and outputs? |
+| EXP-003/RUN-0002: incremental timings | Support checked; formal run pending | Does that additional change improve on EXP-002? |
 
 EXP-002 retains its bounded correctness/security assessment, including smaller local stack use, a larger dot-product body and absence of its previous local stack-canary check under the same flags. The performance improvement does not remove that documented hardening tradeoff or establish constant-time security.
 
-Next I manually apply the [EXP-003 replacement](notes/experiments/EXP-003-staged-invntt.md) to invntt only. It keeps Barrett sum reductions at stage length 16, predicting 896 to 128 calls per inverse transform while retaining centred input reductions and all Montgomery operations. Key generation has no predicted arithmetic benefit. The first run checks the new candidate; performance comes after acceptance. EXP-004 is optional if a distinct interaction/combination question later warrants it.
+I have applied EXP-003 and accepted its [saved validation and security review](notes/runs/EXP-003-RUN-0001.md): all 54 steps pass, KEM transcripts match the original reference byte for byte, and all 90 count observations confirm the fixed schedule. Barrett calls fall from 896 to 128 per inverse transform; Montgomery counts stay unchanged. The current centred-input contract keeps sums/differences within 26624. The inspected branches and indices are public; scoped assembly review does not establish whole-program constant-time security.
 
-The latest timing source is a32a81d12225e00a8b3e0baeb32734f44cf78ab3 and its results commit is 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f. Complete constant-time guarantees, statistical leakage resistance and final ML-KEM conformance remain unestablished. A later direct comparison with the original reference is needed for a total final-variant speed claim.
+For all parameters, the inverse-function body grows from 347 to 458 bytes while local stack use including saved registers falls from 104 to 72 bytes, excluding return address and callees. Neither inverse version has a local canary, so EXP-003 removes none there; the earlier dot-product hardening tradeoff remains. Next I run the [fresh EXP-002/EXP-003 timing comparison](notes/invntt_timing.md). EXP-003 speed remains unmeasured; keygen has no predicted arithmetic benefit. EXP-004 remains optional for a distinct later research question.
+
+The latest accepted timing source is a32a81d12225e00a8b3e0baeb32734f44cf78ab3 with results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f. EXP-003 validation used source 9ec22141e6acc98812438544be0bec5b35d00b5c with results 705f21f7f07dcd4162052aacda3adbcc54c4051a. Complete constant-time guarantees, statistical leakage resistance and final ML-KEM conformance remain unestablished. A later direct comparison with the original reference is needed for a total final-variant speed claim.
 
 I manually apply arithmetic changes and perform Git operations, reviewing support code before committing it. I retain failed and inconclusive outcomes, use distinct experiment/run IDs, and keep validation evidence separate from performance results. The legacy summary script remains unused.

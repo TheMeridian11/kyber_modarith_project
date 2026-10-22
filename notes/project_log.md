@@ -372,3 +372,55 @@ I added tests/test_staged_invntt.c and scripts/run_invntt_validation.py. Each bu
 - Inverse-NTT test driver SHA-256: 5974f6b83f8c0e178d2e20f31ca96746a48657e90d0b33af7f38ff5ed997bec5.
 
 Final verification confirmed that all 455 archived result files, the arithmetic and pinned upstream source files, prior support/evidence and Git HEAD remain unchanged. Tested support hashes match, the proposed snippet changes only the intended sum-reduction schedule, documentation links/whitespace checks pass, and no EXP-003 run directory exists. This activity adds two support files, two research records and two evidence records, and updates seven existing project documents.
+
+## ACT-0011 — Inverse-NTT validation accepted and incremental timings prepared
+
+- **Completed:** I verified EXP-003/RUN-0001, reviewed actual inverse-transform/reducer assembly against retained EXP-002 binaries, documented correctness/range/security findings, and prepared the fresh EXP-002 versus EXP-003 timing runner and protocol.
+- **Results:** All 54 saved steps, 108 raw hashes, eighteen executable hashes and seven support-file hashes verify. Twelve builds pass 47-vector inverse-transform oracles and 100-fixture KEM transcripts; all tested external bytes match the original reference. Six UBSan builds have no diagnostics, three upstream suites pass and all 90 count observations match predictions. The timing support check passes six real builds and eighteen assembly comparisons.
+- **Learned:** Keeping Barrett reduction at length 16 removes 768 of 896 calls per inverse transform with Montgomery counts unchanged, under centred inputs and the 26624 sum/difference bound. Generated inverse code grows 347 -> 458 bytes while local stack use falls 104 -> 72 bytes including saved registers, excluding return address/callees. No inverse-function canary is removed; the inherited EXP-002 dot-product tradeoff remains relevant.
+- **Pending:** EXP-003 performance and final retention are unmeasured. Whole-program constant-time proof, statistical leakage, other-target behaviour and broader implementation-security guarantees remain unestablished or unassessed. I still need to review/commit the new support and records, then execute the formal timing run.
+- **Next:** Run EXP-003/RUN-0002 through scripts/run_invntt_comparison.py with guest logical CPU 0, then review every pair, both order groups and reproduced derived results. Keygen has no predicted arithmetic benefit and is retained as a useful comparison control.
+
+### Evidence identity and saved checks
+
+Source commit 9ec22141e6acc98812438544be0bec5b35d00b5c produced RUN-0001; results commit 705f21f7f07dcd4162052aacda3adbcc54c4051a directly follows it. The manifest SHA-256 is 70a9d98f92494ffa5ead0804565797060f3349f35d167cb68607ca66f2cb4615 and metadata SHA-256 is 21a6e595b26d3f1f0754b514d89446b7992cd081f3b7b9626eebf5b3192af89a. All 696 tracked files matched the results commit before this activity's changes. I read verified stored objects without executing Git commands.
+
+The [run review](runs/EXP-003-RUN-0001.md) and [machine-readable evidence](evidence/ACT-0011/exp-003-run-0001-review.json) retain the source/result/control identities, hashes, transcript sizes, counts, normalised assembly, symbol-table size checks and scoped findings. Only invntt differs from EXP-002, and it exactly matches the recorded replacement. The rest of ntt.c, polyvec.c and all other arithmetic files remain unchanged; the original baseline still matches pinned upstream.
+
+Each parameter's four normal/UBSan transcripts agree byte for byte at 416000/595200/806400 bytes, including valid exchanges, malformed/noncanonical key inputs and corrupted/random-ciphertext rejection outputs. Each of twelve builds passes 47 inverse vectors and 12032 coefficient comparisons. The ordinary modular oracle calls neither reducer but shares the transform layout and twiddle table; this is arithmetic-equivalence evidence, not an independent certification of the complete specification. The same fixtures repeat across builds, and targeted samples do not exhaust all inputs. Each candidate passes the existing 1000-valid/1000-replaced-secret-key/1000-corrupted-ciphertext upstream suite. I did not repeat full validation during this review.
+
+### Confirmed reduction mechanism and safety scope
+
+For Kyber512/768/1024, observed Barrett keygen/encap/decap counts are 2048/2432/3584, 3072/3328/4736 and 4096/4224/5888. Montgomery counts remain 4864/6400/9728, 7296/8832/13056 and 9728/11264/16384. All 90 instrumented observations agree. The fixed schedule gives 128 Barrett calls instead of 896 per inverse transform, with all 1152 Montgomery calls retained. Keygen has no inverse transform; encap has K+1 and decap K+2, including re-encryption. Counts establish the mechanism but do not quantify runtime improvement.
+
+The preserved final poly_reduce in the vector dot product supplies centred inputs bounded by 1664. The stage output bounds remain 3328/6656/13312/3328/6656/13312/26624. All sum/difference narrowing is representable; products are bounded by 44302336 for twiddles and 38365184 for final scaling, within int32_t and the Montgomery input contract. Final outputs stay within 3328; existing encryption/decryption additions/subtractions stay within 3330/4995/6656 before retained reductions. Montgomery scaling and final factor 1441 are unchanged. Internal representatives can differ modulo q while tested KEM bytes remain identical.
+
+These bounds depend on the current caller envelope. Removing input reductions, changing the reset stage or supplying arbitrary int16_t arrays invalidates this acceptance until reassessed. UBSan passing is supplementary and does not alone certify narrowing. Existing implementation-defined signed conversion/shift assumptions remain tied to the inspected GCC/x86-64 environment.
+
+### Generated code and security interpretation
+
+I extracted invntt and both reducers from the saved normal binaries and retained EXP-002 timing binaries after verifying hashes. All reviewed functions match the symbol-table byte extents; parameter variants have the same normalised instruction sequences after namespace substitution. GCC 13.3.0 separates the length-16 and general butterfly bodies using a public stage test. Remaining branches use public loop counters/endpoints, and memory/table addresses use public indices and fixed offsets. No coefficient-dependent branch/address, division or indirect call was identified in these bodies.
+
+One static Barrett site executes 128 times. Three static Montgomery sites cover general butterflies, length-16 butterflies and final scaling, totalling the unchanged 1152 dynamic calls. Both reducers are instruction-identical to EXP-002: Montgomery 22 bytes and Barrett 36 bytes. Static call-site counts are not dynamic operation counts.
+
+Inverse body size increases by 111 bytes; explicit stack reservation falls 56 -> 24 bytes while six saved registers still use 48 bytes. Local stack totals fall 104 -> 72 bytes, excluding the entry return address and callees. This is neither whole-binary size nor peak-stack measurement. The split loops, register/spill changes and layout may affect timing alongside reduction savings. Neither inverse version has a local stack-canary check; endbr64 remains. The previously recorded EXP-002 dot-product canary change remains inherited, with no protection flag disabled.
+
+I accept these bounded findings for research timing. They do not establish whole-program constant-time security, statistical leakage resistance, power/EM or fault resistance, absence of all memory errors, portability to untested compilers/targets, production readiness or final ML-KEM conformance. Ordinary speed measurements cannot fill those gaps.
+
+### Timing support and preservation
+
+I added scripts/run_invntt_comparison.py and the [next-run protocol](invntt_timing.md). When I invoke it, read-only git show restores all 35 accepted EXP-002 source files from a32a81d12225e00a8b3e0baeb32734f44cf78ab3 into the new run's ignored build/exp002-source directory, with each hash verified. The current candidate must match accepted EXP-003 validation. Both are freshly built with identical reviewed compiler/normal flags, and all eighteen inverse/reducer function bodies must match the review before any timing. The new orchestration commit and historical control/validation commits are recorded separately.
+
+The fixed formal budget remains five pairs per parameter, 100 warm-ups and 1000 measured exchanges per process, seed 1 and logical CPU 0. EXP-002 runs first in odd blocks and EXP-003 first in even blocks. Thirty processes provide 90000 operation durations, 90 process summaries, 45 paired effects and nine aggregates. Primary effects use medians of paired ratios/reductions; ranges describe observed pairs rather than confidence intervals. Reused fixtures and a shared session limit independence. Unknown manual conditions remain unknown, and guest affinity does not establish physical-core placement.
+
+[Development evidence](evidence/ACT-0011/invntt-comparison-smoke.json) records six real builds, eighteen assembly matches and two short blocks of twelve measured exchanges, with 432 valid rows. Synthetic positive/negative effects verify direction, experiment labels and paired aggregation; source/hash/assembly/group-integrity guards pass. Git state/existence checks were mocked, source bytes came from verified stored objects, and the git show argv was checked through a mocked subprocess. No Git commands or metadata collector ran. Development durations are excluded from performance conclusions; no formal EXP-003/RUN-0002 was allocated.
+
+I will retain all negative and inconclusive timing findings and examine unexpected keygen movement rather than crediting it to removed inverse-transform calls. I will not retry to obtain a preferred result or combine medians from separate runs into a claimed total gain over the original reference. A later direct final-variant comparison is needed for that claim.
+
+- Comparison runner SHA-256: 39424762798f7f6563df1447591cc71c89a6511ab45142d71daf7ed366d48e28.
+- Validation/assembly review SHA-256: b37952601e09e6eff2564132e77b977aadf4debe262a0a8ea37bc85e9125504e.
+- Development evidence SHA-256: 70ccf423f334d590fa7583f4ea0da2368657a84a11f245061ba4857727492f7a.
+
+The archived manifest retains its original assembly_review=pending field; this later review records completion separately. Raw logs and hashes are preserved, and new full-width assembly has no trailing whitespace. No cryptographic arithmetic or historical support/evidence was edited in this activity.
+
+Final verification confirms that all 565 archived result files, arithmetic/upstream sources, earlier support/evidence and Git HEAD remain unchanged. The tested runner/review/support hashes still match; documentation links, whitespace and the independent interval/count checks pass. EXP-003/RUN-0002 does not exist yet. This activity updates five existing documents and adds one runner, two explanatory records and two evidence records.

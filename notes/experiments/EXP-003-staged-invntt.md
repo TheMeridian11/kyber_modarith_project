@@ -3,18 +3,20 @@
 ## Identity and scope
 
 - Originating activity: ACT-0010.
-- Lifecycle: planned; exact arithmetic replacement supplied for manual application; validation support checked.
-- Variant: staged-invntt, containing the accepted EXP-002 arithmetic plus the proposed inverse-NTT change.
+- Lifecycle: running; RUN-0001 validation/counts/assembly accepted in ACT-0011; incremental timing pending.
+- Variant: staged-invntt, containing the accepted EXP-002 arithmetic plus the applied inverse-NTT change.
 - Predecessor: EXP-002 wide-dot, validated at 61279b2b2373c7594e40f06712bc9f93b734b8ed and timed at a32a81d12225e00a8b3e0baeb32734f44cf78ab3; timing results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f.
 - Original reference: pinned upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
-- Next record: EXP-003/RUN-0001, validation/counts/assembly only.
+- Validation source: 9ec22141e6acc98812438544be0bec5b35d00b5c; results commit: 705f21f7f07dcd4162052aacda3adbcc54c4051a.
+- Accepted record: [EXP-003/RUN-0001](../runs/EXP-003-RUN-0001.md), validation/counts/assembly only.
+- Next record: EXP-003/RUN-0002, [fresh EXP-002 versus EXP-003 timings](../invntt_timing.md).
 - Idea origin: local source/range analysis of LIT-003. No novelty claim or attribution of this exact schedule to the unreviewed full text of LIT-001.
 
 I retain EXP-002 and change only invntt in implementation/kyber-optimised-ref/ntt.c. The accepted basemul and vector-dot-product functions remain in place. This is an incremental experiment conditional on EXP-002, not a standalone estimate of the inverse-NTT treatment on the original reference. This scope avoids a redundant branch of combination experiments. EXP-004 remains optional if a later interaction or combination question warrants it; it is not an automatic extra step.
 
-## Hypothesis and expected effect
+## Hypothesis specified before measurement
 
-The existing inverse NTT has seven butterfly stages with lengths 2, 4, 8, 16, 32, 64 and 128. Each stage applies Barrett reduction to 128 butterfly sums: 896 calls per inverse transform. I propose retaining those sum reductions only at length 16, for 128 calls. All 896 Montgomery twiddle reductions and 256 final scaling reductions remain unchanged.
+The EXP-002 inverse NTT has seven butterfly stages with lengths 2, 4, 8, 16, 32, 64 and 128. Each stage applies Barrett reduction to 128 butterfly sums: 896 calls per inverse transform. I proposed retaining those sum reductions only at length 16, for 128 calls. All 896 Montgomery twiddle reductions and 256 final scaling reductions remain unchanged.
 
 The hypothesis is that removing 768 Barrett calls per inverse transform reduces encapsulation/decapsulation duration while preserving the existing KEM outputs. Key generation does not call this inverse transform, so it has no predicted arithmetic/count benefit and provides a useful comparison where no direct gain is expected. Code-layout/compiler effects may still change its measured duration.
 
@@ -24,7 +26,7 @@ The hypothesis is that removing 768 Barrett calls per inverse transform reduces 
 | Kyber768 | 3072 -> 3072 | 6400 -> 3328 | 8576 -> 4736 |
 | Kyber1024 | 4096 -> 4096 | 8064 -> 4224 | 10496 -> 5888 |
 
-There are zero, K+1 and K+2 inverse transforms in keygen, encapsulation and full decapsulation respectively; decapsulation includes re-encryption. Montgomery counts should remain 4864/6400/9728, 7296/8832/13056 and 9728/11264/16384 for keygen/encap/decap across the three parameter sets. These are source-derived predictions, not measurements. Removing 85.7% of inverse-transform Barrett calls does not imply an 85.7% speedup.
+There are zero, K+1 and K+2 inverse transforms in keygen, encapsulation and full decapsulation respectively; decapsulation includes re-encryption. Montgomery counts should remain 4864/6400/9728, 7296/8832/13056 and 9728/11264/16384 for keygen/encap/decap across the three parameter sets. These were source-derived predictions. ACT-0011 subsequently confirmed all full-operation counts in RUN-0001; the prior prediction is retained here. Removing 85.7% of inverse-transform Barrett calls does not imply an 85.7% speedup.
 
 ## Caller contract, modular argument and bounds
 
@@ -48,9 +50,9 @@ The maximum sum/difference is 26624, below 32767, so every assignment to int16_t
 
 After the inverse transform, encryption adds noise of magnitude at most 2, giving |b| <= 3330, and also a message coefficient at most 1665 for v, giving |v| <= 4995. Decryption subtracts the inverse result from a decompressed coefficient in [0,3328], giving an absolute bound of 6656. These fit int16_t before the existing poly_reduce calls. Those downstream reductions remain in place.
 
-## Exact manual replacement
+## Applied replacement, retained for reproducibility
 
-In implementation/kyber-optimised-ref/ntt.c, replace the complete existing void invntt(int16_t r[256]) function with the following. Preserve the surrounding file, including its other functions. Do not retain the old function inside a comment.
+I manually replaced the complete invntt function in implementation/kyber-optimised-ref/ntt.c with the following. ACT-0011 verified an exact match and preserved surrounding source. This is the applied code record; no further arithmetic edit is needed for timing.
 
 ~~~c
 void invntt(int16_t r[256]) {
@@ -80,7 +82,7 @@ void invntt(int16_t r[256]) {
 }
 ~~~
 
-This code is a proposal in the research record. I have not applied it to an implementation file or executed a temporary candidate. The validation preflight currently rejects the unapplied change before allocating a run.
+I applied and committed this code before RUN-0001. The original ACT-0010 support check tested the preflight rejection of the then-unapplied change; ACT-0011 verifies the now-applied source and saved validation.
 
 ## Implementation security and correctness gates
 
@@ -91,7 +93,7 @@ This code is a proposal in the research record. I have not applied it to an impl
 | Montgomery representation | Keep every twiddle reduction and factor 1441; compare with an ordinary modular inverse-transform oracle. |
 | External compatibility | Repeat the established KEM byte transcripts, including corrupted/random ciphertexts, malformed secret keys and noncanonical public keys, against the original reference. |
 | Timing/indexing | The new condition depends only on public stage length; no coefficient-dependent reduction decision is introduced. Inspect actual normal-build invntt and both reducers before timing. |
-| Memory and hardening | No new array, allocation or indexing scheme is proposed. Actual code size, local stack and hardening instructions remain to be reviewed. EXP-002's existing local-canary tradeoff remains inherited. |
+| Memory and hardening | No new array or allocation is introduced. ACT-0011 observed 347 -> 458 inverse-function bytes and 104 -> 72 local stack bytes including saved registers, excluding return address/callees. Neither inverse version has a local canary. EXP-002's dot-product local-canary tradeoff remains inherited. |
 | Portability | The recorded GCC target and existing signed-narrowing/right-shift assumptions remain. No claim for untested compilers, arbitrary input ranges or different parameters is added. |
 | Broader security | Ordinary speed measurements do not establish constant-time security. Statistical leakage, whole-program proof, power/EM leakage and fault resistance remain unestablished or unassessed. |
 
@@ -103,7 +105,7 @@ I prepared tests/test_staged_invntt.c and scripts/run_invntt_validation.py. The 
 
 The formal runner uses the original baseline and new cumulative candidate in normal and UBSan modes for all three parameters, with 100 KEM fixtures per build. It also runs the candidate's existing upstream functional suites, checks ten counting fixtures per parameter and retains invntt/Montgomery/Barrett assembly. The expected 54 steps include 18 disassembly extractions. No timings are collected. Source guards preserve all files except invntt itself, including EXP-002 polyvec.c and the accepted basemul.
 
-After manually applying the function and committing source/support/notes, I run:
+After manually applying and committing source/support/notes, I ran the following. It is historical; RUN-0001 exists and must not be reused:
 
 ~~~bash
 python3 -B scripts/run_invntt_validation.py --experiment EXP-003 --run RUN-0001
@@ -112,6 +114,14 @@ echo $?
 
 I do not invoke the metadata collector separately. I preserve failed attempts and use a fresh run ID for a retry. After successful execution, I retain the run directory for review; the initial manifest will still mark assembly review pending until it is inspected separately.
 
-[Development support evidence](../evidence/ACT-0010/invntt-validation-support-smoke.json) records twelve real builds using only the existing original reference and accepted EXP-002, with two KEM fixtures each. All 47-vector oracles, transcript comparisons and exercised UBSan checks passed. The unapplied-change guard rejects the current source, and old EXP-002 counts are rejected against the new predictions. The interval induction/count formulas were checked separately. No Git commands, metadata collector, proposed candidate or formal run were executed during those support checks.
+[Development support evidence](../evidence/ACT-0010/invntt-validation-support-smoke.json) records twelve real builds using only the existing original reference and accepted EXP-002, with two KEM fixtures each. All 47-vector oracles, transcript comparisons and exercised UBSan checks passed. The unapplied-change guard rejected the then-current EXP-002 source, and old EXP-002 counts were rejected against the new predictions. The interval induction/count formulas were checked separately. No Git commands, metadata collector, proposed candidate or formal run were executed during those support checks.
 
-Current status: proposed arithmetic not applied; candidate correctness/counts/assembly/performance not-run; support checks passed. After manual execution and acceptance, a fresh EXP-002 versus EXP-003 timing comparison will determine retention. I will retain regressions and inconclusive findings as research results rather than forcing a favourable outcome.
+## ACT-0011 validation decision and pending performance
+
+I accepted [RUN-0001](../runs/EXP-003-RUN-0001.md) after checking all 54 steps, 108 raw hashes, eighteen binaries, committed source/support, exact transcripts, oracle outputs, counts and generated code. All twelve builds passed 47 inverse-transform vectors and 100 KEM fixtures each; all six UBSan builds had no diagnostics, and all three candidate upstream suites passed. All 90 count observations match the table above. The oracle shares the transform layout and twiddles while using independent reduction arithmetic; sampled success is not exhaustive specification conformance.
+
+I verified actual inverse/reducer assembly against retained EXP-002 binaries. The only new stage-selection branch depends on public length 16; other conditional branches and addresses use public counters/endpoints. Both reducers are unchanged, with no value-dependent branches, division or indirect calls in the reviewed bodies. The inverse body is 111 bytes larger and its local stack use is 32 bytes smaller. These generated-code changes may affect runtime alongside removed Barrett calls. No inverse-function stack canary was removed by this treatment.
+
+The original centred-input and downstream bounds still hold for the current KEM call paths. No arbitrary-int16 input guarantee, whole-program constant-time proof, statistical leakage result or production security approval follows. The original manifest remains immutable with its execution-stage assembly_review=pending field; the [later review](../evidence/ACT-0011/exp-003-run-0001-review.json) records acceptance separately.
+
+Performance remains unmeasured. The checked [timing support](../invntt_timing.md) rebuilds both EXP-002 and EXP-003, verifies all eighteen relevant function bodies and uses the established five-pair protocol. The short development check is excluded from performance conclusions. I will retain regressions and inconclusive groups, investigate unexpected keygen movement, and decide performance retention from RUN-0002 rather than from call counts.

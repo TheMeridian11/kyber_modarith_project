@@ -1,0 +1,1016 @@
+{
+  "activity": "ACT-0011",
+  "arithmetic_edits": false,
+  "build_flags": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wmissing-prototypes",
+    "-Wredundant-decls",
+    "-Wshadow",
+    "-Wpointer-arith",
+    "-O3",
+    "-fomit-frame-pointer",
+    "-z",
+    "noexecstack"
+  ],
+  "candidate_validation_source_commit": "9ec22141e6acc98812438544be0bec5b35d00b5c",
+  "checks": {
+    "changed_current_source_rejected": "pass",
+    "changed_restored_identity_rejected": "pass",
+    "changed_stage_branch_target_and_wrong_variant_fail_assembly_match": "pass",
+    "duplicate_pair_rejected": "pass",
+    "historical_git_argv_checked_with_mock_and_exact_bytes_preserved": "pass",
+    "incorrect_historical_source_hash_rejected": "pass",
+    "invalid_reference_path_rejected": "pass",
+    "missing_assembly_symbol_rejected": "pass",
+    "missing_pair_rejected": "pass",
+    "real_build_assembly_and_short_pipeline": "pass",
+    "synthetic_direction_columns_order_and_paired_aggregation": "pass",
+    "unequal_sample_counts_rejected": "pass",
+    "wrong_variant_rejected": "pass"
+  },
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "requested": "gcc",
+    "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+    "version": "13.3.0"
+  },
+  "completed_steps": 36,
+  "control_source_commit": "a32a81d12225e00a8b3e0baeb32734f44cf78ab3",
+  "datasets": [
+    {
+      "block": 1,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-wide-dot-512-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "e25216d61fd5b1bded26ba894e1480ae730ad40cf1f423ece4fb7cfc10cc69a1",
+      "variant": "wide-dot"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-staged-invntt-512-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "7ce44144a14308328952724a92044ca383daff007c71199625a9b1697abc5096",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-wide-dot-768-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "4ae1a7945258fba71fa015958d01ff5d4a50fb5c9c021e79c026111aa910c823",
+      "variant": "wide-dot"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-staged-invntt-768-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "3d44c9d1ad538d2de02d8ed55312ce19360ad5c0fd42130f7c584f9814c3c854",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-wide-dot-1024-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "b6d73865cd8834e8d7187539f1e8becbcf664c06c71b04f042b7c88193a373dc",
+      "variant": "wide-dot"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-staged-invntt-1024-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "53a1cf7e4b6d81454728bb255393ac9cce7b3f8c536686f5961c7c61da0e7f2f",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-staged-invntt-512-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "c805b5ef048f759dcce4f8d125c18fc5c096907483f360ddec1acf01a03ca9d2",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-wide-dot-512-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "124820d5b7b011e38ef6039a2f61aad304037c895a92c22ffd5a54e4c19027b9",
+      "variant": "wide-dot"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-staged-invntt-768-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "b89d57adfe12389910c0a3841a6e62f610c18119e46cc57f72e582101bf00bb0",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-wide-dot-768-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "7c336bfb4b8502ced15af817894c84c6c6d4434430ad1f978996967542eac31f",
+      "variant": "wide-dot"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-staged-invntt-1024-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "b84eccf9b462f50be49db9c304168ef256c8c5521abd5a9fade6fca7f6c623a1",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-wide-dot-1024-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "807a9a07028e9fd86b19986c0998b56c5b4ec717280bbc3eebb40b1bdc8110ef",
+      "variant": "wide-dot"
+    }
+  ],
+  "derived": {
+    "comparison": {
+      "path": "derived/comparison.csv",
+      "rows": 9,
+      "sha256": "2df8ab441a4669e8b12608e72a4db11b9119f8666d14bf7d3a2bfb3fbe1f0c49"
+    },
+    "paired-comparison": {
+      "path": "derived/paired-comparison.csv",
+      "rows": 18,
+      "sha256": "44c87b78f456764f335375f91a04d0d3ca65180a5fb17c364eb647545ff8bf02"
+    },
+    "process-summary": {
+      "path": "derived/process-summary.csv",
+      "rows": 36,
+      "sha256": "98f5cca06247617f3f61cb4ab1002ccf3f0eb4d8239a143d21767440bdd6c3b8"
+    }
+  },
+  "executables": {
+    "staged-invntt-1024": {
+      "path": "build/staged-invntt-1024",
+      "sha256": "73fcbe70faa1e0503234daf6f6fbb8da54f94583f710434f24b93d8101414cd8"
+    },
+    "staged-invntt-512": {
+      "path": "build/staged-invntt-512",
+      "sha256": "7d003654adaf715747c134e0fc7e541729f083265a7b21e8c6f3aa6da049ea6f"
+    },
+    "staged-invntt-768": {
+      "path": "build/staged-invntt-768",
+      "sha256": "7931e0000e79b4e5f045be553354b0c7af2aea256e16444a33ca490e0ce02ca6"
+    },
+    "wide-dot-1024": {
+      "path": "build/wide-dot-1024",
+      "sha256": "fccbdfdba3416af5c241ded097a123a7b9dfcdade60f20a0b04f6690e8ac637b"
+    },
+    "wide-dot-512": {
+      "path": "build/wide-dot-512",
+      "sha256": "aac91d07b3153b793d04b3440835bf65e1c1739e73837ab52c8061bb801a329f"
+    },
+    "wide-dot-768": {
+      "path": "build/wide-dot-768",
+      "sha256": "40bb4348c1f42d5a0b0cafa1b169b0587f8a3b7cf5576fc3afb22187f53756b2"
+    }
+  },
+  "formal_run_executed": false,
+  "full_validation_repeated": false,
+  "git_commands_executed": false,
+  "git_mock_scope": "I mocked source-state/existence checks. Historical source bytes came from SHA-1-verified stored Git objects, and restoration verified all accepted SHA-256 hashes. The git show argv and exact-byte behaviour were checked with a mocked subprocess, without executing Git.",
+  "metadata_collector_executed": false,
+  "metadata_scope": "I reused the saved validation metadata only as an input template for available tool identity; this temporary development execution is not a formal clean-commit run.",
+  "performance_claim": false,
+  "record_type": "development-support-check",
+  "review_sha256": "b37952601e09e6eff2564132e77b977aadf4debe262a0a8ea37bc85e9125504e",
+  "scope": "I compiled six uninstrumented timing executables, verified all eighteen reviewed function bodies, and exercised two short blocks. These development durations are excluded from performance conclusions. The saved validation was not repeated.",
+  "short_protocol": {
+    "aggregate_rows": 9,
+    "blocks": 2,
+    "cpu": 0,
+    "iterations": 12,
+    "paired_rows": 18,
+    "process_summary_rows": 36,
+    "raw_operation_rows": 432,
+    "seed": 1,
+    "warmup": 2
+  },
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "build-wide-dot-512",
+      "status": "completed",
+      "stderr": "raw/build-wide-dot-512.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-wide-dot-512.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-512-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-512-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-512-invntt.stdout.log",
+      "stdout_sha256": "6bdef6f29a23779cd35170d1753eaac169406b15dba1c8efe252cba46b681566",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-512-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-512-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-512-montgomery_reduce.stdout.log",
+      "stdout_sha256": "73a805690ecbfba278eb0b9005145f7213ed11ac6f28dc0431d19dea9805b285",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-512-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-512-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-512-barrett_reduce.stdout.log",
+      "stdout_sha256": "7167aaf85b9d3ed68ba12a0afb26aad39b598cc3268739701e2be7dae8523219",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-staged-invntt-512",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-512.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-512.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-invntt.stdout.log",
+      "stdout_sha256": "b74084ad3b6c204f15bc579cea9533bcf186f7c152d249432e5136bd91334680",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-montgomery_reduce.stdout.log",
+      "stdout_sha256": "f5d48ce74d880b037453fe818c639f4c45005d0ec62735d14bd69406faed2582",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-barrett_reduce.stdout.log",
+      "stdout_sha256": "8c6f9e0e9e8a4fabca7bee01b560763606a492c91f67b7be2d05a6bd1e9a7665",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "build-wide-dot-768",
+      "status": "completed",
+      "stderr": "raw/build-wide-dot-768.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-wide-dot-768.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-768-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-768-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-768-invntt.stdout.log",
+      "stdout_sha256": "f7c2061b620d91f6113c6ad32bba28e7300e7cdeb8dcd9e08d327188a1b06e08",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-768-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-768-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-768-montgomery_reduce.stdout.log",
+      "stdout_sha256": "0ab58e0a35ae8de49b9c8a670d1d53d2c82eeb26b55babfc9e0a0476f064565e",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-768-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-768-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-768-barrett_reduce.stdout.log",
+      "stdout_sha256": "027f08f4f89cc6dba0b61d40542437c849791b4d5abc3a717e5d61dedbc048cc",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-staged-invntt-768",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-768.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-768.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-invntt.stdout.log",
+      "stdout_sha256": "707574ab16771ea87fdbdfae6f67e7fa359958cdfebdb7438afe6c1d44062fdc",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-montgomery_reduce.stdout.log",
+      "stdout_sha256": "612f74babe4969b4e6c65c8fa3e745f639205554c04b54800c7cf13e0013c780",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-barrett_reduce.stdout.log",
+      "stdout_sha256": "705c6611fd2cd3f637ef534d610379155afb0640b501c5b2dc5742bb4a206490",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "build-wide-dot-1024",
+      "status": "completed",
+      "stderr": "raw/build-wide-dot-1024.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-wide-dot-1024.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-1024-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-1024-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-1024-invntt.stdout.log",
+      "stdout_sha256": "81b0ab77133a5e3f22459dc3e51c458492ebf70629f9101e82a04dacf7faec96",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-1024-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-1024-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-1024-montgomery_reduce.stdout.log",
+      "stdout_sha256": "7f6188003346111003994363c0bc54ed94d78791e347460241d477f4a4624207",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "assembly-wide-dot-1024-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-wide-dot-1024-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-wide-dot-1024-barrett_reduce.stdout.log",
+      "stdout_sha256": "7e4ad467edca1e4dd6feb7e54274ebffe297898e15f996b06491cc2c2589e5aa",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-staged-invntt-1024",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-1024.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-1024.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_invntt",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-invntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-invntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-invntt.stdout.log",
+      "stdout_sha256": "58c9e3d300179828206323bdeed181360c6818c3bfa18710679d3932de89c781",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-montgomery_reduce.stdout.log",
+      "stdout_sha256": "69ff207d762ee10a4b3a1c8a421a541bb19ad4c8ef320e0f732ae61b1f726773",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_barrett_reduce",
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-barrett_reduce.stdout.log",
+      "stdout_sha256": "cfc9a348378a4111f50d69a34f705e6bf727a4d629ecf6d1b59b2b6bd7d10060",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-512-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-512-block-0001.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-wide-dot-512-block-0001.csv",
+      "stdout_sha256": "e25216d61fd5b1bded26ba894e1480ae730ad40cf1f423ece4fb7cfc10cc69a1",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-512-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-512-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-512-block-0001.csv",
+      "stdout_sha256": "7ce44144a14308328952724a92044ca383daff007c71199625a9b1697abc5096",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-768-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-768-block-0001.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-wide-dot-768-block-0001.csv",
+      "stdout_sha256": "4ae1a7945258fba71fa015958d01ff5d4a50fb5c9c021e79c026111aa910c823",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-768-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-768-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-768-block-0001.csv",
+      "stdout_sha256": "3d44c9d1ad538d2de02d8ed55312ce19360ad5c0fd42130f7c584f9814c3c854",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-1024-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-1024-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-wide-dot-1024-block-0001.csv",
+      "stdout_sha256": "b6d73865cd8834e8d7187539f1e8becbcf664c06c71b04f042b7c88193a373dc",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-1024-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-1024-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-1024-block-0001.csv",
+      "stdout_sha256": "53a1cf7e4b6d81454728bb255393ac9cce7b3f8c536686f5961c7c61da0e7f2f",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-512-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-512-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-staged-invntt-512-block-0002.csv",
+      "stdout_sha256": "c805b5ef048f759dcce4f8d125c18fc5c096907483f360ddec1acf01a03ca9d2",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-512-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-512-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-wide-dot-512-block-0002.csv",
+      "stdout_sha256": "124820d5b7b011e38ef6039a2f61aad304037c895a92c22ffd5a54e4c19027b9",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-768-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-768-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-staged-invntt-768-block-0002.csv",
+      "stdout_sha256": "b89d57adfe12389910c0a3841a6e62f610c18119e46cc57f72e582101bf00bb0",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-768-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-768-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-wide-dot-768-block-0002.csv",
+      "stdout_sha256": "7c336bfb4b8502ced15af817894c84c6c6d4434430ad1f978996967542eac31f",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/staged-invntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-1024-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-1024-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-1024-block-0002.csv",
+      "stdout_sha256": "b84eccf9b462f50be49db9c304168ef256c8c5521abd5a9fade6fca7f6c623a1",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0011-jv7p6k_2/comparison/build/wide-dot-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0011-jv7p6k_2/comparison/build/exp002-source",
+      "exit_code": 0,
+      "label": "timing-wide-dot-1024-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-wide-dot-1024-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-wide-dot-1024-block-0002.csv",
+      "stdout_sha256": "807a9a07028e9fd86b19986c0998b56c5b4ec717280bbc3eebb40b1bdc8110ef",
+      "timeout_seconds": 120
+    }
+  ],
+  "support_file_sha256": {
+    "benchmarks/bench_kem.c": "103feedada227af4a170b561a05a5268d31845e3ddbe758553ba5f7f3a11dc3a",
+    "benchmarks/count_reductions.c": "adc3efa6f3bf543d5383a4f0611b23b2b0065e517d34b01b4ddc7c046fd17c2a",
+    "scripts/collect_run_metadata.py": "0270459b5c508bfbdd1ce0d9cef59860e8fade7333a0145a9c5d8a5136c5e7e7",
+    "scripts/run_candidate_validation.py": "7b7fc5d0c779303bd3d8bb2898b052e7ca5ab9f3afd6cf26f2867808ab135939",
+    "scripts/run_comparison.py": "a492a1f5efe5292049f46d544b64092b4faf0b15a9459faa5e5d47fad1ce8378",
+    "scripts/run_counts.py": "8f41dc934e7d21b071b67ffd3b529b181ffcfe9fc26bcfde21bdc6838d42710d",
+    "scripts/run_dot_validation.py": "723c00730bb8afa778e6cb651995cb9bbcf55fd9f161024e3bac437f51f45c6d",
+    "scripts/run_incremental_comparison.py": "0f82a43e55aa3b6b1d15aa88c31707d63da6a3547d108161cbda5dfa996c84d7",
+    "scripts/run_invntt_comparison.py": "39424762798f7f6563df1447591cc71c89a6511ab45142d71daf7ed366d48e28",
+    "scripts/run_invntt_validation.py": "c2ef075fe1f4d8b803b09b1f775e56faa7938e83e88dc44a28bfe36f0a51f795",
+    "scripts/run_timing.py": "690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6",
+    "scripts/run_validation.py": "e54636a2335400d35c7103f2e6a5669e4fda88794136d5ac94b6b5a2d1a61071",
+    "tests/test_fused_basemul.c": "2aad45e50a26bf54a3241570aba173f2d238836ba17b5fd267ccb57910b8752b",
+    "tests/test_fused_dot.c": "03f2c33a595ee4e0a70a2f641759758dfc0f0096464c9727f69deada2b6930ab",
+    "tests/test_staged_invntt.c": "5974f6b83f8c0e178d2e20f31ca96746a48657e90d0b33af7f38ff5ed997bec5"
+  },
+  "temporary_paths": "Temporary outputs were removed after recording hashes and execution evidence; no formal run ID was allocated.",
+  "verified_assembly_functions": 18
+}
