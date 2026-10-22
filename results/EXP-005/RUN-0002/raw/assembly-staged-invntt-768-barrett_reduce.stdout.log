@@ -1,0 +1,27 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-005/RUN-0002/build/staged-invntt-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000054c0 <pqcrystals_kyber768_ref_barrett_reduce>:
+    54c0:	f3 0f 1e fa                                     	endbr64
+    54c4:	0f bf d7                                        	movswl %di,%edx
+    54c7:	89 f8                                           	mov    %edi,%eax
+    54c9:	69 d2 bf 4e 00 00                               	imul   $0x4ebf,%edx,%edx
+    54cf:	81 c2 00 00 00 02                               	add    $0x2000000,%edx
+    54d5:	48 63 d2                                        	movslq %edx,%rdx
+    54d8:	48 c1 fa 1a                                     	sar    $0x1a,%rdx
+    54dc:	66 69 d2 01 0d                                  	imul   $0xd01,%dx,%dx
+    54e1:	29 d0                                           	sub    %edx,%eax
+    54e3:	c3                                              	ret
+
+Disassembly of section .fini:
