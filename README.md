@@ -29,7 +29,9 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-003 accepted validation and security/assembly findings](notes/runs/EXP-003-RUN-0001.md)
 - [EXP-002 versus EXP-003 timing protocol](notes/invntt_timing.md)
 - [EXP-003 measured timings and security interpretation](notes/runs/EXP-003-RUN-0002.md)
-- [EXP-005 error-vector plan, bounds and exact manual edit](notes/experiments/EXP-005-error-ntt.md)
+- [EXP-005 error-vector plan, bounds and applied edit](notes/experiments/EXP-005-error-ntt.md)
+- [EXP-005 accepted correctness and security/assembly review](notes/runs/EXP-005-RUN-0001.md)
+- [EXP-003 versus EXP-005 timing protocol](notes/error_ntt_timing.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -42,7 +44,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 - external/kyber-official/: pinned upstream checkout; preserve its source.
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
-- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul, EXP-002 vector-dot-product and EXP-003 inverse-NTT changes.
+- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul, EXP-002 vector-dot-product, EXP-003 inverse-NTT and EXP-005 keygen error-vector changes.
 - scripts/: environment collection and benchmark automation.
 - benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
@@ -70,11 +72,17 @@ The [timing review](notes/runs/EXP-003-RUN-0002.md) records absolute durations, 
 | EXP-002: vector-wide fusion | Initial validation/timings accepted | Does fusion across vector components improve further? |
 | EXP-003: inverse-NTT schedule | Initial validation/timings accepted | Does reducing Barrett frequency improve further within the required bounds? |
 | EXP-004: optional interaction study | Deferred | Is a distinct combination/interaction question worth testing later? |
-| EXP-005: error-vector NTT reduction | Plan/support ready; manual edit pending | Can keygen defer this one reduction until its existing final reduction? |
+| EXP-005: error-vector NTT reduction | Correctness/counts/assembly accepted; timing pending | Does deferring this one reduction improve keygen over EXP-003? |
 
 EXP-003 reduces Barrett calls from 896 to 128 per inverse transform while retaining Montgomery counts and the centred-input contract. Its inverse body grows 347 -> 458 bytes and local stack use falls 104 -> 72 bytes including saved registers, excluding return address/callees. Neither inverse version has a local canary. The earlier EXP-002 dot-product canary tradeoff remains inherited. Scoped public-control-flow assembly and passing sampled correctness/UBSan checks do not establish whole-program constant-time security or production approval.
 
-Next I manually apply the [EXP-005 call-site edit](notes/experiments/EXP-005-error-ntt.md) in indcpa_keypair_derand only: retain the skpv transform/reduction and transform each error polynomial e directly with ntt. The existing final public-key reduction stays in place. Conservative raw-error/addition bounds are 23299/26627, and predicted keygen Barrett savings are 512/768/1024 calls; encap/decap arithmetic counts remain unchanged. All reductions establishing EXP-003's inverse-input bounds are preserved. EXP-005 is not yet applied or validated; its first run collects correctness/counts/assembly, with performance considered only after acceptance.
+I have now applied and [validated EXP-005](notes/runs/EXP-005-RUN-0001.md): keygen transforms each error polynomial directly with ntt while retaining skpv and the final public-key reduction. All sixty validation steps, normal/UBSan deterministic transcripts, targeted arithmetic tests, upstream suites and ninety count observations pass. Keygen Barrett savings are confirmed at 512/768/1024 calls; Montgomery and encap/decap counts are unchanged. Conservative raw-error/addition bounds are 23299/26627 (one less for Kyber768/1024), preserving all earlier caller contracts.
+
+The scoped assembly review confirms the intended calls, unchanged forward NTT/reducers and retained keygen canaries/page probes/endbr64. Keygen code grows by 17/33/40 bytes; local stack use rises by 16/16/0 bytes. I record these tradeoffs and the inherited EXP-002 dot-product canary change. No EXP-005 speed result or whole-program security proof is established. Next I commit the support/records and run the [fresh EXP-003/EXP-005 comparison](notes/error_ntt_timing.md); no further arithmetic edit is needed.
+
+EXP-004 was reserved for studying interactions between optimisations. The retained variants already build on one another, so merely combining them again would repeat the existing treatment. I defer that distinct study unless separate variants or controlled ablations answer a useful question. EXP-004 was not run or rejected; its ID stays reserved.
+
+EXP-005 validation source is 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648 and its results commit is af3408156a334c52676b51a5348540c17234390c. The first identifies executed code; the second archives the run.
 
 The latest accepted timing source is cf8ae0dd700bb41628c158016a7c15926a0b790f with results 23b4736206a8f79d13fb4898d474eb327e1dab3c. EXP-003 validation used source 9ec22141e6acc98812438544be0bec5b35d00b5c with results 705f21f7f07dcd4162052aacda3adbcc54c4051a. Statistical leakage resistance and final ML-KEM conformance remain unestablished. A later direct comparison with the original reference is needed for a total selected-variant speed claim.
 

@@ -1,0 +1,1119 @@
+{
+  "schema_version": 1,
+  "activity_id": "ACT-0013",
+  "record_type": "development-support-smoke",
+  "purpose": "I verified the new EXP-003/EXP-005 runner with short real builds/processes and focused rejection checks. These are support checks, not thesis performance results.",
+  "primary_performance_claim": false,
+  "formal_run_created": false,
+  "git_commands_executed": false,
+  "metadata_collector_executed": false,
+  "arithmetic_modified": false,
+  "mocks": "I mocked Git state/existence checks and replaced read-only git show with SHA-1-verified stored-object reads. The existing validation snapshot supplied compiler/provenance test inputs only; this is not a committed formal run.",
+  "temporary_files": "I used an isolated temporary directory; intermediate development binaries and CSVs were removed after verification.",
+  "development_adjustment": "An initial synthetic branch test changed only the printed absolute address, which the normaliser intentionally removes; I corrected the test to change the resolved symbolic branch offset. No production-runner change was required.",
+  "checks": {
+    "changed_candidate_identity_rejected": "pass",
+    "synthetic_improvement_regression_columns_order_and_median_of_pairs": "pass",
+    "missing_pair_rejected": "pass",
+    "duplicate_pair_rejected": "pass",
+    "unequal_pair_sizes_rejected": "pass",
+    "wrong_variant_rejected": "pass",
+    "changed_call_branch_and_wrong_variant_assembly_detected": "pass",
+    "wrong_historical_source_hash_rejected": "pass",
+    "six_real_builds_24_actual_assembly_matches_12_short_processes": "pass",
+    "432_rows_roundtrips_36_summaries_18_pairs_nine_aggregates": "pass",
+    "historical_restore_35_exact_files_no_arithmetic_edit": "pass"
+  },
+  "reference_source_commit": "cf8ae0dd700bb41628c158016a7c15926a0b790f",
+  "review_sha256": "e583f1ef74776363536778f409be2bc872ec6a99dfa223628c6557e9fee1669f",
+  "support_file_sha256": {
+    "benchmarks/bench_kem.c": "103feedada227af4a170b561a05a5268d31845e3ddbe758553ba5f7f3a11dc3a",
+    "benchmarks/count_reductions.c": "adc3efa6f3bf543d5383a4f0611b23b2b0065e517d34b01b4ddc7c046fd17c2a",
+    "scripts/collect_run_metadata.py": "0270459b5c508bfbdd1ce0d9cef59860e8fade7333a0145a9c5d8a5136c5e7e7",
+    "scripts/run_candidate_validation.py": "7b7fc5d0c779303bd3d8bb2898b052e7ca5ab9f3afd6cf26f2867808ab135939",
+    "scripts/run_comparison.py": "a492a1f5efe5292049f46d544b64092b4faf0b15a9459faa5e5d47fad1ce8378",
+    "scripts/run_counts.py": "8f41dc934e7d21b071b67ffd3b529b181ffcfe9fc26bcfde21bdc6838d42710d",
+    "scripts/run_dot_validation.py": "723c00730bb8afa778e6cb651995cb9bbcf55fd9f161024e3bac437f51f45c6d",
+    "scripts/run_error_ntt_comparison.py": "4ae286303c2a1e1bd88026a86da95510f39adbdc9d939d372d8091cba7aab54f",
+    "scripts/run_error_ntt_validation.py": "18ed7694210b1cac0443ffbe15ff4d9edc4f59276b1d75d89ef4a48e756b55d6",
+    "scripts/run_incremental_comparison.py": "0f82a43e55aa3b6b1d15aa88c31707d63da6a3547d108161cbda5dfa996c84d7",
+    "scripts/run_timing.py": "690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6",
+    "scripts/run_validation.py": "e54636a2335400d35c7103f2e6a5669e4fda88794136d5ac94b6b5a2d1a61071",
+    "tests/test_error_ntt.c": "7fae4a09b1ca651af149a48665c3e6cde717c5103f2d6f7647f44f5a0170b9e2",
+    "tests/test_fused_basemul.c": "2aad45e50a26bf54a3241570aba173f2d238836ba17b5fd267ccb57910b8752b",
+    "tests/test_fused_dot.c": "03f2c33a595ee4e0a70a2f641759758dfc0f0096464c9727f69deada2b6930ab"
+  },
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "requested": "gcc",
+    "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+    "version": "13.3.0"
+  },
+  "objdump": {
+    "path": "/usr/bin/objdump",
+    "sha256": "d0041e7511460b9ebfd95ce4f9d93c7ffea398ffc1cb2c316a220dd8e533db3d"
+  },
+  "protocol": {
+    "blocks": 2,
+    "measured_exchanges_per_process": 12,
+    "warmup_exchanges_per_process": 2,
+    "seed": 1,
+    "selected_guest_logical_cpu": 0
+  },
+  "counts": {
+    "builds": 6,
+    "assembly_matches": 24,
+    "timing_processes": 12,
+    "steps": 42,
+    "raw_streams": 84,
+    "operation_rows": 432,
+    "process_summaries": 36,
+    "paired_rows": 18,
+    "aggregate_rows": 9
+  },
+  "executables": {
+    "raw-error-ntt-1024": {
+      "path": "build/raw-error-ntt-1024",
+      "sha256": "d3e18ed4e1692ff45b7f139bd73ff34addd963b5d89e02813b33a5746fa1d349"
+    },
+    "raw-error-ntt-512": {
+      "path": "build/raw-error-ntt-512",
+      "sha256": "ab5f52cd22df182fa4e226da710dfdfa62978f38bffea4d1f8eaa9165086ed5d"
+    },
+    "raw-error-ntt-768": {
+      "path": "build/raw-error-ntt-768",
+      "sha256": "c802221028d50a83d8b6f7377625b0734f45729871dd5295543f66260c4ba045"
+    },
+    "staged-invntt-1024": {
+      "path": "build/staged-invntt-1024",
+      "sha256": "73fcbe70faa1e0503234daf6f6fbb8da54f94583f710434f24b93d8101414cd8"
+    },
+    "staged-invntt-512": {
+      "path": "build/staged-invntt-512",
+      "sha256": "7d003654adaf715747c134e0fc7e541729f083265a7b21e8c6f3aa6da049ea6f"
+    },
+    "staged-invntt-768": {
+      "path": "build/staged-invntt-768",
+      "sha256": "7931e0000e79b4e5f045be553354b0c7af2aea256e16444a33ca490e0ce02ca6"
+    }
+  },
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "build-staged-invntt-512",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-512.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-512.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "f709a2f4120cbc7036f355a8e81a259ea4d32becd600abafe67ec6861d5404a0",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-ntt.stdout.log",
+      "stdout_sha256": "8dca32d182e5ad8bcede47408cbe830e598b5da9b030cb7183bfdf9dfadb9ee5",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-montgomery_reduce.stdout.log",
+      "stdout_sha256": "3416e6d6885fa41f50a158e5578da0f6bfc74d32afeef5679117f422ac4cb357",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-512-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-512-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-512-barrett_reduce.stdout.log",
+      "stdout_sha256": "2b56a987a7aa6f20f3cb6d4a45c472f5c7fc284fc0dd8af3bf702903aa9065d0",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-raw-error-ntt-512",
+      "status": "completed",
+      "stderr": "raw/build-raw-error-ntt-512.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-raw-error-ntt-512.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-512-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-512-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-512-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "78476356e6f8ad35ef2a7cb74d51d79200956c43d0043b80474e7ede4d20a5cf",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-512-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-512-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-512-ntt.stdout.log",
+      "stdout_sha256": "13727e50be9b584a321333461c7b7749da77454c3429c822a71c8b82847644ed",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-512-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-512-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-512-montgomery_reduce.stdout.log",
+      "stdout_sha256": "fc263773a0db2d37da1062f84cd9276cbdf01358fa66fcd1c451f61d1297331f",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-512-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-512-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-512-barrett_reduce.stdout.log",
+      "stdout_sha256": "db44072178c6225bec4448a20fb8302831e5eafb8de1b942ab6ec129639c5823",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "build-staged-invntt-768",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-768.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-768.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "3edb76f493ef1d614c4d892a2f0f3cc39f3f7d2464336f756bdd6da087d7b104",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-ntt.stdout.log",
+      "stdout_sha256": "d64991e7476a0c41578227525b18cb3033ffc9c180000fde1953a9340dc6d08c",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-montgomery_reduce.stdout.log",
+      "stdout_sha256": "759a5cec6365cbbfc5d33b0f567af853931e9d52e75653fdf11ec905e27ad1f9",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-768-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-768-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-768-barrett_reduce.stdout.log",
+      "stdout_sha256": "c3cb058fce6619ac2de3112f288351938ec89586053c99573ae0234482ca165b",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-raw-error-ntt-768",
+      "status": "completed",
+      "stderr": "raw/build-raw-error-ntt-768.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-raw-error-ntt-768.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-768-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-768-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-768-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "1720723c7bb2aaa08d41b9a5ff1d4d3efb604b4ba9fa430256cce79495d96290",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-768-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-768-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-768-ntt.stdout.log",
+      "stdout_sha256": "46ca29c22d69723b05822efde8a5693f9990fc9adbf204283b6cbfcb3adee46a",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-768-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-768-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-768-montgomery_reduce.stdout.log",
+      "stdout_sha256": "a03d6d78063d3f6240785e99bc25b42b6b9431b8a99b37ea13955229c7a170ac",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-768-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-768-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-768-barrett_reduce.stdout.log",
+      "stdout_sha256": "2bd69f4ffdbb272c4a05c7aa167aa30c3aed278fb3c679fe6e8e52d4156fb787",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "build-staged-invntt-1024",
+      "status": "completed",
+      "stderr": "raw/build-staged-invntt-1024.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-staged-invntt-1024.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "afc19cc9c0ad8d28a4a4801c1e4a43555f95a5eac228283133fde6dbc7167b7c",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-ntt.stdout.log",
+      "stdout_sha256": "d13ed6b1c82d2781ac7fc264f2b8cb687cc30928d4103f564c1b9b5a169e4ee6",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-montgomery_reduce.stdout.log",
+      "stdout_sha256": "9670b086e406b573358b836a619b90ad9d95fc408b65bc544b5ab7c1744ad22a",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "assembly-staged-invntt-1024-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-staged-invntt-1024-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-staged-invntt-1024-barrett_reduce.stdout.log",
+      "stdout_sha256": "2405150e2b2452739730ed0ae8f3a6b019087ef7da0c477b0a94e50fd4352140",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "build-raw-error-ntt-1024",
+      "status": "completed",
+      "stderr": "raw/build-raw-error-ntt-1024.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/build-raw-error-ntt-1024.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_indcpa_keypair_derand",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-1024-indcpa_keypair_derand",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-1024-indcpa_keypair_derand.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-1024-indcpa_keypair_derand.stdout.log",
+      "stdout_sha256": "490b05ef0f691e65b39b9ae283793b72a9afa37fd29ae7636d23ddf00c4f8565",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_ntt",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-1024-ntt",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-1024-ntt.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-1024-ntt.stdout.log",
+      "stdout_sha256": "fa18110bbe411d1fdcd3c29524db234865b052477fc2e2d0ba8c5bda32d06cbd",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-1024-montgomery_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-1024-montgomery_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-1024-montgomery_reduce.stdout.log",
+      "stdout_sha256": "2981daa6159f627eba5f11ad0fe69cad93160b3db7db28e6826b7587c0b5049c",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_barrett_reduce",
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "assembly-raw-error-ntt-1024-barrett_reduce",
+      "status": "completed",
+      "stderr": "raw/assembly-raw-error-ntt-1024-barrett_reduce.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "raw/assembly-raw-error-ntt-1024-barrett_reduce.stdout.log",
+      "stdout_sha256": "5ca43a183388180fda3c05e83f1c9725a592a080da70e4bdf1e99fa874edb903",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-512-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-512-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-512-block-0001.csv",
+      "stdout_sha256": "11b6f8b314483e8332e3efde440586e32f4c8bf9ff0f32edbfdc099fa20f1f1e",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-512-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-512-block-0001.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-raw-error-ntt-512-block-0001.csv",
+      "stdout_sha256": "76fcf95c7a9f259759ed7c3f35b5f3c8e0214896acfab0568a5c0c280b089afe",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-768-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-768-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-768-block-0001.csv",
+      "stdout_sha256": "49ed82fd2ae9819a03dd0664332e86ef77537119ac6f63ee0e62c35684270b07",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-768-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-768-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-raw-error-ntt-768-block-0001.csv",
+      "stdout_sha256": "87521aee2733343b56071e7494097f275e817f82d5486b0562b5314374dc0acd",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-1024-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-1024-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-1024-block-0001.csv",
+      "stdout_sha256": "0adb8f2a6d20cdb3e566d2749baaa5208d55dc05b6b9667bb428679bb1f3ec94",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-1024-block-0001",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-1024-block-0001.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-raw-error-ntt-1024-block-0001.csv",
+      "stdout_sha256": "57468fc28f7f86fde11e31c5eb88d5cf139f37481dec0410fabda54eba4251a2",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-512-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-512-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-raw-error-ntt-512-block-0002.csv",
+      "stdout_sha256": "35e82cf401cf52805c40d1ca001591bd34a6b2ea53b3819475d2d64b5ec6c02c",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-512",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-512-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-512-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-512-block-0002.csv",
+      "stdout_sha256": "9efef6c662d5efb9051c5d60147e999499d3a4090a48e714d3ae933c6b92ad4a",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-768-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-768-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-raw-error-ntt-768-block-0002.csv",
+      "stdout_sha256": "89c3ada9fa3107f472e7b4bbdecac6eefb77f4cee1d1f7a43d039eeca3445624",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-768",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-768-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-768-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-staged-invntt-768-block-0002.csv",
+      "stdout_sha256": "92afa5e3b582286845cf38720c661e2aef25166d1d1d75edd560dad6afe838b1",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/raw-error-ntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+      "exit_code": 0,
+      "label": "timing-raw-error-ntt-1024-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-raw-error-ntt-1024-block-0002.stderr.log",
+      "stderr_sha256": "7e7f1a9ad6f5cfd93bb6639c69fe4da0626dc49737e86019ced06fbadc20a053",
+      "stdout": "raw/timing-raw-error-ntt-1024-block-0002.csv",
+      "stdout_sha256": "386cff71eebef04b67ecedf6df60b1485af531c8f9daae5738d39a91c0b4b968",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/staged-invntt-1024",
+        "12",
+        "2",
+        "1"
+      ],
+      "cwd": "/tmp/kyber-act0013-mhmcfj5u/development-smoke/build/exp003-source",
+      "exit_code": 0,
+      "label": "timing-staged-invntt-1024-block-0002",
+      "status": "completed",
+      "stderr": "raw/timing-staged-invntt-1024-block-0002.stderr.log",
+      "stderr_sha256": "673b98909336a7f5ae4aecf1a5ea00eb061d2fd727013f08279dd2f0f05967a7",
+      "stdout": "raw/timing-staged-invntt-1024-block-0002.csv",
+      "stdout_sha256": "eb166ef9269518649fe5750ec47a4753c918f67f7d0a15662d8ee51f1bf38566",
+      "timeout_seconds": 120
+    }
+  ],
+  "datasets": [
+    {
+      "block": 1,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-staged-invntt-512-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "11b6f8b314483e8332e3efde440586e32f4c8bf9ff0f32edbfdc099fa20f1f1e",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-raw-error-ntt-512-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "76fcf95c7a9f259759ed7c3f35b5f3c8e0214896acfab0568a5c0c280b089afe",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-staged-invntt-768-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "49ed82fd2ae9819a03dd0664332e86ef77537119ac6f63ee0e62c35684270b07",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-raw-error-ntt-768-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "87521aee2733343b56071e7494097f275e817f82d5486b0562b5314374dc0acd",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-staged-invntt-1024-block-0001.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "0adb8f2a6d20cdb3e566d2749baaa5208d55dc05b6b9667bb428679bb1f3ec94",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 1,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-raw-error-ntt-1024-block-0001.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "57468fc28f7f86fde11e31c5eb88d5cf139f37481dec0410fabda54eba4251a2",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-raw-error-ntt-512-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "35e82cf401cf52805c40d1ca001591bd34a6b2ea53b3819475d2d64b5ec6c02c",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber512",
+      "path": "raw/timing-staged-invntt-512-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "9efef6c662d5efb9051c5d60147e999499d3a4090a48e714d3ae933c6b92ad4a",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-raw-error-ntt-768-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "89c3ada9fa3107f472e7b4bbdecac6eefb77f4cee1d1f7a43d039eeca3445624",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber768",
+      "path": "raw/timing-staged-invntt-768-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "92afa5e3b582286845cf38720c661e2aef25166d1d1d75edd560dad6afe838b1",
+      "variant": "staged-invntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-raw-error-ntt-1024-block-0002.csv",
+      "position_in_pair": 1,
+      "rows": 36,
+      "sha256": "386cff71eebef04b67ecedf6df60b1485af531c8f9daae5738d39a91c0b4b968",
+      "variant": "raw-error-ntt"
+    },
+    {
+      "block": 2,
+      "parameter_set": "Kyber1024",
+      "path": "raw/timing-staged-invntt-1024-block-0002.csv",
+      "position_in_pair": 2,
+      "rows": 36,
+      "sha256": "eb166ef9269518649fe5750ec47a4753c918f67f7d0a15662d8ee51f1bf38566",
+      "variant": "staged-invntt"
+    }
+  ],
+  "derived": {
+    "comparison": {
+      "path": "derived/comparison.csv",
+      "rows": 9,
+      "sha256": "475605862486977fc823f1752f77663035cb5bec3398aff7bcacbfa1d8637d16"
+    },
+    "paired-comparison": {
+      "path": "derived/paired-comparison.csv",
+      "rows": 18,
+      "sha256": "c2d5b984df1869b5edace555b91b491318f4297c0cd46ccf1b3c9b83e1ad8556"
+    },
+    "process-summary": {
+      "path": "derived/process-summary.csv",
+      "rows": 36,
+      "sha256": "670e11a5c225e17dc996e5a2c084b45d5398b8ebeea8a9a5a58ce68599412dd4"
+    }
+  },
+  "provenance_recheck": "pass",
+  "no_speed_conclusion": "Short development timings validate the pipeline and are not used to accept, reject or estimate the optimisation effect."
+}
