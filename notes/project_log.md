@@ -331,3 +331,44 @@ The 33 whitespace warnings in six saved assembly logs are objdump byte-continuat
 - Review evidence SHA-256: 532c6144783764d11b7c429325d8e964d19072f9be82a03c7cdf4b9d92d563ad.
 
 Final verification confirmed that all 354 archived result files, all arithmetic/upstream sources and Git HEAD remain unchanged. The tested support/review hashes still match, documentation links and whitespace checks pass, and EXP-002/RUN-0002 has not been created. This activity changes four existing project documents and adds one runner, two evidence records and two explanatory records.
+
+## ACT-0010 — Incremental timing benefit verified and inverse-NTT schedule specified
+
+- **Completed:** I verified EXP-002/RUN-0002, reproduced its entire timing analysis, documented provenance/conditions/order checks and thesis limitations, retained EXP-002, and prepared the EXP-003 bounds/security plan, exact manual replacement and validation support.
+- **Results:** All 90000 raw durations, 90 process summaries, 45 paired effects and nine aggregates verify. All 45 pairs favoured EXP-002 over fresh EXP-001. Median keygen/encap/decap time reductions are 2.02%/6.07%/6.00% for Kyber512, 11.83%/13.46%/13.55% for Kyber768 and 8.66%/8.09%/8.30% for Kyber1024. Twelve support-check builds of existing implementations pass the new inverse-transform oracle and short KEM transcripts.
+- **Learned:** Vector-wide fusion provides further observed benefit in this session, but reduction-call savings alone do not isolate the timing mechanism. The next proposed change can remove six of seven inverse-NTT Barrett stages while keeping a conservative maximum sum/difference of 26624 under the preserved centred-input contract.
+- **Pending:** I need to manually replace invntt, review/commit the new support and records, then execute EXP-003/RUN-0001. The new arithmetic has not been applied or executed; its correctness/counts/assembly/performance remain not-run.
+- **Next:** Review the new candidate's saved validation and assembly before a fresh EXP-002/EXP-003 timing comparison. Key generation has no predicted arithmetic benefit from this inverse-transform change.
+
+### Verified timing result and thesis record
+
+The run source is a32a81d12225e00a8b3e0baeb32734f44cf78ab3; results commit 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f directly follows it. The control was freshly restored from EXP-001 source d407b5134f14a96a4572b3af1132a8f715e0a28d. All 580 tracked files matched the results commit at review. I checked stored objects without executing Git commands.
+
+The [run review](runs/EXP-002-RUN-0002.md) and [verification evidence](evidence/ACT-0010/exp-002-run-0002-review.json) preserve source/result/control identities, hashes, absolute durations, all observed pair ranges, order-group medians, compiler/flags, protocol and interpretation. All 48 saved steps exited zero; 96 raw-stream hashes, six binaries, source/support identities and all twelve reviewed assembly matches verify. Every raw row and roundtrip passes; the versioned analysis code reproduces the saved derived CSVs byte for byte. The 35 restored control-source files match their accepted identities. I did not repeat any benchmark or full validation during this review.
+
+All nine parameter/operation groups have five positive pairs and positive medians in both order groups. Kyber512 keygen is the smallest effect: median 2.02%, range 1.39% to 3.64%. Its order-group medians differ, as do other small groups; the three-versus-two split cannot establish absence of ordering/time-drift effects. Kyber768 has the largest incremental reductions. I retain all observations, including higher first-block absolute durations, without exclusion or a retry intended to improve the result.
+
+These results support retaining EXP-002 within the measured conditions: GCC 13.3.0 normal builds, i9-12900KS reported by Ubuntu/WSL2, guest logical CPU 0, five fresh pairs per parameter, 100 warm-ups and 1000 measured exchanges per process. Host OS details, background load, power mode and physical-core placement remain unknown. Reused fixtures and a shared session mean the 90000 rows are not independent experiments. No confidence interval, formal significance or cross-machine guarantee is claimed.
+
+The known mechanism is fewer Montgomery calls per dot product, with unchanged Barrett counts; loop/memory/code-layout and local stack-canary coverage also change. Their separate timing contributions are not identified. The inherited range/compatibility/security limitations remain; speed does not establish constant-time behaviour or memory safety. I do not add or multiply separately measured median effects to claim total gain over the original baseline. A direct final-selected-variant versus original-reference comparison is needed for that later thesis claim.
+
+### Next treatment and scope decision
+
+[EXP-003](experiments/EXP-003-staged-invntt.md) will add a fixed inverse-NTT Barrett schedule on top of retained EXP-002. It is a conditional incremental treatment, not an independent main effect on the original reference. This avoids an automatic redundant combination step; EXP-004 remains available only if a separate interaction/combination question warrants it.
+
+I propose keeping sum reduction only at public stage length 16. The seven stages each have 128 butterflies, giving 128 Barrett calls instead of 896. All 1152 Montgomery calls per inverse transform remain. Keygen has no inverse transforms; encap has K+1, and decap has K+2 including re-encryption. Predicted full-operation Barrett counts are 2048/2432/3584, 3072/3328/4736 and 4096/4224/5888 for keygen/encap/decap in Kyber512/768/1024. Montgomery counts remain those accepted for EXP-002. These predictions are not measurements or runtime percentages.
+
+The caller analysis preserves final poly_reduce after the vector dot product, including malformed/noncanonical input paths already covered by EXP-002. Thus inverse inputs remain centred within 1664. The proposed stage output bounds are 3328, 6656, 13312, 3328, 6656, 13312 and 26624. Every sum/difference fits int16_t; twiddle products are at most 44302336 and final scaling at most 38365184, within int32_t and the Montgomery input contract. Final outputs remain bounded by 3328. Existing noise/message additions and decryption subtraction remain within 3330/4995/6656 before their retained reductions.
+
+The new branch depends only on stage length; secret values do not choose reduction timing or addresses. Actual generated code, local stack, hardening behaviour and timing effects remain pending. The precondition is not valid for arbitrary int16_t inputs or changed callers. Explicit narrowing bounds remain necessary: passing UBSan alone does not establish them. I checked the relevant official GCC documentation and added LIT-005 with its limited review scope. Whole-program constant-time, statistical leakage, power/EM and fault-resistance claims remain unestablished or unassessed.
+
+### Focused support checks
+
+I added tests/test_staged_invntt.c and scripts/run_invntt_validation.py. Each build checks 47 vectors across all 256 coefficients against ordinary modular arithmetic with no reducer calls in the oracle. Dense extremes, index-bit sign patterns, sparse boundary positions and deterministic interiors target the changed arithmetic. The established KEM fixture/rejection transcript is reused; unchanged standalone basemul/dot-product oracle suites are not repeated. The formal runner adds normal/UBSan builds, 100 KEM fixtures, existing upstream functional suites, ten count fixtures and invntt/Montgomery/Barrett assembly; no timings.
+
+[Support evidence](evidence/ACT-0010/invntt-validation-support-smoke.json) records twelve real builds using only the existing baseline and accepted EXP-002, with two KEM fixtures each. Every oracle/transcript check passes without compiler or sanitizer diagnostics. The unapplied-change guard rejects the current source before run allocation; EXP-002 count observations are rejected against EXP-003 predictions. The interval induction and count formulas were checked separately. I did not apply the proposed arithmetic, including to temporary source copies, and did not run Git or the metadata collector.
+
+- Inverse-NTT validation runner SHA-256: c2ef075fe1f4d8b803b09b1f775e56faa7938e83e88dc44a28bfe36f0a51f795.
+- Inverse-NTT test driver SHA-256: 5974f6b83f8c0e178d2e20f31ca96746a48657e90d0b33af7f38ff5ed997bec5.
+
+Final verification confirmed that all 455 archived result files, the arithmetic and pinned upstream source files, prior support/evidence and Git HEAD remain unchanged. Tested support hashes match, the proposed snippet changes only the intended sum-reduction schedule, documentation links/whitespace checks pass, and no EXP-003 run directory exists. This activity adds two support files, two research records and two evidence records, and updates seven existing project documents.

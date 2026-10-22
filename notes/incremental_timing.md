@@ -1,6 +1,6 @@
 # EXP-002 incremental timing comparison
 
-I have accepted [EXP-002/RUN-0001 validation and assembly](runs/EXP-002-RUN-0001.md). I now measure whether EXP-002 improves complete KEM operations beyond EXP-001. Performance remains pending until a committed run is completed and reviewed.
+I completed this protocol after [EXP-002/RUN-0001 validation and assembly](runs/EXP-002-RUN-0001.md). The accepted [RUN-0002 results](runs/EXP-002-RUN-0002.md) show improvements beyond EXP-001 in all 45 observed pairs. This document preserves the measurement protocol.
 
 ## What is compared
 
@@ -26,7 +26,7 @@ Input generation, output checks and CSV formatting remain outside measured opera
 
 ## Run and preserve
 
-After reviewing and committing the new runner, evidence and notes, I execute:
+I used the following command after committing the runner, evidence and notes. It is historical; RUN-0002 exists and must not be reused:
 
 ~~~bash
 python3 -B scripts/run_incremental_comparison.py --experiment EXP-002 --run RUN-0002 --cpu 0
@@ -41,4 +41,4 @@ I accept execution only with exit code zero, completed status, passing assembly/
 
 [Development evidence](evidence/ACT-0009/incremental-comparison-smoke.json) records six real compilations, twelve assembly matches and two short blocks of twelve measured exchanges, yielding 432 operation rows. Historical-file hash failures, changed restored/candidate source, changed loop bounds/branch targets, wrong-variant assembly and incomplete/duplicate/unequal comparison groups were rejected or failed matching. Synthetic positive and negative effects confirmed direction, experiment labels and aggregation.
 
-The short check used temporary files, mocked Git-state/existence operations and read historical source directly from verified stored objects. The read-only git show invocation was checked with a mocked subprocess; no Git commands or metadata collector ran. The saved formal EXP-002 validation was not repeated. Development durations are excluded from performance conclusions; formal clean-source execution remains pending.
+The short check used temporary files, mocked Git-state/existence operations and read historical source directly from verified stored objects. The read-only git show invocation was checked with a mocked subprocess; no Git commands or metadata collector ran. The saved formal EXP-002 validation was not repeated. Development durations are excluded from performance conclusions. This check preceded the formal clean-source execution, whose saved artifacts and complete derived analysis were verified in ACT-0010.

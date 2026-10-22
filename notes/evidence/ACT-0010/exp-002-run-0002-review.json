@@ -1,0 +1,340 @@
+{
+  "accepted": true,
+  "activity": "ACT-0010",
+  "analysis": [
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 18011.0,
+      "exp002_median_of_medians_ns": 17620.0,
+      "max_paired_improvement_pct": 3.6394957753411172,
+      "median_paired_improvement_pct": 2.020987174504474,
+      "median_paired_speedup": 1.0206267354224514,
+      "min_paired_improvement_pct": 1.3935928043973145,
+      "operation": "keygen",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 1.5694063671459757,
+        "wide-dot": 2.6449742619219063
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber512",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 20132.0,
+      "exp002_median_of_medians_ns": 18910.5,
+      "max_paired_improvement_pct": 7.356620713339545,
+      "median_paired_improvement_pct": 6.067454798331018,
+      "median_paired_speedup": 1.0645937442161761,
+      "min_paired_improvement_pct": 5.263157894736848,
+      "operation": "encap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 5.713073428842408,
+        "wide-dot": 6.712037755835281
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber512",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 26229.0,
+      "exp002_median_of_medians_ns": 24674.5,
+      "max_paired_improvement_pct": 7.210815282791816,
+      "median_paired_improvement_pct": 5.997178695337224,
+      "median_paired_speedup": 1.0637978585334198,
+      "min_paired_improvement_pct": 5.083517656929293,
+      "operation": "decap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 5.236778430694777,
+        "wide-dot": 6.60399698906452
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber512",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 32411.5,
+      "exp002_median_of_medians_ns": 28657.0,
+      "max_paired_improvement_pct": 12.028138160837976,
+      "median_paired_improvement_pct": 11.832303427341294,
+      "median_paired_speedup": 1.1342022519278399,
+      "min_paired_improvement_pct": 10.345467766140137,
+      "operation": "keygen",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 11.929986868807452,
+        "wide-dot": 11.088885596740717
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber768",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 34904.0,
+      "exp002_median_of_medians_ns": 30201.5,
+      "max_paired_improvement_pct": 13.943561448296682,
+      "median_paired_improvement_pct": 13.464682095844449,
+      "median_paired_speedup": 1.1555975343010538,
+      "min_paired_improvement_pct": 12.42407746963099,
+      "operation": "encap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 13.693971737608413,
+        "wide-dot": 12.94437978273772
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber768",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 43092.5,
+      "exp002_median_of_medians_ns": 37224.0,
+      "max_paired_improvement_pct": 13.900100616420142,
+      "median_paired_improvement_pct": 13.5540033239967,
+      "median_paired_speedup": 1.1567915675123355,
+      "min_paired_improvement_pct": 12.235092035932315,
+      "operation": "decap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 13.652027615014218,
+        "wide-dot": 12.894547679964507
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber768",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 46429.0,
+      "exp002_median_of_medians_ns": 42316.0,
+      "max_paired_improvement_pct": 9.220239760669779,
+      "median_paired_improvement_pct": 8.657304701802747,
+      "median_paired_speedup": 1.0947782925995355,
+      "min_paired_improvement_pct": 8.441663172155733,
+      "operation": "keygen",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 8.787351915247466,
+        "wide-dot": 8.524194364419586
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber1024",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 50796.5,
+      "exp002_median_of_medians_ns": 46631.0,
+      "max_paired_improvement_pct": 8.213164292815446,
+      "median_paired_improvement_pct": 8.088286100664321,
+      "median_paired_speedup": 1.0880006014197803,
+      "min_paired_improvement_pct": 7.745439518271446,
+      "operation": "encap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 8.088286100664321,
+        "wide-dot": 7.950657173030623
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber1024",
+      "positive_pairs": 5
+    },
+    {
+      "decision": "improvement supported within this run",
+      "exp001_median_of_medians_ns": 59712.5,
+      "exp002_median_of_medians_ns": 54756.5,
+      "max_paired_improvement_pct": 8.459267560402427,
+      "median_paired_improvement_pct": 8.299769729956042,
+      "median_paired_speedup": 1.0905098024892022,
+      "min_paired_improvement_pct": 7.69822876314622,
+      "operation": "decap",
+      "order_group_median_improvement_pct": {
+        "fused-basemul": 8.305522480672156,
+        "wide-dot": 7.998999246551131
+      },
+      "order_group_pairs": {
+        "fused-basemul": 3,
+        "wide-dot": 2
+      },
+      "pairs": 5,
+      "parameter_set": "Kyber1024",
+      "positive_pairs": 5
+    }
+  ],
+  "analysis_code_sha256": {
+    "scripts/run_comparison.py": "a492a1f5efe5292049f46d544b64092b4faf0b15a9459faa5e5d47fad1ce8378",
+    "scripts/run_incremental_comparison.py": "0f82a43e55aa3b6b1d15aa88c31707d63da6a3547d108161cbda5dfa996c84d7",
+    "scripts/run_timing.py": "690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6"
+  },
+  "benchmark_rerun": false,
+  "build_flags": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wmissing-prototypes",
+    "-Wredundant-decls",
+    "-Wshadow",
+    "-Wpointer-arith",
+    "-O3",
+    "-fomit-frame-pointer",
+    "-z",
+    "noexecstack"
+  ],
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "requested": "gcc",
+    "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+    "version": "13.3.0"
+  },
+  "control_source_commit": "d407b5134f14a96a4572b3af1132a8f715e0a28d",
+  "empty_timer_pair_min_ns_observed_range": [
+    11,
+    12
+  ],
+  "environment": {
+    "architecture": "x86_64",
+    "available_compiler": {
+      "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "requested": "gcc",
+      "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+      "version": "13.3.0"
+    },
+    "collector_affinity": [
+      0
+    ],
+    "cpu_model": "12th Gen Intel(R) Core(TM) i9-12900KS",
+    "kernel_release": "5.15.167.4-microsoft-standard-WSL2",
+    "linux_visible_ram_bytes": 16646680576,
+    "logical_cpus_visible": 24,
+    "os": {
+      "ID": "ubuntu",
+      "PRETTY_NAME": "Ubuntu 24.04.2 LTS",
+      "VERSION_ID": "24.04"
+    },
+    "python": {
+      "path": "/usr/bin/python3.12",
+      "version": "3.12.3"
+    },
+    "scaling_governors": null,
+    "wsl_detected": true
+  },
+  "git_commands_executed": false,
+  "interpretation": {
+    "attribution": "changed reduction schedule, loop/layout/memory and local canary coverage occur together; no attribution solely to Montgomery call counts",
+    "original_baseline": "no total percentage claimed by adding or multiplying separate-run effects",
+    "positive_pairs": 45,
+    "rerun": "no repeat required to proceed; preserve all observations",
+    "retention": "keep EXP-002 as the reference for the next incremental experiment",
+    "sampling": "same public fixtures reused across blocks; five paired processes per parameter; inner rows are not independent experiments",
+    "scope": "descriptive improvement over fresh EXP-001 in this session and compiler/platform; no population significance or cross-machine guarantee",
+    "security": "previous bounded validation and assembly scope retained; timings add no constant-time, leakage, fault or production-safety proof",
+    "total_pairs": 45
+  },
+  "manifest": "results/EXP-002/RUN-0002/manifest.json",
+  "manifest_sha256": "ce21246bd9a1b8cc5fa4696be528dff018a75b71e82f66f87af3cf3be8b006de",
+  "manual_conditions": {
+    "background_load": "unknown",
+    "host_os": "unknown",
+    "physical_core_placement": "unknown",
+    "power_mode": "unknown"
+  },
+  "matched_roundtrips": "all pass",
+  "metadata_sha256": "4eb22f8100ce3209e42af50e7a68ced2ab2c898ba73db9c0607a585a6fb02b6d",
+  "protocol": {
+    "blocks": 5,
+    "fixture_seed": 1,
+    "input_mode": "derand-shake256-v1",
+    "iterations_per_operation": 1000,
+    "observed_affinity": [
+      0
+    ],
+    "operations": [
+      "keygen",
+      "encap",
+      "decap"
+    ],
+    "order": "block, then 512/768/1024; adjacent variant pairs; EXP-001 first in odd blocks",
+    "original_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "outliers_removed": false,
+    "physical_core_placement": "unknown",
+    "same_fixtures_in_every_block": true,
+    "selected_logical_cpu": 0,
+    "timer": "CLOCK_MONOTONIC_RAW",
+    "timer_overhead_subtracted": false,
+    "units": "ns",
+    "warmup_triplets_per_process": 100
+  },
+  "raw_datasets": 30,
+  "raw_operation_rows": 90000,
+  "record_type": "saved-incremental-timing-review",
+  "reproduced_aggregate_rows": 9,
+  "reproduced_paired_rows": 45,
+  "reproduced_process_summary_rows": 90,
+  "restored_control_source_hashes_verified": 35,
+  "results_commit": "5a09a01496fae8dd4b908934c2e5524f5d3ecc9f",
+  "results_parent_matches_source": true,
+  "reviewed_assembly_matches": 12,
+  "saved_results_modified": false,
+  "source_and_support_current_and_committed_hashes": "pass",
+  "source_commit": "a32a81d12225e00a8b3e0baeb32734f44cf78ab3",
+  "tracked_files_matching_results_commit": 580,
+  "verified_executables": 6,
+  "verified_raw_streams": 96,
+  "verified_steps": 48
+}

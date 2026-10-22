@@ -37,6 +37,15 @@ Source: https://github.com/oreparaz/dudect
 - Limitation: failure to detect leakage is not a constant-time proof.
 - Outstanding: verify complete APA publication metadata for the associated DATE 2017 paper before adding its thesis reference.
 
+## LIT-005 Compiler instrumentation scope
+
+Free Software Foundation. (n.d.). *Program instrumentation options*. In *Using the GNU Compiler Collection (GCC 13.3.0)*. https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html
+
+- Inspected in ACT-0010: the official entries for signed-integer-overflow instrumentation/integer promotions and stack-protector variants. This was a targeted documentation check, not a review of the entire manual.
+- Relationship: EXP-003's explicit narrowing bounds cannot be replaced by a passing UBSan run. GCC describes overflow checks in terms of promoted arithmetic and gives an example where a small signed object's increment is not an overflow of that promoted arithmetic.
+- Stack context: protection selection can depend on local arrays/actual stack allocation. This supports interpretation of the EXP-002 observation, while the actual presence/absence of its canary comes from the saved assembly.
+- Scope: compiler documentation supports the interpretation of these checks; it does not validate the cryptographic implementation or prove constant-time behaviour.
+
 ## New-source fields
 
 - Literature ID and verified APA 7 reference:

@@ -3,16 +3,16 @@
 ## Identity and current stage
 
 - Originating activity: ACT-0008.
-- Lifecycle: running; manual implementation and RUN-0001 validation/assembly accepted in ACT-0009; timing pending.
+- Lifecycle: closed for the initial evaluation; validation/assembly accepted in ACT-0009 and incremental timings accepted in ACT-0010. Outcome: supported within the recorded run. Decision: keep as the next research reference.
 - Variant: wide-dot.
 - Predecessor: EXP-001 fused-basemul, retained as a validated research reference after [its timing comparison](../runs/EXP-001-RUN-0002.md).
 - Predecessor arithmetic validated at 8345f6a0fb273917ed4499356f0966d1c5dc7fc2; matched timings at d407b5134f14a96a4572b3af1132a8f715e0a28d, results 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712.
 - Original reference: upstream 3edd5af5991927164edd4aacebfcbee00b8064e7, unchanged in implementation/kyber-baseline-ref.
 - Accepted record: [EXP-002/RUN-0001](../runs/EXP-002-RUN-0001.md), source 61279b2b2373c7594e40f06712bc9f93b734b8ed, results b943e50b9fee417ae21bffb4822b2aa6f3309a83.
-- Next record: EXP-002/RUN-0002, fresh incremental timings against EXP-001.
+- Accepted timing record: [EXP-002/RUN-0002](../runs/EXP-002-RUN-0002.md), source a32a81d12225e00a8b3e0baeb32734f44cf78ab3, results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f.
 - Origin: local analysis of the pinned source, LIT-003. No novelty claim or unreviewed literature attribution.
 
-EXP-001 has already been timed. I now test whether accumulating across the vector before reduction gives further benefit. I have applied the manual change and accepted its saved validation and generated-code review. Performance measurement is next.
+EXP-001 has already been timed. I tested whether accumulating across the vector before reduction gives further benefit. The applied arithmetic, saved validation, generated-code review and fresh incremental timing comparison are now accepted within their recorded scopes.
 
 ## Change and prediction
 
@@ -141,6 +141,12 @@ The runner builds the original baseline and the new candidate in normal and UBSa
 
 [Development support evidence](../evidence/ACT-0008/dot-validation-support-smoke.json) records twelve builds using only the existing baseline and accepted EXP-001 arithmetic, with two KEM fixtures each. All vector-oracle checks and four-way transcript comparisons passed without compiler/sanitizer diagnostics. The preflight rejects an unapplied change before allocating a run, and the count parser rejects EXP-001 counts presented as EXP-002 predictions. These checks exercise support code, not the proposed optimisation.
 
-With validation and assembly accepted, the [next timing comparison](../incremental_timing.md) uses fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; its old timing rows will not substitute for a fresh paired control. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
+After validation and assembly acceptance, the [recorded timing comparison](../incremental_timing.md) used fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; its old timing rows will not substitute for a fresh paired control. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
 
-Current status: manual implementation complete; candidate validation/counts/assembly accepted within the recorded scope; performance not-run; final retention decision pending. The changed loop, function size and local canary coverage accompany the arithmetic savings, so any runtime effect cannot be attributed solely to reduction-call counts.
+Current status: initial implementation/validation/counts/assembly/timing evaluation complete; retain EXP-002 as a research reference within the recorded scopes. The changed loop, function size and local canary coverage accompany the arithmetic savings, so the measured runtime effect cannot be attributed solely to reduction-call counts.
+
+## Measured incremental outcome
+
+[RUN-0002](../runs/EXP-002-RUN-0002.md) verified 90000 durations, 45 paired effects and all source/assembly identities. Every pair favoured EXP-002. Median paired time reductions for keygen/encap/decap were 2.02%/6.07%/6.00% for Kyber512, 11.83%/13.46%/13.55% for Kyber768 and 8.66%/8.09%/8.30% for Kyber1024. Both order groups remain positive, but the small three-versus-two split and shared WSL session limit generalisation. The detailed review retains absolute medians, full observed ranges and order-group effects.
+
+I keep this variant for [EXP-003](EXP-003-staged-invntt.md), which adds an inverse-NTT schedule and requires new validation. I do not claim a total gain over the original reference from separate-run percentage arithmetic. The correctness, leakage and stack-hardening limitations remain in force.

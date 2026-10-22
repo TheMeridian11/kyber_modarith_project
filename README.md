@@ -24,6 +24,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-002 plan, bounds and applied replacement](notes/experiments/EXP-002-wide-dot.md)
 - [EXP-002 accepted validation and assembly](notes/runs/EXP-002-RUN-0001.md)
 - [EXP-001 versus EXP-002 timing protocol](notes/incremental_timing.md)
+- [EXP-002 measured timing results](notes/runs/EXP-002-RUN-0002.md)
+- [EXP-003 inverse-NTT plan, bounds and manual replacement](notes/experiments/EXP-003-staged-invntt.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -45,26 +47,28 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 ## Current state
 
-I have completed initial baseline preparation and the first optimisation's correctness and timing evaluation. EXP-001 fuses products before reduction inside basemul. It preserved the tested outputs and produced the following median paired improvements in the first matched timing run:
+I have completed baseline preparation and the first two optimisations' initial correctness/timing evaluations. EXP-001 fused products inside basemul; EXP-002 extended fusion across vector components. The latest fresh paired comparison shows the following median time reductions for EXP-002 relative to EXP-001:
 
 | Parameter set | Keygen | Encap | Decap |
 |---|---:|---:|---:|
-| Kyber512 | 4.12% | 5.87% | 6.01% |
-| Kyber768 | 1.68% | 0.87% (inconclusive) | 0.86% (inconclusive) |
-| Kyber1024 | 7.43% | 8.55% | 8.43% |
+| Kyber512 | 2.02% | 6.07% | 6.00% |
+| Kyber768 | 11.83% | 13.46% | 13.55% |
+| Kyber1024 | 8.66% | 8.09% | 8.30% |
 
-All five pairs favoured EXP-001 for Kyber512, Kyber1024 and Kyber768 keygen. Kyber768 encapsulation and decapsulation each included one slower pair; I do not claim a reliable sub-one-percent gain for them. I retain EXP-001 as a validated research reference. The [timing review](notes/runs/EXP-001-RUN-0002.md) records the verified 90000 observations, pair ranges, order checks and limits of this single WSL run.
+All 45 paired comparisons favoured EXP-002, including both execution orders. I verified all 90000 raw operation durations and reproduced the complete derived analysis. I retain EXP-002 as the reference for the next incremental experiment. These are single-session improvements over EXP-001; they are not a total gain over the original baseline or a cross-machine guarantee. The [timing review](notes/runs/EXP-002-RUN-0002.md) records absolute durations, pair ranges, order checks, provenance and limitations. The [earlier EXP-001 findings](notes/runs/EXP-001-RUN-0002.md) remain preserved separately.
 
 | Stage | Status | Question answered |
 |---|---|---|
 | EXP-000: baseline preparation | Complete | What does the unchanged reference do? |
-| EXP-001/RUN-0001: validation and assembly | Accepted | Does the first change preserve tested behaviour under the reviewed bounds? |
-| EXP-001/RUN-0002: matched timings | Accepted and analysed | Did the first change make complete KEM operations faster here? |
-| EXP-002/RUN-0001: vector-wide fusion validation and assembly | Accepted | Does the larger accumulation preserve tested behaviour under the new bounds? |
-| EXP-002/RUN-0002: incremental timings | Support checked; formal run pending | Is EXP-002 faster than EXP-001 in fresh matched pairs? |
+| EXP-001: base multiplication | Initial validation and timings accepted | Does fusion inside each coefficient pair help? |
+| EXP-002: vector-wide fusion | Initial validation and timings accepted | Does fusion across vector components improve further? |
+| EXP-003/RUN-0001: inverse-NTT schedule | Plan/support ready; manual arithmetic edit pending | Can I reduce less often while preserving bounds and outputs? |
+| EXP-003 timings | Later, after candidate validation and assembly | Does that additional change improve on EXP-002? |
 
-I applied EXP-002 to polyvec_basemul_acc_montgomery and retained the accepted ntt.c. Its 48 saved validation steps, byte comparisons, exercised-path UBSan checks and all 90 count observations pass. Assembly confirms 384 Montgomery calls per dot product, a smaller local stack setup and a larger function body. The local stack-canary check is absent in the new generated function; the [review](notes/runs/EXP-002-RUN-0001.md) documents that hardening change and the bounded security evidence. EXP-002 has no measured speed result yet. The next action is a [fresh paired comparison against EXP-001](notes/incremental_timing.md); no further arithmetic edit is needed.
+EXP-002 retains its bounded correctness/security assessment, including smaller local stack use, a larger dot-product body and absence of its previous local stack-canary check under the same flags. The performance improvement does not remove that documented hardening tradeoff or establish constant-time security.
 
-The first timing comparison used source d407b5134f14a96a4572b3af1132a8f715e0a28d; results are in 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712. Source, binaries and measurements are preserved. Complete constant-time guarantees, statistical leakage resistance and final ML-KEM conformance remain unestablished; faster execution is not a security certificate.
+Next I manually apply the [EXP-003 replacement](notes/experiments/EXP-003-staged-invntt.md) to invntt only. It keeps Barrett sum reductions at stage length 16, predicting 896 to 128 calls per inverse transform while retaining centred input reductions and all Montgomery operations. Key generation has no predicted arithmetic benefit. The first run checks the new candidate; performance comes after acceptance. EXP-004 is optional if a distinct interaction/combination question later warrants it.
+
+The latest timing source is a32a81d12225e00a8b3e0baeb32734f44cf78ab3 and its results commit is 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f. Complete constant-time guarantees, statistical leakage resistance and final ML-KEM conformance remain unestablished. A later direct comparison with the original reference is needed for a total final-variant speed claim.
 
 I manually apply arithmetic changes and perform Git operations, reviewing support code before committing it. I retain failed and inconclusive outcomes, use distinct experiment/run IDs, and keep validation evidence separate from performance results. The legacy summary script remains unused.
