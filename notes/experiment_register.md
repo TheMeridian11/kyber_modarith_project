@@ -1,10 +1,10 @@
 # Master experiment register
 
-I use this register as the master index; detailed records and raw outputs provide the evidence. The metadata checkpoint and sampled functional run are accepted. The first committed raw timing pilot is pending.
+I use this register as the master index; detailed records and raw outputs provide the evidence. The metadata checkpoint, sampled functional run and first raw timing pilot are accepted. The recorded reduction-count run is pending.
 
 | ID | Question or treatment | Lifecycle | Evidence and result | Decision |
 |---|---|---|---|---|
-| [EXP-000](experiments/EXP-000-baseline.md) | Establish a reproducible reference baseline and validation procedure | running | [RUN-0001 metadata](runs/EXP-000-RUN-0001.md) and [RUN-0002 functional validation](runs/EXP-000-RUN-0002.md) accepted; raw timing harness checked in ACT-0004; pilot pending | functional baseline accepted; timing pending |
+| [EXP-000](experiments/EXP-000-baseline.md) | Establish a reproducible reference baseline and validation procedure | running | [RUN-0001 metadata](runs/EXP-000-RUN-0001.md), [RUN-0002 functional validation](runs/EXP-000-RUN-0002.md) and [RUN-0003 timing pilot](runs/EXP-000-RUN-0003.md) accepted; counters checked in ACT-0005 | sampled functional and timing baseline accepted; RUN-0004 counts pending |
 | EXP-001 | Fuse products before Montgomery reduction within base multiplication | proposed | Prediction: 5 to 3 Montgomery calls per coefficient pair; no implementation or measurements | pending |
 | EXP-002 | Use local wider accumulators across a vector dot product | proposed | Prediction under reviewed bounds: 640K to 384 Montgomery calls per dot product; no implementation or measurements | pending |
 | EXP-003 | Reduce Barrett frequency on a fixed inverse-NTT stage schedule | proposed | Candidate: 896 to 128 Barrett calls per inverse transform with centred input retained; no implementation or measurements | pending |

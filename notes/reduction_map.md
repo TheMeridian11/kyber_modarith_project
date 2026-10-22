@@ -23,4 +23,4 @@ poly_reduce applies Barrett to each coefficient; polyvec_reduce applies it to ea
 
 Record caller-specific input/output ranges, Montgomery scale, intermediate bounds, narrowing and affected consumers, including invalid-input paths. A candidate relying on centred inputs must not silently be used with callers or microbenchmarks supplying larger values. Diagnostic range checks remain separate from timing builds.
 
-See the [experiment register](experiment_register.md) and [baseline plan](experiments/EXP-000-baseline.md). No measured counter results are available.
+See the [experiment register](experiment_register.md) and [baseline plan](experiments/EXP-000-baseline.md). ACT-0005 development counts matched the source predictions for all parameter sets. The committed baseline counting record is pending RUN-0004; see the [counter protocol](reduction_counts.md).

@@ -1,0 +1,239 @@
+{
+  "all_roundtrips_and_predicted_counts_pass": true,
+  "build_and_execution": [
+    {
+      "build_argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-fno-lto",
+        "-DKYBER_K=2",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/count_reductions.c",
+        "-Wl,--wrap=pqcrystals_kyber512_ref_montgomery_reduce",
+        "-Wl,--wrap=pqcrystals_kyber512_ref_barrett_reduce",
+        "-o",
+        "/tmp/kyber-counts-z7ya4393/count_kyber512"
+      ],
+      "build_exit_code": 0,
+      "build_stderr": "",
+      "build_stdout": "",
+      "count_argv": [
+        "/tmp/kyber-counts-z7ya4393/count_kyber512",
+        "2",
+        "1"
+      ],
+      "count_exit_code": 0,
+      "executable_sha256": "618c81bc83bbfee1b73402699dd4615b7aa72d5327731323ea608244d7a9bb1f",
+      "parameter_set": "Kyber512",
+      "raw_csv": "parameter_set,operation,iteration,montgomery_calls,barrett_calls,roundtrip_ok\nKyber512,keygen,0,6656,2048,1\nKyber512,encap,0,9088,4736,1\nKyber512,decap,0,13312,6656,1\nKyber512,keygen,1,6656,2048,1\nKyber512,encap,1,9088,4736,1\nKyber512,decap,1,13312,6656,1\n",
+      "stderr": "wrapper_self_check=pass\ninput_mode=derand-shake256-v1\niterations=2\nseed=1\nperformance_measurements=false\n",
+      "summary": [
+        {
+          "barrett_calls": 2048,
+          "montgomery_calls": 6656,
+          "operation": "keygen",
+          "parameter_set": "Kyber512",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 4736,
+          "montgomery_calls": 9088,
+          "operation": "encap",
+          "parameter_set": "Kyber512",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 6656,
+          "montgomery_calls": 13312,
+          "operation": "decap",
+          "parameter_set": "Kyber512",
+          "samples": 2
+        }
+      ]
+    },
+    {
+      "build_argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-fno-lto",
+        "-DKYBER_K=3",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/count_reductions.c",
+        "-Wl,--wrap=pqcrystals_kyber768_ref_montgomery_reduce",
+        "-Wl,--wrap=pqcrystals_kyber768_ref_barrett_reduce",
+        "-o",
+        "/tmp/kyber-counts-z7ya4393/count_kyber768"
+      ],
+      "build_exit_code": 0,
+      "build_stderr": "",
+      "build_stdout": "",
+      "count_argv": [
+        "/tmp/kyber-counts-z7ya4393/count_kyber768",
+        "2",
+        "1"
+      ],
+      "count_exit_code": 0,
+      "executable_sha256": "6a679cdc502dea0c78abd8b1d28a9d659b21e3284d19e73ce47af1917284e6e9",
+      "parameter_set": "Kyber768",
+      "raw_csv": "parameter_set,operation,iteration,montgomery_calls,barrett_calls,roundtrip_ok\nKyber768,keygen,0,11904,3072,1\nKyber768,encap,0,14976,6400,1\nKyber768,decap,0,20736,8576,1\nKyber768,keygen,1,11904,3072,1\nKyber768,encap,1,14976,6400,1\nKyber768,decap,1,20736,8576,1\n",
+      "stderr": "wrapper_self_check=pass\ninput_mode=derand-shake256-v1\niterations=2\nseed=1\nperformance_measurements=false\n",
+      "summary": [
+        {
+          "barrett_calls": 3072,
+          "montgomery_calls": 11904,
+          "operation": "keygen",
+          "parameter_set": "Kyber768",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 6400,
+          "montgomery_calls": 14976,
+          "operation": "encap",
+          "parameter_set": "Kyber768",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 8576,
+          "montgomery_calls": 20736,
+          "operation": "decap",
+          "parameter_set": "Kyber768",
+          "samples": 2
+        }
+      ]
+    },
+    {
+      "build_argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-fno-lto",
+        "-DKYBER_K=4",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/count_reductions.c",
+        "-Wl,--wrap=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "-Wl,--wrap=pqcrystals_kyber1024_ref_barrett_reduce",
+        "-o",
+        "/tmp/kyber-counts-z7ya4393/count_kyber1024"
+      ],
+      "build_exit_code": 0,
+      "build_stderr": "",
+      "build_stdout": "",
+      "count_argv": [
+        "/tmp/kyber-counts-z7ya4393/count_kyber1024",
+        "2",
+        "1"
+      ],
+      "count_exit_code": 0,
+      "executable_sha256": "ca83c15d6ad56efcf17de5d1cfec20fa3ac65453146ef51b73a1ed3241e22054",
+      "parameter_set": "Kyber1024",
+      "raw_csv": "parameter_set,operation,iteration,montgomery_calls,barrett_calls,roundtrip_ok\nKyber1024,keygen,0,18432,4096,1\nKyber1024,encap,0,22144,8064,1\nKyber1024,decap,0,29440,10496,1\nKyber1024,keygen,1,18432,4096,1\nKyber1024,encap,1,22144,8064,1\nKyber1024,decap,1,29440,10496,1\n",
+      "stderr": "wrapper_self_check=pass\ninput_mode=derand-shake256-v1\niterations=2\nseed=1\nperformance_measurements=false\n",
+      "summary": [
+        {
+          "barrett_calls": 4096,
+          "montgomery_calls": 18432,
+          "operation": "keygen",
+          "parameter_set": "Kyber1024",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 8064,
+          "montgomery_calls": 22144,
+          "operation": "encap",
+          "parameter_set": "Kyber1024",
+          "samples": 2
+        },
+        {
+          "barrett_calls": 10496,
+          "montgomery_calls": 29440,
+          "operation": "decap",
+          "parameter_set": "Kyber1024",
+          "samples": 2
+        }
+      ]
+    }
+  ],
+  "compiler_path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+  "compiler_sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+  "compiler_version": "13.3.0",
+  "invalid_iterations_exit_code": 2,
+  "parser_rejections": {
+    "failed_roundtrip": "Invalid or failed observation: /tmp/kyber-counts-z7ya4393/failed_roundtrip.csv, row 1",
+    "incorrect_reduction_count": "Counts vary across fixtures: Kyber512 keygen",
+    "missing_row": "Incomplete CSV: /tmp/kyber-counts-z7ya4393/missing_row.csv; 5 rows"
+  },
+  "scope": "uncommitted development smoke check; not a formal run or performance data",
+  "source_file_sha256": {
+    "benchmarks/count_reductions.c": "adc3efa6f3bf543d5383a4f0611b23b2b0065e517d34b01b4ddc7c046fd17c2a",
+    "scripts/run_counts.py": "67da80bc1de61c618443e175b56f92778f2cfc2762c03385fc8769553e85ea17",
+    "scripts/run_timing.py": "690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6"
+  },
+  "timing_summary_lf_only_and_values_preserved": true,
+  "total_observed_operation_rows": 18,
+  "unchanged_reference_sources": true
+}

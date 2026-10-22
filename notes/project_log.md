@@ -125,3 +125,43 @@ These development checks exercised the real C harness and CSV parser. The commit
 The pilot protocol is five fresh processes per parameter set, 100 warm-up exchanges and 1000 measured exchanges per process. I expect 45000 raw rows and 45 summary rows. I will retain all observations without outlier removal and assess variation before interpreting later optimisation effects. See the [protocol](raw_timing.md).
 
 Final read-only checks confirmed that both 36-file reference copies, the accepted RUN-0002 manifest, the original collector and the functional runner remain unchanged. The new harness files match their tested hashes, local documentation links resolve and RUN-0003 has not been created. No Git commands were executed during this activity.
+
+## ACT-0005 — Timing baseline accepted and reduction counters prepared
+
+- **Completed:** I verified RUN-0003 directly, updated the baseline progress records, prepared separate reduction-counting support and corrected future CSV summary line endings.
+- **Results:** All 45000 timing rows and 45 summary rows validated; all measured exchanges passed. The process-median ranges were 0.56% to 1.94%. Three counter builds and 18 development observations passed, matching all source-derived reduction predictions.
+- **Pending:** I need to review and commit the support changes, then execute and preserve EXP-000/RUN-0004.
+- **Learned:** Five batches of 1000 exchanges per parameter set are a practical pilot. These are repeated automated observations, not 45000 independent experiments. Reduction-call counts explain arithmetic work but do not establish a speedup.
+- **Next:** Accept the recorded count baseline, then begin EXP-001 with range analysis and the isolated fused-base-multiplication change.
+
+### Accepted timing evidence
+
+Source commit d690cfb580f0dd2d1b0805a6635ed56e553ca5f9 produced RUN-0003; its direct child 8a76f3f1c0bf9da8157b0901b2defbf8f3f618d2 records the results. I checked the relationship through stored Git objects without executing Git commands.
+
+All 18 steps exited 0. I checked 36 raw-log hashes, 15 dataset hashes, three executable hashes, four support-file hashes, metadata, summary and the recorded source files. I reproduced all per-process summary values from the raw CSVs. The [run review](runs/EXP-000-RUN-0003.md) and [verification record](evidence/ACT-0005/run-0003-review.json) preserve the findings and scope.
+
+Median-of-process-median durations in microseconds were:
+
+| Parameter set | Keygen | Encap | Decap |
+|---|---:|---:|---:|
+| Kyber512 | 18.6885 | 21.2705 | 27.8050 |
+| Kyber768 | 32.5920 | 34.7770 | 43.0455 |
+| Kyber1024 | 49.5855 | 55.0405 | 64.8405 |
+
+I retained the pilot without outlier removal. Its 45000 intervals total approximately 1.80 seconds of measured duration. This excludes other harness work and does not make the observations independent. WSL host controls remain a limitation. Fresh matched baseline/candidate runs will support the optimisation comparisons; small uncertain effects may require additional complete comparison blocks.
+
+### Support changes and checks
+
+I added benchmarks/count_reductions.c and scripts/run_counts.py. GNU linker wrappers count external calls to the original reduction functions in a separate build with LTO disabled. The wrappers reset before each KEM operation, preserve original function arguments/results and do not alter either implementation copy. The first recorded count run will use ten exchanges per parameter set, producing 90 raw rows and nine summary rows.
+
+The [counter protocol](reduction_counts.md) records the instrumentation boundary and acceptance rules. [Development evidence](evidence/ACT-0005/counts-smoke.json) retains three clean builds, two exchanges per parameter set, successful wrapper self-checks, matching shared secrets and agreement with every predicted count. The executable rejected zero iterations; CSV validation rejected a missing row, a failed exchange and an incorrect count. These checks cover the harness and parser; committed full-run orchestration remains pending RUN-0004.
+
+- Counter C SHA-256: adc3efa6f3bf543d5383a4f0611b23b2b0065e517d34b01b4ddc7c046fd17c2a.
+- Counter runner SHA-256: 67da80bc1de61c618443e175b56f92778f2cfc2762c03385fc8769553e85ea17.
+- Updated timing runner SHA-256: 690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6.
+
+The Git whitespace warnings arose from CRLF in the saved derived CSV. I preserved RUN-0003 byte-for-byte and changed only the future summary writer to specify LF. A direct check of the updated writer confirmed LF output and identical parsed values. The timing C harness remains unchanged, and I did not repeat the timing pilot.
+
+No arithmetic optimisation or Git operation was performed during this activity. Functional agreement, arithmetic safety, timing behaviour and performance remain separate evidence categories. RUN-0004 is the last planned baseline measurement before EXP-001; candidate-specific validation proceeds with the optimisation.
+
+Final verification confirmed that both 36-file implementation copies and every tracked file in RUN-0001, RUN-0002 and RUN-0003 remain unchanged. The timing runner differs only in its summary writer's line terminator, tested support hashes still match, and local documentation links and whitespace checks pass. RUN-0004 has not been created.

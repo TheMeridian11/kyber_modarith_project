@@ -1,6 +1,6 @@
 # Raw timing pilot
 
-I use benchmarks/bench_kem.c and scripts/run_timing.py to measure the unchanged reference implementation. The first committed pilot is EXP-000/RUN-0003.
+I use benchmarks/bench_kem.c and scripts/run_timing.py to measure the unchanged reference implementation. The first committed pilot, EXP-000/RUN-0003, is accepted; see the [run review](runs/EXP-000-RUN-0003.md).
 
 ## Protocol
 
@@ -37,7 +37,7 @@ Logical CPU affinity limits guest scheduling movement. It does not establish phy
 
 ## Execution and acceptance
 
-After committing the harness and records, I launch from the repository root:
+The accepted RUN-0003 was launched from the repository root with the command below. It is historical evidence; I use a new run ID for any further execution:
 
 ```bash
 python3 -B scripts/run_timing.py --experiment EXP-000 --run RUN-0003 --cpu 0
@@ -59,3 +59,9 @@ derived/summary.csv is generated from the retained raw measurements and contains
 ACT-0004 records short real compile/execution checks of all three binaries, with two warm-up exchanges and twelve measured exchanges each. All 108 operation rows had positive durations and successful round trips. Invalid argument and CSV-integrity checks also passed.
 
 [Retained development output](evidence/ACT-0004/harness-smoke.json) contains the raw smoke-check CSVs and build/test output. These are uncommitted-development checks and are excluded from the thesis performance dataset.
+
+## Accepted pilot and collection budget
+
+ACT-0005 verified all 45000 raw observations and recomputed all 45 summary rows. I retain five fresh processes of 1000 exchanges as the initial comparison budget. There are 1000 fixture indices per parameter set reused across repetitions, so repeated rows must not be treated as independent experimental runs. The [review](runs/EXP-000-RUN-0003.md) records durations, descriptive variation and limitations.
+
+The original summary uses CRLF and remains unchanged because its hash identifies the saved evidence. The writer now specifies LF for future summaries; the CSV-format correction changes neither timing code nor parsed numeric values.

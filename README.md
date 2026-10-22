@@ -14,6 +14,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Functional validation runner](notes/validation_runner.md)
 - [Accepted functional run](notes/runs/EXP-000-RUN-0002.md)
 - [Raw timing protocol](notes/raw_timing.md)
+- [Accepted timing pilot](notes/runs/EXP-000-RUN-0003.md)
+- [Reduction counting protocol](notes/reduction_counts.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -41,8 +43,16 @@ I implemented and checked the metadata collector at source commit 7eea4121e19896
 
 I completed EXP-000/RUN-0002 using source commit 75b0e38b5436dfa3f2672822edb178087b542b43 and saved its evidence in results commit e1d3734be7d890e0697678a8ae336e0a8a210f92. All three existing functional tests passed; the archived logs, metadata and binary hashes have been checked.
 
-I have prepared benchmarks/bench_kem.c and scripts/run_timing.py for a baseline timing pilot. The harness records per-operation nanosecond durations, uses reproducible inputs through the existing deterministic APIs, and buffers CSV output until measurement finishes. Short development checks passed for all parameter sets; the committed pilot is still pending. The legacy summary script remains unused.
+I completed EXP-000/RUN-0003 using source commit d690cfb580f0dd2d1b0805a6635ed56e553ca5f9 and saved its evidence in results commit 8a76f3f1c0bf9da8157b0901b2defbf8f3f618d2. I verified all 45000 timing rows, reproduced the 45 per-process summary rows and checked the retained hashes. All measured exchanges passed. These are pilot nanosecond durations with operating-system randomness excluded; no optimisation speedup has been measured.
 
-I have an archived sampled functional baseline. Formal performance collection is pending; independent vectors, arithmetic-safety analysis and timing-behaviour checks remain separate evidence.
+| Step | Status | Purpose |
+|---|---|---|
+| RUN-0001: metadata | Accepted | Identify source and environment |
+| RUN-0002: functional tests | Accepted | Check that unchanged Kyber works |
+| RUN-0003: timing pilot | Accepted | Establish unchanged-Kyber duration and variation |
+| RUN-0004: reduction counts | Support ready; recorded run pending | Establish calls per operation |
+| EXP-001: first optimisation | Next after counts | Test fused base multiplication against the baseline |
+
+I have prepared separate counting support in benchmarks/count_reductions.c and scripts/run_counts.py. Short development checks matched all predicted counts for all parameter sets. RUN-0004 is the last planned baseline measurement before beginning EXP-001. Bounds analysis, byte-level compatibility, arithmetic checks and timing-behaviour review will accompany that candidate. The legacy summary script remains unused.
 
 I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.

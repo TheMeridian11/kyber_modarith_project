@@ -172,7 +172,7 @@ def execute_timing(run_dir, snapshot, source_hashes, args, original_affinity):
         derived.mkdir()
         summary_path = derived / "summary.csv"
         with summary_path.open("x", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(summaries[0]))
+            writer = csv.DictWriter(handle, fieldnames=list(summaries[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows(summaries)
         manifest["summary"] = {

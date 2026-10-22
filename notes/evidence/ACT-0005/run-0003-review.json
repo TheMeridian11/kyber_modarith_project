@@ -1,0 +1,94 @@
+{
+  "review": "saved RUN-0003 verification; no benchmark rerun",
+  "source_commit": "d690cfb580f0dd2d1b0805a6635ed56e553ca5f9",
+  "results_commit": "8a76f3f1c0bf9da8157b0901b2defbf8f3f618d2",
+  "manifest_sha256": "af54bf4ba3ba6ab516f10d47db2884751bafe8ea5996ba5872e7505b449574cf",
+  "metadata_sha256": "b5c28042e167907efba92be7edd1c433f4b64e7f0e45c3c136b6f32aaa197d2d",
+  "verified_steps": 18,
+  "verified_log_hashes": 36,
+  "verified_executable_hashes": 3,
+  "verified_source_files_per_copy": 35,
+  "verified_support_hashes": 4,
+  "raw_files": 15,
+  "raw_rows": 45000,
+  "measured_exchanges": 15000,
+  "summary_rows_recomputed": 45,
+  "all_roundtrips_passed": true,
+  "measured_duration_sum_seconds": 1.800372823,
+  "max_single_operation_ns": 406298,
+  "summary_has_crlf": true,
+  "statistics": [
+    {
+      "parameter_set": "Kyber512",
+      "operation": "keygen",
+      "median_of_repetition_medians_ns": 18688.5,
+      "min_repetition_median_ns": 18602,
+      "max_repetition_median_ns": 18707,
+      "repetition_median_range_percent": 0.5618428445300586
+    },
+    {
+      "parameter_set": "Kyber512",
+      "operation": "encap",
+      "median_of_repetition_medians_ns": 21270.5,
+      "min_repetition_median_ns": 21172,
+      "max_repetition_median_ns": 21306.5,
+      "repetition_median_range_percent": 0.6323311628781646
+    },
+    {
+      "parameter_set": "Kyber512",
+      "operation": "decap",
+      "median_of_repetition_medians_ns": 27805,
+      "min_repetition_median_ns": 27634,
+      "max_repetition_median_ns": 27821.5,
+      "repetition_median_range_percent": 0.6743391476353174
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "keygen",
+      "median_of_repetition_medians_ns": 32592,
+      "min_repetition_median_ns": 32454,
+      "max_repetition_median_ns": 32770,
+      "repetition_median_range_percent": 0.9695630829651448
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "encap",
+      "median_of_repetition_medians_ns": 34777,
+      "min_repetition_median_ns": 34729.5,
+      "max_repetition_median_ns": 35049,
+      "repetition_median_range_percent": 0.9187106420910371
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "decap",
+      "median_of_repetition_medians_ns": 43045.5,
+      "min_repetition_median_ns": 42895.5,
+      "max_repetition_median_ns": 43323.5,
+      "repetition_median_range_percent": 0.9942967325272096
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "keygen",
+      "median_of_repetition_medians_ns": 49585.5,
+      "min_repetition_median_ns": 49059,
+      "max_repetition_median_ns": 49766.5,
+      "repetition_median_range_percent": 1.4268284074981596
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "encap",
+      "median_of_repetition_medians_ns": 55040.5,
+      "min_repetition_median_ns": 54313,
+      "max_repetition_median_ns": 55382.5,
+      "repetition_median_range_percent": 1.943114615601239
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "decap",
+      "median_of_repetition_medians_ns": 64840.5,
+      "min_repetition_median_ns": 64000.5,
+      "max_repetition_median_ns": 64895.5,
+      "repetition_median_range_percent": 1.380310145665132
+    }
+  ]
+}
