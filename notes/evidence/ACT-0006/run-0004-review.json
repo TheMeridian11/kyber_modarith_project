@@ -1,0 +1,79 @@
+{
+  "source_commit": "3757df58a02408fb9a701869cc1f3ac6f6159a8d",
+  "results_commit": "2a8388c1701dcf66cb5dfa6906921f63bc574c55",
+  "manifest_sha256": "66b82ccd1330aa5089a59a781bfaf88bb1b2434607632361e77d0c9fb9c6f347",
+  "metadata_sha256": "e5a4ccf7f3688714ab1fdfdcc0f68fb6f23469c1ae5b1e140b06ca082c538d24",
+  "verified_steps": 6,
+  "verified_log_hashes": 12,
+  "verified_executables": 3,
+  "raw_rows": 90,
+  "complete_exchanges": 30,
+  "summary_rows_recomputed": 9,
+  "all_count_predictions_and_roundtrips_pass": true,
+  "reference_sources_and_support_hashes_match": true,
+  "summary": [
+    {
+      "parameter_set": "Kyber512",
+      "operation": "keygen",
+      "samples": 10,
+      "montgomery_calls": 6656,
+      "barrett_calls": 2048
+    },
+    {
+      "parameter_set": "Kyber512",
+      "operation": "encap",
+      "samples": 10,
+      "montgomery_calls": 9088,
+      "barrett_calls": 4736
+    },
+    {
+      "parameter_set": "Kyber512",
+      "operation": "decap",
+      "samples": 10,
+      "montgomery_calls": 13312,
+      "barrett_calls": 6656
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "keygen",
+      "samples": 10,
+      "montgomery_calls": 11904,
+      "barrett_calls": 3072
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "encap",
+      "samples": 10,
+      "montgomery_calls": 14976,
+      "barrett_calls": 6400
+    },
+    {
+      "parameter_set": "Kyber768",
+      "operation": "decap",
+      "samples": 10,
+      "montgomery_calls": 20736,
+      "barrett_calls": 8576
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "keygen",
+      "samples": 10,
+      "montgomery_calls": 18432,
+      "barrett_calls": 4096
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "encap",
+      "samples": 10,
+      "montgomery_calls": 22144,
+      "barrett_calls": 8064
+    },
+    {
+      "parameter_set": "Kyber1024",
+      "operation": "decap",
+      "samples": 10,
+      "montgomery_calls": 29440,
+      "barrett_calls": 10496
+    }
+  ]
+}

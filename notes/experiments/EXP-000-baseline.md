@@ -1,6 +1,6 @@
 # EXP-000 Reproducible reference baseline
 
-Lifecycle: running. Metadata, sampled functional validation and the first timing pilot are accepted through ACT-0005. The committed reduction-count run is pending.
+Lifecycle: closed as initial baseline preparation. Metadata, sampled functional validation, timing pilot and reduction counts are accepted through ACT-0006. This does not establish a complete implementation-security result.
 
 ## Purpose and provenance
 
@@ -34,7 +34,7 @@ These predict reduction-function invocations per KEM call, not measured instruct
 1. Source identity and environment: RUN-0001 accepted.
 2. Sampled functional baseline: RUN-0002 accepted for all three parameter sets.
 3. Timing baseline: RUN-0003 accepted; 45000 raw rows and 45 reproduced summary rows.
-4. Reduction counts: separate support implemented and checked in ACT-0005; commit and execute RUN-0004 next.
+4. Reduction counts: RUN-0004 accepted in ACT-0006; all 90 observations agreed with the source-derived predictions.
 
 I retain the unchanged reference as the control. After RUN-0004, no additional general baseline infrastructure is planned before EXP-001. Candidate-specific range proofs, deterministic byte comparisons, arithmetic checks and timing-behaviour review remain necessary parts of the optimisation work.
 
@@ -44,7 +44,7 @@ I retain the unchanged reference as the control. After RUN-0004, no additional g
 - Support-script tests: 15 passed with dummy processes and mocked workflows.
 - New Kyber builds/tests during ACT-0003: not-run.
 - Sampled functional archive: accepted, EXP-000/RUN-0002.
-- Recorded reduction counts: pending RUN-0004; 18 development observations matched the source predictions.
+- Recorded reduction counts: [RUN-0004 accepted](../runs/EXP-000-RUN-0004.md); all 90 observations matched the source predictions.
 - Committed timing dataset: RUN-0003 accepted as a pilot; all 45000 rows validated.
 - Timing-behaviour assessment: not-run.
 - Functional baseline acceptance: accepted within the existing tests' scope.
@@ -56,7 +56,7 @@ The earlier review reported passing existing correctness binaries without a pers
 
 I accepted [RUN-0003](../runs/EXP-000-RUN-0003.md). Median-of-process-median durations in microseconds were 18.6885 / 21.2705 / 27.8050 for Kyber512, 32.5920 / 34.7770 / 43.0455 for Kyber768, and 49.5855 / 55.0405 / 64.8405 for Kyber1024, in keygen / encap / decap order. All measured exchanges passed. Process-median ranges were 0.56% to 1.94%; these are descriptive observations, not confidence intervals.
 
-I will use EXP-000/RUN-0004 for [reduction counting](../reduction_counts.md): ten distinct exchanges per parameter set, 90 operation observations and no timing measurements. I expect the source-derived counts above. Short development checks already agreed, but the committed run is still required for the baseline record.
+I accepted EXP-000/RUN-0004 for [reduction counting](../reduction_counts.md): ten distinct exchanges per parameter set and 90 operation observations. Every count matched the source-derived prediction and every exchange passed. No timing data were collected. I now proceed to [EXP-001](EXP-001-fused-basemul.md), with its own bounds, compatibility and implementation-security assessment.
 
 For initial optimisation comparisons, I retain five processes of 1000 exchanges per parameter set and compare fresh baseline and candidate builds in alternating matched blocks. I will add complete comparison blocks if a small effect remains uncertain, preserving all results. Repeated fixture sequences and within-process timing rows are not independent experiments.
 

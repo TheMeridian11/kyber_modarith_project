@@ -16,6 +16,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Raw timing protocol](notes/raw_timing.md)
 - [Accepted timing pilot](notes/runs/EXP-000-RUN-0003.md)
 - [Reduction counting protocol](notes/reduction_counts.md)
+- [Accepted reduction counts](notes/runs/EXP-000-RUN-0004.md)
+- [EXP-001 plan and security assessment](notes/experiments/EXP-001-fused-basemul.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -50,9 +52,11 @@ I completed EXP-000/RUN-0003 using source commit d690cfb580f0dd2d1b0805a6635ed56
 | RUN-0001: metadata | Accepted | Identify source and environment |
 | RUN-0002: functional tests | Accepted | Check that unchanged Kyber works |
 | RUN-0003: timing pilot | Accepted | Establish unchanged-Kyber duration and variation |
-| RUN-0004: reduction counts | Support ready; recorded run pending | Establish calls per operation |
-| EXP-001: first optimisation | Next after counts | Test fused base multiplication against the baseline |
+| RUN-0004: reduction counts | Accepted | Establish calls per operation |
+| EXP-001: first optimisation | Plan and validation support ready; manual arithmetic edit pending | Test fused base multiplication against the baseline |
 
-I have prepared separate counting support in benchmarks/count_reductions.c and scripts/run_counts.py. Short development checks matched all predicted counts for all parameter sets. RUN-0004 is the last planned baseline measurement before beginning EXP-001. Bounds analysis, byte-level compatibility, arithmetic checks and timing-behaviour review will accompany that candidate. The legacy summary script remains unused.
+I accepted RUN-0004 from source commit 3757df58a02408fb9a701869cc1f3ac6f6159a8d, saved in results commit 2a8388c1701dcf66cb5dfa6906921f63bc574c55. All 90 observations matched the predicted counts. EXP-000 is complete as baseline preparation.
+
+I am beginning EXP-001: fused base multiplication. The plan records modular equivalence, caller ranges including malformed keys, predicted counts and implementation-security gates. I prepared tests/test_fused_basemul.c and scripts/run_candidate_validation.py for exact baseline/candidate byte comparisons, kernel checks, UBSan, existing functional tests, counts and retained disassembly. The arithmetic change is pending manual application; no candidate result or speedup exists yet. The legacy summary script remains unused.
 
 I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.

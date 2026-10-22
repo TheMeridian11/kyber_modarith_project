@@ -82,3 +82,9 @@ I retain slower, failed and inconclusive variants. A failed command is an execut
 I use the [raw timing protocol](raw_timing.md): fixed logical-CPU affinity, reproducible public fixtures, uninstrumented reference builds, nanosecond duration measurements and five fresh processes per parameter set. Warm-up, fixture generation, shared-secret comparison and CSV formatting occur outside each operation's measured interval. The deterministic API mode excludes operating-system random-number generation.
 
 I keep implementation work focused on the next necessary experiment. I reuse the existing run-record machinery and perform checks that protect correctness, measurement validity and retained evidence, without adding unrelated infrastructure.
+
+## Per-optimisation security record
+
+For each candidate I record the potential failure mechanisms, caller ranges, Montgomery representation, intermediate widths, downstream consumers, invalid-input behaviour and any new timing or memory risks before measurement. I distinguish a reviewed argument from executed evidence. I record exact transcript comparisons, sanitizer outcomes, generated-code findings and any leakage-test limitations separately; a successful benchmark or round trip never becomes a blanket security pass.
+
+EXP-001's [assessment](experiments/EXP-001-fused-basemul.md) applies this rule to fused base multiplication, including noncanonical encoded keys and implicit-rejection outputs. Any later change that invalidates its input bounds requires a new assessment.

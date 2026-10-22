@@ -28,9 +28,10 @@ EXPECTED = {
 }
 
 
-def build_command(compiler, parameter, k, executable):
+def build_command(compiler, parameter, k, executable, source_dir=None):
+    source_dir = validation.BASELINE if source_dir is None else source_dir
     return [
-        compiler, *FLAGS, f"-DKYBER_K={k}", "-I", str(validation.BASELINE),
+        compiler, *FLAGS, f"-DKYBER_K={k}", "-I", str(source_dir),
         *validation.SOURCES[:-1], str(HARNESS),
         f"-Wl,--wrap=pqcrystals_kyber{parameter}_ref_montgomery_reduce",
         f"-Wl,--wrap=pqcrystals_kyber{parameter}_ref_barrett_reduce",
@@ -38,7 +39,7 @@ def build_command(compiler, parameter, k, executable):
     ]
 
 
-def summarise_csv(path, parameter, iterations):
+def summarise_csv(path, parameter, iterations, expected_counts=None):
     observations = {operation: [] for operation in OPERATIONS}
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -68,7 +69,8 @@ def summarise_csv(path, parameter, iterations):
         if len(set(values)) != 1:
             raise RuntimeError(f"Counts vary across fixtures: Kyber{parameter} {operation}")
         observed = values[0]
-        expected = EXPECTED[parameter][position]
+        predictions = EXPECTED if expected_counts is None else expected_counts
+        expected = predictions[parameter][position]
         if observed != expected:
             raise RuntimeError(
                 f"Count prediction mismatch: Kyber{parameter} {operation}; "

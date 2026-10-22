@@ -31,7 +31,7 @@ The C harness computes observations without using the predicted totals. The Pyth
 
 ## Recorded execution
 
-After reviewing and committing the support changes, I launch from the repository root:
+The accepted RUN-0004 used the command below. I use a new run ID for any further execution:
 
 ~~~bash
 python3 -B scripts/run_counts.py --experiment EXP-000 --run RUN-0004
@@ -48,8 +48,8 @@ The run directory contains metadata.json, manifest.json, raw/counts-512.csv, raw
 
 I compiled all three parameter sets and ran two fixture exchanges each: 18 operation rows in total. All wrapper self-checks, exchanges and source-derived count predictions passed. Zero iterations was rejected, and the parser rejected a missing row, a failed exchange flag and an incorrect reduction count.
 
-[Retained development evidence](evidence/ACT-0005/counts-smoke.json) contains the exact source hashes, compile commands, raw observations and check outcomes. This is a check of uncommitted support files, not the committed RUN-0004. The complete recorded orchestration remains pending that run.
+[Retained development evidence](evidence/ACT-0005/counts-smoke.json) contains the exact source hashes, compile commands, raw observations and check outcomes. This is a check of uncommitted support files, not the committed RUN-0004. The recorded baseline orchestration was subsequently accepted as RUN-0004 in ACT-0006.
 
 ## What follows
 
-After accepting RUN-0004, I can move to EXP-001: fused base multiplication. Its initial hypothesis is five to three Montgomery reductions per coefficient pair. I will establish the required ranges, apply the isolated change, check byte-level compatibility and arithmetic behaviour, then compare uninstrumented baseline and candidate timing builds. I will use fresh matched timing blocks rather than relying only on this pilot's earlier measurements.
+I accepted [RUN-0004](runs/EXP-000-RUN-0004.md) and can move to [EXP-001: fused base multiplication](experiments/EXP-001-fused-basemul.md). Its initial hypothesis is five to three Montgomery reductions per coefficient pair. I will establish the required ranges, apply the isolated change, check byte-level compatibility and arithmetic behaviour, then compare uninstrumented baseline and candidate timing builds. I will use fresh matched timing blocks rather than relying only on this pilot's earlier measurements.

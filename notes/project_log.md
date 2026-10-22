@@ -165,3 +165,43 @@ The Git whitespace warnings arose from CRLF in the saved derived CSV. I preserve
 No arithmetic optimisation or Git operation was performed during this activity. Functional agreement, arithmetic safety, timing behaviour and performance remain separate evidence categories. RUN-0004 is the last planned baseline measurement before EXP-001; candidate-specific validation proceeds with the optimisation.
 
 Final verification confirmed that both 36-file implementation copies and every tracked file in RUN-0001, RUN-0002 and RUN-0003 remain unchanged. The timing runner differs only in its summary writer's line terminator, tested support hashes still match, and local documentation links and whitespace checks pass. RUN-0004 has not been created.
+
+## ACT-0006 — Baseline counts accepted and first optimisation specified
+
+- **Completed:** I verified RUN-0004, closed initial baseline preparation, recorded the EXP-001 algebra/range argument and implementation-security assessment, and prepared candidate-validation support.
+- **Results:** All 90 baseline count observations and nine summary rows validated. All predictions and exchanges agreed. Six support-check builds using unchanged reference arithmetic passed the kernel oracle and normal/UBSan transcript comparisons.
+- **Pending:** I need to apply the supplied basemul replacement manually, review and commit the source/support/records, and execute EXP-001/RUN-0001.
+- **Learned:** Reduction fusion must preserve Montgomery scaling and cover deserialised coefficients up to 4095. The proposed int32_t sums remain within the existing reducer's input bounds. Internal representatives may differ by q while final encoded results must remain identical.
+- **Next:** Review candidate correctness, exercised-path sanitizer results, counts and generated code before collecting fresh matched timings.
+
+### Accepted baseline record
+
+The count source commit is 3757df58a02408fb9a701869cc1f3ac6f6159a8d; results commit 2a8388c1701dcf66cb5dfa6906921f63bc574c55 directly follows it. Stored Git objects confirmed the relationship without executing Git commands.
+
+I verified all six steps, 12 raw-log hashes, three executable hashes, metadata, source/support identity and summary. All 90 rows reproduced the nine summary entries and matched the prior source predictions. No timing was collected. See the [RUN-0004 review](runs/EXP-000-RUN-0004.md) and [verification evidence](evidence/ACT-0006/run-0004-review.json).
+
+EXP-000 is closed as initial baseline preparation. Sampled correctness, the timing pilot and count evidence remain subject to their recorded scope; closure does not establish complete security or final ML-KEM conformance.
+
+### Proposed arithmetic and security assessment
+
+I propose changing only basemul in the experimental ntt.c. I retain M(a1*b1), combine the remaining products in two int32_t accumulators, and reduce each output once. Predicted calls change from five to three per coefficient pair; Barrett counts remain unchanged. The [EXP-001 plan](experiments/EXP-001-fused-basemul.md) records full KEM count predictions, source-derived algebra and downstream compatibility.
+
+The reviewed conservative input envelope is |a| <= 4095, |b| <= 1664 and |zeta| <= 1664. The largest fused sum is bounded by 13628160, within the reducer's documented input interval and int32_t. Each output has magnitude at most 3328, so up to four products accumulate within 13312 before the unchanged final Barrett reduction.
+
+I explicitly record risks from wrong Montgomery scale, overflow/narrowing, changed representatives, invalid-input/rejection behaviour and secret-dependent execution. The proposal introduces fixed scalar arithmetic with fixed indices; candidate generated-code review and leakage assessment remain outstanding. The existing GCC-specific signed conversions/shifts remain an implementation assumption. Passing tests or observing fewer calls will not be recorded as a blanket security pass.
+
+### Support implementation and checks
+
+I added tests/test_fused_basemul.c and scripts/run_candidate_validation.py. The support compares normal and UBSan builds of both variants, checks a test-only modular oracle and output bounds, compares public deterministic KEM transcripts byte for byte including invalid-input cases, runs the candidate's existing functional suite, checks candidate counts and retains disassembly.
+
+I extended run_counts.py helpers with optional source-directory and prediction arguments. Default baseline parsing still accepts the saved RUN-0004 data; presenting those baseline observations as candidate predictions is rejected.
+
+Development checks used unchanged reference arithmetic only, with two KEM fixtures and 3200 small kernel cases per executable. All six builds passed, normal and UBSan transcripts were identical, no sanitizer diagnostics appeared, and a deliberately altered transcript was rejected. The runner also rejects a missing arithmetic change before reserving a run. [Retained support evidence](evidence/ACT-0006/validation-support-smoke.json) identifies the exact files and commands.
+
+- Validation runner SHA-256: 7b7fc5d0c779303bd3d8bb2898b052e7ca5ab9f3afd6cf26f2867808ab135939.
+- Validation C SHA-256: 2aad45e50a26bf54a3241570aba173f2d238836ba17b5fd267ccb57910b8752b.
+- Extended counting runner SHA-256: 8f41dc934e7d21b071b67ffd3b529b181ffcfe9fc26bcfde21bdc6838d42710d.
+
+The proposed arithmetic itself has not been written into the repository or tested. Full recorded candidate validation remains pending manual application. No optimisation speedup, complete safety proof or constant-time guarantee is claimed.
+
+Final read-only verification confirmed that both 36-file reference copies and every archived result remain unchanged. The support files match their tested hashes, documentation links and whitespace checks pass, and the candidate-count table agrees with the source-derived savings formulas. EXP-001/RUN-0001 has not been created. No Git commands were executed during this activity.
