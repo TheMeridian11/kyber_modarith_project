@@ -1,0 +1,49 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0002/build/fused-basemul-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002630 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery>:
+    2630:	f3 0f 1e fa                                     	endbr64
+    2634:	41 54                                           	push   %r12
+    2636:	49 89 d4                                        	mov    %rdx,%r12
+    2639:	55                                              	push   %rbp
+    263a:	48 89 f5                                        	mov    %rsi,%rbp
+    263d:	53                                              	push   %rbx
+    263e:	48 89 fb                                        	mov    %rdi,%rbx
+    2641:	48 81 ec 10 02 00 00                            	sub    $0x210,%rsp
+    2648:	64 48 8b 04 25 28 00 00 00                      	mov    %fs:0x28,%rax
+    2651:	48 89 84 24 08 02 00 00                         	mov    %rax,0x208(%rsp)
+    2659:	31 c0                                           	xor    %eax,%eax
+    265b:	e8 00 22 00 00                                  	call   4860 <pqcrystals_kyber512_ref_poly_basemul_montgomery>
+    2660:	48 8d b5 00 02 00 00                            	lea    0x200(%rbp),%rsi
+    2667:	48 89 e5                                        	mov    %rsp,%rbp
+    266a:	49 8d 94 24 00 02 00 00                         	lea    0x200(%r12),%rdx
+    2672:	48 89 ef                                        	mov    %rbp,%rdi
+    2675:	e8 e6 21 00 00                                  	call   4860 <pqcrystals_kyber512_ref_poly_basemul_montgomery>
+    267a:	48 89 df                                        	mov    %rbx,%rdi
+    267d:	48 89 ea                                        	mov    %rbp,%rdx
+    2680:	48 89 de                                        	mov    %rbx,%rsi
+    2683:	e8 d8 22 00 00                                  	call   4960 <pqcrystals_kyber512_ref_poly_add>
+    2688:	48 89 df                                        	mov    %rbx,%rdi
+    268b:	e8 90 22 00 00                                  	call   4920 <pqcrystals_kyber512_ref_poly_reduce>
+    2690:	48 8b 84 24 08 02 00 00                         	mov    0x208(%rsp),%rax
+    2698:	64 48 2b 04 25 28 00 00 00                      	sub    %fs:0x28,%rax
+    26a1:	75 0c                                           	jne    26af <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x7f>
+    26a3:	48 81 c4 10 02 00 00                            	add    $0x210,%rsp
+    26aa:	5b                                              	pop    %rbx
+    26ab:	5d                                              	pop    %rbp
+    26ac:	41 5c                                           	pop    %r12
+    26ae:	c3                                              	ret
+    26af:	e8 2c eb ff ff                                  	call   11e0 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:
