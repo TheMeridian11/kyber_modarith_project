@@ -1,0 +1,6 @@
+invntt_vectors=47
+invntt_coefficient_checks=12032
+invntt_oracle=pass
+kem_fixtures=100
+kem_checks=pass
+transcript=public-deterministic-test-vectors

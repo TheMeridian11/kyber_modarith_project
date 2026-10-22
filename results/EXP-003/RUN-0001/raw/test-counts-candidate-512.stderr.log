@@ -1,0 +1,5 @@
+wrapper_self_check=pass
+input_mode=derand-shake256-v1
+iterations=10
+seed=1
+performance_measurements=false

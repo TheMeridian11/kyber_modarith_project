@@ -1,0 +1,129 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-003/RUN-0001/build/staged-invntt-768-normal:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004770 <pqcrystals_kyber768_ref_invntt>:
+    4770:	f3 0f 1e fa                                     	endbr64
+    4774:	41 57                                           	push   %r15
+    4776:	41 56                                           	push   %r14
+    4778:	41 55                                           	push   %r13
+    477a:	41 54                                           	push   %r12
+    477c:	41 bc 5c 06 00 00                               	mov    $0x65c,%r12d
+    4782:	55                                              	push   %rbp
+    4783:	53                                              	push   %rbx
+    4784:	48 89 fb                                        	mov    %rdi,%rbx
+    4787:	48 83 ec 18                                     	sub    $0x18,%rsp
+    478b:	c7 44 24 0c 07 00 00 00                         	movl   $0x7,0xc(%rsp)
+    4793:	c7 04 24 7f 00 00 00                            	movl   $0x7f,(%rsp)
+    479a:	c7 44 24 08 02 00 00 00                         	movl   $0x2,0x8(%rsp)
+    47a2:	66 0f 1f 44 00 00                               	nopw   0x0(%rax,%rax,1)
+    47a8:	31 ed                                           	xor    %ebp,%ebp
+    47aa:	83 7c 24 08 10                                  	cmpl   $0x10,0x8(%rsp)
+    47af:	0f 84 ae 00 00 00                               	je     4863 <pqcrystals_kyber768_ref_invntt+0xf3>
+    47b5:	0f 1f 00                                        	nopl   (%rax)
+    47b8:	8b 44 24 08                                     	mov    0x8(%rsp),%eax
+    47bc:	83 2c 24 01                                     	subl   $0x1,(%rsp)
+    47c0:	44 8d 3c 28                                     	lea    (%rax,%rbp,1),%r15d
+    47c4:	44 39 fd                                        	cmp    %r15d,%ebp
+    47c7:	0f 83 2a 01 00 00                               	jae    48f7 <pqcrystals_kyber768_ref_invntt+0x187>
+    47cd:	89 ed                                           	mov    %ebp,%ebp
+    47cf:	4c 8d 34 6b                                     	lea    (%rbx,%rbp,2),%r14
+    47d3:	42 8d 2c 38                                     	lea    (%rax,%r15,1),%ebp
+    47d7:	66 0f 1f 84 00 00 00 00 00                      	nopw   0x0(%rax,%rax,1)
+    47e0:	44 89 f8                                        	mov    %r15d,%eax
+    47e3:	41 83 c7 01                                     	add    $0x1,%r15d
+    47e7:	49 83 c6 02                                     	add    $0x2,%r14
+    47eb:	4c 8d 2c 43                                     	lea    (%rbx,%rax,2),%r13
+    47ef:	41 0f b7 46 fe                                  	movzwl -0x2(%r14),%eax
+    47f4:	41 0f b7 7d 00                                  	movzwl 0x0(%r13),%edi
+    47f9:	01 c7                                           	add    %eax,%edi
+    47fb:	66 41 89 7e fe                                  	mov    %di,-0x2(%r14)
+    4800:	41 0f b7 7d 00                                  	movzwl 0x0(%r13),%edi
+    4805:	29 c7                                           	sub    %eax,%edi
+    4807:	66 41 89 7d 00                                  	mov    %di,0x0(%r13)
+    480c:	0f bf ff                                        	movswl %di,%edi
+    480f:	41 0f af fc                                     	imul   %r12d,%edi
+    4813:	e8 68 07 00 00                                  	call   4f80 <pqcrystals_kyber768_ref_montgomery_reduce>
+    4818:	66 41 89 45 00                                  	mov    %ax,0x0(%r13)
+    481d:	41 39 ef                                        	cmp    %ebp,%r15d
+    4820:	75 be                                           	jne    47e0 <pqcrystals_kyber768_ref_invntt+0x70>
+    4822:	81 fd ff 00 00 00                               	cmp    $0xff,%ebp
+    4828:	0f 87 aa 00 00 00                               	ja     48d8 <pqcrystals_kyber768_ref_invntt+0x168>
+    482e:	8b 04 24                                        	mov    (%rsp),%eax
+    4831:	48 8d 15 28 69 00 00                            	lea    0x6928(%rip),%rdx        # b160 <pqcrystals_kyber768_ref_zetas>
+    4838:	44 0f bf 24 42                                  	movswl (%rdx,%rax,2),%r12d
+    483d:	e9 76 ff ff ff                                  	jmp    47b8 <pqcrystals_kyber768_ref_invntt+0x48>
+    4842:	66 0f 1f 44 00 00                               	nopw   0x0(%rax,%rax,1)
+    4848:	81 fd 00 01 00 00                               	cmp    $0x100,%ebp
+    484e:	0f 84 84 00 00 00                               	je     48d8 <pqcrystals_kyber768_ref_invntt+0x168>
+    4854:	8b 04 24                                        	mov    (%rsp),%eax
+    4857:	48 8d 0d 02 69 00 00                            	lea    0x6902(%rip),%rcx        # b160 <pqcrystals_kyber768_ref_zetas>
+    485e:	44 0f b7 24 41                                  	movzwl (%rcx,%rax,2),%r12d
+    4863:	83 2c 24 01                                     	subl   $0x1,(%rsp)
+    4867:	41 0f bf c4                                     	movswl %r12w,%eax
+    486b:	44 8d 75 10                                     	lea    0x10(%rbp),%r14d
+    486f:	89 44 24 04                                     	mov    %eax,0x4(%rsp)
+    4873:	89 e8                                           	mov    %ebp,%eax
+    4875:	83 c5 20                                        	add    $0x20,%ebp
+    4878:	4c 8d 2c 43                                     	lea    (%rbx,%rax,2),%r13
+    487c:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    4880:	45 0f b7 65 00                                  	movzwl 0x0(%r13),%r12d
+    4885:	41 0f b7 7d 20                                  	movzwl 0x20(%r13),%edi
+    488a:	44 89 f0                                        	mov    %r14d,%eax
+    488d:	41 83 c6 01                                     	add    $0x1,%r14d
+    4891:	4c 8d 3c 43                                     	lea    (%rbx,%rax,2),%r15
+    4895:	49 83 c5 02                                     	add    $0x2,%r13
+    4899:	44 01 e7                                        	add    %r12d,%edi
+    489c:	0f bf ff                                        	movswl %di,%edi
+    489f:	e8 fc 06 00 00                                  	call   4fa0 <pqcrystals_kyber768_ref_barrett_reduce>
+    48a4:	66 41 89 45 fe                                  	mov    %ax,-0x2(%r13)
+    48a9:	41 0f b7 3f                                     	movzwl (%r15),%edi
+    48ad:	8b 44 24 04                                     	mov    0x4(%rsp),%eax
+    48b1:	44 29 e7                                        	sub    %r12d,%edi
+    48b4:	66 41 89 3f                                     	mov    %di,(%r15)
+    48b8:	0f bf ff                                        	movswl %di,%edi
+    48bb:	0f af f8                                        	imul   %eax,%edi
+    48be:	e8 bd 06 00 00                                  	call   4f80 <pqcrystals_kyber768_ref_montgomery_reduce>
+    48c3:	66 41 89 07                                     	mov    %ax,(%r15)
+    48c7:	41 39 ee                                        	cmp    %ebp,%r14d
+    48ca:	75 b4                                           	jne    4880 <pqcrystals_kyber768_ref_invntt+0x110>
+    48cc:	e9 77 ff ff ff                                  	jmp    4848 <pqcrystals_kyber768_ref_invntt+0xd8>
+    48d1:	0f 1f 80 00 00 00 00                            	nopl   0x0(%rax)
+    48d8:	d1 64 24 08                                     	shll   $1,0x8(%rsp)
+    48dc:	83 6c 24 0c 01                                  	subl   $0x1,0xc(%rsp)
+    48e1:	74 1c                                           	je     48ff <pqcrystals_kyber768_ref_invntt+0x18f>
+    48e3:	8b 04 24                                        	mov    (%rsp),%eax
+    48e6:	48 8d 35 73 68 00 00                            	lea    0x6873(%rip),%rsi        # b160 <pqcrystals_kyber768_ref_zetas>
+    48ed:	44 0f bf 24 46                                  	movswl (%rsi,%rax,2),%r12d
+    48f2:	e9 b1 fe ff ff                                  	jmp    47a8 <pqcrystals_kyber768_ref_invntt+0x38>
+    48f7:	44 89 fd                                        	mov    %r15d,%ebp
+    48fa:	e9 2f ff ff ff                                  	jmp    482e <pqcrystals_kyber768_ref_invntt+0xbe>
+    48ff:	48 8d ab 00 02 00 00                            	lea    0x200(%rbx),%rbp
+    4906:	66 2e 0f 1f 84 00 00 00 00 00                   	cs nopw 0x0(%rax,%rax,1)
+    4910:	0f bf 3b                                        	movswl (%rbx),%edi
+    4913:	48 83 c3 02                                     	add    $0x2,%rbx
+    4917:	69 ff a1 05 00 00                               	imul   $0x5a1,%edi,%edi
+    491d:	e8 5e 06 00 00                                  	call   4f80 <pqcrystals_kyber768_ref_montgomery_reduce>
+    4922:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    4926:	48 39 eb                                        	cmp    %rbp,%rbx
+    4929:	75 e5                                           	jne    4910 <pqcrystals_kyber768_ref_invntt+0x1a0>
+    492b:	48 83 c4 18                                     	add    $0x18,%rsp
+    492f:	5b                                              	pop    %rbx
+    4930:	5d                                              	pop    %rbp
+    4931:	41 5c                                           	pop    %r12
+    4933:	41 5d                                           	pop    %r13
+    4935:	41 5e                                           	pop    %r14
+    4937:	41 5f                                           	pop    %r15
+    4939:	c3                                              	ret
+
+Disassembly of section .fini:
