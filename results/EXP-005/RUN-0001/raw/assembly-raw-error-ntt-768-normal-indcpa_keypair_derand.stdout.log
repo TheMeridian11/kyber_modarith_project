@@ -1,0 +1,128 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-005/RUN-0001/build/raw-error-ntt-768-normal:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000001940 <pqcrystals_kyber768_ref_indcpa_keypair_derand>:
+    1940:	f3 0f 1e fa                                     	endbr64
+    1944:	41 57                                           	push   %r15
+    1946:	41 56                                           	push   %r14
+    1948:	41 55                                           	push   %r13
+    194a:	41 54                                           	push   %r12
+    194c:	55                                              	push   %rbp
+    194d:	53                                              	push   %rbx
+    194e:	48 81 ec 00 10 00 00                            	sub    $0x1000,%rsp
+    1955:	48 83 0c 24 00                                  	orq    $0x0,(%rsp)
+    195a:	48 81 ec 00 10 00 00                            	sub    $0x1000,%rsp
+    1961:	48 83 0c 24 00                                  	orq    $0x0,(%rsp)
+    1966:	48 81 ec 78 04 00 00                            	sub    $0x478,%rsp
+    196d:	f3 0f 6f 02                                     	movdqu (%rdx),%xmm0
+    1971:	f3 0f 6f 4a 10                                  	movdqu 0x10(%rdx),%xmm1
+    1976:	ba 21 00 00 00                                  	mov    $0x21,%edx
+    197b:	48 89 74 24 10                                  	mov    %rsi,0x10(%rsp)
+    1980:	4c 8d a4 24 20 24 00 00                         	lea    0x2420(%rsp),%r12
+    1988:	49 89 fd                                        	mov    %rdi,%r13
+    198b:	4c 8d bc 24 20 12 00 00                         	lea    0x1220(%rsp),%r15
+    1993:	4c 89 e6                                        	mov    %r12,%rsi
+    1996:	4c 89 e7                                        	mov    %r12,%rdi
+    1999:	48 8d 9c 24 40 24 00 00                         	lea    0x2440(%rsp),%rbx
+    19a1:	48 8d ac 24 20 0c 00 00                         	lea    0xc20(%rsp),%rbp
+    19a9:	4c 8d b4 24 20 04 00 00                         	lea    0x420(%rsp),%r14
+    19b1:	64 48 8b 04 25 28 00 00 00                      	mov    %fs:0x28,%rax
+    19ba:	48 89 84 24 68 24 00 00                         	mov    %rax,0x2468(%rsp)
+    19c2:	31 c0                                           	xor    %eax,%eax
+    19c4:	0f 29 84 24 20 24 00 00                         	movaps %xmm0,0x2420(%rsp)
+    19cc:	0f 29 8c 24 30 24 00 00                         	movaps %xmm1,0x2430(%rsp)
+    19d4:	c6 84 24 40 24 00 00 03                         	movb   $0x3,0x2440(%rsp)
+    19dc:	e8 7f 77 00 00                                  	call   9160 <pqcrystals_kyber_fips202_ref_sha3_512>
+    19e1:	31 d2                                           	xor    %edx,%edx
+    19e3:	4c 89 e6                                        	mov    %r12,%rsi
+    19e6:	4c 89 ff                                        	mov    %r15,%rdi
+    19e9:	e8 02 fd ff ff                                  	call   16f0 <pqcrystals_kyber768_ref_gen_matrix>
+    19ee:	48 89 de                                        	mov    %rbx,%rsi
+    19f1:	31 d2                                           	xor    %edx,%edx
+    19f3:	48 89 ef                                        	mov    %rbp,%rdi
+    19f6:	e8 25 2a 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    19fb:	48 89 de                                        	mov    %rbx,%rsi
+    19fe:	ba 01 00 00 00                                  	mov    $0x1,%edx
+    1a03:	48 8d bc 24 20 0e 00 00                         	lea    0xe20(%rsp),%rdi
+    1a0b:	e8 10 2a 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    1a10:	48 89 de                                        	mov    %rbx,%rsi
+    1a13:	ba 02 00 00 00                                  	mov    $0x2,%edx
+    1a18:	48 8d bc 24 20 10 00 00                         	lea    0x1020(%rsp),%rdi
+    1a20:	e8 fb 29 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    1a25:	48 8d 44 24 20                                  	lea    0x20(%rsp),%rax
+    1a2a:	48 89 de                                        	mov    %rbx,%rsi
+    1a2d:	ba 03 00 00 00                                  	mov    $0x3,%edx
+    1a32:	48 89 c7                                        	mov    %rax,%rdi
+    1a35:	48 89 44 24 08                                  	mov    %rax,0x8(%rsp)
+    1a3a:	e8 e1 29 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    1a3f:	48 8d 8c 24 20 02 00 00                         	lea    0x220(%rsp),%rcx
+    1a47:	48 89 de                                        	mov    %rbx,%rsi
+    1a4a:	ba 04 00 00 00                                  	mov    $0x4,%edx
+    1a4f:	48 89 cf                                        	mov    %rcx,%rdi
+    1a52:	48 89 4c 24 18                                  	mov    %rcx,0x18(%rsp)
+    1a57:	e8 c4 29 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    1a5c:	48 89 de                                        	mov    %rbx,%rsi
+    1a5f:	ba 05 00 00 00                                  	mov    $0x5,%edx
+    1a64:	4c 89 f7                                        	mov    %r14,%rdi
+    1a67:	e8 b4 29 00 00                                  	call   4420 <pqcrystals_kyber768_ref_poly_getnoise_eta1>
+    1a6c:	48 89 ef                                        	mov    %rbp,%rdi
+    1a6f:	e8 4c 07 00 00                                  	call   21c0 <pqcrystals_kyber768_ref_polyvec_ntt>
+    1a74:	48 8b 7c 24 08                                  	mov    0x8(%rsp),%rdi
+    1a79:	e8 32 2c 00 00                                  	call   46b0 <pqcrystals_kyber768_ref_ntt>
+    1a7e:	48 8b 7c 24 18                                  	mov    0x18(%rsp),%rdi
+    1a83:	e8 28 2c 00 00                                  	call   46b0 <pqcrystals_kyber768_ref_ntt>
+    1a88:	4c 89 f7                                        	mov    %r14,%rdi
+    1a8b:	4c 8d b4 24 20 06 00 00                         	lea    0x620(%rsp),%r14
+    1a93:	e8 18 2c 00 00                                  	call   46b0 <pqcrystals_kyber768_ref_ntt>
+    1a98:	4c 89 f3                                        	mov    %r14,%rbx
+    1a9b:	4c 89 fe                                        	mov    %r15,%rsi
+    1a9e:	48 89 df                                        	mov    %rbx,%rdi
+    1aa1:	48 89 ea                                        	mov    %rbp,%rdx
+    1aa4:	49 81 c7 00 06 00 00                            	add    $0x600,%r15
+    1aab:	e8 70 07 00 00                                  	call   2220 <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery>
+    1ab0:	48 89 df                                        	mov    %rbx,%rdi
+    1ab3:	48 81 c3 00 02 00 00                            	add    $0x200,%rbx
+    1aba:	e8 11 2b 00 00                                  	call   45d0 <pqcrystals_kyber768_ref_poly_tomont>
+    1abf:	4d 39 fc                                        	cmp    %r15,%r12
+    1ac2:	75 d7                                           	jne    1a9b <pqcrystals_kyber768_ref_indcpa_keypair_derand+0x15b>
+    1ac4:	48 8b 54 24 08                                  	mov    0x8(%rsp),%rdx
+    1ac9:	4c 89 f6                                        	mov    %r14,%rsi
+    1acc:	4c 89 f7                                        	mov    %r14,%rdi
+    1acf:	e8 ec 08 00 00                                  	call   23c0 <pqcrystals_kyber768_ref_polyvec_add>
+    1ad4:	4c 89 f7                                        	mov    %r14,%rdi
+    1ad7:	e8 b4 08 00 00                                  	call   2390 <pqcrystals_kyber768_ref_polyvec_reduce>
+    1adc:	48 8b 7c 24 10                                  	mov    0x10(%rsp),%rdi
+    1ae1:	48 89 ee                                        	mov    %rbp,%rsi
+    1ae4:	e8 37 06 00 00                                  	call   2120 <pqcrystals_kyber768_ref_polyvec_tobytes>
+    1ae9:	4c 89 f6                                        	mov    %r14,%rsi
+    1aec:	4c 89 ef                                        	mov    %r13,%rdi
+    1aef:	e8 2c 06 00 00                                  	call   2120 <pqcrystals_kyber768_ref_polyvec_tobytes>
+    1af4:	66 0f 6f 94 24 20 24 00 00                      	movdqa 0x2420(%rsp),%xmm2
+    1afd:	66 0f 6f 9c 24 30 24 00 00                      	movdqa 0x2430(%rsp),%xmm3
+    1b06:	41 0f 11 95 80 04 00 00                         	movups %xmm2,0x480(%r13)
+    1b0e:	41 0f 11 9d 90 04 00 00                         	movups %xmm3,0x490(%r13)
+    1b16:	48 8b 84 24 68 24 00 00                         	mov    0x2468(%rsp),%rax
+    1b1e:	64 48 2b 04 25 28 00 00 00                      	sub    %fs:0x28,%rax
+    1b27:	75 12                                           	jne    1b3b <pqcrystals_kyber768_ref_indcpa_keypair_derand+0x1fb>
+    1b29:	48 81 c4 78 24 00 00                            	add    $0x2478,%rsp
+    1b30:	5b                                              	pop    %rbx
+    1b31:	5d                                              	pop    %rbp
+    1b32:	41 5c                                           	pop    %r12
+    1b34:	41 5d                                           	pop    %r13
+    1b36:	41 5e                                           	pop    %r14
+    1b38:	41 5f                                           	pop    %r15
+    1b3a:	c3                                              	ret
+    1b3b:	e8 c0 f5 ff ff                                  	call   1100 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:

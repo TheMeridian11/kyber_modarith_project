@@ -1,0 +1,8 @@
+error_ntt_vectors=47
+error_ntt_coefficient_checks=12032
+error_ntt_addition_checks=48128
+error_ntt_serialization_checks=188
+error_ntt_oracle=pass
+kem_fixtures=100
+kem_checks=pass
+transcript=public-deterministic-test-vectors

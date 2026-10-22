@@ -1,0 +1,86 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-005/RUN-0001/build/baseline-1024-normal:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004420 <pqcrystals_kyber1024_ref_ntt>:
+    4420:	f3 0f 1e fa                                     	endbr64
+    4424:	41 57                                           	push   %r15
+    4426:	49 89 ff                                        	mov    %rdi,%r15
+    4429:	41 56                                           	push   %r14
+    442b:	41 55                                           	push   %r13
+    442d:	41 54                                           	push   %r12
+    442f:	55                                              	push   %rbp
+    4430:	bd 0a fd ff ff                                  	mov    $0xfffffd0a,%ebp
+    4435:	53                                              	push   %rbx
+    4436:	48 83 ec 28                                     	sub    $0x28,%rsp
+    443a:	c7 44 24 1c 07 00 00 00                         	movl   $0x7,0x1c(%rsp)
+    4442:	c7 44 24 0c 01 00 00 00                         	movl   $0x1,0xc(%rsp)
+    444a:	c7 44 24 10 80 00 00 00                         	movl   $0x80,0x10(%rsp)
+    4452:	66 0f 1f 44 00 00                               	nopw   0x0(%rax,%rax,1)
+    4458:	8b 44 24 10                                     	mov    0x10(%rsp),%eax
+    445c:	45 31 e4                                        	xor    %r12d,%r12d
+    445f:	8d 70 ff                                        	lea    -0x1(%rax),%esi
+    4462:	83 c0 01                                        	add    $0x1,%eax
+    4465:	89 74 24 14                                     	mov    %esi,0x14(%rsp)
+    4469:	89 44 24 18                                     	mov    %eax,0x18(%rsp)
+    446d:	0f 1f 00                                        	nopl   (%rax)
+    4470:	8b 44 24 10                                     	mov    0x10(%rsp),%eax
+    4474:	83 44 24 0c 01                                  	addl   $0x1,0xc(%rsp)
+    4479:	45 89 e5                                        	mov    %r12d,%r13d
+    447c:	44 01 e0                                        	add    %r12d,%eax
+    447f:	89 c0                                           	mov    %eax,%eax
+    4481:	48 89 c3                                        	mov    %rax,%rbx
+    4484:	4c 29 e8                                        	sub    %r13,%rax
+    4487:	4d 8d 34 47                                     	lea    (%r15,%rax,2),%r14
+    448b:	0f 1f 44 00 00                                  	nopl   0x0(%rax,%rax,1)
+    4490:	43 0f bf 3c 6e                                  	movswl (%r14,%r13,2),%edi
+    4495:	0f af fd                                        	imul   %ebp,%edi
+    4498:	e8 33 08 00 00                                  	call   4cd0 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    449d:	43 0f b7 0c 6f                                  	movzwl (%r15,%r13,2),%ecx
+    44a2:	29 c1                                           	sub    %eax,%ecx
+    44a4:	66 43 89 0c 6e                                  	mov    %cx,(%r14,%r13,2)
+    44a9:	66 43 01 04 6f                                  	add    %ax,(%r15,%r13,2)
+    44ae:	49 83 c5 01                                     	add    $0x1,%r13
+    44b2:	41 39 dd                                        	cmp    %ebx,%r13d
+    44b5:	72 d9                                           	jb     4490 <pqcrystals_kyber1024_ref_ntt+0x70>
+    44b7:	41 8d 44 24 01                                  	lea    0x1(%r12),%eax
+    44bc:	8b 74 24 18                                     	mov    0x18(%rsp),%esi
+    44c0:	39 c3                                           	cmp    %eax,%ebx
+    44c2:	b8 00 00 00 00                                  	mov    $0x0,%eax
+    44c7:	0f 43 44 24 14                                  	cmovae 0x14(%rsp),%eax
+    44cc:	41 01 f4                                        	add    %esi,%r12d
+    44cf:	41 01 c4                                        	add    %eax,%r12d
+    44d2:	41 81 fc ff 00 00 00                            	cmp    $0xff,%r12d
+    44d9:	77 15                                           	ja     44f0 <pqcrystals_kyber1024_ref_ntt+0xd0>
+    44db:	8b 44 24 0c                                     	mov    0xc(%rsp),%eax
+    44df:	48 8d 15 5a 6c 00 00                            	lea    0x6c5a(%rip),%rdx        # b140 <pqcrystals_kyber1024_ref_zetas>
+    44e6:	0f bf 2c 42                                     	movswl (%rdx,%rax,2),%ebp
+    44ea:	eb 84                                           	jmp    4470 <pqcrystals_kyber1024_ref_ntt+0x50>
+    44ec:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    44f0:	d1 6c 24 10                                     	shrl   $1,0x10(%rsp)
+    44f4:	83 6c 24 1c 01                                  	subl   $0x1,0x1c(%rsp)
+    44f9:	74 14                                           	je     450f <pqcrystals_kyber1024_ref_ntt+0xef>
+    44fb:	8b 44 24 0c                                     	mov    0xc(%rsp),%eax
+    44ff:	48 8d 35 3a 6c 00 00                            	lea    0x6c3a(%rip),%rsi        # b140 <pqcrystals_kyber1024_ref_zetas>
+    4506:	0f bf 2c 46                                     	movswl (%rsi,%rax,2),%ebp
+    450a:	e9 49 ff ff ff                                  	jmp    4458 <pqcrystals_kyber1024_ref_ntt+0x38>
+    450f:	48 83 c4 28                                     	add    $0x28,%rsp
+    4513:	5b                                              	pop    %rbx
+    4514:	5d                                              	pop    %rbp
+    4515:	41 5c                                           	pop    %r12
+    4517:	41 5d                                           	pop    %r13
+    4519:	41 5e                                           	pop    %r14
+    451b:	41 5f                                           	pop    %r15
+    451d:	c3                                              	ret
+
+Disassembly of section .fini:
