@@ -97,3 +97,31 @@ The support tests in tests/test_run_validation.py use temporary dummy processes 
 These checks were development validation of uncommitted support files identified by the hashes above. I will commit them before creating a formal Kyber run. I retain manual application of arithmetic optimisations and all Git operations; supporting automation and records are reviewed before inclusion.
 
 Final read-only verification checked links and work-record formatting across 12 Markdown files, confirmed the collector and saved metadata hashes remain unchanged, and confirmed both implementation copies still match all 36 upstream reference source/configuration files. The support-script hashes match the versions that passed the infrastructure tests. No Git commands or new Kyber executions were performed during this activity.
+
+## ACT-0004 — Functional baseline accepted and raw timing harness prepared
+
+- **Completed:** I verified RUN-0002 and prepared the C raw timing harness, Python runner and measurement protocol.
+- **Results:** All three reference functional tests passed. The archived logs and hashes matched. Short harness checks produced 108 valid timing rows with matching shared secrets across all parameter sets; invalid inputs and malformed CSVs were rejected.
+- **Pending:** I need to commit the harness and launch the first recorded timing pilot, EXP-000/RUN-0003.
+- **Learned:** The sampled functional baseline is established. The timing harness measures reproducible KEM computation in nanoseconds with randomness generation excluded; no optimisation speedup has been measured.
+- **Next:** Collect and inspect the raw baseline timing data, then proceed to reduction-count instrumentation.
+
+### Accepted functional evidence
+
+Source commit 75b0e38b5436dfa3f2672822edb178087b542b43 produced RUN-0002. Results commit e1d3734be7d890e0697678a8ae336e0a8a210f92 directly follows it. The manifest is completed with all six steps exiting 0, all three functional checks passing and provenance recheck passing.
+
+I verified 12 raw-log hashes, three retained executable hashes, metadata and source-file hashes, and runner/collector identity. The existing test completed 1000 iterations of each of three cases for every parameter set, totalling 9000 case executions. No new functional rerun was needed. See [RUN-0002 review](runs/EXP-000-RUN-0002.md).
+
+### Timing implementation and checks
+
+I prepared benchmarks/bench_kem.c for per-operation CLOCK_MONOTONIC_RAW durations, reproducible SHAKE256 fixtures passed to the existing deterministic APIs, warm-up, buffered CSV output and exchange checks outside measured intervals. I prepared scripts/run_timing.py to reuse the existing collector and run-record helpers, pin one logical CPU, build fresh binaries, preserve every measurement and generate per-process summaries. All Kyber arithmetic sources remain unchanged.
+
+- Tested C harness SHA-256: 103feedada227af4a170b561a05a5268d31845e3ddbe758553ba5f7f3a11dc3a.
+- Tested timing runner SHA-256: 7101f8978bbf2591bf802f26a7b0b6f63127460561fcfa952b923361d77cf500.
+- [Development evidence](evidence/ACT-0004/harness-smoke.json): three successful real compilations, 108 retained operation rows, all round trips matching and all durations positive. Zero iterations was rejected by each binary; missing rows, failed round trips, duplicate iteration labels and incorrect headers were rejected by CSV validation.
+
+These development checks exercised the real C harness and CSV parser. The committed full timing orchestration remains pending RUN-0003. Development durations are retained for traceability and are not thesis performance results.
+
+The pilot protocol is five fresh processes per parameter set, 100 warm-up exchanges and 1000 measured exchanges per process. I expect 45000 raw rows and 45 summary rows. I will retain all observations without outlier removal and assess variation before interpreting later optimisation effects. See the [protocol](raw_timing.md).
+
+Final read-only checks confirmed that both 36-file reference copies, the accepted RUN-0002 manifest, the original collector and the functional runner remain unchanged. The new harness files match their tested hashes, local documentation links resolve and RUN-0003 has not been created. No Git commands were executed during this activity.

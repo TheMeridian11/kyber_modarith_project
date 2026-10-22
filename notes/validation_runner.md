@@ -55,4 +55,4 @@ I can check the infrastructure without compiling or running Kyber:
 python3 -B -m unittest discover -s tests -p test_run_validation.py -v
 ```
 
-These tests use dummy processes and mocked workflows. ACT-0003 records 15 passing checks and tested file hashes. The first real runner execution remains pending the source commit and launch.
+These tests use dummy processes and mocked workflows. ACT-0003 records 15 passing checks and tested file hashes. ACT-0004 accepts the first real execution, EXP-000/RUN-0002; its manifest, logs and hashes were verified.

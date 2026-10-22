@@ -12,6 +12,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Baseline experiment plan](notes/experiments/EXP-000-baseline.md)
 - [Verified metadata checkpoint](notes/runs/EXP-000-RUN-0001.md)
 - [Functional validation runner](notes/validation_runner.md)
+- [Accepted functional run](notes/runs/EXP-000-RUN-0002.md)
+- [Raw timing protocol](notes/raw_timing.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -26,6 +28,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
 - implementation/kyber-optimised-ref/: experimental source; no arithmetic modifications recorded yet.
 - scripts/: environment collection and benchmark automation.
+- benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
 - analysis/: reproducible analysis and chart-generation code.
 - notes/: research plans, logs, literature and evidence records.
@@ -36,8 +39,10 @@ I have committed the setup at c584c16d7b8a8e8de5e071a4edd5bc1450f92592 on branch
 
 I implemented and checked the metadata collector at source commit 7eea4121e19896cc21773c81530ea5201bb235f3. The metadata-only snapshot EXP-000/RUN-0001 is saved in results commit d2a50d7d6f610f28e4e8f5dcb10c09ed46e93750. File hashes and the separate source/results commits have been verified; the supplied terminal evidence confirms refusal to overwrite the existing run.
 
-I have prepared scripts/run_validation.py to freshly build and execute the existing baseline functional tests for all three parameter sets. Fifteen infrastructure tests passed using dummy processes and mocked workflows; the new runner has not yet executed Kyber. I will commit the support files before launching the recorded functional run. The legacy scripts/run_baseline.sh remains unused; the raw timing harness is still pending.
+I completed EXP-000/RUN-0002 using source commit 75b0e38b5436dfa3f2672822edb178087b542b43 and saved its evidence in results commit e1d3734be7d890e0697678a8ae336e0a8a210f92. All three existing functional tests passed; the archived logs, metadata and binary hashes have been checked.
 
-I have no formal benchmark dataset. The earlier review reported passing existing correctness binaries for all three parameter sets, but a complete raw test archive was not retained. Those historical observations do not establish the accepted baseline.
+I have prepared benchmarks/bench_kem.c and scripts/run_timing.py for a baseline timing pilot. The harness records per-operation nanosecond durations, uses reproducible inputs through the existing deterministic APIs, and buffers CSV output until measurement finishes. Short development checks passed for all parameter sets; the committed pilot is still pending. The legacy summary script remains unused.
+
+I have an archived sampled functional baseline. Formal performance collection is pending; independent vectors, arithmetic-safety analysis and timing-behaviour checks remain separate evidence.
 
 I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.
