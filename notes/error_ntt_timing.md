@@ -1,6 +1,6 @@
 # EXP-005 incremental timing comparison
 
-I specify this protocol after accepting [EXP-005/RUN-0001](runs/EXP-005-RUN-0001.md). The question is whether deferring only the keygen error-vector reduction improves on retained EXP-003. Keygen is the predicted beneficiary. Encap and decap retain their arithmetic counts and serve as operations without a predicted direct benefit. EXP-005 performance is still pending.
+I specify this protocol after accepting [EXP-005/RUN-0001](runs/EXP-005-RUN-0001.md). The question is whether deferring only the keygen error-vector reduction improves on retained EXP-003. Keygen is the predicted beneficiary. Encap and decap retain their arithmetic counts and serve as operations without a predicted direct benefit. ACT-0014 now accepts the completed [RUN-0002 result](runs/EXP-005-RUN-0002.md). I preserve this original protocol separately from its outcome; RUN-0002 exists and must not be reused.
 
 ## Sources and gates
 
@@ -28,9 +28,9 @@ I accept a performance benefit only when the validated candidate shows a consist
 
 The correctness, range and scoped security conclusions remain those in RUN-0001. Performance timing is not a leakage test. Incremental effects are conditional on EXP-001/002/003 already being present. I do not add or multiply medians from separate sessions into a total gain over the original reference; that requires a later direct comparison.
 
-## Review, commit, run and preserve
+## Historical execution sequence — already completed
 
-I first review and commit the new runner and thesis records:
+The following commands document the completed run, not new instructions to repeat. Support commit is 4bd813ed71a90c7722275dc802336852214a5388 and results commit is eb4c34586c7531bc87dcd165e952d3278cea0b5e. I reviewed and committed the runner and thesis records:
 
 ~~~bash
 git diff --check
@@ -67,7 +67,7 @@ git diff --cached --stat
 git commit -m "Record EXP-005 incremental timing comparison"
 ~~~
 
-A failure is not accepted by these success commands; I preserve its record for diagnosis and use a new ID if a retry is required. The completed run still needs review of hashes, generated code, paired data and reproducibility of the derived analysis before a performance conclusion.
+A failure is not accepted by these success commands; I preserve its record for diagnosis and use a new ID if a retry is required. ACT-0014 has completed that review of hashes, generated code, paired data and reproduced analysis; the result and limits are in the linked run record.
 
 ## Development check
 

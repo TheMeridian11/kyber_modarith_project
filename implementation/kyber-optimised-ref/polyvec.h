@@ -27,6 +27,10 @@ void polyvec_invntt_tomont(polyvec *r);
 #define polyvec_basemul_acc_montgomery KYBER_NAMESPACE(polyvec_basemul_acc_montgomery)
 void polyvec_basemul_acc_montgomery(poly *r, const polyvec *a, const polyvec *b);
 
+/* Keygen only: same dot-product input bounds; output is scaled by poly_tomont. */
+#define polyvec_basemul_acc_keygen KYBER_NAMESPACE(polyvec_basemul_acc_keygen)
+void polyvec_basemul_acc_keygen(poly *r, const polyvec *a, const polyvec *b);
+
 #define polyvec_reduce KYBER_NAMESPACE(polyvec_reduce)
 void polyvec_reduce(polyvec *r);
 

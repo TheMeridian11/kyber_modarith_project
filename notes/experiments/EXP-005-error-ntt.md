@@ -3,13 +3,13 @@
 ## Identity and scope
 
 - Originating activity: ACT-0012.
-- Lifecycle: running; manual edit committed and RUN-0001 correctness/counts/scoped assembly accepted in ACT-0013. Performance and retention decision pending.
+- Lifecycle: closed for initial evaluation; RUN-0001 accepted in ACT-0013 and RUN-0002 timing accepted in ACT-0014. Outcome: supported for observed keygen benefit. Decision: keep as next research reference with documented tradeoffs; final selection remains subject to repeat-session/security checks.
 - Variant: raw-error-ntt, cumulative on retained EXP-003.
 - Predecessor: EXP-003 staged-invntt, validated at 9ec22141e6acc98812438544be0bec5b35d00b5c and timed at cf8ae0dd700bb41628c158016a7c15926a0b790f; timing results 23b4736206a8f79d13fb4898d474eb327e1dab3c.
 - Original reference: pinned upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
 - Accepted record: [EXP-005/RUN-0001](../runs/EXP-005-RUN-0001.md), correctness/counts/assembly only.
 - Source commit: 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648; results commit: af3408156a334c52676b51a5348540c17234390c.
-- Next record: EXP-005/RUN-0002, [fresh timing comparison against EXP-003](../error_ntt_timing.md).
+- Accepted timing: [EXP-005/RUN-0002](../runs/EXP-005-RUN-0002.md), using the [predeclared protocol](../error_ntt_timing.md); source 4bd813ed71a90c7722275dc802336852214a5388 and results eb4c34586c7531bc87dcd165e952d3278cea0b5e.
 - Idea origin: the previously noted optional error-vector pilot, developed through local inspection of LIT-003: indcpa_keypair_derand, polyvec_ntt, poly_ntt, ntt, poly_tomont, poly_add, poly_reduce, params.h and cbd.c. No novelty claim or attribution of this exact edit to an unreviewed paper is made.
 
 I allocate EXP-005 because EXP-004 is already reserved for a distinct optional interaction/combination question. EXP-004 remains deferred; I do not silently repurpose that record or add a redundant combination run. EXP-005 estimates an incremental treatment conditional on the retained preceding variants.
@@ -132,4 +132,14 @@ The compiler unrolls the new loop into K fixed direct ntt calls while retaining 
 
 No new secret-error-dependent branch/index appears in the changed call path. The larger Kyber1024 keygen body includes existing public-matrix rejection sampling, so I do not claim all keygen branches are fixed loop counters or the whole program is constant-time. I preserve limits for statistical leakage, power/EM and faults, signed portability, exhaustive memory safety and final ML-KEM conformance. Larger representatives and code/register/layout changes require their own interpretation; speed cannot establish security or isolate Barrett-call cost.
 
-I accept the validation gate and proceed to [RUN-0002](../error_ntt_timing.md). Six real development builds match all 24 reviewed functions and twelve short processes pass the comparison pipeline. These support checks are not thesis performance results. Keygen benefit, encap/decap tradeoffs and the final performance-retention decision remain pending the formal paired run.
+At ACT-0013 I accepted the validation gate and prepared [RUN-0002](../error_ntt_timing.md). Six real development builds matched all 24 reviewed functions and twelve short processes passed the comparison pipeline. These support checks were not thesis performance results; actual timing acceptance follows below.
+
+## Accepted initial timing and next action (ACT-0014)
+
+I accept [RUN-0002](../runs/EXP-005-RUN-0002.md) after verifying all sixty steps, source/tool/binary identities, 120 raw streams and exact reproduction of all 90000 durations into the three derived CSVs. Median paired keygen reductions against fresh EXP-003 are +5.18%/+0.48%/+1.36% for Kyber512/768/1024; all fifteen keygen pairs are positive and both order groups favour EXP-005. The Kyber768 effect is small and comparable to unchanged-operation movements, so its magnitude/mechanism needs confirmation.
+
+Encap/decap medians are +0.78%/+0.54%, +0.89%/+0.42% and -0.12%/-0.50%. The Kyber1024 encap result is mixed and decap is slower in four of five pairs. I retain those outcomes rather than claiming every operation improved. Unchanged normalised encryption/decryption bodies and shifted IND-CPA entry addresses demonstrate a layout change, without proving a timing cause. Count savings, wrapper bypass, code growth and environment can contribute together; an individual Barrett-call cost is not measured.
+
+The timing-build keygen/NTT/reducer bodies match all 24 accepted validation bodies. This preserves the earlier correctness/range/security review under verified identities; it adds no secret-class leakage measurement or whole-program proof. I keep EXP-005 as the next research reference with its bounds, code/stack/canary observations and single-session limits. The required [security assessment](../implementation_security.md) and [final evaluation](../practical_completion.md) remain.
+
+The next and final planned optimisation trial is [EXP-006](EXP-006-keygen-dot.md), a keygen-only dot-output reduction deferral. It preserves the general dot's centred inverse-input contract. Its proposed code is unapplied and its result is unknown; no further optimisation search is required merely if it fails to improve performance.

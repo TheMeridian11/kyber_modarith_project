@@ -234,6 +234,42 @@ void polyvec_basemul_acc_montgomery(poly *r, const polyvec *a,
   poly_reduce(r);
 }
 
+/* Keygen-only dot product: defer centring until the final public-key reduction.
+ * Keep the general dot-product function unchanged for inverse-NTT callers.
+ */
+void polyvec_basemul_acc_keygen(poly *r, const polyvec *a,
+                                    const polyvec *b)
+{
+  unsigned int pair, j;
+  int16_t zeta, t;
+  int32_t sum00, sum11, sum01;
+
+  for(pair = 0; pair < KYBER_N/2; pair++) {
+    sum00 = 0;
+    sum11 = 0;
+    sum01 = 0;
+
+    for(j = 0; j < KYBER_K; j++) {
+      const int16_t *ap = &a->vec[j].coeffs[2*pair];
+      const int16_t *bp = &b->vec[j].coeffs[2*pair];
+
+      sum00 += (int32_t)ap[0] * bp[0];
+      sum11 += (int32_t)ap[1] * bp[1];
+      sum01 += (int32_t)ap[0] * bp[1] + (int32_t)ap[1] * bp[0];
+    }
+
+    zeta = zetas[64 + pair/2];
+    if(pair & 1)
+      zeta = (int16_t)-zeta;
+
+    t = montgomery_reduce(sum11);
+    r->coeffs[2*pair] = montgomery_reduce((int32_t)t * zeta + sum00);
+    r->coeffs[2*pair + 1] = montgomery_reduce(sum01);
+  }
+
+  poly_tomont(r);
+}
+
 /*************************************************
 * Name:        polyvec_reduce
 *
