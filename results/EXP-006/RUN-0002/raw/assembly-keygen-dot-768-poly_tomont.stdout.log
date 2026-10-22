@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-006/RUN-0002/build/keygen-dot-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004c50 <pqcrystals_kyber768_ref_poly_tomont>:
+    4c50:	f3 0f 1e fa                                     	endbr64
+    4c54:	55                                              	push   %rbp
+    4c55:	48 8d af 00 02 00 00                            	lea    0x200(%rdi),%rbp
+    4c5c:	53                                              	push   %rbx
+    4c5d:	48 89 fb                                        	mov    %rdi,%rbx
+    4c60:	48 83 ec 08                                     	sub    $0x8,%rsp
+    4c64:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    4c68:	0f bf 3b                                        	movswl (%rbx),%edi
+    4c6b:	48 83 c3 02                                     	add    $0x2,%rbx
+    4c6f:	69 ff 49 05 00 00                               	imul   $0x549,%edi,%edi
+    4c75:	e8 c6 09 00 00                                  	call   5640 <pqcrystals_kyber768_ref_montgomery_reduce>
+    4c7a:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    4c7e:	48 39 eb                                        	cmp    %rbp,%rbx
+    4c81:	75 e5                                           	jne    4c68 <pqcrystals_kyber768_ref_poly_tomont+0x18>
+    4c83:	48 83 c4 08                                     	add    $0x8,%rsp
+    4c87:	5b                                              	pop    %rbx
+    4c88:	5d                                              	pop    %rbp
+    4c89:	c3                                              	ret
+
+Disassembly of section .fini:
