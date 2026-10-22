@@ -1,72 +1,76 @@
 # Research workflow
 
-Agreed on 22 October 2026, Australia/Sydney. This document defines how work and evidence are recorded.
+I use this workflow to preserve the connection between research questions, source changes, validation, measurements and conclusions.
 
-## Collaboration agreement
+## Working method
 
-- The researcher applies every implementation, script, analysis-code, build-file and Git-configuration change. The assistant supplies exact paths, snippets or complete replacements, commands, expected outcomes and verification instructions in chat.
-- The assistant may maintain research documentation, experiment records, literature records and result summaries, and inspect files and outputs. It does not change executable code/configuration, commit, tag, push, build or run benchmarks unless separately requested.
-- The researcher normally runs the supplied commands and shares outputs or repository locations. The assistant checks available evidence and records its interpretation.
-- Each substantive final response ends with an activity-log entry covering completed work, pending work, results, interpretation and next actions. The same entry is saved in project_log.md. Corrections are appended explicitly.
-- Chat supplies instructions and discussion; the repository is the durable research record. Distinguish directly inspected evidence, researcher-reported evidence and historical observations.
-- Preserve user changes. Proposed changes and commands are not marked implemented or executed until confirmed or inspected.
+- I review each proposed code, script, build and configuration change and apply it manually before committing.
+- I record completed work, pending work, results, interpretation and next actions under sequential activity IDs in project_log.md.
+- I distinguish directly inspected repository evidence, supplied execution output and historical observations. A proposed snippet or command is not an implemented change or an executed check.
+- I keep the repository as the durable research record. Chat discussion alone does not establish a reproducible result.
+- I write project records in first person and keep conclusions tied to the available evidence.
+- I identify work through activity IDs, experiment IDs, run IDs and full Git commits. I omit calendar dates, clock times and timezone fields from project work records. Publication years in APA references and software version identifiers retain their meaning. Benchmark durations and cycle/tick counts remain essential measurements.
 
 ## Identifiers
 
 | Identifier | Meaning | Example |
 |---|---|---|
-| Activity | One session of decisions, changes or review | ACT-0001 |
+| Activity | One set of decisions, changes or review | ACT-0001 |
 | Experiment | One research question or comparison protocol | EXP-001 |
 | Variant | A specific implementation treatment | baseline or fused-basemul |
-| Run | One execution attempt within an experiment | EXP-001/RUN-0001 |
+| Run | One execution attempt or explicitly labelled metadata snapshot | EXP-001/RUN-0001 |
 | Comparison block | Related baseline and candidate executions | EXP-001/BLOCK-0001 |
 
-Activity and experiment numbers increase and are never reused. Run numbers are unique within an experiment; the full experiment/run pair is globally unique. Retries receive new run IDs, including after failure. Record variant, parameter set and build mode explicitly.
+I increase activity and experiment numbers without reusing them. Run numbers are unique within an experiment; the full experiment/run pair is globally unique. A retry after an incomplete attempt receives a new ID. I record the record type, variant, parameter set and build mode where applicable. A metadata-only snapshot is not a benchmark repetition.
 
-Lifecycle: proposed, planned, running, analysed, closed. Record the outcome separately: supported, not-supported, inconclusive, invalid-implementation, execution-error. Record the retention decision separately: keep, reject, revise, defer. Unperformed checks are not-run, never pass.
+Lifecycle: proposed, planned, running, analysed, closed. I record the outcome separately: supported, not-supported, inconclusive, invalid-implementation, execution-error. I record the retention decision separately: keep, reject, revise, defer. Unperformed checks are not-run, never pass.
 
 ## Evidence sequence
 
-1. Before collecting comparison data, specify the hypothesis, isolated change, baseline, predictions, arithmetic assumptions, validation gates, measurement protocol and decision criteria. Label predictions as source-derived or literature-derived.
-2. The researcher implements the change and reviews the diff. Complete required correctness and arithmetic checks before formal performance collection.
-3. Commit the source and harness before formal execution. Record the full source commit, upstream commit, submodule state, compiler command, build mode and executable SHA-256. Preserve build output. Rebuild explicitly when headers or flags change.
-4. Allocate a run ID and capture metadata before launch. The future launcher should create a manifest before execution and finalise its timestamps, exit codes and completion status. Preserve partial output after failure.
-5. Keep raw observations, stdout/stderr and exit codes. Analysis writes derived files separately. Record comparison blocks and order, and link any baseline run reused in a comparison.
-6. Record outcomes and limitations, update the register and activity log, and commit results and records after the run.
-7. The results commit differs from the source commit that produced the measurements. Do not try to embed a results commit's own hash in a file in that same commit. Git history identifies it, or a later index can reference it. Record the analysis-code revision separately.
+1. Before collecting comparison data, I specify the hypothesis, isolated change, baseline, predictions, arithmetic assumptions, validation gates, measurement protocol and decision criteria. I label predictions as source-derived or literature-derived.
+2. I implement the change and review the diff. I complete required correctness and arithmetic checks before formal performance collection.
+3. I commit the source and harness before formal execution. I record the full source commit, upstream commit, submodule state, compiler command, build mode and executable SHA-256, and preserve build output. I rebuild explicitly when headers or flags change.
+4. I allocate a run ID and capture metadata before launch. The future launcher will preserve its invocation, execution order, exit codes and completion status. I retain partial output after failure.
+5. I keep raw observations, stdout/stderr and exit codes. Analysis writes derived files separately. I record comparison blocks and order, and link any baseline run reused in a comparison.
+6. I record outcomes and limitations, update the register and activity log, and commit results and records after the run.
+7. The results commit differs from the source commit that produced the measurements. I do not embed a results commit's own hash in a file in that same commit. Git history identifies it, or a later index can reference it. I record the analysis-code revision separately.
 
-Formal runs require the tested code, configuration and harness to be committed. Prefer a clean tracked tree at launch. If an exploratory run uses uncommitted work, preserve the exact diff and all relevant untracked sources and label it exploratory. A dirty flag alone cannot reconstruct an experiment.
+Formal runs require the tested code, configuration and harness to be committed. The initial metadata collector will require a clean Git-visible tree outside results/, including tracked changes and non-ignored untracked files. Existing result records may accumulate without blocking collection. This is a Git cleanliness check, not proof that ignored build files were produced from the recorded source. An executable hash alone does not establish build provenance.
 
-Do not amend or force-move commits or tags already cited by results. Correct records through new commits. Milestone tags are useful labels, but manifests retain full commit IDs.
+If an exploratory run uses uncommitted work, I preserve the exact diff and relevant untracked sources and label it exploratory through a separately documented procedure. The initial collector deliberately rejects that source state; a dirty flag alone cannot reconstruct an experiment.
+
+I preserve commits and tags already cited by results. Corrections use new commits. Milestone tags are useful labels, but manifests retain full commit IDs. This record-format change does not rewrite existing Git history.
 
 ## Result preservation
 
-Use a directory such as results/EXP-001/RUN-0001/ containing a manifest.json, a raw/ directory for measurements/build/test output, and a derived/ directory for summaries and generated figures. This is a convention for future runs, not evidence that a run exists.
+The first collector will write results/EXP-000/RUN-0001/metadata.json for a metadata-only smoke check. Its execution fields remain not-run and build details remain not-recorded. Its available compiler and environment observations describe the collector process; they do not establish a future benchmark's conditions.
 
-Counting, correctness, sanitizer and performance runs have distinct build modes and evidence. A failed run keeps its ID and partial files. A retry gets a new ID. Never overwrite raw files to remove an outlier or repair a failure. Record exclusion rules and affected observations in analysis.
+A later complete run directory will contain a manifest.json, raw/ measurements/build/test output, and derived/ summaries and generated figures. That is a future convention, not evidence of completed execution.
 
-Keep complete raw datasets in Git while practical. If size requires an external archive, preserve its stable location, checksum and retrieval procedure in the repository. Never retain only medians or charts. Use a backed-up location or appropriate remote when available; do not assume a remote is configured.
+Counting, correctness, sanitizer and performance runs have distinct build modes and evidence. I preserve failed runs and partial files under their original IDs. A retry receives a new ID. I never overwrite raw files to remove an outlier or repair a failure; exclusions are recorded in analysis.
+
+I keep complete raw datasets in Git while practical. If size requires an external archive, I retain its stable location, checksum and retrieval procedure. I preserve individual observations rather than only medians or charts.
 
 ## Conditions and measurement
 
-Implement automatic per-run system metadata collection next. Manually controlled facts remain explicit manual fields; unknown values stay unknown. Capture defined fields rather than dumping all process environment variables.
+I collect defined system fields rather than dumping all environment variables. Manually controlled facts remain explicit manual fields; unknown values stay unknown.
 
-Record host/guest versions, CPU and visible topology, RAM with guest/physical scope, compiler path/version/flags, timer and units, executable hash, affinity, power/frequency controls where observable, warm-up, iterations, input/RNG mode, fixture identifiers, comparison order and timestamps. Distinguish observed and manually reported fields. WSL guest affinity does not prove physical-core placement.
+For full benchmark runs, I record host/guest versions, CPU and visible topology, RAM with guest/physical scope, compiler path/version/flags, timer and units, executable hash, affinity, observable power/frequency controls, warm-up, iterations, input/RNG mode, fixture identifiers and comparison order. I distinguish observed and manually reported fields. WSL guest affinity does not prove physical-core placement.
 
-Instrumentation and sanitizer builds do not supply primary performance measurements. Function-call counts are not processor instruction counts or timing measurements. Keep individual observations and report run-level variation with appropriate uncertainty. Predetermine exclusion and rerun rules. Compare like units, inputs, flags and protocols. Generate charts from retained data using versioned analysis code.
+Instrumentation and sanitizer builds do not supply primary performance measurements. Function-call counts are not processor instruction counts or timing measurements. I retain individual observations and report run-level variation with appropriate uncertainty. I predetermine exclusion and rerun rules, compare like units/inputs/flags/protocols, and generate charts from retained data using versioned analysis code.
 
 ## Correctness and implementation-safety evidence
 
-Record three evidence categories separately:
+I maintain three evidence categories separately:
 
 - Functional compatibility: vectors, deterministic byte comparisons, cross-implementation tests, round trips and invalid-ciphertext behaviour.
 - Arithmetic safety: input/output bounds, Montgomery scale, intermediate widths, narrowing, edge cases and relevant sanitizer checks.
 - Timing behaviour: source review, generated-code inspection and focused statistical tests with their limits.
 
-Individual checks use not-run/pass/fail/inconclusive and link their evidence. This is an implementation-safety evidence record, not a blanket security-equivalence certificate. Low benchmark variance and passing correctness tests do not prove constant-time behaviour. Combining individually successful variants requires new range and compatibility checks.
+Individual checks use not-run/pass/fail/inconclusive and link their evidence. These records support bounded implementation-safety claims. Low benchmark variance and passing correctness tests do not prove constant-time behaviour. Combining individually successful variants requires new range and compatibility checks.
 
 ## Literature and interpretation
 
-Maintain APA 7 references, stable URLs/DOIs, exact versions and verified page/section locators. Link ideas and claims to experiments. Distinguish abstract access from full-text review, predictions from measurements, and observed failures from proved causes.
+I maintain APA 7 references, stable URLs/DOIs, exact versions and verified page/section locators. I link ideas and claims to experiments and distinguish abstract access from full-text review, predictions from measurements, and observed failures from proved causes.
 
-Keep slower, failed and inconclusive variants. A failed command is an execution outcome; a correct but slower implementation is a performance finding. Neither should be silently deleted or treated as evidence for a mechanism that was not tested.
+I retain slower, failed and inconclusive variants. A failed command is an execution outcome; a correct but slower implementation is a performance finding. Neither establishes an untested mechanism.

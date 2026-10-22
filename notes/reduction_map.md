@@ -1,6 +1,6 @@
 # Reduction map
 
-Updated 22 October 2026 from source inspection in the 29 September review. Applies to upstream revision 3edd5af5991927164edd4aacebfcbee00b8064e7. This is a starting point for experiment-specific bounds, not a completed safety proof.
+I use this map to record the findings of source inspection. It applies to upstream revision 3edd5af5991927164edd4aacebfcbee00b8064e7. This is a starting point for experiment-specific bounds, not a completed safety proof.
 
 ## Functions and boundaries
 

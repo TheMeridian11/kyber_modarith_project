@@ -2,8 +2,8 @@
 
 ## Identity and plan
 
-- Created date and timezone:
-- Researcher and reviewer roles:
+- Originating activity ID and plan revision:
+- Linked activity amendments:
 - Lifecycle:
 - Research question:
 - Baseline variant, source commit and baseline run IDs:
@@ -63,4 +63,4 @@ Use not-run/pass/fail/inconclusive and link evidence. Record the analysis-code r
 
 ## Amendments
 
-Append dated changes to the plan or interpretation. Preserve which decisions preceded data collection. Do not rewrite a prediction to match a result.
+I append sequential amendments linked to activity IDs and commits, preserving which decisions preceded data collection. I do not rewrite a prediction to match a result.

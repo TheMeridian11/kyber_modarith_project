@@ -1,10 +1,13 @@
 # EXP-NNN RUN-NNNN Run record
 
-This is a field specification for the future automated manifest and a readable fallback for exploratory runs. No values here are observations. Unavailable fields say unknown/not-collected with a reason.
+I use this field specification for the future full execution manifest and as a readable fallback for exploratory runs. No values here are observations. Unavailable fields say unknown/not-collected with a reason.
+
+The initial metadata collector writes metadata.json for a metadata-only snapshot. It does not fill the build or execution evidence described below. Its record type remains metadata-only, benchmark_executed is false, and execution checks remain not-run.
 
 ## Identity and provenance
 
-- Experiment ID, run ID and optional comparison block:
+- Experiment ID, run ID, record type and optional comparison block:
+- Linked activity ID and sequence/order:
 - Variant, parameter set and build mode:
 - Full project source commit and upstream commit:
 - Working-tree and submodule status before execution:
@@ -16,7 +19,6 @@ This is a field specification for the future automated manifest and a readable f
 
 ## Conditions
 
-- Start/end timestamps in UTC and local timezone identifier:
 - Linux distribution/kernel and Windows host/WSL versions:
 - CPU model, visible topology and scope:
 - RAM and whether guest or physical:
@@ -32,7 +34,7 @@ This is a field specification for the future automated manifest and a readable f
 
 ## Execution
 
-- Exact invocation, working directory and operator:
+- Exact invocation and working directory:
 - Status: started/completed/failed/interrupted:
 - Process exit code or signal:
 - Per-check results and stdout/stderr evidence:
@@ -40,7 +42,7 @@ This is a field specification for the future automated manifest and a readable f
 - Expected/actual observation counts:
 - Missing data, interruptions and anomalies:
 
-Preserve the tested command's exit status rather than the success of a later logging command. Unperformed checks are not-run. Failed and partial outputs remain evidence.
+I preserve the tested command's exit status rather than the success of a later logging command. Unperformed checks are not-run. Failed and partial outputs remain evidence.
 
 ## Derived analysis
 

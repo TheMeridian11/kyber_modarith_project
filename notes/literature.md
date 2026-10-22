@@ -1,6 +1,6 @@
 # Literature and idea provenance
 
-Use APA 7 references and verified locators in the thesis. These entries seed the record from the 29 September 2026 review. No new literature retrieval occurred in the 22 October setup session. Bibliographic verification and full-text review are distinct.
+I use APA 7 references and verified locators in the thesis. These entries retain the findings of the preliminary literature review. No new literature retrieval occurred during ACT-0001 or ACT-0002. Bibliographic verification and full-text review are distinct; publication years are retained.
 
 ## LIT-001 Modular arithmetic optimisation
 
@@ -9,7 +9,7 @@ Zelenetsky, A. S., & Klyucharev, P. G. (2024). Modular arithmetic optimization i
 - Inspected: publisher abstract/accessible preview in the earlier review; full experimental configuration not reviewed.
 - Context: wider arithmetic reduces modular reductions; the authors report maximum speedups of 1.41 times for key generation, 1.58 for encapsulation and 1.83 for decapsulation.
 - Project relationship: motivation for EXP-002 and the research question. These are literature results, not project forecasts.
-- Attribution boundary: exact EXP-001/EXP-003 proposals arose from our source analysis; do not attribute those rearrangements to this paper without checking its full text.
+- Attribution boundary: exact EXP-001/EXP-003 proposals arose from the source analysis; do not attribute those rearrangements to this paper without checking its full text.
 - Outstanding: review the full paper through legitimate access before claiming faithful replication or citing its detailed protocol; add verified page/section locators.
 
 ## LIT-002 Final ML-KEM standard
@@ -41,9 +41,9 @@ Source: https://github.com/oreparaz/dudect
 
 - Literature ID and verified APA 7 reference:
 - DOI/stable URL and version:
-- Review date and scope: abstract/full text/code:
-- Claim supported in our own words:
+- Review activity ID and scope: abstract/full text/code:
+- Claim supported in my own words:
 - Verified page/section/code locator:
 - Linked experiments:
-- Platform/protocol differences from our study:
+- Platform/protocol differences from my study:
 - Unverified claims and outstanding checks:
