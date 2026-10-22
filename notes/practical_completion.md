@@ -2,7 +2,7 @@
 
 ## Where I am
 
-I am near the end of the arithmetic optimisation trials, but the practical component is not complete. I have a reproducible original reference, working validation/count/timing machinery and four cumulatively evaluated optimisations. The final narrow candidate, EXP-006, is now applied and its correctness/count/scoped assembly review is accepted; its timing comparison remains before freezing the search. There is no requirement to invent more optimisations to fill an experiment count.
+I have finished the planned arithmetic trials and frozen the search in ACT-0016. I select EXP-005 as the primary candidate for closing evaluation and retain EXP-006 as a secondary comparison after its mixed timing result. The practical component is now in its assessment and reporting phase: formal security tests, repeat-session/direct performance confirmation and the final evidence package remain. I do not need more optimisations to reach an arbitrary count.
 
 | Experiment | Simple description | State |
 |---|---|---|
@@ -12,7 +12,8 @@ I am near the end of the arithmetic optimisation trials, but the practical compo
 | EXP-003 | Reduce less often during the inverse transform | Correctness and initial timings reviewed; targeted encap/decap gains |
 | EXP-004 | Ask whether independently controlled optimisations interact when combined | Deferred; no implementation/run or failed result |
 | EXP-005 | Delay centring the keygen error vector until its final addition | Correctness and initial timings reviewed; keygen gains and small other-operation regressions recorded |
-| EXP-006 | Delay keygen dot-product centring before its existing scale conversion | Correctness/counts/scoped assembly accepted; timing pending |
+| EXP-006 | Delay keygen dot-product centring before its existing scale conversion | Initial trial closed; mixed timings, not adopted as general candidate |
+| EXP-007 | Check secret-dependent branches/addresses on exercised paths | Executable protocol and real development matrix ready; formal run pending |
 
 The numbers are identifiers, not a required sequence of six successful optimisations. EXP-004 was reserved for a different interaction question. The retained implementations already build on one another, so repeating that same combination would not answer a new question. A distinct interaction study needs controlled separate variants/ablations. It is optional and does not block this project's completion.
 
@@ -25,15 +26,17 @@ The [EXP-005 timing review](runs/EXP-005-RUN-0002.md) finds median paired keygen
 - [x] Manually apply the three [EXP-006 edits](experiments/EXP-006-keygen-dot.md), review/commit source and support, and execute RUN-0001.
 - [x] Review actual correctness, bounds, counts, assembly, local stack and hardening findings: [ACT-0015 acceptance](runs/EXP-006-RUN-0001.md).
 - [x] Prepare and development-check the [fresh EXP-005/EXP-006 timing protocol](keygen_dot_timing.md).
-- [ ] Review/commit that support and execute EXP-006/RUN-0002; review the result and retain slower/inconclusive outcomes.
-- [ ] Select the candidate to carry forward and freeze the optimisation search. A negative EXP-006 result is a useful completed experiment; I can retain EXP-005 or another earlier variant.
+- [x] Review/commit that support and execute EXP-006/RUN-0002; [ACT-0016 review](runs/EXP-006-RUN-0002.md) retains all regressions and mixed outcomes.
+- [x] Select EXP-005 as primary, keep EXP-006 as a secondary research comparison and freeze the optimisation search. The current checkout remains EXP-006; test runners restore the exact EXP-005 source separately.
 
 ### 2. Complete the required implementation-security assessment
 
 My supervisor asked me to determine a suitable way to evaluate security effects. I therefore need more than a statement that tests passed. The [assessment plan](implementation_security.md) combines existing range/compatibility/assembly evidence with dynamic secret-flow checking and focused statistical timing-leakage tests.
 
-- [ ] Pin tools and prepare the public/secret input map and focused harnesses.
-- [ ] Establish sensitivity with positive/negative controls and commit the formal testing budget/protocol.
+- [x] Pin dynamic-check tools, write the public/secret map and prepare [EXP-007](experiments/EXP-007-secret-flow.md): seven arithmetic path/operand-role cases plus IND-CPA decryption.
+- [x] Exercise the full development matrix: 9 builds, 198 Memcheck processes, 18 detected marked positive controls, quiet target/defined/negative checks; 102 production bodies match accepted normal code.
+- [ ] Review/commit support and execute formal EXP-007/RUN-0001; review every control/diagnostic before accepting bounded security findings.
+- [ ] Prepare and pin the statistical leakage tool/harness, conduct sensitivity pilots, then commit finite budgets, secret classes, seeds, thresholds and stopping/multiple-test rules before formal timing-leakage collection.
 - [ ] Compare the original reference and selected implementation, investigate any new dependencies or timing signals, and record bounded conclusions and limitations.
 - [ ] Complete the final security matrix, including the inherited canary tradeoff, code/local-stack changes and unassessed attack classes.
 
@@ -50,7 +53,8 @@ The session or matched process pair is an experimental unit for the correspondin
 
 ### 4. Produce the practical handover package
 
-- [ ] Generate reproducible thesis tables/figures from retained data: per-operation timing, paired effects and repeat-session spread; reduction counts; code/local-stack and security findings.
+- [x] Generate the first [thesis figures/tables](thesis_figures.md): all EXP-006 pairs, incremental-result overview and observed reduction-count progression, with PNG/SVG/PDF exports and input/code hashes.
+- [ ] Extend figures after formal security and repeat-session results: direct original-reference timing/spread, code/local-stack tradeoffs and a bounded security-evidence matrix.
 - [ ] Write the practical results/methods summary linking every claim to a source commit, run, protocol and analysis artifact, including unsuccessful/deferred ideas.
 - [ ] Audit clean reproduction instructions and tool/build identities. Preserve original results and resolve stale links or unexplained findings.
 - [ ] Mark practical work complete only once these outputs and bounded conclusions exist. Then write the thesis draft and present it with the repository to the supervisor for feedback, as planned.
@@ -59,4 +63,4 @@ The session or matched process pair is an experimental unit for the correspondin
 
 I do not need to implement every possible reduction change, complete EXP-004, port to another hardware family, prove whole-program constant time, establish final ML-KEM certification or use VTune. I explicitly excluded VTune in ACT-0015. New work is justified if a finding prevents a defensible conclusion or supervisor feedback changes the scope. The optional full-text literature checks and bibliographic work also belong in thesis preparation; I must complete them before making claims that depend on those sources.
 
-The immediate action is to commit the new comparison support/records and execute EXP-006/RUN-0002 against a freshly restored EXP-005. The arithmetic is already applied and RUN-0001 is accepted; no further arithmetic edit is required. After the timing result, the work changes from finding optimisations to checking and explaining the selected result.
+The immediate action is to review/commit ACT-0016 support/records, install the pinned Valgrind package and run EXP-007/RUN-0001 using the [recorded commands](experiments/EXP-007-secret-flow.md). No arithmetic edit is needed. I then review that result and complete the separate statistical leakage stage, followed by direct/repeat-session performance confirmation and the final thesis/reproduction package. This is a finite closing sequence, not an open-ended search for more optimisations.

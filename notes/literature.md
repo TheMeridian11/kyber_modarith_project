@@ -68,6 +68,12 @@ Intel Corporation. (n.d.). *Hotspots analysis*. In *Intel VTune Profiler user gu
 - Constraints: software and hardware sampling have different collection requirements/overheads. WSL support does not establish which hardware events this local setup exposes. Check actual availability before relying on profiler metrics.
 - Security boundary: hotspot/CPU measurements do not compare secret-input timing classes and do not replace the required leakage assessment. Keep profiling runs separate from primary normal-build timings.
 
+## ACT-0016 tool-interface verification
+
+I inspected the official Memcheck manual (sections 4.2.2 and 4.7) and the actual Ubuntu valgrind 1:3.22.0-0ubuntu3 package headers. In usr/include/valgrind/memcheck.h, VALGRIND_MAKE_MEM_UNDEFINED and VALGRIND_MAKE_MEM_DEFINED map to Memcheck client requests; valgrind.h supplies RUNNING_ON_VALGRIND. I inspected the emitted XML protocol 4, error kinds UninitCondition/UninitValue, completion states, origin stacks and occurrence counts in real positive-control executions. Exact package/header/runtime hashes and retained reports are in [ACT-0016 support evidence](evidence/ACT-0016/secret-flow-support-smoke.json). This is interface/source and local execution evidence, not a new whole-program proof or a full-text paper review. [Official manual](https://valgrind.org/docs/manual/mc-manual.html).
+
+The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer complementary questions; numerical leakage-test budgets and a pinned dudect revision remain to be prepared. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
+
 ## New-source fields
 
 - Literature ID and verified APA 7 reference:

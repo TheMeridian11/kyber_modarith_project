@@ -1,0 +1,20 @@
+{
+  "activity_id": "ACT-0016",
+  "analysis_code_sha256": "8c72c1df31ee158bc2825435101ee51a0432dd8f450d7d6c704685c41bd4fda6",
+  "count_groups_checked": 54,
+  "data_tables": 3,
+  "dependency_file_sha256": "39d8b5f8b8a048e8506b4330755b94af4be8cf96115a807e1e66f7e234bc6e7b",
+  "figure_exports": 9,
+  "group_statistics_checked": 45,
+  "input_files": 22,
+  "limitations": [
+    "Single-session incremental effects are not cumulative speedups.",
+    "Observed pair extrema are not confidence intervals.",
+    "Count plots show function calls, not instructions or leakage."
+  ],
+  "paired_effects_checked": 225,
+  "provenance_sha256": "c9b7a24a43fb2a988dfe681241a214b0434e4cf52d1d32def0cfa027857ffd2c",
+  "record_type": "thesis-figure-verification",
+  "render_review": "All three PNG figures inspected. Initial EXP-006 median-label overlap corrected and final rendering re-inspected. No clipping/overlap observed.",
+  "separate_directory_reproduction": "byte-for-byte; all outputs and provenance"
+}

@@ -1,6 +1,6 @@
 # EXP-006 incremental timing comparison
 
-I specify this protocol after accepting [EXP-006/RUN-0001](runs/EXP-006-RUN-0001.md). It asks whether omitting only the keygen dot's intermediate Barrett centring improves on retained EXP-005. Keygen is the predicted beneficiary; encap/decap have unchanged arithmetic and serve as control operations. The formal speed result remains pending.
+I specify this protocol after accepting [EXP-006/RUN-0001](runs/EXP-006-RUN-0001.md). It asks whether omitting only the keygen dot's intermediate Barrett centring improves on retained EXP-005. Keygen is the predicted beneficiary; encap/decap have unchanged arithmetic and serve as control operations. The protocol was executed as RUN-0002 and reviewed in ACT-0016; the [complete result](runs/EXP-006-RUN-0002.md) records the mixed outcome and EXP-005 primary-candidate decision. The commands below preserve the historical execution procedure; RUN-0002 must not be reused.
 
 ## Sources and acceptance gates
 

@@ -3,12 +3,13 @@
 ## Identity and stopping point
 
 - Activity: ACT-0014.
-- Lifecycle: running; manual edits committed and RUN-0001 correctness/counts/scoped assembly accepted in ACT-0015. Formal timing and performance-retention decision pending.
+- Lifecycle: closed in ACT-0016; correctness/counts/scoped assembly and initial timing review complete.
+- Outcome: mixed; general keygen-benefit hypothesis not supported. Decision: do not adopt as general candidate; preserve secondary/parameter-specific comparison; select EXP-005 for closing evaluation.
 - Variant: keygen-dot, cumulative on EXP-005.
 - Predecessor: EXP-005 validation source 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648; timing source 4bd813ed71a90c7722275dc802336852214a5388; timing results eb4c34586c7531bc87dcd165e952d3278cea0b5e.
 - Original reference: upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
 - Accepted first run: [EXP-006/RUN-0001](../runs/EXP-006-RUN-0001.md), correctness/counts/scoped assembly. Source/support commit 4c9d539eba8903c2404591b8024e7afef15bbf47; results commit 571f597a0b35fd0c9df264402d4b74d07a725204.
-- Next: [EXP-005 versus EXP-006 timing protocol](../keygen_dot_timing.md), planned RUN-0002.
+- Accepted timing: [EXP-006/RUN-0002](../runs/EXP-006-RUN-0002.md). Next: [EXP-007 secret-flow assessment](EXP-007-secret-flow.md).
 - Origin: local inspection of indcpa.c, polyvec.c, poly.c and reduce.c, extending the consumer-specific reasoning in EXP-005. I make no novelty claim or attribution of this exact proposal to an unreviewed paper.
 
 I make this the final planned optimisation trial before freezing the candidate set. A correct but slower result completes the experiment and can be rejected for performance. It does not require another optimisation. The [practical completion checklist](../practical_completion.md) then requires the focused security assessment, final comparisons and reproducibility outputs.
@@ -150,7 +151,7 @@ The formal runner built baseline/candidate in normal and UBSan modes and compare
 
 [Development evidence](../evidence/ACT-0014/keygen-dot-validation-support-smoke.json) records twelve successful real normal/UBSan builds of the existing original reference and EXP-005, with EXPECT_KEYGEN=0 and two KEM fixtures per build. The new arithmetic/addition/serialization oracle passes on these existing paths and all four transcripts per parameter match. Unapplied/altered-source guards reject before collection; current EXP-005 counts reject the EXP-006 prediction. Formula and bounds checks pass. Temporary outputs were removed after recording identities. No Git commands, metadata collection, formal run, arithmetic edits, EXP-006 candidate execution or performance measurement occurred in these support checks.
 
-That ACT-0014 smoke check verified only the support machinery. Subsequent manual application and RUN-0001 now establish the actual candidate validation/counts/scoped assembly findings below. Speed and performance retention remain pending.
+That ACT-0014 smoke check verified only the support machinery. Subsequent manual application and RUN-0001 now establish the actual candidate validation/counts/scoped assembly findings below. At ACT-0015, speed and performance retention remained pending; ACT-0016 resolves them below.
 
 ## Historical execution sequence — already completed
 
@@ -198,4 +199,10 @@ Keygen bodies change 442->423, 512->521 and 988->980 bytes; new dot bodies add 2
 
 No new secret-coefficient-dependent branch/address choice is observed in the scoped changed path. This does not establish whole-program constant time, statistical leakage resistance, power/EM/fault resistance, exhaustive memory safety, signed portability or final ML-KEM conformance. The inherited EXP-002 dot-canary tradeoff remains recorded. Focused dynamic security checks are still required; VTune is excluded from the plan by the user's ACT-0015 preference.
 
-Six development timing builds match all 33 reviewed bodies and twelve short processes pass both-order comparison checks. These are support checks, not evidence of speed. I now proceed to RUN-0002 and retain this as the final planned optimisation trial before the closing security and direct/repeat-session evaluation.
+Six development timing builds match all 33 reviewed bodies and twelve short processes pass both-order comparison checks. These are support checks, not evidence of speed. At ACT-0015 I proceeded to RUN-0002 as the final planned optimisation trial. The completed decision follows.
+
+## Accepted timing and closing decision (ACT-0016)
+
+I accept [RUN-0002](../runs/EXP-006-RUN-0002.md) from source 02cdbb13b49e649953dc05653bcb94002491b236, archived in 42d68a7da90f5d19d0539a0e8825a24852121e41. All 90000 raw durations and derived summaries reproduce exactly, and all 33 reviewed bodies match. Keygen paired medians are -2.55%/+0.22%/+1.67% for Kyber512/768/1024; encap is -2.39%/-0.82%/-0.43%, decap -1.89%/-0.72%/-0.02%. Only ten of 45 pairs are positive. Kyber512 regressions and Kyber1024 keygen improvement persist in both order groups; the small/mixed effects require caution.
+
+The intended reduction-count saving is confirmed, but it is insufficient to predict overall speed. I do not attribute the regressions to a proven layout/cache mechanism or dismiss them as known noise. Existing arithmetic/security evidence remains valid within scope; throughput observations are not a leakage test. I close this final arithmetic trial, select EXP-005 as primary and keep EXP-006 as a secondary research comparison without changing production arithmetic. [EXP-007](EXP-007-secret-flow.md), statistical leakage and final direct/repeat-session comparisons remain. [Thesis figures](../thesis_figures.md) retain the adverse result alongside the successes.

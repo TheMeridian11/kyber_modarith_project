@@ -672,3 +672,70 @@ The first smoke attempt stopped before building because the copied review filena
 - Comparison support evidence SHA-256: 86489182eab9c0aa7d9f6f4479bf76c60797df65136a25468504b0b6d7f2568d.
 
 Final verification confirms that all 1065 archived result files, arithmetic/upstream identities, earlier support/evidence and Git HEAD remain unchanged. The accepted EXP-006 gate loads with all 33 required control/candidate bodies; all fifteen tested timing-support hashes and both new evidence hashes match. The preserved manual-edit record matches the actually applied source. Syntax, JSON, relative links, LF and whitespace checks pass. EXP-006/RUN-0002 does not exist. This activity changes eight existing documents and adds one comparison runner, two explanatory records and two evidence records. The next action is the user's review/commit and formal timing execution, with no further arithmetic edit required.
+
+## ACT-0016 — Review EXP-006 timings, freeze trials and start security testing
+
+### Request, evidence and selection
+
+I received the committed EXP-006/RUN-0002 result and a request to review it against EXP-005, record correctness/security implications, begin security testing and produce useful thesis visuals at appropriate milestones. The source/support commit is 02cdbb13b49e649953dc05653bcb94002491b236; result commit 42d68a7da90f5d19d0539a0e8825a24852121e41 is its child. I inspected the actual repository and binary/data artifacts rather than relying only on the supplied terminal screenshots.
+
+The arithmetic trials are now complete. I select EXP-005 as the primary implementation for closing evaluation and retain EXP-006 as a secondary research comparison. I freeze the optimisation search. EXP-006's general keygen-benefit hypothesis is not supported by this run, although Kyber1024 keygen shows an observed benefit. I make no new parameter dispatch or arithmetic rollback; the current checkout remains EXP-006 and security support restores EXP-005 faithfully into an ignored build directory. Final retention still requires the security assessment and direct repeat-session confirmation. EXP-004 remains a deferred separate interaction question, not an omitted failure. VTune stays excluded.
+
+### Performance audit and interpretation
+
+The [full timing review](runs/EXP-006-RUN-0002.md) and [machine-readable audit](evidence/ACT-0016/exp-006-run-0002-review.json) record all identities, paired observations, order groups and limitations. I verified 1368 tracked files against SHA-1-checked stored objects at the initial clean result commit, without executing Git commands. I checked 69 completed steps, 138 raw streams, six actual binaries, fifteen support files, all 35 restored EXP-005 source files and 33 scoped assembly bodies. All 90000 raw durations, ninety summaries, 45 paired effects and nine aggregates reproduce the three saved CSVs byte-for-byte, with independent formula/median/range checks. Measured round trips and provenance checks pass.
+
+| Parameter | Keygen median paired reduction | Encap | Decap |
+|---|---:|---:|---:|
+| Kyber512 | -2.55% | -2.39% | -1.89% |
+| Kyber768 | +0.22% | -0.82% | -0.72% |
+| Kyber1024 | +1.67% | -0.43% | -0.02% |
+
+Positive means faster. Ten of 45 pairs improve, including eight of fifteen keygen pairs. Every Kyber512 pair is slower. All five Kyber1024 keygen pairs improve, and that direction persists in both order groups. Kyber768 keygen and Kyber1024 decap are mixed. I preserve negative control-operation results and do not dismiss them as proven noise. The paired statistic differs from the ratio of aggregate medians; this explains the small sign difference in Kyber1024 decap's separate absolute summaries.
+
+The comparison uses five adjacent pairs, alternating order (three EXP-005-first and two EXP-006-first), 100 warm-ups, 1000 measurements per process and fixed seed-1 fixtures. I preserve the entire raw range, including long observations, without exclusions or timer subtraction. GCC 13.3.0/-O3, CLOCK_MONOTONIC_RAW nanoseconds, Ubuntu/WSL and guest logical CPU 0 define the target. Manual host/power/background/physical-core conditions remain unknown where unrecorded. Inner observations are not independent process/session replications. The result is not a cumulative original-baseline improvement or a leakage measurement.
+
+### Correctness, assembly and security continuity
+
+ACT-0015's accepted validation supplies deterministic byte compatibility including sampled invalid/noncanonical inputs, targeted int64-oracle checks, explicit range/scale/narrowing arguments, exercised UBSan and upstream functional evidence. All 33 timing bodies match that review. I did not rerun full correctness or throughput tests unnecessarily, or modify prior result manifests to replace historical pending-review fields.
+
+The confirmed extra K*256 keygen Barrett saving reduces EXP-005's 1536/2304/3072 calls to 1024/1536/2048, with Montgomery and other-operation counts unchanged. It does not predict a proportional time saving. The new dot body and changed keygen body add a scoped 266/364/405 bytes; local keygen stack changes by 0/-16/0 bytes, with Kyber768 call unrolling. Keygen canaries, endbr64 and page probes remain; the inherited general-dot local-canary removal remains and the additional dot has no local canary. These observations do not prove memory safety or runtime CET enforcement.
+
+I additionally compared KEM enc_derand/dec and IND-CPA enc/dec in each timing pair. All twelve function comparisons match after relocation normalisation. IND-CPA entry addresses move by -16/+16/0 bytes for Kyber512/768/1024, while the KEM entries match. This preserves evidence of layout differences without attributing the measured regressions to a demonstrated cache/layout mechanism. Public-index/control observations in reviewed arithmetic remain bounded; no result establishes whole-program constant time, physical power/EM/fault resistance, all-target portability or final ML-KEM conformance.
+
+### Executable dynamic secret-flow support
+
+I allocated [EXP-007](experiments/EXP-007-secret-flow.md) to dynamic secret-flow assessment, not an optimisation. scripts/run_secret_flow.py and tests/test_secret_flow.c compare original/EXP-005/EXP-006 under GCC 13.3.0 with normal flags plus -g. The runner pins accepted manifests/reviews, restores all 35 EXP-005 files byte-for-byte, records tool/source/support/binary identities and archives build output, assembly, stdout/stderr, XML, occurrence counts and outcomes. Formal execution requires the committed source/support and clean-tree checks through the existing collector. No production arithmetic is changed.
+
+The local system had no Valgrind executable/header. I downloaded Ubuntu valgrind 1:3.22.0-0ubuntu3 and extracted it under a temporary directory; the installed libc6-dbg was available. I inspected the actual client macros and tested the real Valgrind 3.22.0 runtime. This did not install system software. The exact package, launcher and valgrind.bin, Memcheck runtime/preloads, headers and disassembler hashes are retained. I use defined twins to distinguish real uninitialised memory from intentionally marked secrets, origin tracking, no default suppressions and explicit test-boundary declassification.
+
+The initial six-path development matrix completed nine builds and 162 processes, with eighteen detected marked positive controls and no target diagnostics. I retained that [initial snapshot](evidence/ACT-0016/secret-flow-support-initial.json). Subsequent caller inspection made the operand-role difference explicit: encryption passes secret sp second; decryption passes decoded skpv first. I expanded the focused matrix with basemul-first and dot-first, including the [0,4095] encoded-secret stress envelope and a defined centred second operand. This improves coverage beyond the generated-key integration case without changing arithmetic or inventing a new optimisation.
+
+The [final development evidence](evidence/ACT-0016/secret-flow-support-smoke.json) records nine builds, 198 Memcheck processes, 129 assembly extractions and 870 retained raw files embedded with hashes. The total is 336 steps, counting intentional nonzero control exits as raw observations. All eighteen marked positive controls detect their intended branch or indexed-address dependency. All 27 defined controls and nine marked negative controls are quiet. All 72 defined and 72 marked target processes are quiet. Each target has eight fixtures; basemul cases each expand into 128 coefficient pairs. The full integration scope is IND-CPA decryption on two valid, two single-bit-corrupted, two all-255 and two deterministic-random public ciphertexts, with marked generated secret-key bytes. Full KEM reencryption/implicit-rejection secret-flow coverage is not claimed.
+
+All 102 extracted production bodies match accepted normal validation/timing binaries after relocation normalisation. I inspected all 27 control bodies: deliberate branches/indexed addresses remain, and the negative control has no branch or call. Native execution is rejected. Parser/classifier checks reject incomplete XML, suppressions, wrong completion markers, quiet positives, diagnostics outside the intended control and tampered accepted review/restored source bytes. The final saved evidence matches the actual support file hashes. Both development snapshots retain exact support text; the initial text was reconstructed by reversing the documented coverage edit and its captured SHA-256 identities matched exactly.
+
+Development execution used temporary directories, SHA-1-verified source-object reads and replacements only for user-reserved Git state/existence operations. Actual compiler/Valgrind processes, file hashes, source gates, restoration, report parsing and body comparisons ran. The uncommitted support check is not formal EXP-007/RUN-0001. Its quiet result is limited to exercised marked paths/operands and says nothing about every operand-latency, unexecuted or physical channel. Formal dynamic collection/review and the separate statistical leakage pilot, finite committed protocol and runs remain required.
+
+### Thesis visuals and closing scope
+
+I added analysis/build_thesis_figures.py, a 22-file input-hash index and pinned plotting requirements. [Three figures](thesis_figures.md) cover EXP-006's individual paired effects and order, all implemented incremental timing effects, and original-to-EXP-006 Montgomery/Barrett call counts. Each has SVG/PDF vector and 300-dpi PNG exports. Three data tables retain exact values; captions distinguish observed ranges from confidence intervals, conditional incremental effects from cumulative gains, and calls from time/instructions/security.
+
+The plotting code recomputes 225 paired effects, 45 group medians/extrema and checks 54 count groups. I rendered and inspected all figures, corrected an overlapping median label, and regenerated in a separate directory: all twelve figure/table outputs and the provenance manifest match byte-for-byte. [Figure review evidence](evidence/ACT-0016/figure-review.json) records these checks. Matplotlib 3.10.8 and its exact dependencies were installed only in a temporary virtual environment; the existing pip --python option supplied pip when the bare environment lacked it. I preserved source/output hashes and omitted calendar metadata from SVG/PDF exports.
+
+I recorded the request to produce further relevant thesis visuals at evidence milestones. Final direct/repeat-session effects, code/local-stack tradeoffs and the formal security matrix/timing diagnostics will follow their evidence, with adverse and inconclusive findings retained. I updated README, the register, reduction map, experiment/protocol status, security plan and practical checklist. The remaining work is finite: formal secret-flow testing, the separate statistical leakage assessment, direct original-reference/repeat-session performance and the final reproducibility/security handover. Then I can write the thesis draft and present it with the repository for supervisor feedback.
+
+### Handoff and recorded identities
+
+I next review/commit the support and records, install the pinned packaged Valgrind tool and execute EXP-007/RUN-0001 using its recorded commands. No new arithmetic edit is needed. Formal results stay separate from development evidence and use a new run ID after any failed/interrupted attempt. I continue to perform Git operations manually.
+
+- notes/evidence/ACT-0016/exp-006-run-0002-review.json: cd08444809dbde25021221388c0fa9fe4b4cf109f74e988c0b2744e008c3327d.
+- notes/evidence/ACT-0016/secret-flow-support-smoke.json: 77424357658c6f7340bdd5f04d0b7eda3b4afd6cf2be1f51b6873c46b2e064ff.
+- notes/evidence/ACT-0016/secret-flow-support-initial.json: 0d95b75626ee8a17e4246160605f0fe46a51b06684582c59727a6139f51f949c.
+- notes/evidence/ACT-0016/figure-review.json: 12760428ef0c0912a07a267d9c7887a4a8869895e0b5733c9bc81ae0c483d57e.
+- scripts/run_secret_flow.py: 4b27cb1f0501ec0eea9c5ad9dc016058fe88c92872f1a2b53ce0a8b2e309e4cc.
+- tests/test_secret_flow.c: ea2efcbcec2ae999d0253e07db7f965c75eb5078c5b3efcfb73bb22248cf4f3f.
+- analysis/build_thesis_figures.py: 8c72c1df31ee158bc2825435101ee51a0432dd8f450d7d6c704685c41bd4fda6.
+- analysis/figures/ACT-0016/provenance.json: c9b7a24a43fb2a988dfe681241a214b0434e4cf52d1d32def0cfa027857ffd2c.
+
+Final ACT-0016 verification preserves all 1208 archived result files, production arithmetic, earlier scripts/tests/evidence and Git HEAD. Both development snapshots retain support/raw bytes matching their recorded hashes; the final runner's five support hashes match the current files. All nine final security builds emit no warnings. The final matrix has 336 steps, 198 reports and 102 matching production bodies. JSON, Python syntax, relative links, LF and trailing-whitespace checks pass. Formal EXP-007/RUN-0001 remains uncreated. This activity changes ten existing documents and adds the new support, evidence, result record and reproducible figure package; no Git operation or arithmetic edit was performed.

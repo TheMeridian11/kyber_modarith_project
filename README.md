@@ -36,6 +36,9 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-006 plan, bounds and applied changes](notes/experiments/EXP-006-keygen-dot.md)
 - [EXP-006 accepted correctness and security/assembly review](notes/runs/EXP-006-RUN-0001.md)
 - [EXP-005 versus EXP-006 timing protocol](notes/keygen_dot_timing.md)
+- [EXP-006 measured results and candidate selection](notes/runs/EXP-006-RUN-0002.md)
+- [EXP-007 executable secret-flow protocol](notes/experiments/EXP-007-secret-flow.md)
+- [Reproducible thesis figures and captions](notes/thesis_figures.md)
 - [Required implementation-security assessment](notes/implementation_security.md)
 - [Practical completion checklist](notes/practical_completion.md)
 - [Experiment record template](notes/templates/experiment.md)
@@ -59,40 +62,35 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 ## Current state
 
-I have completed baseline preparation and four optimisations' initial correctness/timing evaluations: EXP-001, EXP-002, EXP-003 and EXP-005. The latest matched comparison gives these median paired time reductions for EXP-005 relative to fresh EXP-003:
+I have completed the five planned arithmetic trials (EXP-001/002/003/005/006) and frozen the optimisation search. I select EXP-005 as the primary candidate for the closing evaluation. EXP-006 remains a secondary research comparison: fewer reductions did not produce a general speed improvement. The current arithmetic checkout still contains EXP-006; the security runner restores EXP-005 faithfully into its build directory, without changing that checkout.
+
+The latest matched comparison measures EXP-006 relative to freshly rebuilt EXP-005:
 
 | Parameter | Keygen | Encap | Decap |
 |---|---:|---:|---:|
-| Kyber512 | +5.18% | +0.78% | +0.54% |
-| Kyber768 | +0.48% | +0.89% | +0.42% |
-| Kyber1024 | +1.36% | -0.12% | -0.50% |
+| Kyber512 | -2.55% | -2.39% | -1.89% |
+| Kyber768 | +0.22% | -0.82% | -0.72% |
+| Kyber1024 | +1.67% | -0.43% | -0.02% |
 
-Positive means faster; negative means slower. All fifteen keygen pairs favour EXP-005. Kyber768's small gain needs confirmation, particularly because unchanged operations also move. Kyber1024 encap is mixed and decap is slower in four of five pairs. I retain EXP-005 as the next research reference with these tradeoffs; final selection remains subject to repeat-session and security evaluation.
+Positive means faster; these are medians of five paired percentage reductions. All Kyber512 pairs regress; all five Kyber1024 keygen pairs improve. Kyber768 keygen and Kyber1024 decap are mixed. I retain all regressions, observed ranges and order effects in the [full review](notes/runs/EXP-006-RUN-0002.md). I reproduced all 90000 duration rows and all three derived CSVs exactly, verified source/tool/binary identities and matched all 33 reviewed timing assembly bodies. No outliers were removed. These single-session incremental effects are not cumulative gains over the original reference or leakage measurements.
 
-The [timing review](notes/runs/EXP-005-RUN-0002.md) records absolute durations, all pair ranges, both order groups, provenance and limitations. I reproduced all 90000 raw durations into the saved ninety summaries, 45 pairs and nine aggregates. All 24 timing-build keygen/NTT/reducer bodies match accepted validation. Additional encryption/decryption bodies match after normalisation, while IND-CPA entry addresses move by 16/32/32 bytes. This demonstrates layout changes but does not establish their timing contribution. I do not credit encap/decap movements to a keygen-only reduction change.
+| Stage | Current state |
+|---|---|
+| Original reference and measurement process | Initial preparation complete |
+| EXP-001/002/003/005 | Correctness, counts, scoped assembly and initial timings accepted; EXP-005 selected for closing evaluation |
+| EXP-004 | Deferred interaction/ablation idea; never implemented or run; not needed to finish |
+| EXP-006 | Trial closed with mixed performance; not adopted as the general candidate; preserved as a research result |
+| EXP-007 secret-flow assessment | Harness/protocol prepared; nine-build development matrix passed its sensitivity/diagnostic checks; formal run after support commit |
+| Statistical timing-leakage assessment | Required; pilot and committed finite-budget protocol still to prepare |
+| Final direct comparison and repeat sessions | Required; original versus selected implementation, with uncertainty and adverse effects retained |
+| Thesis artifacts | Three reproducible figures and data tables produced; final performance/security figures and handover remain |
 
-The [EXP-001](notes/runs/EXP-001-RUN-0002.md), [EXP-002](notes/runs/EXP-002-RUN-0002.md) and [EXP-003](notes/runs/EXP-003-RUN-0002.md) results remain preserved. These are single-session incremental effects, not cumulative gains over the original reference or cross-machine guarantees. I do not add or multiply percentages from separate runs.
+EXP-006 saves another 512/768/1024 keygen Barrett calls but grows the scoped keygen-plus-new-dot code by 266/364/405 bytes. Keygen local-stack changes are 0/-16/0 bytes. Existing keygen protections remain; the EXP-002 general-dot local-canary tradeoff persists, and the extra dedicated dot has the same no-canary pattern. Correctness, sampled invalid inputs, range/scale/narrowing arguments and exercised UBSan checks support bounded implementation-safety conclusions. Layout/compiler effects are possible performance contributors, not established causes.
 
-| Stage | Status | Question answered |
-|---|---|---|
-| EXP-000: baseline preparation | Complete | What does the unchanged reference do? |
-| EXP-001: base multiplication | Initial validation/timings accepted | Does fusion inside each coefficient pair help? |
-| EXP-002: vector-wide fusion | Initial validation/timings accepted | Does fusion across vector components improve further? |
-| EXP-003: inverse-NTT schedule | Initial validation/timings accepted | Does reducing Barrett frequency help within the required bounds? |
-| EXP-004: optional interaction study | Deferred; never run | Would controlled separate variants answer a distinct interaction question? |
-| EXP-005: error-vector NTT reduction | Initial validation/timings accepted with tradeoffs | Does deferring this reduction improve keygen over EXP-003? |
-| EXP-006: keygen dot-product reduction | Correctness/counts/scoped assembly accepted; timing pending | Can keygen omit dot-output centring before its retained scale conversion? |
-| Final security assessment | Required; dynamic checks pending | Do the selected changes introduce detectable implementation-security problems? |
-| Final direct/repeat-session comparison and thesis artifacts | Pending | What total improvement and limitations can I defend? |
+The [security protocol](notes/experiments/EXP-007-secret-flow.md) compares original/EXP-005/EXP-006 for all parameters, covering seven arithmetic path/operand-role cases and representative IND-CPA decryption. In the development check, all eighteen deliberately marked positive controls were detected and all tested target paths were quiet; 102 production bodies match accepted normal binaries. This is uncommitted support verification, not a formal security result or whole-KEM constant-time proof. Formal secret-flow collection and statistical secret-class timing checks remain required. VTune is excluded; physical side channels, faults and final ML-KEM certification are outside the established claim.
 
-EXP-005 saves 512/768/1024 keygen Barrett calls while preserving Montgomery and encap/decap counts. Accepted deterministic/invalid-input transcripts, targeted arithmetic tests, upstream suites and exercised UBSan checks agree. Raw-error/addition bounds are 23299/26627 for Kyber512 and 23298/26626 otherwise; skpv and inverse-input centring remain intact. Reviewed keygen canaries, endbr64 and page probes remain. Keygen code grows by 17/33/40 bytes and local stack changes by +16/+16/0 bytes; the earlier EXP-002 dot-product canary tradeoff persists.
+I now move from finding optimisations to checking and explaining the selected result. The [completion checklist](notes/practical_completion.md) specifies the remaining security work, direct repeat-session evaluation and reproducible handover. There is no requirement to invent more optimisations. EXP-004 was reserved for a separately controlled interaction study; existing cumulative variants do not by themselves isolate interactions.
 
-These checks support bounded correctness and implementation-safety conclusions. They do not establish whole-program constant time, statistical leakage resistance or production approval. Following the supervisor requirement clarified in ACT-0014, I will complete the [focused security assessment](notes/implementation_security.md): secret-flow checks and secret-class timing measurements alongside the existing proofs/tests/assembly. VTune is excluded from the remaining work at my request in ACT-0015; the focused security assessment remains required. Final ML-KEM conformance and physical side-channel/fault resistance remain outside the established claims.
+I generated [paired effects](analysis/figures/ACT-0016/exp006-paired-effects.svg), an [incremental-results overview](analysis/figures/ACT-0016/incremental-effects-overview.svg) and [reduction-count plots](analysis/figures/ACT-0016/reduction-counts.svg). PNG/PDF versions, exact data, captions and input/code checksums accompany them. I will add further figures at the security and final-performance milestones, preserving negative/inconclusive findings.
 
-I am near the end of arithmetic changes, but practical work remains. [EXP-006](notes/experiments/EXP-006-keygen-dot.md) is the final planned candidate: a dedicated keygen dot function retains poly_tomont while omitting its preceding Barrett centring. The general dot and inverse-input contracts stay unchanged. The actual [RUN-0001 validation](notes/runs/EXP-006-RUN-0001.md) passes all 69 steps, normal/UBSan compatibility checks, targeted arithmetic oracles, upstream suites and counts. Keygen saves another 512/768/1024 Barrett calls, with all other counts unchanged. The scoped assembly confirms the retained scale conversion and general dot, keygen canaries and public control/indexing. A new 285/355/413-byte dot body is added; keygen local stack changes by 0/-16/0 bytes. These code/stack findings and the inherited dot-canary tradeoff are recorded. Next I commit the new support/records and run the [fresh EXP-005/EXP-006 timing comparison](notes/keygen_dot_timing.md); no further arithmetic edit is needed. After this trial, I freeze the search, assess security, compare the selected version directly with the original reference across repeat sessions, and prepare reproducible thesis tables/figures. The [completion checklist](notes/practical_completion.md) defines the remaining work and stopping criteria.
-
-EXP-004 was reserved for studying interactions between independently controlled optimisations. Existing retained variants already build on one another, so repeating the same combination would duplicate work. It was not run or rejected and is not required to finish this scope.
-
-EXP-005 validation source is 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648 with results af3408156a334c52676b51a5348540c17234390c. Latest timing/support source is 4bd813ed71a90c7722275dc802336852214a5388 with results eb4c34586c7531bc87dcd165e952d3278cea0b5e. The source identifies executed code; the results commit archives outputs. EXP-006 validation source/support is 4c9d539eba8903c2404591b8024e7afef15bbf47, with results 571f597a0b35fd0c9df264402d4b74d07a725204. EXP-006 formal performance remains pending.
-
-I manually apply arithmetic changes and perform Git operations, reviewing support code before committing it. I retain failed and inconclusive outcomes, use distinct experiment/run IDs, and keep validation evidence separate from performance results. The legacy summary script remains unused.
+EXP-006 timing/support source is 02cdbb13b49e649953dc05653bcb94002491b236; results are committed in 42d68a7da90f5d19d0539a0e8825a24852121e41. The [run record](notes/runs/EXP-006-RUN-0002.md) identifies validation and historical control commits separately. I manually perform arithmetic edits and Git operations, reviewing support before committing it. Formal runs require that commit; ACT-0016's temporary development checks do not claim a clean committed formal execution. The legacy summary script remains unused.
