@@ -61,3 +61,39 @@ The proposal was compiled in memory for syntax inspection only. I still need run
 ### Verification of the revised records
 
 The documentation-only diff passed Git whitespace checks and local Markdown link checks. A read-only review found the setup, proposal and execution status consistent across all ten records. Before/after SHA-256 fingerprints matched for 91 implementation, script and configuration files. The collector file was still absent from the repository. These checks validate this documentation update and do not establish collector runtime behaviour.
+
+## ACT-0003 — Metadata checkpoint accepted and functional runner prepared
+
+- **Completed:** I verified the committed metadata snapshot and overwrite-refusal evidence, revised the working method, and prepared the recorded functional-validation runner with infrastructure tests and usage notes.
+- **Results:** The saved metadata and collector hashes match their committed files. All 15 infrastructure tests passed using dummy processes and mocked workflows. No Kyber arithmetic files were changed, and the new runner has not executed Kyber.
+- **Pending:** I need to review and commit the support files, then launch EXP-000/RUN-0002 and inspect its manifest and raw logs.
+- **Learned:** The metadata checkpoint establishes source identity and observed environment. Functional compatibility, arithmetic safety and performance still require their own evidence.
+- **Next:** Record fresh baseline functional tests for all three parameter sets before developing the raw timing harness.
+
+### Verified metadata checkpoint
+
+The source commit is 7eea4121e19896cc21773c81530ea5201bb235f3. Its direct child, results commit d2a50d7d6f610f28e4e8f5dcb10c09ed46e93750, adds only results/EXP-000/RUN-0001/metadata.json. Read-only inspection of stored Git objects and current files confirmed the relationship and hashes without executing Git commands.
+
+- Collector SHA-256: 0270459b5c508bfbdd1ce0d9cef59860e8fade7333a0145a9c5d8a5136c5e7e7.
+- Metadata SHA-256: edb4d4d38012efc4f33f890d4afe12c9662deca8caf26431111124c29a828c3e.
+- Upstream revision remains 3edd5af5991927164edd4aacebfcbee00b8064e7.
+- Supplied terminal evidence shows the duplicate ID was refused with exit code 2 and an unchanged metadata hash. I preserved the [overwrite-check screenshot](evidence/ACT-0003/metadata-overwrite-check.png).
+- The metadata records the i9-12900KS, 24 visible logical CPUs, Ubuntu under WSL2, GCC 13.3.0 and Python 3.12.3. Host power settings, background load and physical-core placement remain unknown.
+
+The snapshot is accepted as metadata-only. It contains no completed Kyber tests or performance observations. See the [run review](runs/EXP-000-RUN-0001.md).
+
+### Support implementation and validation
+
+I prepared scripts/run_validation.py to reserve a new run through the existing collector, require the baseline to match upstream, build fresh functional-test binaries with explicit flags, and retain commands, environment, stdout/stderr, exit codes and file hashes. It handles nonzero exits, timeouts and ordinary interruption without marking incomplete tests as successful. The source, compiler and executables are rechecked before accepting completion.
+
+The runner reads 35 C/header/Makefile files and confirms their contents match the pinned reference. The earlier 36-file inventory also included the reference .gitignore. The original collector and RUN-0001 metadata remain unchanged. The root ignore rules now exclude only rebuildable run/build/ contents in addition to existing exclusions; raw logs and manifests remain trackable.
+
+The support tests in tests/test_run_validation.py use temporary dummy processes and mocked build/test orchestration. They check output preservation, nonzero exits, launch failure, timeout, interruption, changed/missing source, all parameter sets, stop-on-failure, invalidated provenance and setup failure. The final check returned exit code 0 with 15 passing tests. This does not substitute for running the real compiler and Kyber tests through the new runner.
+
+- Tested runner SHA-256: e54636a2335400d35c7103f2e6a5669e4fda88794136d5ac94b6b5a2d1a61071.
+- Tested infrastructure-test SHA-256: f11170421ab569708df61f0da8b0d2c59e002ee17d567e1b620c90826087005b.
+- [Captured support-test console output](evidence/ACT-0003/support-tests.log).
+
+These checks were development validation of uncommitted support files identified by the hashes above. I will commit them before creating a formal Kyber run. I retain manual application of arithmetic optimisations and all Git operations; supporting automation and records are reviewed before inclusion.
+
+Final read-only verification checked links and work-record formatting across 12 Markdown files, confirmed the collector and saved metadata hashes remain unchanged, and confirmed both implementation copies still match all 36 upstream reference source/configuration files. The support-script hashes match the versions that passed the infrastructure tests. No Git commands or new Kyber executions were performed during this activity.

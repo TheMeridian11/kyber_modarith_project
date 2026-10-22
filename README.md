@@ -10,6 +10,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Cumulative activity log](notes/project_log.md)
 - [Master experiment register](notes/experiment_register.md)
 - [Baseline experiment plan](notes/experiments/EXP-000-baseline.md)
+- [Verified metadata checkpoint](notes/runs/EXP-000-RUN-0001.md)
+- [Functional validation runner](notes/validation_runner.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -32,8 +34,10 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 I have committed the setup at c584c16d7b8a8e8de5e071a4edd5bc1450f92592 on branch reduction-counters. Repository inspection confirms the upstream submodule mapping, corrected ignore rules and a clean working tree before the ACT-0002 documentation updates. All 36 reference source/build files in each local implementation copy match the pinned upstream reference.
 
-I am preparing the automatic metadata collector next. The proposed collector has only been syntax-checked in memory; its implementation and runtime checks are pending. It will record a metadata-only snapshot and will not build or run Kyber. The existing scripts/run_baseline.sh still uses calendar-based output names and summary measurements; I will leave it unused until the sequential-ID launcher and raw-data harness replace that workflow.
+I implemented and checked the metadata collector at source commit 7eea4121e19896cc21773c81530ea5201bb235f3. The metadata-only snapshot EXP-000/RUN-0001 is saved in results commit d2a50d7d6f610f28e4e8f5dcb10c09ed46e93750. File hashes and the separate source/results commits have been verified; the supplied terminal evidence confirms refusal to overwrite the existing run.
+
+I have prepared scripts/run_validation.py to freshly build and execute the existing baseline functional tests for all three parameter sets. Fifteen infrastructure tests passed using dummy processes and mocked workflows; the new runner has not yet executed Kyber. I will commit the support files before launching the recorded functional run. The legacy scripts/run_baseline.sh remains unused; the raw timing harness is still pending.
 
 I have no formal benchmark dataset. The earlier review reported passing existing correctness binaries for all three parameter sets, but a complete raw test archive was not retained. Those historical observations do not establish the accepted baseline.
 
-I apply and review code changes before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.
+I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.

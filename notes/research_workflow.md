@@ -4,7 +4,7 @@ I use this workflow to preserve the connection between research questions, sourc
 
 ## Working method
 
-- I review each proposed code, script, build and configuration change and apply it manually before committing.
+- I manually apply arithmetic optimisation changes and perform Git operations myself. I review supporting scripts, tests, build automation and research-record changes before committing them.
 - I record completed work, pending work, results, interpretation and next actions under sequential activity IDs in project_log.md.
 - I distinguish directly inspected repository evidence, supplied execution output and historical observations. A proposed snippet or command is not an implemented change or an executed check.
 - I keep the repository as the durable research record. Chat discussion alone does not establish a reproducible result.
@@ -35,7 +35,7 @@ Lifecycle: proposed, planned, running, analysed, closed. I record the outcome se
 6. I record outcomes and limitations, update the register and activity log, and commit results and records after the run.
 7. The results commit differs from the source commit that produced the measurements. I do not embed a results commit's own hash in a file in that same commit. Git history identifies it, or a later index can reference it. I record the analysis-code revision separately.
 
-Formal runs require the tested code, configuration and harness to be committed. The initial metadata collector will require a clean Git-visible tree outside results/, including tracked changes and non-ignored untracked files. Existing result records may accumulate without blocking collection. This is a Git cleanliness check, not proof that ignored build files were produced from the recorded source. An executable hash alone does not establish build provenance.
+Formal runs require the tested code, configuration and harness to be committed. The metadata collector requires a clean Git-visible tree outside results/, including tracked changes and non-ignored untracked files. Existing result records may accumulate without blocking collection. This is a Git cleanliness check, not proof that ignored build files were produced from the recorded source. An executable hash alone does not establish build provenance.
 
 If an exploratory run uses uncommitted work, I preserve the exact diff and relevant untracked sources and label it exploratory through a separately documented procedure. The initial collector deliberately rejects that source state; a dirty flag alone cannot reconstruct an experiment.
 
@@ -43,9 +43,11 @@ I preserve commits and tags already cited by results. Corrections use new commit
 
 ## Result preservation
 
-The first collector will write results/EXP-000/RUN-0001/metadata.json for a metadata-only smoke check. Its execution fields remain not-run and build details remain not-recorded. Its available compiler and environment observations describe the collector process; they do not establish a future benchmark's conditions.
+The collector wrote results/EXP-000/RUN-0001/metadata.json for the verified metadata-only smoke check recorded in ACT-0003. Its execution fields remain not-run and build details remain not-recorded. Its available compiler and environment observations describe the collector process; they do not establish a future benchmark's conditions.
 
-A later complete run directory will contain a manifest.json, raw/ measurements/build/test output, and derived/ summaries and generated figures. That is a future convention, not evidence of completed execution.
+The functional validation runner adds manifest.json and raw/ build/test logs to a newly reserved run directory, and builds executables under build/. The metadata.json remains the immutable pre-execution snapshot; manifest.json records the actual attempt and final status. Rebuildable binaries are kept locally and ignored by Git; their hashes and build commands remain in the manifest. Derived timing summaries and figures will be added when the performance harness exists.
+
+I accept functional validation only when the manifest status is completed, the provenance recheck passes, all three upstream functional checks pass and all six build/test steps complete with exit code zero. Failed, interrupted or still-running records are not accepted. Abrupt system termination may prevent finalisation; I preserve that incomplete evidence and retry with a new ID.
 
 Counting, correctness, sanitizer and performance runs have distinct build modes and evidence. I preserve failed runs and partial files under their original IDs. A retry receives a new ID. I never overwrite raw files to remove an outlier or repair a failure; exclusions are recorded in analysis.
 

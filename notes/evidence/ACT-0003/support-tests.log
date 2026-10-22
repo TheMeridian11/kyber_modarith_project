@@ -1,0 +1,20 @@
+test_changed_source_is_rejected (test_run_validation.SourceTests.test_changed_source_is_rejected) ... ok
+test_missing_source_is_rejected (test_run_validation.SourceTests.test_missing_source_is_rejected) ... ok
+test_existing_raw_output_is_not_overwritten (test_run_validation.StepTests.test_existing_raw_output_is_not_overwritten) ... ok
+test_keyboard_interrupt_saves_step (test_run_validation.StepTests.test_keyboard_interrupt_saves_step) ... ok
+test_missing_executable_preserves_failure (test_run_validation.StepTests.test_missing_executable_preserves_failure) ... ok
+test_nonzero_exit_is_failure (test_run_validation.StepTests.test_nonzero_exit_is_failure) ... ok
+test_success_preserves_output_and_hashes (test_run_validation.StepTests.test_success_preserves_output_and_hashes) ... ok
+test_termination_handler_uses_interrupt_path (test_run_validation.StepTests.test_termination_handler_uses_interrupt_path) ... ok
+test_timeout_is_not_pass (test_run_validation.StepTests.test_timeout_is_not_pass) ... ok
+test_all_parameters_and_evidence_categories (test_run_validation.WorkflowTests.test_all_parameters_and_evidence_categories) ... ok
+test_build_failure_stops_before_tests (test_run_validation.WorkflowTests.test_build_failure_stops_before_tests) ... ok
+test_changed_provenance_invalidates_completed_tests (test_run_validation.WorkflowTests.test_changed_provenance_invalidates_completed_tests) ... ok
+test_functional_failure_stops_remaining_parameters (test_run_validation.WorkflowTests.test_functional_failure_stops_remaining_parameters) ... ok
+test_interrupted_test_is_inconclusive (test_run_validation.WorkflowTests.test_interrupted_test_is_inconclusive) ... ok
+test_setup_failure_has_manifest (test_run_validation.WorkflowTests.test_setup_failure_has_manifest) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.107s
+
+OK

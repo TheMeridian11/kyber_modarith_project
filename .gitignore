@@ -30,3 +30,6 @@ __pycache__/
 .idea/
 
 # Research logs and raw result files are intentionally not ignored.
+
+# Rebuildable run executables; manifests and raw logs remain tracked.
+/results/EXP-*/RUN-*/build/
