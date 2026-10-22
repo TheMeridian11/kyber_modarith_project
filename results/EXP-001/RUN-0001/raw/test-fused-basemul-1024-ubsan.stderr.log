@@ -1,0 +1,5 @@
+basemul_cases=3200
+basemul_oracle=pass
+kem_fixtures=100
+kem_checks=pass
+transcript=public-deterministic-test-vectors
