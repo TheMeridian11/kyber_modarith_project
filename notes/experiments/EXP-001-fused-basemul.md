@@ -3,7 +3,7 @@
 ## Identity and status
 
 - Originating activity: ACT-0006.
-- Lifecycle: running; manual implementation and RUN-0001 validation accepted, matched timings pending.
+- Lifecycle: closed initial evaluation; validation and matched timings accepted with parameter-specific limitations.
 - Candidate variant: fused-basemul.
 - Validated candidate source commit: 8345f6a0fb273917ed4499356f0966d1c5dc7fc2.
 - Validation results commit: 00398d18dddbccb99854bb6519fc896a23d90f22.
@@ -11,7 +11,8 @@
 - Baseline evidence: EXP-000/RUN-0002 functional checks, RUN-0003 timing pilot and [RUN-0004 counts](../runs/EXP-000-RUN-0004.md).
 - Baseline count source/results commits: 3757df58a02408fb9a701869cc1f3ac6f6159a8d / 2a8388c1701dcf66cb5dfa6906921f63bc574c55.
 - Accepted record: [EXP-001/RUN-0001 validation and assembly review](../runs/EXP-001-RUN-0001.md).
-- Next record: EXP-001/RUN-0002, [matched timings](../paired_timing.md).
+- Accepted timing record: [EXP-001/RUN-0002](../runs/EXP-001-RUN-0002.md).
+- Next treatment: [EXP-002 vector-wide fusion](EXP-002-wide-dot.md).
 - Origin: local analysis of the pinned source, LIT-003. I do not claim that this rearrangement is novel or attribute it to an unreviewed paper.
 
 I test whether combining products before Montgomery reduction improves key generation, encapsulation and decapsulation while preserving externally visible behaviour and the reviewed implementation assumptions.
@@ -128,7 +129,7 @@ A completed run requires all commands and per-parameter checks to pass, exact tr
 
 Candidate validation and scoped generated-code review are accepted. I prepared scripts/run_comparison.py for fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
 
-I will compare process-level medians within matched blocks and preserve the raw observations. Small uncertain effects require additional complete blocks and explicit uncertainty, not selective repetition or outlier removal. A correct candidate with a reproducible improvement may be retained; a regression, no detectable effect or inconclusive result remains a reportable outcome. Any failed arithmetic or compatibility gate stops performance collection.
+RUN-0002 compared process-level medians within matched blocks and preserved every raw observation. Small uncertain effects remain inconclusive; a stronger claim would require additional planned complete blocks. I do not selectively repeat or remove outliers. A regression, no detectable effect or inconclusive result remains reportable. Any failed arithmetic or compatibility gate stops performance collection.
 
 The change adds two int32_t local accumulators and one int16_t temporary. It does not add heap allocation or change key/ciphertext storage. Both normal-build basemul bodies save four registers and reserve eight additional stack bytes. The candidate uses registers for the accumulators; no local stack-setup increase was observed. This does not measure whole-program peak stack usage.
 
@@ -139,8 +140,8 @@ The change adds two int32_t local accumulators and one int16_t temporary. It doe
 - Candidate tests/counts/sanitizer checks: RUN-0001 passes, including exact sampled invalid-input/rejection compatibility and all predicted counts.
 - Candidate assembly review: completed in ACT-0007 for normal-build basemul and its reducer in all parameter sets; no new branch/index-based leakage mechanism found in that scope.
 - Statistical timing-leakage assessment: not-run.
-- Performance comparison: not-run.
-- Retention decision: pending.
+- Performance comparison: RUN-0002 accepted; effects and limits recorded below.
+- Retention decision: keep as a validated research reference; Kyber768 encapsulation/decapsulation performance remains inconclusive.
 
 [Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. That development check preceded manual application. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
 
@@ -150,4 +151,18 @@ The observed count reductions agree with the proposed mechanism: two fewer Montg
 
 The reviewed basemul symbol shrinks from 138 to 114 bytes in every normal build; its reducer remains 22 bytes. Fixed-offset memory accesses, direct reducer calls and 32-bit accumulator additions match the proposal. No conditional branches or divisions occur in these reviewed bodies. The caller-range argument and compiler assumptions remain essential; tests and assembly inspection do not establish whole-program constant-time behaviour or all-input safety.
 
-I accept the implementation for performance evaluation, with retention still deferred. The [matched timing protocol](../paired_timing.md) defines five pairs per parameter set, complete raw retention, paired process-median effects and explicit WSL/order/uncertainty limitations. RUN-0001 contains no timing result. Its original manifest remains immutable; the later review separately resolves its assembly-review action.
+ACT-0007 accepted the implementation for performance evaluation; ACT-0008 now records the measured outcome and retention decision. The [matched timing protocol](../paired_timing.md) defines five pairs per parameter set, complete raw retention, paired process-median effects and explicit WSL/order/uncertainty limitations. RUN-0001 contains no timing result. Its original manifest remains immutable; the later review separately resolves its assembly-review action.
+
+### ACT-0008 measured outcome
+
+RUN-0002 used source d407b5134f14a96a4572b3af1132a8f715e0a28d and saved results in 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712. All 90000 rows and all derived summaries verified. The median paired reductions in process-median duration were:
+
+| Parameter set | Keygen | Encap | Decap |
+|---|---:|---:|---:|
+| Kyber512 | 4.12% | 5.87% | 6.01% |
+| Kyber768 | 1.68% | 0.87% | 0.86% |
+| Kyber1024 | 7.43% | 8.55% | 8.43% |
+
+Every Kyber512/Kyber1024 pair favoured the candidate, including both orders. Kyber768 keygen was faster in five of five pairs, while its encap/decap each had one slower pair. I retain those two sub-one-percent effects as inconclusive. The [run review](../runs/EXP-001-RUN-0002.md) records all observed ranges, order checks and WSL limitations. These descriptive results do not establish significance, cross-session reproducibility or complete constant-time security.
+
+I retain this implementation as a research reference and proceed to EXP-002 without an obligatory repeat solely to make the small effects positive. Any later claim of a reliable small Kyber768 gain needs more evidence. Reduction-call percentages are not runtime percentages, and the cause of the parameter-dependent differences has not been isolated.

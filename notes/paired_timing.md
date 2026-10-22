@@ -1,6 +1,6 @@
 # EXP-001 matched timing comparison
 
-I now have an unchanged baseline, an implemented candidate and accepted [candidate validation and assembly review](runs/EXP-001-RUN-0001.md). This run asks whether the reduction savings make complete KEM operations faster.
+I completed this comparison and accepted its [RUN-0002 results](runs/EXP-001-RUN-0002.md). This document preserves the protocol used to measure EXP-001 against the original baseline after [validation and assembly review](runs/EXP-001-RUN-0001.md).
 
 ## Fixed starting protocol
 
@@ -21,7 +21,7 @@ The timer remains CLOCK_MONOTONIC_RAW in nanoseconds. Fixture generation, warm-u
 
 ## Run and preserve
 
-After reviewing and committing the support files and records, I launch from the repository root:
+I used the following command after committing the support files and records. It is historical; RUN-0002 already exists and must not be reused:
 
 ~~~bash
 python3 -B scripts/run_comparison.py --experiment EXP-001 --run RUN-0002 --cpu 0
@@ -51,4 +51,4 @@ I will examine consistency across pairs and both orders before deciding whether 
 
 [Development evidence](evidence/ACT-0007/comparison-smoke.json) records six real builds and two short blocks with twelve exchanges per process. All 432 operation rows passed; all twelve function assembly comparisons matched. Known synthetic improvement/regression pairs verified effect direction and aggregation. Missing variants, duplicate groups, unequal sample counts and a changed source hash were rejected.
 
-The development run used temporary files, bypassed Git-state checks through mocks and did not invoke the metadata collector. It is support verification, not a committed benchmark or evidence of a speedup. Formal execution and its clean-source checks remain pending RUN-0002.
+The development run used temporary files, bypassed Git-state checks through mocks and did not invoke the metadata collector. It is support verification, not a committed benchmark or evidence of a speedup. That development check preceded formal execution. ACT-0008 now records verification of the completed RUN-0002, including its clean-source provenance checks and retained artifacts.

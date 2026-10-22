@@ -247,3 +247,48 @@ The initial budget remains 100 warm-up and 1000 measured exchanges per process. 
 I made no arithmetic or Git changes during this activity. No development duration is used as evidence of a speedup.
 
 Final verification confirmed that all 155 archived result files, the arithmetic implementation files, pinned upstream sources and Git HEAD remain unchanged. The tested support hashes still match, documentation links and whitespace checks pass, and EXP-001/RUN-0002 has not been created. The changes comprise one new runner, two evidence records, two explanatory records and four updated project documents.
+
+## ACT-0008 — First timing result analysed and vector-wide fusion specified
+
+- **Completed:** I verified EXP-001/RUN-0002 from saved artifacts, interpreted the timing effects and execution-order checks, recorded the source-commit clarification, and prepared the EXP-002 range/security plan, exact manual replacement and validation support.
+- **Results:** All 90000 timing rows, 90 process summaries, 45 paired effects and nine aggregate rows verified. EXP-001 improved Kyber512 by 4.12%/5.87%/6.01% and Kyber1024 by 7.43%/8.55%/8.43% for keygen/encap/decap. Kyber768 keygen improved by 1.68%; its 0.87%/0.86% encap/decap effects remain inconclusive. Twelve support-check builds of the existing implementations passed the new vector oracle and transcript comparisons.
+- **Learned:** RUN-0001 validated the first optimisation; RUN-0002 measured its performance. Reduction savings do help several operations here, but their timing effect differs by parameter set. Repeated observations are not independent experiments, and small mixed effects need qualified conclusions.
+- **Pending:** I need to apply the EXP-002 function and includes manually, review/commit source and support, then execute EXP-002/RUN-0001. The new candidate has not been implemented or tested.
+- **Next:** Review the new vector arithmetic, invalid-input compatibility, UBSan, counts and assembly before a fresh incremental timing comparison against EXP-001.
+
+### Verified timing record and interpretation
+
+The source commit is d407b5134f14a96a4572b3af1132a8f715e0a28d; results commit 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712 directly follows it. I verified the relationship through stored objects without executing Git commands. All 370 tracked files matched the results commit before these support/document changes.
+
+All 48 steps exited zero. I verified 96 raw-stream hashes, 30 datasets, six retained executables, source/support identity, metadata and derived artifacts. All twelve timing-build function disassemblies match the accepted review. I re-parsed every raw observation and reproduced the complete analysis with the existing versioned summary/comparison functions. See the [run review](runs/EXP-001-RUN-0002.md) and [verification evidence](evidence/ACT-0008/exp-001-run-0002-review.json).
+
+Every Kyber512/Kyber1024 pair improved, including both orders. Kyber768 keygen improved in all five pairs but by a smaller amount. Kyber768 encap/decap each regressed in block 5; I retained those observations and classify the small median effects as inconclusive. Order-group medians are positive, but the three-versus-two order split and single-session WSL conditions limit inference. No significance, independent-row or cross-machine claim is made. Host power mode, background load and physical-core placement remain unknown.
+
+The counts and code review explain which arithmetic work was removed; they do not isolate why Kyber768's timing gain is smaller. Possible code-layout/compiler/environment effects remain hypotheses, not findings. I keep EXP-001 as a research reference and proceed without an unnecessary repeat merely to make every comparison favourable. Any stronger claim about the small effects requires further planned evidence. Performance results add no security proof.
+
+### Earlier source-commit clarification
+
+I reported that my first attempt left the old basemul in a comment; replacing the complete function allowed the next attempt to pass. The inspected source guard would reject that changed prefix before allocating a run. This supports a source-layout explanation rather than an observed arithmetic-test failure; the failed invocation log is not available for independent verification. The accepted validation still identifies 8345f6a0fb273917ed4499356f0966d1c5dc7fc2, after b935e1566567fd91335c4dee8e5a0dd4b611af47. I preserve both commits and the successful evidence.
+
+### Next optimisation and security argument
+
+[EXP-002](experiments/EXP-002-wide-dot.md) extends reduction fusion across the K vector components. For each coefficient pair I propose accumulating S00, S11 and S01 in int32_t, then computing M(M(S11)*zeta + S00) and M(S01). I retain final poly_reduce and the accepted ntt.c. The KEM vector path will compute directly, so the original and first-optimisation savings must not be added as independent treatments.
+
+For |a| <= 4095, |b| <= 1664, |zeta| <= 1664 and K <= 4, S00/S11 are bounded by 27256320, S01 by 54512640 and the twiddle-containing sum by 32794112. All fit int32_t and the existing Montgomery input contract. The output narrows only after reduction and remains centred after poly_reduce. The preserved inner Montgomery reduction is necessary for the correct scale.
+
+Predicted dot-product calls fall from EXP-001's 384K to 384, compared with the original reference's 640K. Proposed full-operation counts are 4864/6400/9728 for Kyber512, 7296/8832/13056 for Kyber768, and 9728/11264/16384 for Kyber1024. Barrett counts should remain unchanged. These predictions have not been measured.
+
+The source introduces only public-index loops and a public parity branch, with fixed coefficient bounds and no new heap allocation. Actual generated code, stack allocation and candidate compatibility remain pending. Invalid-input/rejection behaviour, signed narrowing, overflow and any new timing/indexing mechanism are explicit gates. Statistical leakage, full constant-time security, power/EM and fault resistance remain unestablished or unassessed.
+
+### Support implementation and development checks
+
+I added tests/test_fused_dot.c and scripts/run_dot_validation.py. The test driver reuses the established public KEM fixtures and binary transcript format while checking 41+K whole vectors against an independent int64_t oracle. It covers aligned and cancelling sign corners, zero, each isolated component and deterministic interior inputs across all 128 coefficient pairs. It does not repeat the unchanged standalone basemul test. The runner checks both normal/UBSan variants, 100 KEM fixtures, the existing candidate functional suite, ten count fixtures and retained dot-product/reducer assembly.
+
+[Development evidence](evidence/ACT-0008/dot-validation-support-smoke.json) records twelve builds using only the original baseline and accepted EXP-001 implementation, with two KEM fixtures each. All vector oracles and four-way transcript comparisons passed without compiler/sanitizer diagnostics. The source preflight rejects the unapplied change before run allocation; the count parser rejects EXP-001 observations against EXP-002 predictions. These are support checks, not results for the proposed arithmetic. No full formal validation or timing was repeated.
+
+- EXP-002 validation runner SHA-256: 723c00730bb8afa778e6cb651995cb9bbcf55fd9f161024e3bac437f51f45c6d.
+- Vector test driver SHA-256: 03f2c33a595ee4e0a70a2f641759758dfc0f0096464c9727f69deada2b6930ab.
+
+I made no arithmetic or Git changes during this activity. Existing result records are preserved, and the exact optimisation code is supplied for manual application.
+
+Final verification confirmed that all 256 archived result files, every arithmetic source, the pinned upstream files and Git HEAD remain unchanged. Tested support hashes match, proposed count formulas and bounds agree, documentation links and whitespace checks pass, and EXP-002/RUN-0001 has not been created. The pending change set contains the two new support files, two new research records, two evidence records and five updated project documents.

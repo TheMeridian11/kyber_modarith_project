@@ -2,6 +2,8 @@
 #include "params.h"
 #include "poly.h"
 #include "polyvec.h"
+#include "ntt.h"
+#include "reduce.h"
 
 /*************************************************
 * Name:        polyvec_compress
@@ -199,15 +201,34 @@ void polyvec_invntt_tomont(polyvec *r)
 *            - const polyvec *a: pointer to first input vector of polynomials
 *            - const polyvec *b: pointer to second input vector of polynomials
 **************************************************/
-void polyvec_basemul_acc_montgomery(poly *r, const polyvec *a, const polyvec *b)
+void polyvec_basemul_acc_montgomery(poly *r, const polyvec *a,
+                                    const polyvec *b)
 {
-  unsigned int i;
-  poly t;
+  unsigned int pair, j;
+  int16_t zeta, t;
+  int32_t sum00, sum11, sum01;
 
-  poly_basemul_montgomery(r, &a->vec[0], &b->vec[0]);
-  for(i=1;i<KYBER_K;i++) {
-    poly_basemul_montgomery(&t, &a->vec[i], &b->vec[i]);
-    poly_add(r, r, &t);
+  for(pair = 0; pair < KYBER_N/2; pair++) {
+    sum00 = 0;
+    sum11 = 0;
+    sum01 = 0;
+
+    for(j = 0; j < KYBER_K; j++) {
+      const int16_t *ap = &a->vec[j].coeffs[2*pair];
+      const int16_t *bp = &b->vec[j].coeffs[2*pair];
+
+      sum00 += (int32_t)ap[0] * bp[0];
+      sum11 += (int32_t)ap[1] * bp[1];
+      sum01 += (int32_t)ap[0] * bp[1] + (int32_t)ap[1] * bp[0];
+    }
+
+    zeta = zetas[64 + pair/2];
+    if(pair & 1)
+      zeta = (int16_t)-zeta;
+
+    t = montgomery_reduce(sum11);
+    r->coeffs[2*pair] = montgomery_reduce((int32_t)t * zeta + sum00);
+    r->coeffs[2*pair + 1] = montgomery_reduce(sum01);
   }
 
   poly_reduce(r);
