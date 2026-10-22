@@ -5,21 +5,22 @@
 *.dylib
 
 # Kyber test binaries
-impl/**/test/test_kyber512
-impl/**/test/test_kyber768
-impl/**/test/test_kyber1024
-impl/**/test/test_vectors512
-impl/**/test/test_vectors768
-impl/**/test/test_vectors1024
-impl/**/test/test_speed512
-impl/**/test/test_speed768
-impl/**/test/test_speed1024
-impl/**/PQCgenKAT_kem512
-impl/**/PQCgenKAT_kem768
-impl/**/PQCgenKAT_kem1024
+implementation/**/test/test_kyber512
+implementation/**/test/test_kyber768
+implementation/**/test/test_kyber1024
+implementation/**/test/test_vectors512
+implementation/**/test/test_vectors768
+implementation/**/test/test_vectors1024
+implementation/**/test/test_speed512
+implementation/**/test/test_speed768
+implementation/**/test/test_speed1024
+
+# Kyber known-answer-test generator binaries
+implementation/**/nistkat/PQCgenKAT_kem512
+implementation/**/nistkat/PQCgenKAT_kem768
+implementation/**/nistkat/PQCgenKAT_kem1024
 
 # Generated temporary files
-*.log
 .DS_Store
 __pycache__/
 .pytest_cache/
@@ -27,3 +28,5 @@ __pycache__/
 # Editor files
 .vscode/
 .idea/
+
+# Research logs and raw result files are intentionally not ignored.

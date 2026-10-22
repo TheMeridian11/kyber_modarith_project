@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BASELINE_DIR="$ROOT_DIR/impl/kyber-baseline-ref"
+BASELINE_DIR="$ROOT_DIR/implementation/kyber-baseline-ref"
 RESULT_DIR="$ROOT_DIR/results/baseline/$(date +%Y-%m-%d_%H-%M-%S)"
 
 mkdir -p "$RESULT_DIR"
