@@ -1,0 +1,622 @@
+{
+  "activity_id": "ACT-0007",
+  "checks": [
+    "Known improvement and regression pairs: correct direction, pairing and median-of-paired-effects aggregation",
+    "Rejected missing variant",
+    "Rejected duplicate group",
+    "Rejected unequal sample counts",
+    "Rejected source differing from accepted validation",
+    "Real six-build orchestration: both variant orders, all parameters, 432 CSV rows, 12 assembly matches, derived LF CSVs and all log hashes"
+  ],
+  "derived_rows": {
+    "comparison": 9,
+    "paired-comparison": 18,
+    "process-summary": 36
+  },
+  "executables": {
+    "baseline-1024": {
+      "path": "build/baseline-1024",
+      "sha256": "fe3c9a3cc5e4e600641aa0c874cb7220265fe87f3b823b911f96d6bdce61998e"
+    },
+    "baseline-512": {
+      "path": "build/baseline-512",
+      "sha256": "cd2501cb545ecef68a36df08137125adbe8ffd64ce4c5c8c4d722c7657902c9a"
+    },
+    "baseline-768": {
+      "path": "build/baseline-768",
+      "sha256": "d9554038d1eb18b9b4a6080abe0827e09f8d93a3ada2fd7372f8d2992ee0144a"
+    },
+    "fused-basemul-1024": {
+      "path": "build/fused-basemul-1024",
+      "sha256": "528e0933a9fb6741727cf560a47937fc4d1f0f15be2e43aa1e99191c983dd17a"
+    },
+    "fused-basemul-512": {
+      "path": "build/fused-basemul-512",
+      "sha256": "014ac66850cf1000e9bbcc3a9512a86a1ba9192c2015affcc51c63c19d88c29a"
+    },
+    "fused-basemul-768": {
+      "path": "build/fused-basemul-768",
+      "sha256": "1143f916cf1fd2af15d502db1504b8dfd50522de84879be5f69ed17f5d9a8e26"
+    }
+  },
+  "formal_source_cleanliness_checked": false,
+  "git_commands_executed": false,
+  "protocol": {
+    "blocks": 2,
+    "fixture_seed": 1,
+    "input_mode": "derand-shake256-v1",
+    "iterations_per_operation": 12,
+    "observed_affinity": [
+      0
+    ],
+    "operations": [
+      "keygen",
+      "encap",
+      "decap"
+    ],
+    "order": "block, then 512/768/1024; adjacent variant pairs; baseline first in odd blocks",
+    "original_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "outliers_removed": false,
+    "physical_core_placement": "unknown",
+    "same_fixtures_in_every_block": true,
+    "selected_logical_cpu": 0,
+    "timer": "CLOCK_MONOTONIC_RAW",
+    "timer_overhead_subtracted": false,
+    "units": "ns",
+    "warmup_triplets_per_process": 3
+  },
+  "raw_rows": 432,
+  "record_type": "development-support-check",
+  "review_sha256": "fafed1a5cb1f1cbe67e72f27bac453b64e3608adca905551f0c61c990c94bae9",
+  "scope": "Temporary short execution of the real comparison orchestration with committed-source Git checks mocked; metadata collector was not invoked. This is not a formal experiment or performance result.",
+  "status": "pass",
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-512"
+      ],
+      "exit_code": 0,
+      "label": "build-baseline-512",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber512_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-512"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-512-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "d5b0d7e79d032df9e1bc5451c3654a4672e0ab659dbb453da717804ed356bc55"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-512"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-512-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "6643e60ebe01df16a32eef842e4800b4a19ffe306b983a18db9d65fcb263b328"
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=2",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-512"
+      ],
+      "exit_code": 0,
+      "label": "build-fused-basemul-512",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber512_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-512"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-512-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "aaca21ba05582980e2dd5071db25ef445a7e29aac31a536dd777150136c6caed"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-512"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-512-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "4ebcd241d66eef2426992b44251374d4daf893b55b4335c020eda989fedaeb6e"
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-768"
+      ],
+      "exit_code": 0,
+      "label": "build-baseline-768",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber768_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-768"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-768-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9abf76882350129935f5803dbe9be54b2eac538e3b68be275e44af95b95fae01"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-768"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-768-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b1850cddcc36209df0bd5d13cafc982a47d82bdd5168b03c5c755b089d1e8adf"
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=3",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-768"
+      ],
+      "exit_code": 0,
+      "label": "build-fused-basemul-768",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber768_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-768"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-768-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "07b7840cca88f25917e6038b1ed864e62019ea4c3e4c089cd7ecc9ad6d9937e8"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-768"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-768-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "eed5302439e5da43781cefbd470c833ff60d4cd6e5715aede6c6a45381919e83"
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-baseline-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-1024"
+      ],
+      "exit_code": 0,
+      "label": "build-baseline-1024",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber1024_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-1024"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-1024-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f1f1b329354fac7e0cc33cbcf2455e8a079eef8584b37563737813d962dff093"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-1024"
+      ],
+      "exit_code": 0,
+      "label": "assembly-baseline-1024-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "13aebd9a372e99a53f3454bf433f41050fcadaa9f724babe986db0f442090f16"
+    },
+    {
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wmissing-prototypes",
+        "-Wredundant-decls",
+        "-Wshadow",
+        "-Wpointer-arith",
+        "-O3",
+        "-fomit-frame-pointer",
+        "-z",
+        "noexecstack",
+        "-DKYBER_K=4",
+        "-I",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/implementation/kyber-optimised-ref",
+        "kem.c",
+        "indcpa.c",
+        "polyvec.c",
+        "poly.c",
+        "ntt.c",
+        "cbd.c",
+        "reduce.c",
+        "verify.c",
+        "fips202.c",
+        "symmetric-shake.c",
+        "randombytes.c",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/benchmarks/bench_kem.c",
+        "-o",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-1024"
+      ],
+      "exit_code": 0,
+      "label": "build-fused-basemul-1024",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber1024_ref_basemul",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-1024"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-1024-basemul",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b04fae64a3f8ac7739466472343d1fb34984937ec8e92d287c491ac0ce96fa47"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-1024"
+      ],
+      "exit_code": 0,
+      "label": "assembly-fused-basemul-1024-montgomery_reduce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "77b8db60c1c7e990051ab3f51a25ea7d1378a24d1c31fe488001bea9b1d0be0f"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-512",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-512-block-0001",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "63dca26666525b456f1459a2826b78f994fe9d5be43399263fa4a28c0af53f00"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-512",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-512-block-0001",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "3e73b6e344eb6058670878ca5efe58c42abfe3fd0a5d656c4ddde934f8bfcd26"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-768",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-768-block-0001",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "f548fce209e99793594fb9eba4262357940f2fc16909ad7e07923486c8307a1e"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-768",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-768-block-0001",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "947a884b6f1cba026175e5ecb6c6f5d623ac119826aa8568a7798b20e832f41d"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-1024",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-1024-block-0001",
+      "stderr_sha256": "aa9a5c50a5d55f88bbc593c9edc756837994f81bc289a1df32431c2652d5763f",
+      "stdout_sha256": "57d731a043e80946ceb30f1d22bdb40c79123b8ea01422a4ba0d2dfb1a223352"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-1024",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-1024-block-0001",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "23d39d442c91b041d884e562b8e2db9ae815f0e7a861872b17ea477f43fd420d"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-512",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-512-block-0002",
+      "stderr_sha256": "aa9a5c50a5d55f88bbc593c9edc756837994f81bc289a1df32431c2652d5763f",
+      "stdout_sha256": "d45c2e64a7627de868ea4641e3774132d989d0678ab6536a73e5aa14e9adb6a2"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-512",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-512-block-0002",
+      "stderr_sha256": "aa9a5c50a5d55f88bbc593c9edc756837994f81bc289a1df32431c2652d5763f",
+      "stdout_sha256": "77ed11f65fdf0fbb6bcb34258c735cddf139eeb07ff3026763189f3d092cb65b"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-768",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-768-block-0002",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "6581a751700d3e90dfaf952fd10fb8fc77c02ecd24373252753bdd344a123aef"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-768",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-768-block-0002",
+      "stderr_sha256": "aa9a5c50a5d55f88bbc593c9edc756837994f81bc289a1df32431c2652d5763f",
+      "stdout_sha256": "410c78c3f0e2961fa01a6d45883d6eb2b016e12ab6f13d0cd842a5b34c6d2038"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/fused-basemul-1024",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-fused-basemul-1024-block-0002",
+      "stderr_sha256": "72ee03164cf2c1d2a1c6c562d97b30f3e806eb9bba686f53472fe638c10a41bc",
+      "stdout_sha256": "e68053b8a073a3883d207851bdeb842f283552344e3797cd313c412b0caf772a"
+    },
+    {
+      "argv": [
+        "/tmp/kyber-comparison-support-twlzrnhe/build/baseline-1024",
+        "12",
+        "3",
+        "1"
+      ],
+      "exit_code": 0,
+      "label": "timing-baseline-1024-block-0002",
+      "stderr_sha256": "aa9a5c50a5d55f88bbc593c9edc756837994f81bc289a1df32431c2652d5763f",
+      "stdout_sha256": "d9d734ff4550936183715bfe8dd9be379164bdc537f78c86bdb70444d372c7e8"
+    }
+  ],
+  "support_file_sha256": {
+    "benchmarks/bench_kem.c": "103feedada227af4a170b561a05a5268d31845e3ddbe758553ba5f7f3a11dc3a",
+    "benchmarks/count_reductions.c": "adc3efa6f3bf543d5383a4f0611b23b2b0065e517d34b01b4ddc7c046fd17c2a",
+    "scripts/collect_run_metadata.py": "0270459b5c508bfbdd1ce0d9cef59860e8fade7333a0145a9c5d8a5136c5e7e7",
+    "scripts/run_candidate_validation.py": "7b7fc5d0c779303bd3d8bb2898b052e7ca5ab9f3afd6cf26f2867808ab135939",
+    "scripts/run_comparison.py": "a492a1f5efe5292049f46d544b64092b4faf0b15a9459faa5e5d47fad1ce8378",
+    "scripts/run_counts.py": "8f41dc934e7d21b071b67ffd3b529b181ffcfe9fc26bcfde21bdc6838d42710d",
+    "scripts/run_timing.py": "690af59011de1794be5f59097135581bd5ea624aca82fc171bf7ed8f4e6306f6",
+    "scripts/run_validation.py": "e54636a2335400d35c7103f2e6a5669e4fda88794136d5ac94b6b5a2d1a61071",
+    "tests/test_fused_basemul.c": "2aad45e50a26bf54a3241570aba173f2d238836ba17b5fd267ccb57910b8752b"
+  },
+  "temporary_output_policy": "Temporary binaries/raw development durations removed after verification; hashes and invocation details retained here. Formal comparison remains pending."
+}

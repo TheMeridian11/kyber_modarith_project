@@ -205,3 +205,45 @@ Development checks used unchanged reference arithmetic only, with two KEM fixtur
 The proposed arithmetic itself has not been written into the repository or tested. Full recorded candidate validation remains pending manual application. No optimisation speedup, complete safety proof or constant-time guarantee is claimed.
 
 Final read-only verification confirmed that both 36-file reference copies and every archived result remain unchanged. The support files match their tested hashes, documentation links and whitespace checks pass, and the candidate-count table agrees with the source-derived savings formulas. EXP-001/RUN-0001 has not been created. No Git commands were executed during this activity.
+
+## ACT-0007 — First optimisation validated and matched timings prepared
+
+- **Completed:** I verified EXP-001/RUN-0001, reviewed normal-build basemul and its Montgomery reducer for both variants and all parameter sets, recorded the results and security scope, and prepared matched timing support.
+- **Results:** All 42 saved steps passed. Twelve transcripts agree within parameter sets, all exercised kernel/oracle/output-bound and UBSan checks pass, and all 90 count observations match predictions. Reviewed basemul uses three reducer calls instead of five, shrinks from 138 to 114 bytes and retains the same local stack setup. The new comparison support passed a short six-build, two-block development check.
+- **Learned:** The candidate reduces complete-operation Montgomery calls by approximately 15.4% to 23.1% while preserving the tested external outputs. This establishes the arithmetic mechanism, not a speedup. The generated code introduces no branch/index-based leakage mechanism in the inspected functions; complete constant-time security remains unestablished.
+- **Pending:** I need to review and commit the comparison support and records, then execute and preserve EXP-001/RUN-0002. No formal baseline/candidate timing comparison has run.
+- **Next:** Compare fresh matched process medians, check consistency across pairs and execution orders, and interpret any benefit, regression or uncertainty alongside the correctness/security evidence.
+
+### Accepted execution and provenance
+
+The actual validation source is 8345f6a0fb273917ed4499356f0966d1c5dc7fc2. It follows b935e1566567fd91335c4dee8e5a0dd4b611af47 from the screenshots. Results commit 00398d18dddbccb99854bb6519fc896a23d90f22 directly follows the actual source. I confirmed these relationships and all 264 tracked file contents through stored objects without executing Git commands.
+
+I checked all 84 raw-stream hashes, 18 retained executable hashes, six support-file hashes, metadata and committed/current source contents. The baseline matches upstream; only candidate basemul differs. The [run review](runs/EXP-001-RUN-0001.md) and [verification evidence](evidence/ACT-0007/run-0001-review.json) record the checks, transcript sizes and counts.
+
+Each parameter set produced four identical transcripts containing 100 public deterministic fixtures, including tested invalid-input and rejection behaviour. Each of twelve test binaries passed 3200 kernel-oracle/output-bound checks; six used UBSan without diagnostics. The repeated builds exercise common fixtures, not thousands of independently designed experiments. The candidate also passed the upstream functional suites. I reviewed saved evidence without rerunning this validation.
+
+### Analysis and implementation-security scope
+
+The observed savings match the source-derived predictions for keygen, encapsulation and decapsulation, with Barrett counts unchanged. Removing two of five local reducer calls does not remove the five product multiplications or other KEM work. Runtime improvement therefore remains an empirical question.
+
+All six normal basemul disassemblies show the intended 32-bit accumulators, fixed-offset accesses and direct calls. The unchanged reducer has register arithmetic and a fixed shift. Neither reviewed body contains a conditional branch, division or indirect call. Both basemul versions save four registers and reserve eight additional stack bytes. The smaller 114-byte candidate symbol is a local code-size finding; it is not a whole-binary or peak-stack measurement.
+
+The caller bounds still give at most 13628160 for a fused sum and 13312 for four accumulated outputs. Existing signed-narrowing/compiler assumptions remain. Sampled byte agreement and exercised-path sanitizer results support the bounded argument, while all-input safety, whole-program constant-time behaviour, statistical leakage, power/EM leakage and fault resistance are not established by this run. I record those limitations separately from the decision to proceed to timing.
+
+I left RUN-0001 unchanged, including its original assembly_review=pending entry. The new review records the later completion of that action without rewriting historical evidence.
+
+### Timing support and checks
+
+I added scripts/run_comparison.py, reusing the existing C timing harness, CSV validation, metadata collector and process-record helpers. It builds both implementations with the reviewed compiler/flags, verifies their basemul/reducer instruction sequences against the review, and executes five adjacent pairs per parameter set in alternating order. It records all raw durations and produces process summaries, paired effects and nine descriptive aggregate rows using LF CSVs.
+
+The initial budget remains 100 warm-up and 1000 measured exchanges per process. Two implementations yield 30 processes and 90000 operation durations. This is the expected doubling of the pilot volume, not a new requirement for 90000 independent tests. The same public fixture indices are reused. I interpret matched process pairs and observed variation rather than treating inner rows as independent runs. The [protocol](paired_timing.md) records formulas, the three-versus-two order imbalance, WSL limitations and rules for inconclusive results.
+
+[Development evidence](evidence/ACT-0007/comparison-smoke.json) records six real compilations, twelve assembly matches and two short blocks yielding 432 valid operation rows. Known synthetic improvement and regression pairs verified effect direction and median-of-paired-effects aggregation. Missing variants, duplicate groups, unequal sample counts and changed candidate source hashes were rejected. Git-state checks were mocked for this temporary development check and the metadata collector was not invoked; formal clean-source execution remains pending.
+
+- Comparison runner SHA-256: a492a1f5efe5292049f46d544b64092b4faf0b15a9459faa5e5d47fad1ce8378.
+- Unchanged timing C SHA-256: 103feedada227af4a170b561a05a5268d31845e3ddbe758553ba5f7f3a11dc3a.
+- Review evidence SHA-256: fafed1a5cb1f1cbe67e72f27bac453b64e3608adca905551f0c61c990c94bae9.
+
+I made no arithmetic or Git changes during this activity. No development duration is used as evidence of a speedup.
+
+Final verification confirmed that all 155 archived result files, the arithmetic implementation files, pinned upstream sources and Git HEAD remain unchanged. The tested support hashes still match, documentation links and whitespace checks pass, and EXP-001/RUN-0002 has not been created. The changes comprise one new runner, two evidence records, two explanatory records and four updated project documents.

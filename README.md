@@ -18,6 +18,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Reduction counting protocol](notes/reduction_counts.md)
 - [Accepted reduction counts](notes/runs/EXP-000-RUN-0004.md)
 - [EXP-001 plan and security assessment](notes/experiments/EXP-001-fused-basemul.md)
+- [Accepted candidate validation and assembly review](notes/runs/EXP-001-RUN-0001.md)
+- [Matched baseline/candidate timing protocol](notes/paired_timing.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -30,7 +32,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 - external/kyber-official/: pinned upstream checkout; preserve its source.
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
-- implementation/kyber-optimised-ref/: experimental source; no arithmetic modifications recorded yet.
+- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul change.
 - scripts/: environment collection and benchmark automation.
 - benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
@@ -39,24 +41,21 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 ## Current state
 
-I have committed the setup at c584c16d7b8a8e8de5e071a4edd5bc1450f92592 on branch reduction-counters. Repository inspection confirms the upstream submodule mapping, corrected ignore rules and a clean working tree before the ACT-0002 documentation updates. All 36 reference source/build files in each local implementation copy match the pinned upstream reference.
+Initial baseline preparation is complete. I have implemented the first optimisation, fused base multiplication, and accepted its correctness, exercised-path UBSan, reduction-count and scoped assembly evidence. I am ready to measure its effect on complete KEM operations with a fresh baseline alongside it.
 
-I implemented and checked the metadata collector at source commit 7eea4121e19896cc21773c81530ea5201bb235f3. The metadata-only snapshot EXP-000/RUN-0001 is saved in results commit d2a50d7d6f610f28e4e8f5dcb10c09ed46e93750. File hashes and the separate source/results commits have been verified; the supplied terminal evidence confirms refusal to overwrite the existing run.
-
-I completed EXP-000/RUN-0002 using source commit 75b0e38b5436dfa3f2672822edb178087b542b43 and saved its evidence in results commit e1d3734be7d890e0697678a8ae336e0a8a210f92. All three existing functional tests passed; the archived logs, metadata and binary hashes have been checked.
-
-I completed EXP-000/RUN-0003 using source commit d690cfb580f0dd2d1b0805a6635ed56e553ca5f9 and saved its evidence in results commit 8a76f3f1c0bf9da8157b0901b2defbf8f3f618d2. I verified all 45000 timing rows, reproduced the 45 per-process summary rows and checked the retained hashes. All measured exchanges passed. These are pilot nanosecond durations with operating-system randomness excluded; no optimisation speedup has been measured.
-
-| Step | Status | Purpose |
+| Step | Status | What it establishes |
 |---|---|---|
-| RUN-0001: metadata | Accepted | Identify source and environment |
-| RUN-0002: functional tests | Accepted | Check that unchanged Kyber works |
-| RUN-0003: timing pilot | Accepted | Establish unchanged-Kyber duration and variation |
-| RUN-0004: reduction counts | Accepted | Establish calls per operation |
-| EXP-001: first optimisation | Plan and validation support ready; manual arithmetic edit pending | Test fused base multiplication against the baseline |
+| EXP-000/RUN-0001: metadata | Accepted | Source and environment identity |
+| EXP-000/RUN-0002: functional tests | Accepted | Sampled unchanged-Kyber correctness |
+| EXP-000/RUN-0003: timing pilot | Accepted | Baseline duration and observed variation |
+| EXP-000/RUN-0004: reduction counts | Accepted | Baseline calls per operation |
+| EXP-001/RUN-0001: candidate validation and assembly | Accepted for timing comparison | Sampled compatibility, arithmetic checks and reviewed code |
+| EXP-001/RUN-0002: matched timings | Support ready; formal execution pending | Whether fewer reductions improve measured performance |
 
-I accepted RUN-0004 from source commit 3757df58a02408fb9a701869cc1f3ac6f6159a8d, saved in results commit 2a8388c1701dcf66cb5dfa6906921f63bc574c55. All 90 observations matched the predicted counts. EXP-000 is complete as baseline preparation.
+EXP-001/RUN-0001 used source commit 8345f6a0fb273917ed4499356f0966d1c5dc7fc2; results commit 00398d18dddbccb99854bb6519fc896a23d90f22 directly follows it. All 42 steps passed, the twelve deterministic transcripts agree within each parameter set, and all predicted candidate counts matched. Normal-build basemul contains three Montgomery calls instead of five, with unchanged Barrett counts and no new branch or data-dependent index in the reviewed bodies.
 
-I am beginning EXP-001: fused base multiplication. The plan records modular equivalence, caller ranges including malformed keys, predicted counts and implementation-security gates. I prepared tests/test_fused_basemul.c and scripts/run_candidate_validation.py for exact baseline/candidate byte comparisons, kernel checks, UBSan, existing functional tests, counts and retained disassembly. The arithmetic change is pending manual application; no candidate result or speedup exists yet. The legacy summary script remains unused.
+I have not measured an optimisation speedup yet. The next run uses five adjacent baseline/candidate pairs per parameter set, alternating their order, with the existing timing harness. It preserves all 90000 operation durations and reports effects from matched process medians. The prior pilot is context, not the primary comparison control.
 
-I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The activity log distinguishes proposed instructions from confirmed changes and executed checks.
+The [candidate review](notes/runs/EXP-001-RUN-0001.md) records the bounds, sampled evidence and generated-code findings. Complete constant-time guarantees and statistical leakage assessment remain unestablished or unperformed. Timing results will not be used as a blanket security claim or as evidence of final ML-KEM conformance.
+
+I manually apply arithmetic optimisation changes and review supporting automation before committing the exact source used for a run. I preserve raw outputs, evidence limitations and failed experiments alongside successful results. The legacy summary script remains unused.

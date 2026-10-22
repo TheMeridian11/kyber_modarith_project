@@ -3,20 +3,22 @@
 ## Identity and status
 
 - Originating activity: ACT-0006.
-- Lifecycle: planned; the arithmetic change is supplied for manual application and is not yet implemented.
+- Lifecycle: running; manual implementation and RUN-0001 validation accepted, matched timings pending.
 - Candidate variant: fused-basemul.
-- Candidate source commit: pending.
+- Validated candidate source commit: 8345f6a0fb273917ed4499356f0966d1c5dc7fc2.
+- Validation results commit: 00398d18dddbccb99854bb6519fc896a23d90f22.
 - Baseline: pinned reference at upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
 - Baseline evidence: EXP-000/RUN-0002 functional checks, RUN-0003 timing pilot and [RUN-0004 counts](../runs/EXP-000-RUN-0004.md).
 - Baseline count source/results commits: 3757df58a02408fb9a701869cc1f3ac6f6159a8d / 2a8388c1701dcf66cb5dfa6906921f63bc574c55.
-- Next record: EXP-001/RUN-0001, candidate validation.
+- Accepted record: [EXP-001/RUN-0001 validation and assembly review](../runs/EXP-001-RUN-0001.md).
+- Next record: EXP-001/RUN-0002, [matched timings](../paired_timing.md).
 - Origin: local analysis of the pinned source, LIT-003. I do not claim that this rearrangement is novel or attribute it to an unreviewed paper.
 
 I test whether combining products before Montgomery reduction improves key generation, encapsulation and decapsulation while preserving externally visible behaviour and the reviewed implementation assumptions.
 
 ## Isolated change and hypothesis
 
-I will replace only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I retain the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
+I manually replaced only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I retain the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
 
 A polynomial contains 128 such pairs, so its base multiplication changes from 640 to 384 Montgomery calls. A K-element dot product changes from 640K to 384K calls. For keygen, encapsulation and decapsulation, predicted savings are respectively 256K^2, 256K(K+1) and 256K(K+2). Decapsulation includes re-encryption.
 
@@ -26,7 +28,7 @@ A polynomial contains 128 such pairs, so its base multiplication changes from 64
 | Kyber768 | 11904 -> 9600 | 14976 -> 11904 | 20736 -> 16896 |
 | Kyber1024 | 18432 -> 14336 | 22144 -> 17024 | 29440 -> 23296 |
 
-These are predicted Montgomery calls per operation. Barrett counts should remain exactly as recorded in RUN-0004. The C counter supplies observations independently of these predictions.
+These predictions were specified before execution. RUN-0001 now confirms every entry with ten observations per operation and parameter set. Barrett counts remain exactly as recorded in RUN-0004. The C counter supplies observations independently of these predictions.
 
 The local kernel uses 40% fewer reductions. The complete KEM still performs hashing, sampling, transforms and other work, so this is not a 40% runtime forecast. Register use, instruction scheduling, compiler optimisation and measurement variation may yield a smaller benefit, no benefit or a regression.
 
@@ -80,31 +82,31 @@ The unchanged reducer depends on GCC's documented signed narrowing and arithmeti
 
 | Concern | Mechanism or risk | Current evidence and gate |
 |---|---|---|
-| Modular correctness | Incorrect grouping can change the Montgomery scale or output residue | Algebra recorded above; candidate kernel and API checks pending |
-| Overflow and narrowing | A wide sum narrowed too early can corrupt arithmetic; signed overflow can invalidate compiler assumptions | Explicit int32_t arithmetic and bounded inputs proposed; UBSan and output-bound checks pending |
+| Modular correctness | Incorrect grouping can change the Montgomery scale or output residue | Algebra recorded above; RUN-0001 kernel oracle and exact sampled API comparisons pass |
+| Overflow and narrowing | A wide sum narrowed too early can corrupt arithmetic; signed overflow can invalidate compiler assumptions | Explicit int32_t arithmetic applied under the reviewed bounds; RUN-0001 UBSan and output-bound checks pass on exercised paths |
 | Downstream assumptions | Equivalent residues can have different integer representatives | Candidate outputs have a smaller bound; unchanged final poly_reduce restores identical centred values |
-| Invalid inputs and rejection | Arithmetic disagreement can change decryption, re-encryption or the selected rejection secret | Compare baseline/candidate responses to corrupted/random ciphertexts and malformed keys byte for byte |
-| Secret-dependent timing | Branches, divisions or data-indexed memory could introduce leakage | Proposed body has fixed arithmetic and fixed a/b indices; generated-code review pending |
-| Compiler behaviour | Source-level control flow alone does not establish machine-code behaviour | Retain normal-build disassembly for both variants; review before performance interpretation |
-| Memory behaviour | New buffers or changed indexing could introduce corruption | No array layout, allocation or indexing change is proposed; only scalar temporaries |
+| Invalid inputs and rejection | Arithmetic disagreement can change decryption, re-encryption or the selected rejection secret | RUN-0001 responses to the tested corrupted/random ciphertexts and malformed keys agree byte for byte |
+| Secret-dependent timing | Branches, divisions or data-indexed memory could introduce leakage | Reviewed basemul and reducer have fixed arithmetic/offsets and no conditional branches or divisions; statistical leakage testing remains not-run |
+| Compiler behaviour | Source-level control flow alone does not establish machine-code behaviour | Both variants reviewed for all three parameter sets with GCC 13.3.0; the comparison runner checks the actual timing builds against those instruction sequences |
+| Memory behaviour | New buffers or changed indexing could introduce corruption | No array layout, allocation or indexing change; only scalar temporaries; no observed local stack-setup increase |
 | Broader leakage | Power, EM, fault behaviour and complete constant-time guarantees are not established by these tests | Not assessed; do not generalise timing/correctness results to those properties |
 
 The KEM verification, rejection-key derivation and conditional selection functions remain untouched. This does not itself prove equivalence: the candidate's preceding arithmetic must supply the same values. The validation specifically compares rejection outputs as well as successful exchanges.
 
 I do not mark security as passed merely because the program is faster or its secrets match on valid exchanges. The evidence record keeps algebra/range review, sampled correctness, sanitizer results, generated-code review and statistical leakage assessment separate.
 
-## Validation prepared for manual application
+## Validation protocol and accepted execution
 
-I added tests/test_fused_basemul.c and scripts/run_candidate_validation.py as support code. I extended the existing count helpers with explicit optional source/prediction arguments; their baseline defaults remain unchanged. I did not apply the arithmetic replacement.
+I added tests/test_fused_basemul.c and scripts/run_candidate_validation.py as support code. I extended the existing count helpers with explicit optional source/prediction arguments; their baseline defaults remain unchanged. I subsequently applied the arithmetic replacement manually and completed RUN-0001 from the source commit recorded above.
 
-After applying the supplied basemul body and committing source, tests, scripts and records, I run:
+After applying the supplied basemul body and committing source, tests, scripts and records, I executed:
 
 ~~~bash
 python3 -B scripts/run_candidate_validation.py --experiment EXP-001 --run RUN-0001
 echo $?
 ~~~
 
-This is a new run ID within EXP-001. It does not reuse or modify EXP-000/RUN-0001.
+This completed record is EXP-001/RUN-0001, distinct from EXP-000/RUN-0001. The command above is historical; I do not repeat it with an existing run ID.
 
 The runner performs, for each parameter set:
 
@@ -120,24 +122,32 @@ The deterministic transcripts contain pk, sk, valid ct, encapsulated ss, decapsu
 
 UndefinedBehaviorSanitizer instruments executed operations and can report signed overflow and other supported errors. It does not prove all paths safe, check every narrowing conversion, or establish constant-time execution. The arithmetic argument remains necessary. See [GCC instrumentation documentation](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html).
 
-A completed run requires all commands and per-parameter checks to pass, exact transcript agreement, predicted counts and a successful provenance recheck. Generated-code review still remains pending; a completed validation manifest is not a security certification. Failed or interrupted records remain under their original IDs. No performance measurements are collected by this command.
+A completed run requires all commands and per-parameter checks to pass, exact transcript agreement, predicted counts and a successful provenance recheck. The runner leaves generated-code review pending for a separate inspection; ACT-0007 now records that inspection. A completed validation manifest is not a security certification. Failed or interrupted records remain under their original IDs. No performance measurements are collected by this command.
 
 ## Measurement and decision plan
 
-Once candidate validation and generated-code review are accepted, I will prepare fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
+Candidate validation and scoped generated-code review are accepted. I prepared scripts/run_comparison.py for fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
 
 I will compare process-level medians within matched blocks and preserve the raw observations. Small uncertain effects require additional complete blocks and explicit uncertainty, not selective repetition or outlier removal. A correct candidate with a reproducible improvement may be retained; a regression, no detectable effect or inconclusive result remains a reportable outcome. Any failed arithmetic or compatibility gate stops performance collection.
 
-The change adds two int32_t local accumulators and one int16_t temporary. It does not add heap allocation or change key/ciphertext storage. Compiler register/stack allocation remains to be inspected; source variable sizes are not a measured stack increase.
+The change adds two int32_t local accumulators and one int16_t temporary. It does not add heap allocation or change key/ciphertext storage. Both normal-build basemul bodies save four registers and reserve eight additional stack bytes. The candidate uses registers for the accumulators; no local stack-setup increase was observed. This does not measure whole-program peak stack usage.
 
 ## Execution evidence and decision
 
 - Proposal algebra and caller-bound review: recorded with the stated assumptions.
-- Candidate implementation: pending manual application.
-- Candidate tests/counts/sanitizer checks: not-run.
-- Candidate assembly review: pending.
+- Candidate implementation: manually applied; only basemul differs from the baseline.
+- Candidate tests/counts/sanitizer checks: RUN-0001 passes, including exact sampled invalid-input/rejection compatibility and all predicted counts.
+- Candidate assembly review: completed in ACT-0007 for normal-build basemul and its reducer in all parameter sets; no new branch/index-based leakage mechanism found in that scope.
 - Statistical timing-leakage assessment: not-run.
 - Performance comparison: not-run.
 - Retention decision: pending.
 
-[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. The complete committed orchestration remains pending manual application and EXP-001/RUN-0001.
+[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. That development check preceded manual application. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
+
+### ACT-0007 interpretation
+
+The observed count reductions agree with the proposed mechanism: two fewer Montgomery calls per coefficient pair, and approximately 15.4% to 23.1% fewer Montgomery calls across full KEM operations. Product multiplications in basemul remain five. The unchanged hashing, transforms, sampling and other work prevent translating call savings directly into a runtime prediction.
+
+The reviewed basemul symbol shrinks from 138 to 114 bytes in every normal build; its reducer remains 22 bytes. Fixed-offset memory accesses, direct reducer calls and 32-bit accumulator additions match the proposal. No conditional branches or divisions occur in these reviewed bodies. The caller-range argument and compiler assumptions remain essential; tests and assembly inspection do not establish whole-program constant-time behaviour or all-input safety.
+
+I accept the implementation for performance evaluation, with retention still deferred. The [matched timing protocol](../paired_timing.md) defines five pairs per parameter set, complete raw retention, paired process-median effects and explicit WSL/order/uncertainty limitations. RUN-0001 contains no timing result. Its original manifest remains immutable; the later review separately resolves its assembly-review action.

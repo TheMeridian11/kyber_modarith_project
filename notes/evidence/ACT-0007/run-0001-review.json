@@ -1,0 +1,610 @@
+{
+  "accepted_for_comparison": true,
+  "activity_id": "ACT-0007",
+  "assembly": {
+    "1024": {
+      "baseline": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-baseline-1024-normal.stdout.log",
+            "sha256": "bdf91f9c5f1ce05353de72d53cee214607fdc08c711b2ba931a804ae95099167"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-1024-normal",
+          "executable_sha256": "5fbe839e9c65b63e57cd3736f6a483e7d1f21b0f49264a65795ef7d5370ab57d",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %ecx,%r13d",
+            "push %r12",
+            "mov %rsi,%r12",
+            "movswl %r13w,%r13d",
+            "push %rbp",
+            "mov %rdx,%rbp",
+            "push %rbx",
+            "mov %rdi,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "movswl %ax,%edi",
+            "mov %ax,(%rbx)",
+            "imul %r13d,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "mov %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "add %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x2(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbx)",
+            "movswl 0x2(%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "add %ax,0x2(%rbx)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 138
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-1024-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-1024-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n0000000000005110 <pqcrystals_kyber1024_ref_montgomery_reduce>:\n    5110:\tf3 0f 1e fa          \tendbr64\n    5114:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    5119:\t98                   \tcwtl\n    511a:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    5120:\t01 f8                \tadd    %edi,%eax\n    5122:\tc1 e8 10             \tshr    $0x10,%eax\n    5125:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "e6fc739fac7dcf164e3c48b4927e735483ac95d5f9665325cf2462a7579b9fae"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-1024-normal",
+          "executable_sha256": "5fbe839e9c65b63e57cd3736f6a483e7d1f21b0f49264a65795ef7d5370ab57d",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      },
+      "fused-basemul": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-fused-basemul-1024-normal.stdout.log",
+            "sha256": "53c0e081650ed276c31c5bbdd36b8955c5a2f8e1e3d0ee88f7c237e426c630f6"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-1024-normal",
+          "executable_sha256": "7dd1682356fad0ce03cbddbdb00ae8443009702b9d4774d2918f531209cae0a2",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %rsi,%r13",
+            "push %r12",
+            "mov %ecx,%r12d",
+            "push %rbp",
+            "mov %rdi,%rbp",
+            "movswl %r12w,%r12d",
+            "push %rbx",
+            "mov %rdx,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "movswl (%rbx),%esi",
+            "movswl 0x0(%r13),%edx",
+            "movswl 0x2(%rbx),%ebx",
+            "movswl 0x2(%r13),%ecx",
+            "movswl %ax,%edi",
+            "imul %r12d,%edi",
+            "imul %edx,%ebx",
+            "imul %esi,%edx",
+            "imul %esi,%ecx",
+            "add %edx,%edi",
+            "add %ecx,%ebx",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "mov %ebx,%edi",
+            "mov %ax,0x0(%rbp)",
+            "call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbp)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 114
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-1024-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-1024-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n0000000000005100 <pqcrystals_kyber1024_ref_montgomery_reduce>:\n    5100:\tf3 0f 1e fa          \tendbr64\n    5104:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    5109:\t98                   \tcwtl\n    510a:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    5110:\t01 f8                \tadd    %edi,%eax\n    5112:\tc1 e8 10             \tshr    $0x10,%eax\n    5115:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "740522e609ee2f03aff3ed63859666bab2a0f5ecd002b255c7b1066ca94e0b41"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-1024-normal",
+          "executable_sha256": "7dd1682356fad0ce03cbddbdb00ae8443009702b9d4774d2918f531209cae0a2",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      }
+    },
+    "512": {
+      "baseline": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-baseline-512-normal.stdout.log",
+            "sha256": "9a2ebcd071bd3bf689f2d4e516a5f911050d4b387c460ecb008ab0d2974dd6cf"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-512-normal",
+          "executable_sha256": "86261928cc9814789e78749fe878db1609735d1b9952c9198a7197739efc4744",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %ecx,%r13d",
+            "push %r12",
+            "mov %rsi,%r12",
+            "movswl %r13w,%r13d",
+            "push %rbp",
+            "mov %rdx,%rbp",
+            "push %rbx",
+            "mov %rdi,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "movswl %ax,%edi",
+            "mov %ax,(%rbx)",
+            "imul %r13d,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "mov %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "add %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x2(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbx)",
+            "movswl 0x2(%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "add %ax,0x2(%rbx)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 138
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-512-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-512-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n0000000000005260 <pqcrystals_kyber512_ref_montgomery_reduce>:\n    5260:\tf3 0f 1e fa          \tendbr64\n    5264:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    5269:\t98                   \tcwtl\n    526a:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    5270:\t01 f8                \tadd    %edi,%eax\n    5272:\tc1 e8 10             \tshr    $0x10,%eax\n    5275:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "17cf600506e59faa14f8a80b0ffcea44a5abcc7fa3f4899affbdc16efb5f09e9"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-512-normal",
+          "executable_sha256": "86261928cc9814789e78749fe878db1609735d1b9952c9198a7197739efc4744",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      },
+      "fused-basemul": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-fused-basemul-512-normal.stdout.log",
+            "sha256": "e2485a9bd87d0b5f9e7c45a07fa967f5be2a8a2e2bd4c70a699e54af7b58a74c"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-512-normal",
+          "executable_sha256": "69d3fb33f52e7e94994f3159e21b09c459ad3691c1ead3a822c64f479b01c76a",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %rsi,%r13",
+            "push %r12",
+            "mov %ecx,%r12d",
+            "push %rbp",
+            "mov %rdi,%rbp",
+            "movswl %r12w,%r12d",
+            "push %rbx",
+            "mov %rdx,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "movswl (%rbx),%esi",
+            "movswl 0x0(%r13),%edx",
+            "movswl 0x2(%rbx),%ebx",
+            "movswl 0x2(%r13),%ecx",
+            "movswl %ax,%edi",
+            "imul %r12d,%edi",
+            "imul %edx,%ebx",
+            "imul %esi,%edx",
+            "imul %esi,%ecx",
+            "add %edx,%edi",
+            "add %ecx,%ebx",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "mov %ebx,%edi",
+            "mov %ax,0x0(%rbp)",
+            "call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbp)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 114
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-512-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-512-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n0000000000005250 <pqcrystals_kyber512_ref_montgomery_reduce>:\n    5250:\tf3 0f 1e fa          \tendbr64\n    5254:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    5259:\t98                   \tcwtl\n    525a:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    5260:\t01 f8                \tadd    %edi,%eax\n    5262:\tc1 e8 10             \tshr    $0x10,%eax\n    5265:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "30e53ad66f478749b3f64243eca1fef7cdd415ea04df5ec7a089c794dc9a0ec9"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-512-normal",
+          "executable_sha256": "69d3fb33f52e7e94994f3159e21b09c459ad3691c1ead3a822c64f479b01c76a",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      }
+    },
+    "768": {
+      "baseline": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-baseline-768-normal.stdout.log",
+            "sha256": "fa87ee96aed9e14b45d09002ef500b41ff0e925c1f55d801da5151336b44e097"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-768-normal",
+          "executable_sha256": "fd120fe02f7a76c7030b2dd72f9a61269c952a11b02147d29ecfd980a5fb995b",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %ecx,%r13d",
+            "push %r12",
+            "mov %rsi,%r12",
+            "movswl %r13w,%r13d",
+            "push %rbp",
+            "mov %rdx,%rbp",
+            "push %rbx",
+            "mov %rdi,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "movswl %ax,%edi",
+            "mov %ax,(%rbx)",
+            "imul %r13d,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "mov %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "add %ax,(%rbx)",
+            "movswl (%r12),%edi",
+            "movswl 0x2(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbx)",
+            "movswl 0x2(%r12),%edi",
+            "movswl 0x0(%rbp),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "add %ax,0x2(%rbx)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 138
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-768-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/baseline-768-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n00000000000052c0 <pqcrystals_kyber768_ref_montgomery_reduce>:\n    52c0:\tf3 0f 1e fa          \tendbr64\n    52c4:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    52c9:\t98                   \tcwtl\n    52ca:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    52d0:\t01 f8                \tadd    %edi,%eax\n    52d2:\tc1 e8 10             \tshr    $0x10,%eax\n    52d5:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "f1ea842367af24119511a6fcd11a1f8e3d01db3f9cfe1df697a5894c4e1d458e"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/baseline-768-normal",
+          "executable_sha256": "fd120fe02f7a76c7030b2dd72f9a61269c952a11b02147d29ecfd980a5fb995b",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      },
+      "fused-basemul": {
+        "basemul": {
+          "disassembly": {
+            "path": "results/EXP-001/RUN-0001/raw/assembly-fused-basemul-768-normal.stdout.log",
+            "sha256": "f7b39393efd26afe9d070dcf97007c87dc146cfa2cd7492651a91682649b2b49"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-768-normal",
+          "executable_sha256": "41afce471dad0bddb4c738e36417d9faa84afe85e7ce161f6b2af1412f011bca",
+          "instructions": [
+            "endbr64",
+            "push %r13",
+            "mov %rsi,%r13",
+            "push %r12",
+            "mov %ecx,%r12d",
+            "push %rbp",
+            "mov %rdi,%rbp",
+            "movswl %r12w,%r12d",
+            "push %rbx",
+            "mov %rdx,%rbx",
+            "sub $0x8,%rsp",
+            "movswl 0x2(%rsi),%edi",
+            "movswl 0x2(%rdx),%eax",
+            "imul %eax,%edi",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "movswl (%rbx),%esi",
+            "movswl 0x0(%r13),%edx",
+            "movswl 0x2(%rbx),%ebx",
+            "movswl 0x2(%r13),%ecx",
+            "movswl %ax,%edi",
+            "imul %r12d,%edi",
+            "imul %edx,%ebx",
+            "imul %esi,%edx",
+            "imul %esi,%ecx",
+            "add %edx,%edi",
+            "add %ecx,%ebx",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "mov %ebx,%edi",
+            "mov %ax,0x0(%rbp)",
+            "call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "mov %ax,0x2(%rbp)",
+            "add $0x8,%rsp",
+            "pop %rbx",
+            "pop %rbp",
+            "pop %r12",
+            "pop %r13",
+            "ret"
+          ],
+          "symbol_size_bytes": 114
+        },
+        "montgomery_reduce": {
+          "disassembly": {
+            "argv": [
+              "/usr/bin/objdump",
+              "-d",
+              "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+              "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-768-normal"
+            ],
+            "exit_code": 0,
+            "stdout": "\n/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0001/build/fused-basemul-768-normal:     file format elf64-x86-64\n\n\nDisassembly of section .init:\n\nDisassembly of section .plt:\n\nDisassembly of section .plt.got:\n\nDisassembly of section .plt.sec:\n\nDisassembly of section .text:\n\n00000000000052b0 <pqcrystals_kyber768_ref_montgomery_reduce>:\n    52b0:\tf3 0f 1e fa          \tendbr64\n    52b4:\t66 69 c7 01 f3       \timul   $0xf301,%di,%ax\n    52b9:\t98                   \tcwtl\n    52ba:\t69 c0 ff f2 ff ff    \timul   $0xfffff2ff,%eax,%eax\n    52c0:\t01 f8                \tadd    %edi,%eax\n    52c2:\tc1 e8 10             \tshr    $0x10,%eax\n    52c5:\tc3                   \tret\n\nDisassembly of section .fini:\n",
+            "stdout_sha256": "4c79d50c30178da493f2611b30d855d6fec67e77f513b1834194a8d6131cfada"
+          },
+          "executable_path": "results/EXP-001/RUN-0001/build/fused-basemul-768-normal",
+          "executable_sha256": "41afce471dad0bddb4c738e36417d9faa84afe85e7ce161f6b2af1412f011bca",
+          "instructions": [
+            "endbr64",
+            "imul $0xf301,%di,%ax",
+            "cwtl",
+            "imul $0xfffff2ff,%eax,%eax",
+            "add %edi,%eax",
+            "shr $0x10,%eax",
+            "ret"
+          ],
+          "symbol_size_bytes": 22
+        }
+      }
+    }
+  },
+  "assessment": {
+    "arithmetic": "Caller-bound argument recorded in EXP-001; executed oracle, output-bound, UBSan and byte-compatibility checks passed.",
+    "code_size": "basemul 138 to 114 bytes in all three parameter sets; reducer unchanged at 22 bytes. Function size is not whole-binary size.",
+    "compiler_assumptions": "Existing signed narrowing and shift assumptions retained; see EXP-001. Reducer emits a logical shift because only the returned low 16 bits are needed.",
+    "constant_time_proof": "not-established",
+    "decision": "Proceed to matched uninstrumented timing under the reviewed source, flags and compiler; no deployment security certification.",
+    "findings": "Three direct reducer calls versus five; fixed-offset loads/stores; 32-bit accumulator additions; no branches, divisions or indirect calls in reviewed bodies.",
+    "performance": "not-measured",
+    "power_em_fault_assessment": "not-run",
+    "scope": "Normal GCC 13.3.0 x86-64 builds; changed basemul and unchanged Montgomery reducer only.",
+    "stack": "Both basemul bodies push the same four registers and reserve eight further bytes; no increase in the observed local stack setup. No whole-program peak-stack measurement.",
+    "statistical_leakage": "not-run"
+  },
+  "earlier_screenshot_commit": "b935e1566567fd91335c4dee8e5a0dd4b611af47",
+  "experiment_id": "EXP-001",
+  "manifest_path": "results/EXP-001/RUN-0001/manifest.json",
+  "manifest_sha256": "d9e250886983261848ac634d8b426b2383dd6be1828b30296addcbaee6e165c4",
+  "metadata_sha256": "4dd1fbb9a4ac274779a7475425b525f657f47444ad7ea18efd25431023ef31a9",
+  "preservation": "Existing run manifest remains unchanged, including its assembly_review=pending field; this later review resolves that pending action.",
+  "record_type": "validation-and-assembly-review",
+  "reduction_counts": [
+    {
+      "barrett_calls": 2048,
+      "montgomery_calls": 5632,
+      "operation": "keygen",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 4736,
+      "montgomery_calls": 7552,
+      "operation": "encap",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 6656,
+      "montgomery_calls": 11264,
+      "operation": "decap",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 3072,
+      "montgomery_calls": 9600,
+      "operation": "keygen",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 6400,
+      "montgomery_calls": 11904,
+      "operation": "encap",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 8576,
+      "montgomery_calls": 16896,
+      "operation": "decap",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 4096,
+      "montgomery_calls": 14336,
+      "operation": "keygen",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 8064,
+      "montgomery_calls": 17024,
+      "operation": "encap",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 10496,
+      "montgomery_calls": 23296,
+      "operation": "decap",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    }
+  ],
+  "results_commit": "00398d18dddbccb99854bb6519fc896a23d90f22",
+  "results_commit_direct_child_of_source": true,
+  "run_id": "RUN-0001",
+  "source_commit": "8345f6a0fb273917ed4499356f0966d1c5dc7fc2",
+  "verification": {
+    "baseline_matches_pinned_upstream": true,
+    "committed_files_matching_results_commit": 264,
+    "completed_zero_exit_steps": 42,
+    "count_observations": 90,
+    "predicted_counts_match": true,
+    "source_hashes_match_committed_source_and_current_tree": true,
+    "transcripts_byte_identical": [
+      {
+        "bytes_per_transcript": 416000,
+        "parameter_set": "Kyber512",
+        "status": "pass",
+        "transcripts": [
+          "raw/test-baseline-512-normal.bin",
+          "raw/test-fused-basemul-512-normal.bin",
+          "raw/test-baseline-512-ubsan.bin",
+          "raw/test-fused-basemul-512-ubsan.bin"
+        ]
+      },
+      {
+        "bytes_per_transcript": 595200,
+        "parameter_set": "Kyber768",
+        "status": "pass",
+        "transcripts": [
+          "raw/test-baseline-768-normal.bin",
+          "raw/test-fused-basemul-768-normal.bin",
+          "raw/test-baseline-768-ubsan.bin",
+          "raw/test-fused-basemul-768-ubsan.bin"
+        ]
+      },
+      {
+        "bytes_per_transcript": 806400,
+        "parameter_set": "Kyber1024",
+        "status": "pass",
+        "transcripts": [
+          "raw/test-baseline-1024-normal.bin",
+          "raw/test-fused-basemul-1024-normal.bin",
+          "raw/test-baseline-1024-ubsan.bin",
+          "raw/test-fused-basemul-1024-ubsan.bin"
+        ]
+      }
+    ],
+    "unexpected_build_or_sanitizer_diagnostics": false,
+    "verified_raw_stream_hashes": 84,
+    "verified_retained_executables": 18,
+    "verified_support_files": 6
+  }
+}
