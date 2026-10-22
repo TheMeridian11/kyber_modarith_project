@@ -1,6 +1,6 @@
 {
-  "activity_id": "ACT-0016",
-  "analysis_code_sha256": "8c72c1df31ee158bc2825435101ee51a0432dd8f450d7d6c704685c41bd4fda6",
+  "activity_id": "ACT-0017",
+  "analysis_code_sha256": "4fa96fb30ba20bf68f1dba989aa1f1645c76f97c5f21e9a5a7b1adbb0421e451",
   "checks": {
     "count_groups": 54,
     "paired_effects_recomputed": 225,
@@ -33,19 +33,20 @@
     "results/EXP-006/RUN-0002/manifest.json": "116fe9186c1cc099423958ba5ca49f23199ee82a70c19823b213ef21544d984c"
   },
   "interpretation": "Single-session incremental results; ranges are observed extrema, not confidence intervals. No cumulative performance or leakage claim.",
+  "original_figure_activity": "ACT-0016",
   "outputs": {
     "exp006-paired-effects.csv": "98ae857904f6b50440ac41798a6973505d17ff28ed666e81a83c10857298a1c3",
     "exp006-paired-effects.pdf": "cf82ecf2ddefbff1e7cc70c487c24770d62ff9d17bcc9bdfe6d89789c11c1415",
     "exp006-paired-effects.png": "8c0caddae6785ca7afc40f0d74112695a5260f5e13a53e39ead6d46c69d110ae",
-    "exp006-paired-effects.svg": "33924c7879c4093ddebe8919baa97a72bc8564e779d0b80367f70f685cd051af",
+    "exp006-paired-effects.svg": "e90a2737a844546977158f3c2adb1446527255c4201865afc3df5868f921ec06",
     "incremental-effects-overview.pdf": "1d075e44989a9041837071f97cead9d595b402e481c03ea1fd46396c0d8b86d1",
     "incremental-effects-overview.png": "f90436b12334aa2f2c14623daae5797e9d194ab0804bdf32824ec07b9053d4ff",
-    "incremental-effects-overview.svg": "789d1bd19c7eff126806425cf571c24a503bf2753b0a5f326bd6ace5db550913",
+    "incremental-effects-overview.svg": "0f65b74ce291db1f8b16bd524f3b042cdfe2d127908a9c820825b19e06f251e6",
     "incremental-effects.csv": "8e55add2b212b5adc3adf7dad3e7b5e1092ecd24dd0f03d9c52fc103eb7b857d",
     "reduction-counts.csv": "9e9e03b2497daac82513f98e63d256d5eeab00cabb56a79f3ae4dde73f3f9ae8",
     "reduction-counts.pdf": "bfee2b1a11187bf99c1cc8c4567a3479c662365d33781572b7951c12952e31fa",
     "reduction-counts.png": "77df28ed3e2cb801734907416ae181951f098085543689c118e3a50aa90bd789",
-    "reduction-counts.svg": "a92f925417b9722c2890ac5cc233db21c111d6a6fc53c23c3e6bcbb353352598"
+    "reduction-counts.svg": "0593ccc3216a71c72423ae7f4b047e56461cbd8ac0d28d98e6ed462e8b94eaa1"
   },
   "packages": {
     "contourpy": "1.4.0",
@@ -63,5 +64,6 @@
   },
   "python": "3.12.3",
   "record_type": "derived-thesis-figures",
+  "revision": "SVG trailing whitespace canonicalised; numerical inputs and figure design unchanged",
   "source_results_commit": "42d68a7da90f5d19d0539a0e8825a24852121e41"
 }

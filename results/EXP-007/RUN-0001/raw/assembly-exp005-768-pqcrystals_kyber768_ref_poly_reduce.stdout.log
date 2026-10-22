@@ -1,0 +1,34 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-exp005-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004990 <pqcrystals_kyber768_ref_poly_reduce>:
+    4990:	f3 0f 1e fa          	endbr64
+    4994:	55                   	push   %rbp
+    4995:	48 8d af 00 02 00 00 	lea    0x200(%rdi),%rbp
+    499c:	53                   	push   %rbx
+    499d:	48 89 fb             	mov    %rdi,%rbx
+    49a0:	48 83 ec 08          	sub    $0x8,%rsp
+    49a4:	0f 1f 40 00          	nopl   0x0(%rax)
+    49a8:	0f bf 3b             	movswl (%rbx),%edi
+    49ab:	48 83 c3 02          	add    $0x2,%rbx
+    49af:	e8 ac 09 00 00       	call   5360 <pqcrystals_kyber768_ref_barrett_reduce>
+    49b4:	66 89 43 fe          	mov    %ax,-0x2(%rbx)
+    49b8:	48 39 eb             	cmp    %rbp,%rbx
+    49bb:	75 eb                	jne    49a8 <pqcrystals_kyber768_ref_poly_reduce+0x18>
+    49bd:	48 83 c4 08          	add    $0x8,%rsp
+    49c1:	5b                   	pop    %rbx
+    49c2:	5d                   	pop    %rbp
+    49c3:	c3                   	ret
+
+Disassembly of section .fini:

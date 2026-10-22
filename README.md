@@ -38,6 +38,8 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-005 versus EXP-006 timing protocol](notes/keygen_dot_timing.md)
 - [EXP-006 measured results and candidate selection](notes/runs/EXP-006-RUN-0002.md)
 - [EXP-007 executable secret-flow protocol](notes/experiments/EXP-007-secret-flow.md)
+- [EXP-007 accepted security results and assembly](notes/runs/EXP-007-RUN-0001.md)
+- [EXP-008 statistical timing-leakage protocol](notes/experiments/EXP-008-timing-leakage.md)
 - [Reproducible thesis figures and captions](notes/thesis_figures.md)
 - [Required implementation-security assessment](notes/implementation_security.md)
 - [Practical completion checklist](notes/practical_completion.md)
@@ -62,7 +64,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 ## Current state
 
-I have completed the five planned arithmetic trials (EXP-001/002/003/005/006) and frozen the optimisation search. I select EXP-005 as the primary candidate for the closing evaluation. EXP-006 remains a secondary research comparison: fewer reductions did not produce a general speed improvement. The current arithmetic checkout still contains EXP-006; the security runner restores EXP-005 faithfully into its build directory, without changing that checkout.
+I have completed the five planned arithmetic trials (EXP-001/002/003/005/006) and frozen the optimisation search. I select EXP-005 as the provisional primary candidate, with EXP-003 retained as an explicit closing comparator/fallback. EXP-005 includes EXP-003's inverse-NTT improvements; its percentages describe an additional change, not a competing replacement. EXP-006 remains a secondary research comparison: fewer reductions did not produce a general speed improvement. The current arithmetic checkout still contains EXP-006; the security runner restores EXP-005 faithfully into its build directory, without changing that checkout.
 
 The latest matched comparison measures EXP-006 relative to freshly rebuilt EXP-005:
 
@@ -80,17 +82,17 @@ Positive means faster; these are medians of five paired percentage reductions. A
 | EXP-001/002/003/005 | Correctness, counts, scoped assembly and initial timings accepted; EXP-005 selected for closing evaluation |
 | EXP-004 | Deferred interaction/ablation idea; never implemented or run; not needed to finish |
 | EXP-006 | Trial closed with mixed performance; not adopted as the general candidate; preserved as a research result |
-| EXP-007 secret-flow assessment | Harness/protocol prepared; nine-build development matrix passed its sensitivity/diagnostic checks; formal run after support commit |
-| Statistical timing-leakage assessment | Required; pilot and committed finite-budget protocol still to prepare |
-| Final direct comparison and repeat sessions | Required; original versus selected implementation, with uncertainty and adverse effects retained |
-| Thesis artifacts | Three reproducible figures and data tables produced; final performance/security figures and handover remain |
+| EXP-007 secret-flow assessment | RUN-0001 accepted: 144 quiet target processes, all 18 deliberate dependencies detected; bounded branch/address finding |
+| EXP-008 statistical timing-leakage assessment | Harness/protocol and sensitivity pilot prepared; formal RUN-0001 after support commit |
+| Final direct comparison and repeat sessions | Required; original, EXP-003 and EXP-005, with uncertainty and adverse effects retained |
+| Thesis artifacts | Initial performance/count figures plus audited EXP-007 coverage matrix; final performance/leakage figures and handover remain |
 
 EXP-006 saves another 512/768/1024 keygen Barrett calls but grows the scoped keygen-plus-new-dot code by 266/364/405 bytes. Keygen local-stack changes are 0/-16/0 bytes. Existing keygen protections remain; the EXP-002 general-dot local-canary tradeoff persists, and the extra dedicated dot has the same no-canary pattern. Correctness, sampled invalid inputs, range/scale/narrowing arguments and exercised UBSan checks support bounded implementation-safety conclusions. Layout/compiler effects are possible performance contributors, not established causes.
 
-The [security protocol](notes/experiments/EXP-007-secret-flow.md) compares original/EXP-005/EXP-006 for all parameters, covering seven arithmetic path/operand-role cases and representative IND-CPA decryption. In the development check, all eighteen deliberately marked positive controls were detected and all tested target paths were quiet; 102 production bodies match accepted normal binaries. This is uncommitted support verification, not a formal security result or whole-KEM constant-time proof. Formal secret-flow collection and statistical secret-class timing checks remain required. VTune is excluded; physical side channels, faults and final ML-KEM certification are outside the established claim.
+The [accepted EXP-007 run](notes/runs/EXP-007-RUN-0001.md) compares original/EXP-005/EXP-006 across all parameters and eight path/operand-role cases. All 144 target processes and all negative/defined controls were quiet; all 18 deliberately marked branch/address controls were detected. I verified 870 raw files and 129 assembly bodies. This supports no marked-secret branch/address dependency observed on those executed paths; it is not whole-KEM constant-time proof. [EXP-008](notes/experiments/EXP-008-timing-leakage.md) adds a separate fixed-budget statistical screen of original/EXP-003/EXP-005. VTune is excluded; physical side channels, faults and final ML-KEM certification remain outside the established claim.
 
 I now move from finding optimisations to checking and explaining the selected result. The [completion checklist](notes/practical_completion.md) specifies the remaining security work, direct repeat-session evaluation and reproducible handover. There is no requirement to invent more optimisations. EXP-004 was reserved for a separately controlled interaction study; existing cumulative variants do not by themselves isolate interactions.
 
-I generated [paired effects](analysis/figures/ACT-0016/exp006-paired-effects.svg), an [incremental-results overview](analysis/figures/ACT-0016/incremental-effects-overview.svg) and [reduction-count plots](analysis/figures/ACT-0016/reduction-counts.svg). PNG/PDF versions, exact data, captions and input/code checksums accompany them. I will add further figures at the security and final-performance milestones, preserving negative/inconclusive findings.
+I generated [paired effects](analysis/figures/ACT-0016/exp006-paired-effects.svg), an [incremental-results overview](analysis/figures/ACT-0016/incremental-effects-overview.svg) and [reduction-count plots](analysis/figures/ACT-0016/reduction-counts.svg). PNG/PDF versions, exact data, captions and input/code checksums accompany them. ACT-0017 adds the [EXP-007 coverage matrix](analysis/figures/ACT-0017/exp007-secret-flow.svg) and corrects generated SVG trailing whitespace without changing the original plotted data. I will add further figures at the security and final-performance milestones, preserving negative/inconclusive findings.
 
-EXP-006 timing/support source is 02cdbb13b49e649953dc05653bcb94002491b236; results are committed in 42d68a7da90f5d19d0539a0e8825a24852121e41. The [run record](notes/runs/EXP-006-RUN-0002.md) identifies validation and historical control commits separately. I manually perform arithmetic edits and Git operations, reviewing support before committing it. Formal runs require that commit; ACT-0016's temporary development checks do not claim a clean committed formal execution. The legacy summary script remains unused.
+EXP-006 timing/support source is 02cdbb13b49e649953dc05653bcb94002491b236; results are committed in 42d68a7da90f5d19d0539a0e8825a24852121e41. The [run record](notes/runs/EXP-006-RUN-0002.md) identifies validation and historical control commits separately. I manually perform arithmetic edits and Git operations, reviewing support before committing it. Formal runs require that commit; ACT-0017 accepts the formal EXP-007 run from source 5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4. EXP-008 development checks remain separate from formal collection. The legacy summary script remains unused.

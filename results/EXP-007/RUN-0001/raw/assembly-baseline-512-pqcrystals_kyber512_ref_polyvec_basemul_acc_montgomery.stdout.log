@@ -1,0 +1,54 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000024b0 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery>:
+    24b0:	f3 0f 1e fa          	endbr64
+    24b4:	41 54                	push   %r12
+    24b6:	49 89 d4             	mov    %rdx,%r12
+    24b9:	55                   	push   %rbp
+    24ba:	48 89 f5             	mov    %rsi,%rbp
+    24bd:	53                   	push   %rbx
+    24be:	48 89 fb             	mov    %rdi,%rbx
+    24c1:	48 81 ec 10 02 00 00 	sub    $0x210,%rsp
+    24c8:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    24cf:	00 00 
+    24d1:	48 89 84 24 08 02 00 	mov    %rax,0x208(%rsp)
+    24d8:	00 
+    24d9:	31 c0                	xor    %eax,%eax
+    24db:	e8 00 22 00 00       	call   46e0 <pqcrystals_kyber512_ref_poly_basemul_montgomery>
+    24e0:	48 8d b5 00 02 00 00 	lea    0x200(%rbp),%rsi
+    24e7:	48 89 e5             	mov    %rsp,%rbp
+    24ea:	49 8d 94 24 00 02 00 	lea    0x200(%r12),%rdx
+    24f1:	00 
+    24f2:	48 89 ef             	mov    %rbp,%rdi
+    24f5:	e8 e6 21 00 00       	call   46e0 <pqcrystals_kyber512_ref_poly_basemul_montgomery>
+    24fa:	48 89 df             	mov    %rbx,%rdi
+    24fd:	48 89 ea             	mov    %rbp,%rdx
+    2500:	48 89 de             	mov    %rbx,%rsi
+    2503:	e8 d8 22 00 00       	call   47e0 <pqcrystals_kyber512_ref_poly_add>
+    2508:	48 89 df             	mov    %rbx,%rdi
+    250b:	e8 90 22 00 00       	call   47a0 <pqcrystals_kyber512_ref_poly_reduce>
+    2510:	48 8b 84 24 08 02 00 	mov    0x208(%rsp),%rax
+    2517:	00 
+    2518:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+    251f:	00 00 
+    2521:	75 0c                	jne    252f <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x7f>
+    2523:	48 81 c4 10 02 00 00 	add    $0x210,%rsp
+    252a:	5b                   	pop    %rbx
+    252b:	5d                   	pop    %rbp
+    252c:	41 5c                	pop    %r12
+    252e:	c3                   	ret
+    252f:	e8 ac eb ff ff       	call   10e0 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:

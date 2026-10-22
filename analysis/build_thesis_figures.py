@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce ACT-0016 scientific figures/tables from pinned retained results."""
+"""Reproduce initial scientific figures with the ACT-0017 SVG whitespace correction."""
 import argparse
 import csv
 import hashlib
@@ -79,6 +79,8 @@ def main():
             path=out/(name+"."+ext)
             md=({"Date":None} if ext=="svg" else {"CreationDate":None,"ModDate":None} if ext=="pdf" else {})
             fig.savefig(path,dpi=300,bbox_inches="tight",metadata=md)
+            if ext=="svg":
+                path.write_text("\n".join(line.rstrip(" \t") for line in path.read_text().splitlines())+"\n")
             exports.append(path.name)
         plt.close(fig)
     fig,axes=plt.subplots(1,3,figsize=(11.5,4.4),sharex=True,sharey=True)
@@ -153,7 +155,7 @@ def main():
     for name,digest in inputs.items():
         if sha(ROOT/name)!=digest:raise RuntimeError("Input changed during figure generation")
     versions={p:importlib.metadata.version(p) for p in ("matplotlib","numpy","pillow","contourpy","cycler","fonttools","kiwisolver","packaging","pyparsing","python-dateutil","six","tzdata")}
-    manifest={"activity_id":"ACT-0016","record_type":"derived-thesis-figures","source_results_commit":"42d68a7da90f5d19d0539a0e8825a24852121e41",
+    manifest={"activity_id":"ACT-0017","original_figure_activity":"ACT-0016","revision":"SVG trailing whitespace canonicalised; numerical inputs and figure design unchanged","record_type":"derived-thesis-figures","source_results_commit":"42d68a7da90f5d19d0539a0e8825a24852121e41",
       "analysis_code_sha256":sha(Path(__file__)),"input_index_sha256":sha(ROOT/"analysis/figure_inputs.json"),
       "python":platform.python_version(),"packages":versions,"input_sha256":inputs,
       "outputs":{name:sha(out/name) for name in [*exports,"incremental-effects.csv","exp006-paired-effects.csv","reduction-counts.csv"]},

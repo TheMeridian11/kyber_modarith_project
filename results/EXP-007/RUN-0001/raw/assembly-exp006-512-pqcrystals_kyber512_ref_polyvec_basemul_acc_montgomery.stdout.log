@@ -1,0 +1,96 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-exp006-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000024b0 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery>:
+    24b0:	f3 0f 1e fa          	endbr64
+    24b4:	41 57                	push   %r15
+    24b6:	48 89 d1             	mov    %rdx,%rcx
+    24b9:	49 89 f7             	mov    %rsi,%r15
+    24bc:	41 56                	push   %r14
+    24be:	41 55                	push   %r13
+    24c0:	49 89 fd             	mov    %rdi,%r13
+    24c3:	41 54                	push   %r12
+    24c5:	55                   	push   %rbp
+    24c6:	53                   	push   %rbx
+    24c7:	31 db                	xor    %ebx,%ebx
+    24c9:	48 83 ec 18          	sub    $0x18,%rsp
+    24cd:	eb 4a                	jmp    2519 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x69>
+    24cf:	90                   	nop
+    24d0:	48 89 4c 24 08       	mov    %rcx,0x8(%rsp)
+    24d5:	41 f7 de             	neg    %r14d
+    24d8:	e8 d3 2e 00 00       	call   53b0 <pqcrystals_kyber512_ref_montgomery_reduce>
+    24dd:	45 0f bf f6          	movswl %r14w,%r14d
+    24e1:	0f bf f8             	movswl %ax,%edi
+    24e4:	41 0f af fe          	imul   %r14d,%edi
+    24e8:	01 ef                	add    %ebp,%edi
+    24ea:	e8 c1 2e 00 00       	call   53b0 <pqcrystals_kyber512_ref_montgomery_reduce>
+    24ef:	44 89 e7             	mov    %r12d,%edi
+    24f2:	66 41 89 44 9d 00    	mov    %ax,0x0(%r13,%rbx,4)
+    24f8:	e8 b3 2e 00 00       	call   53b0 <pqcrystals_kyber512_ref_montgomery_reduce>
+    24fd:	48 8b 4c 24 08       	mov    0x8(%rsp),%rcx
+    2502:	66 41 89 44 9d 02    	mov    %ax,0x2(%r13,%rbx,4)
+    2508:	48 83 c3 01          	add    $0x1,%rbx
+    250c:	48 81 fb 80 00 00 00 	cmp    $0x80,%rbx
+    2513:	0f 84 9e 00 00 00    	je     25b7 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x107>
+    2519:	41 0f bf 14 9f       	movswl (%r15,%rbx,4),%edx
+    251e:	44 0f bf 64 99 02    	movswl 0x2(%rcx,%rbx,4),%r12d
+    2524:	41 0f bf 84 9f 00 02 	movswl 0x200(%r15,%rbx,4),%eax
+    252b:	00 00 
+    252d:	44 0f bf 04 99       	movswl (%rcx,%rbx,4),%r8d
+    2532:	45 0f bf 5c 9f 02    	movswl 0x2(%r15,%rbx,4),%r11d
+    2538:	89 d5                	mov    %edx,%ebp
+    253a:	41 0f af d4          	imul   %r12d,%edx
+    253e:	0f bf b4 99 00 02 00 	movswl 0x200(%rcx,%rbx,4),%esi
+    2545:	00 
+    2546:	45 0f bf 8c 9f 02 02 	movswl 0x202(%r15,%rbx,4),%r9d
+    254d:	00 00 
+    254f:	89 c7                	mov    %eax,%edi
+    2551:	41 0f af e8          	imul   %r8d,%ebp
+    2555:	44 0f bf 94 99 02 02 	movswl 0x202(%rcx,%rbx,4),%r10d
+    255c:	00 00 
+    255e:	0f af fe             	imul   %esi,%edi
+    2561:	45 0f af c3          	imul   %r11d,%r8d
+    2565:	45 89 ce             	mov    %r9d,%r14d
+    2568:	41 0f af f1          	imul   %r9d,%esi
+    256c:	41 0f af c2          	imul   %r10d,%eax
+    2570:	01 fd                	add    %edi,%ebp
+    2572:	44 89 df             	mov    %r11d,%edi
+    2575:	44 01 c2             	add    %r8d,%edx
+    2578:	41 0f af fc          	imul   %r12d,%edi
+    257c:	45 0f af f2          	imul   %r10d,%r14d
+    2580:	01 f0                	add    %esi,%eax
+    2582:	48 8d 35 17 8c 00 00 	lea    0x8c17(%rip),%rsi        # b1a0 <pqcrystals_kyber512_ref_zetas>
+    2589:	44 8d 24 02          	lea    (%rdx,%rax,1),%r12d
+    258d:	89 d8                	mov    %ebx,%eax
+    258f:	d1 e8                	shr    $1,%eax
+    2591:	44 01 f7             	add    %r14d,%edi
+    2594:	83 c0 40             	add    $0x40,%eax
+    2597:	44 0f bf 34 46       	movswl (%rsi,%rax,2),%r14d
+    259c:	f6 c3 01             	test   $0x1,%bl
+    259f:	0f 85 2b ff ff ff    	jne    24d0 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x20>
+    25a5:	48 89 4c 24 08       	mov    %rcx,0x8(%rsp)
+    25aa:	e8 01 2e 00 00       	call   53b0 <pqcrystals_kyber512_ref_montgomery_reduce>
+    25af:	0f bf f8             	movswl %ax,%edi
+    25b2:	e9 2d ff ff ff       	jmp    24e4 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x34>
+    25b7:	48 83 c4 18          	add    $0x18,%rsp
+    25bb:	4c 89 ef             	mov    %r13,%rdi
+    25be:	5b                   	pop    %rbx
+    25bf:	5d                   	pop    %rbp
+    25c0:	41 5c                	pop    %r12
+    25c2:	41 5d                	pop    %r13
+    25c4:	41 5e                	pop    %r14
+    25c6:	41 5f                	pop    %r15
+    25c8:	e9 83 23 00 00       	jmp    4950 <pqcrystals_kyber512_ref_poly_reduce>
+
+Disassembly of section .fini:

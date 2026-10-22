@@ -1,0 +1,27 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-exp005-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000052c0 <pqcrystals_kyber512_ref_barrett_reduce>:
+    52c0:	f3 0f 1e fa          	endbr64
+    52c4:	0f bf d7             	movswl %di,%edx
+    52c7:	89 f8                	mov    %edi,%eax
+    52c9:	69 d2 bf 4e 00 00    	imul   $0x4ebf,%edx,%edx
+    52cf:	81 c2 00 00 00 02    	add    $0x2000000,%edx
+    52d5:	48 63 d2             	movslq %edx,%rdx
+    52d8:	48 c1 fa 1a          	sar    $0x1a,%rdx
+    52dc:	66 69 d2 01 0d       	imul   $0xd01,%dx,%dx
+    52e1:	29 d0                	sub    %edx,%eax
+    52e3:	c3                   	ret
+
+Disassembly of section .fini:

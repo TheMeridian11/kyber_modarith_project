@@ -1,0 +1,31 @@
+{
+  "activity_id": "ACT-0017",
+  "initial_provenance_preserved": "notes/evidence/ACT-0017/figure-provenance-before-correction.json",
+  "original_figures_commit": "5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4",
+  "corrections": [
+    {
+      "file": "exp006-paired-effects.svg",
+      "old_sha256": "33924c7879c4093ddebe8919baa97a72bc8564e779d0b80367f70f685cd051af",
+      "new_sha256": "e90a2737a844546977158f3c2adb1446527255c4201865afc3df5868f921ec06",
+      "correction": "line-ending spaces/tabs only"
+    },
+    {
+      "file": "incremental-effects-overview.svg",
+      "old_sha256": "789d1bd19c7eff126806425cf571c24a503bf2753b0a5f326bd6ace5db550913",
+      "new_sha256": "0f65b74ce291db1f8b16bd524f3b042cdfe2d127908a9c820825b19e06f251e6",
+      "correction": "line-ending spaces/tabs only"
+    },
+    {
+      "file": "reduction-counts.svg",
+      "old_sha256": "a92f925417b9722c2890ac5cc233db21c111d6a6fc53c23c3e6bcbb353352598",
+      "new_sha256": "0593ccc3216a71c72423ae7f4b047e56461cbd8ac0d28d98e6ed462e8b94eaa1",
+      "correction": "line-ending spaces/tabs only"
+    }
+  ],
+  "unchanged_png_pdf_and_csv": 9,
+  "input_files_unchanged": 22,
+  "prior_check_limitation": "ACT-0016 whitespace check did not include SVG; the broad claim in that activity was incomplete. All generated SVGs are now checked.",
+  "new_security_figure": "analysis/figures/ACT-0017/exp007-secret-flow.png",
+  "new_security_figure_visually_inspected": true,
+  "security_figure_manifest_sha256": "0a6c6bf3a47b1098dbf7345c71a10ea098de63af110b7ee894355cbddf2e6945"
+}

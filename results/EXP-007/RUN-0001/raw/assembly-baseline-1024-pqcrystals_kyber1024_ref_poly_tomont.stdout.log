@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-baseline-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000046c0 <pqcrystals_kyber1024_ref_poly_tomont>:
+    46c0:	f3 0f 1e fa          	endbr64
+    46c4:	55                   	push   %rbp
+    46c5:	48 8d af 00 02 00 00 	lea    0x200(%rdi),%rbp
+    46cc:	53                   	push   %rbx
+    46cd:	48 89 fb             	mov    %rdi,%rbx
+    46d0:	48 83 ec 08          	sub    $0x8,%rsp
+    46d4:	0f 1f 40 00          	nopl   0x0(%rax)
+    46d8:	0f bf 3b             	movswl (%rbx),%edi
+    46db:	48 83 c3 02          	add    $0x2,%rbx
+    46df:	69 ff 49 05 00 00    	imul   $0x549,%edi,%edi
+    46e5:	e8 66 09 00 00       	call   5050 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    46ea:	66 89 43 fe          	mov    %ax,-0x2(%rbx)
+    46ee:	48 39 eb             	cmp    %rbp,%rbx
+    46f1:	75 e5                	jne    46d8 <pqcrystals_kyber1024_ref_poly_tomont+0x18>
+    46f3:	48 83 c4 08          	add    $0x8,%rsp
+    46f7:	5b                   	pop    %rbx
+    46f8:	5d                   	pop    %rbp
+    46f9:	c3                   	ret
+
+Disassembly of section .fini:

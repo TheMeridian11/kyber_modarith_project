@@ -1,0 +1,32 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000096d0 <positive_branch>:
+    96d0:	8b 07                	mov    (%rdi),%eax
+    96d2:	a8 01                	test   $0x1,%al
+    96d4:	74 1a                	je     96f0 <positive_branch+0x20>
+    96d6:	c7 05 4c 49 00 00 11 	movl   $0x11,0x494c(%rip)        # e02c <sink>
+    96dd:	00 00 00 
+    96e0:	8b 05 46 49 00 00    	mov    0x4946(%rip),%eax        # e02c <sink>
+    96e6:	83 c0 1d             	add    $0x1d,%eax
+    96e9:	89 05 3d 49 00 00    	mov    %eax,0x493d(%rip)        # e02c <sink>
+    96ef:	c3                   	ret
+    96f0:	c7 05 32 49 00 00 2b 	movl   $0x2b,0x4932(%rip)        # e02c <sink>
+    96f7:	00 00 00 
+    96fa:	8b 05 2c 49 00 00    	mov    0x492c(%rip),%eax        # e02c <sink>
+    9700:	83 c0 3b             	add    $0x3b,%eax
+    9703:	89 05 23 49 00 00    	mov    %eax,0x4923(%rip)        # e02c <sink>
+    9709:	c3                   	ret
+
+Disassembly of section .fini:

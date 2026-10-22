@@ -1,0 +1,89 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-baseline-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000047a0 <pqcrystals_kyber1024_ref_ntt>:
+    47a0:	f3 0f 1e fa          	endbr64
+    47a4:	41 57                	push   %r15
+    47a6:	49 89 ff             	mov    %rdi,%r15
+    47a9:	41 56                	push   %r14
+    47ab:	41 55                	push   %r13
+    47ad:	41 54                	push   %r12
+    47af:	55                   	push   %rbp
+    47b0:	bd 0a fd ff ff       	mov    $0xfffffd0a,%ebp
+    47b5:	53                   	push   %rbx
+    47b6:	48 83 ec 28          	sub    $0x28,%rsp
+    47ba:	c7 44 24 1c 07 00 00 	movl   $0x7,0x1c(%rsp)
+    47c1:	00 
+    47c2:	c7 44 24 0c 01 00 00 	movl   $0x1,0xc(%rsp)
+    47c9:	00 
+    47ca:	c7 44 24 10 80 00 00 	movl   $0x80,0x10(%rsp)
+    47d1:	00 
+    47d2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    47d8:	8b 44 24 10          	mov    0x10(%rsp),%eax
+    47dc:	45 31 e4             	xor    %r12d,%r12d
+    47df:	8d 70 ff             	lea    -0x1(%rax),%esi
+    47e2:	83 c0 01             	add    $0x1,%eax
+    47e5:	89 74 24 14          	mov    %esi,0x14(%rsp)
+    47e9:	89 44 24 18          	mov    %eax,0x18(%rsp)
+    47ed:	0f 1f 00             	nopl   (%rax)
+    47f0:	8b 44 24 10          	mov    0x10(%rsp),%eax
+    47f4:	83 44 24 0c 01       	addl   $0x1,0xc(%rsp)
+    47f9:	45 89 e5             	mov    %r12d,%r13d
+    47fc:	44 01 e0             	add    %r12d,%eax
+    47ff:	89 c0                	mov    %eax,%eax
+    4801:	48 89 c3             	mov    %rax,%rbx
+    4804:	4c 29 e8             	sub    %r13,%rax
+    4807:	4d 8d 34 47          	lea    (%r15,%rax,2),%r14
+    480b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+    4810:	43 0f bf 3c 6e       	movswl (%r14,%r13,2),%edi
+    4815:	0f af fd             	imul   %ebp,%edi
+    4818:	e8 33 08 00 00       	call   5050 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    481d:	43 0f b7 0c 6f       	movzwl (%r15,%r13,2),%ecx
+    4822:	29 c1                	sub    %eax,%ecx
+    4824:	66 43 89 0c 6e       	mov    %cx,(%r14,%r13,2)
+    4829:	66 43 01 04 6f       	add    %ax,(%r15,%r13,2)
+    482e:	49 83 c5 01          	add    $0x1,%r13
+    4832:	41 39 dd             	cmp    %ebx,%r13d
+    4835:	72 d9                	jb     4810 <pqcrystals_kyber1024_ref_ntt+0x70>
+    4837:	41 8d 44 24 01       	lea    0x1(%r12),%eax
+    483c:	8b 74 24 18          	mov    0x18(%rsp),%esi
+    4840:	39 c3                	cmp    %eax,%ebx
+    4842:	b8 00 00 00 00       	mov    $0x0,%eax
+    4847:	0f 43 44 24 14       	cmovae 0x14(%rsp),%eax
+    484c:	41 01 f4             	add    %esi,%r12d
+    484f:	41 01 c4             	add    %eax,%r12d
+    4852:	41 81 fc ff 00 00 00 	cmp    $0xff,%r12d
+    4859:	77 15                	ja     4870 <pqcrystals_kyber1024_ref_ntt+0xd0>
+    485b:	8b 44 24 0c          	mov    0xc(%rsp),%eax
+    485f:	48 8d 15 1a 69 00 00 	lea    0x691a(%rip),%rdx        # b180 <pqcrystals_kyber1024_ref_zetas>
+    4866:	0f bf 2c 42          	movswl (%rdx,%rax,2),%ebp
+    486a:	eb 84                	jmp    47f0 <pqcrystals_kyber1024_ref_ntt+0x50>
+    486c:	0f 1f 40 00          	nopl   0x0(%rax)
+    4870:	d1 6c 24 10          	shrl   $1,0x10(%rsp)
+    4874:	83 6c 24 1c 01       	subl   $0x1,0x1c(%rsp)
+    4879:	74 14                	je     488f <pqcrystals_kyber1024_ref_ntt+0xef>
+    487b:	8b 44 24 0c          	mov    0xc(%rsp),%eax
+    487f:	48 8d 35 fa 68 00 00 	lea    0x68fa(%rip),%rsi        # b180 <pqcrystals_kyber1024_ref_zetas>
+    4886:	0f bf 2c 46          	movswl (%rsi,%rax,2),%ebp
+    488a:	e9 49 ff ff ff       	jmp    47d8 <pqcrystals_kyber1024_ref_ntt+0x38>
+    488f:	48 83 c4 28          	add    $0x28,%rsp
+    4893:	5b                   	pop    %rbx
+    4894:	5d                   	pop    %rbp
+    4895:	41 5c                	pop    %r12
+    4897:	41 5d                	pop    %r13
+    4899:	41 5e                	pop    %r14
+    489b:	41 5f                	pop    %r15
+    489d:	c3                   	ret
+
+Disassembly of section .fini:

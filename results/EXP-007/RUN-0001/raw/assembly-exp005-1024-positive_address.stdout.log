@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-exp005-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000009740 <positive_address>:
+    9740:	48 83 ec 18          	sub    $0x18,%rsp
+    9744:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    974b:	00 00 
+    974d:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+    9752:	48 b8 11 00 00 00 1d 	movabs $0x1d00000011,%rax
+    9759:	00 00 00 
+    975c:	48 89 04 24          	mov    %rax,(%rsp)
+    9760:	8b 07                	mov    (%rdi),%eax
+    9762:	83 e0 01             	and    $0x1,%eax
+    9765:	8b 04 84             	mov    (%rsp,%rax,4),%eax
+    9768:	89 05 be 48 00 00    	mov    %eax,0x48be(%rip)        # e02c <sink>
+    976e:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+    9773:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+    977a:	00 00 
+    977c:	75 05                	jne    9783 <positive_address+0x43>
+    977e:	48 83 c4 18          	add    $0x18,%rsp
+    9782:	c3                   	ret
+    9783:	e8 58 79 ff ff       	call   10e0 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:

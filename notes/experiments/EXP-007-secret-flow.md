@@ -55,3 +55,7 @@ The runner uses /usr by default; --valgrind-prefix may identify an equivalent ex
 ## Development status
 
 ACT-0016 prepares this protocol and checks the real harness/runner in a temporary development directory. This is explicitly separate from a formal EXP-007/RUN-0001 result. The activity evidence records the exact support snapshot, controls, source restoration, diagnostic parser checks and actual outcomes. Formal collection is pending the support commit.
+
+## ACT-0017 formal result
+
+I accepted [RUN-0001](../runs/EXP-007-RUN-0001.md) from support commit 5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4 after verifying all 870 raw files, 198 reports and 129 assembly bodies. All 144 target processes were quiet and all 18 deliberate positive controls were detected. The earlier development-status section describes the ACT-0016 handoff; formal collection is now complete. Statistical timing leakage remains separate and moves to [EXP-008](EXP-008-timing-leakage.md).

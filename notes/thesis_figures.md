@@ -10,6 +10,8 @@ I generated these initial figures in ACT-0016 from retained measurements and cou
 | Incremental results across experiments | [SVG](../analysis/figures/ACT-0016/incremental-effects-overview.svg), [PDF](../analysis/figures/ACT-0016/incremental-effects-overview.pdf) | [PNG](../analysis/figures/ACT-0016/incremental-effects-overview.png) | [45 parameter/operation/experiment groups](../analysis/figures/ACT-0016/incremental-effects.csv) |
 | Modular-reduction counts | [SVG](../analysis/figures/ACT-0016/reduction-counts.svg), [PDF](../analysis/figures/ACT-0016/reduction-counts.pdf) | [PNG](../analysis/figures/ACT-0016/reduction-counts.png) | [54 count groups](../analysis/figures/ACT-0016/reduction-counts.csv) |
 
+ACT-0017 corrects trailing whitespace in the three initial SVG files and updates their provenance. The original PNG/PDF/CSV bytes and all 22 data inputs are unchanged. The [original provenance](evidence/ACT-0017/figure-provenance-before-correction.json) is retained, and [correction evidence](evidence/ACT-0017/figure-review.json) records old/new hashes. My ACT-0016 whitespace check omitted SVG files; its broad statement of a passing whitespace check was incomplete. The generator now canonicalises SVG line endings, and the final check includes SVG.
+
 The [provenance manifest](../analysis/figures/ACT-0016/provenance.json) records 22 input file hashes, analysis-code identity, package versions and all output hashes. [The input index](../analysis/figure_inputs.json) pins the original manifests/CSV files. All five timing comparisons use RUN-0002; original counts use EXP-000/RUN-0004, and implemented-variant counts use their RUN-0001 validation manifests. The [EXP-006 review](runs/EXP-006-RUN-0002.md) records raw-data reconstruction and source/build provenance. Earlier timing reviews remain linked in the experiment register.
 
 ## Draft captions and interpretation
@@ -43,3 +45,17 @@ I will extend the set when relevant evidence exists:
 - Statistical leakage diagnostics including sensitivity controls and chosen secret classes/budgets once those are fixed and collected. A quiet plot will not be labelled proof of constant time.
 
 I will choose additional visuals when they clarify a defensible thesis claim. I will preserve adverse results, units, comparators, sample structure, tool/source identities and limitations in captions and linked evidence. These initial figures are ready to use as report drafts; final direct-performance and security conclusions are still pending.
+
+## ACT-0017 formal secret-flow coverage figure
+
+I generated [SVG](../analysis/figures/ACT-0017/exp007-secret-flow.svg), [PDF](../analysis/figures/ACT-0017/exp007-secret-flow.pdf) and [PNG](../analysis/figures/ACT-0017/exp007-secret-flow.png) versions of the accepted EXP-007 coverage matrix, with [99 marked-mode process outcomes](../analysis/figures/ACT-0017/exp007-secret-flow.csv) and [provenance](../analysis/figures/ACT-0017/provenance.json). I visually inspected the rendering.
+
+**Draft caption.** I show marked-mode outcomes for eight target path/operand-role cases and three controls across original/EXP-005/EXP-006 and all parameter sets. All 72 target processes and nine negative controls are quiet; all nine branch and nine address positive controls are detected. Each target process exercises eight fixtures, with 128 pairs per basemul fixture. The 99 defined twins are also quiet and retained in the raw run. Colour identifies expected outcomes; it is not a numerical security rating. Quiet means no marked-secret branch/address dependency observed on the exercised paths. This is neither a statistical timing result nor whole-program constant-time proof.
+
+I reproduce it using the same figure environment:
+
+```sh
+/tmp/kyber-thesis-figures/bin/python -B analysis/build_security_figures.py
+```
+
+The initial exports remain under ACT-0016 with their explicit ACT-0017 whitespace revision; the new security figure is under ACT-0017. Statistical timing plots wait for formal EXP-008 observations and their review. I retain the existing incremental heatmap to explain that EXP-003's sizeable inverse-NTT benefit is already part of EXP-005. A final original/EXP-003/EXP-005 figure will use fresh matched data, not constructed cumulative percentages.

@@ -74,6 +74,18 @@ I inspected the official Memcheck manual (sections 4.2.2 and 4.7) and the actual
 
 The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer complementary questions; numerical leakage-test budgets and a pinned dudect revision remain to be prepared. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
 
+## ACT-0017 pinned timing-method review
+
+I inspected the full dudect header and repository license at dc269651fb2567e46755cfb2a13d3875592968b5. Source locators: t_push/t_compute/t_init for Welford/Welch accumulation, cpucycles for the upstream timer, update_statistics/prepare_percentiles for cropping and the online second-order view, and report/dudect_main for threshold 10 and sequential interpretation. I preserve exact source/license hashes in tests/timing_leakage_protocol.json and the original files under tests/reference/dudect/. This is a source-code review, not a newly obtained full-paper review. [Pinned primary source](https://github.com/oreparaz/dudect/blob/dc269651fb2567e46755cfb2a13d3875592968b5/src/dudect.h).
+
+EXP-008 uses a custom finite dudect-style screen. It retains balanced classes, observable kernels, Welch testing and threshold 10, but changes the timer to fenced RDTSCP, archives every interval, uses two fixed looks and three specified views, and does not use the upstream 100 cropped views or open-ended stopping. The pooled second-moment transform also differs from the upstream online per-class centring. I document these differences and do not call the experiment unmodified dudect or claim identical power/error calibration. An independent C oracle uses the unmodified pinned t_push/t_compute to verify my Python Welch calculation.
+
+Intel Corporation. (2016). *Intel 64 and IA-32 architectures software developer's manual, Volume 2B: Instruction set reference, M-U* (Order 253667-060US). https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf
+
+I inspected the RDTSCP entry, printed pages 4-547–4-548 (PDF indices 548–549), for TSC/AUX outputs, the CPUID feature bit and instruction-ordering limits. I also inspected the official [manual index](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). The protocol uses memory/load fences and compiler barriers around the counter read, verifies the emitted sequence and records TSC ticks rather than claiming frequency-scaled core cycles. Guest AUX equality and affinity do not prove physical-host placement or freedom from preemption. This is a focused timer-method review, not a general hardware audit.
+
+ACT-0017 accepts formal EXP-007 dynamic-flow evidence and executes separate statistical-harness development checks. The earlier LIT-004/LIT-006 pending statements describe their original review stage; formal statistical collection remains pending, while dynamic collection is complete.
+
 ## New-source fields
 
 - Literature ID and verified APA 7 reference:

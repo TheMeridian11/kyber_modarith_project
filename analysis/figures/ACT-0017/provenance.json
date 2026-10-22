@@ -1,0 +1,16 @@
+{
+  "activity_id": "ACT-0017",
+  "analysis_sha256": "aeb7df3a350ba5bd9af809d26593f35cfdd8e9202b579fce1bdc4cd68dfa01fa",
+  "inputs": {
+    "notes/evidence/ACT-0017/exp-007-run-0001-review.json": "b30f599b8e47fccb893f83bbd479c7296bee93f9e9b45dabedf6cffbcd764629",
+    "results/EXP-007/RUN-0001/manifest.json": "eb01c1ac1be9806489c0ab5a71d2e1ae48079082d36f3550927eb8b29e62ea09"
+  },
+  "matplotlib": "3.10.8",
+  "meaning": "Executed marked-mode process outcomes, not a quantitative security score.",
+  "outputs": {
+    "exp007-secret-flow.csv": "94b3268a669a90029f4f5c105cc2d22b5df6f24d698dd7338d3181f9642f4c45",
+    "exp007-secret-flow.pdf": "760caf87f7bbb9cb240fa7e1c52b536a1d7bfd4ba6a138fac2827ec91b943527",
+    "exp007-secret-flow.png": "e512d2fbec62ae1fc0a139877474eab5992a11b8dc5808260a0c6dc75d732f8d",
+    "exp007-secret-flow.svg": "c1cab94ab0879d33f71a89b1cc78ab1f51f75e47f1692d4f900ad4748641f8f1"
+  }
+}

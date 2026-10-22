@@ -1,0 +1,73 @@
+{
+  "activity_id": "ACT-0017",
+  "record_type": "statistical-leakage-support-review",
+  "formal_run": false,
+  "git_commands_executed": false,
+  "production_arithmetic_modified": false,
+  "development_gate_substitutions": [
+    "Committed-source/cleanliness guards replaced only in temporary driver; production runner still enforces them.",
+    "Historical files restored from verified Git object bytes without invoking Git.",
+    "Support-matrix sample budget 4000 and minimum group size 100, explicitly below formal 50000/10000.",
+    "Metadata environment copied from accepted EXP-007 snapshot; compiler and runtime identities independently checked; not fresh formal metadata."
+  ],
+  "archives": {
+    "timing-leakage-initial-smoke.tar.gz": "64deb65416824e03ff4dabd94ccb36802d338cee4b6af1bce994bb7771c0fdf5",
+    "timing-controls-initial.tar.gz": "a7d93b3ce7297aff0d8c9efcf3d3c9553417e04310e6c1da9223bbb3c48b8f6c",
+    "timing-leakage-final-smoke.tar.gz": "86299ef9777abdd9852564ed33b045232398d59f61be1fef2026efc635978ec5"
+  },
+  "checks": {
+    "final_smoke_builds": 9,
+    "final_smoke_compiler_warnings": 0,
+    "final_smoke_assembly_extractions": 180,
+    "production_assembly_matches": 99,
+    "final_smoke_processes": 324,
+    "final_smoke_target_processes": 288,
+    "final_smoke_target_flags": 0,
+    "final_smoke_exclusions": 0,
+    "reduced_budget_insensitive_controls_retained": [
+      {
+        "variant": "exp003",
+        "parameter": 768,
+        "repetition": 1,
+        "path": "positive-control",
+        "profile": 0
+      },
+      {
+        "variant": "exp003",
+        "parameter": 768,
+        "repetition": 2,
+        "path": "positive-control",
+        "profile": 0
+      }
+    ],
+    "full_budget_control_processes": 36,
+    "full_budget_positive_detected": 18,
+    "full_budget_negative_quiet": 18,
+    "full_budget_final_uncropped_positive_abs_t_min": 23.50461823487292,
+    "full_budget_final_uncropped_positive_abs_t_max": 287.9412381497328,
+    "independent_numerical_and_corruption_tests": 4,
+    "numerical_oracle": "Pinned upstream dudect t_push/t_compute; unequal sample sizes, large offsets, first/second moments; tolerance 1e-7",
+    "test_command": "python3 -B tests/test_timing_leakage_analysis.py",
+    "test_outcome": "4 tests passed"
+  },
+  "assembly_review": {
+    "timer": "Copies precede MFENCE/LFENCE/RDTSCP/LFENCE; indirect target call is inside paired fenced boundaries; observations and checksum follow final boundary.",
+    "positive_control": "Secret conditional jump and 64-iteration volatile recurrence retained.",
+    "negative_control": "Fixed multiply/add code without secret branch/address."
+  },
+  "pilot_correction": "Calibration-only 99th percentile discarded too many later control class-1 observations (9711 at first look). Final rule uses pooled class-blind 99th percentile at each predetermined look; initial raw data and analysis retained. Full-budget controls all satisfy final rule. No target observations used for this change.",
+  "limits": [
+    "Uncommitted development evidence, not formal EXP-008/RUN-0001.",
+    "Short matrix remains inconclusive because two uncropped positive controls were insensitive at 4000 observations.",
+    "Large positive-control detection does not establish sensitivity to all small leaks.",
+    "Threshold 10 is diagnostic, not calibrated multiple-test significance."
+  ],
+  "source_sha256": {
+    "tests/test_timing_leakage.c": "250adb1641647052a6fa08ec8b1b65e46b13ca850d87ed3a907b2202c11c18ee",
+    "scripts/analyse_timing_leakage.py": "294dbfd13c1bfbd50d2052641e8858fa50da18a76ff9e743c0246757464219bc",
+    "scripts/run_timing_leakage.py": "dbcda15d1fdf67703576a3f09b600df4f8bfdda706f70a1b5b2d22fac647877a",
+    "tests/timing_leakage_protocol.json": "e930dd28b34b103a0276df5d08865100420eb577e5f11c6720d2a8cecc5d98c1",
+    "tests/check_welch_reference.c": "b1b4a1e484618e8474d7431e9891575c9db9175756d1ef0f5ee3b29c52dce0af",
+    "tests/test_timing_leakage_analysis.py": "fb43c79d08e4e83773a8cef94f24337b58c93db02bf0661d9f070045814cb534"
+  }
+}

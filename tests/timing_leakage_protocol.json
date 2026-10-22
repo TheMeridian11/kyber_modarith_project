@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment": "EXP-008",
+  "record_type": "bounded-statistical-timing-screen",
+  "method": "dudect-style custom fixed-budget Welch screen; not unmodified dudect",
+  "dudect_revision": "dc269651fb2567e46755cfb2a13d3875592968b5",
+  "reference_sha256": {
+    "tests/reference/dudect/dudect.h": "3fb3b2bd7f9e17ae34b7c92518c1311c67342c56facc80da925d85f121b649da",
+    "tests/reference/dudect/LICENSE": "ee7cd5d500ab72e03a6c8aefe69c6311d698c83e732b19d152a6fa38fd521720"
+  },
+  "accepted_inputs": {
+    "results/EXP-003/RUN-0001/manifest.json": "70a9d98f92494ffa5ead0804565797060f3349f35d167cb68607ca66f2cb4615",
+    "results/EXP-005/RUN-0001/manifest.json": "6bf9833c02e9744e92360cecd37d6668cb4c4dc01ad4803ee72315fce8f0bd5d",
+    "results/EXP-007/RUN-0001/manifest.json": "eb01c1ac1be9806489c0ab5a71d2e1ae48079082d36f3550927eb8b29e62ea09",
+    "notes/evidence/ACT-0017/exp-007-run-0001-review.json": "b30f599b8e47fccb893f83bbd479c7296bee93f9e9b45dabedf6cffbcd764629"
+  },
+  "variants": {
+    "baseline": 0,
+    "exp003": 3,
+    "exp005": 5
+  },
+  "restoration_commits": {
+    "exp003": "cf8ae0dd700bb41628c158016a7c15926a0b790f",
+    "exp005": "4bd813ed71a90c7722275dc802336852214a5388"
+  },
+  "paths": [
+    "basemul",
+    "basemul-first",
+    "dot",
+    "dot-first",
+    "inverse",
+    "error-path",
+    "keygen-dot",
+    "indcpa-dec"
+  ],
+  "profiles": [
+    "zero-versus-uniform",
+    "alternating-boundaries-versus-strict-interior"
+  ],
+  "seeds": [
+    305419896,
+    2271560481
+  ],
+  "samples_per_process": 50000,
+  "calibration_per_process": 2000,
+  "warmup_per_process": 1000,
+  "balanced_block": 1000,
+  "looks": [
+    25000,
+    50000
+  ],
+  "views": [
+    "raw-mean",
+    "crop99-mean",
+    "second-moment"
+  ],
+  "threshold_abs_t": 10.0,
+  "minimum_per_class_per_view": 10000,
+  "maximum_invalid_fraction": 0.01,
+  "compiler_version": "13.3.0",
+  "cpu": 0,
+  "timeout_seconds_per_process": 120,
+  "controls": [
+    "negative-control",
+    "positive-control"
+  ],
+  "stopping": "complete entire fixed matrix; no early success or signal stopping; preserve all attempts",
+  "scope": "bounded kernels and synthetic encoded-key IND-CPA decryption, not full KEM or power/EM/fault certification",
+  "crop_rule": "class-blind pooled 99th percentile of valid observations at each fixed look; all raw retained"
+}

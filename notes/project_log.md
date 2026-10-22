@@ -739,3 +739,63 @@ I next review/commit the support and records, install the pinned packaged Valgri
 - analysis/figures/ACT-0016/provenance.json: c9b7a24a43fb2a988dfe681241a214b0434e4cf52d1d32def0cfa027857ffd2c.
 
 Final ACT-0016 verification preserves all 1208 archived result files, production arithmetic, earlier scripts/tests/evidence and Git HEAD. Both development snapshots retain support/raw bytes matching their recorded hashes; the final runner's five support hashes match the current files. All nine final security builds emit no warnings. The final matrix has 336 steps, 198 reports and 102 matching production bodies. JSON, Python syntax, relative links, LF and trailing-whitespace checks pass. Formal EXP-007/RUN-0001 remains uncreated. This activity changes ten existing documents and adds the new support, evidence, result record and reproducible figure package; no Git operation or arithmetic edit was performed.
+
+## ACT-0017 — Accept secret-flow evidence and prepare bounded timing-leakage testing
+
+### Starting evidence and decision
+
+I inspected the actual EXP-007/RUN-0001 files after the supplied execution screenshots. HEAD and source/support commit are 5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4; all 1393 tracked files matched that commit before this work. EXP-007 results were present but not yet committed. I preserved all 2080 existing archived result files, and did not execute Git commands or edit production arithmetic.
+
+I accepted [EXP-007/RUN-0001](runs/EXP-007-RUN-0001.md) after checking the metadata/source/tool/support/binary identities, all 870 raw files, all 198 XML reports and all 129 assembly bodies. All 72 marked and 72 defined target processes were quiet. All 18 deliberate branch/address positive controls were detected, all 27 defined controls and nine marked negatives were quiet. Expected exit-99 raw steps remain labelled failed by the generic execution helper; the review explicitly interprets them as expected controls. The 102 production bodies match the prior accepted normal-code review, and all 27 control bodies match the sensitive development build.
+
+This supports no marked-secret branch/address dependency observed in these executed paths. It does not prove whole-program constant time or rule out operand latency, other microarchitectural channels, power/EM or faults. IND-CPA integration is narrower than full KEM reencryption/implicit rejection. Existing correctness/range/invalid-input/UBSan evidence remains separate; the inherited EXP-002 local-canary tradeoff remains recorded.
+
+### EXP-003 and EXP-005 interpretation
+
+I clarified that the variants are cumulative. EXP-003's staged inverse NTT improved every one of the 30 encapsulation/decapsulation pairs over EXP-002, with median reductions 4.30–4.98%. EXP-005 retains that benefit and adds the error-vector change: keygen +5.18%/+0.48%/+1.36% against freshly rebuilt EXP-003. These percentages have different denominators. They are not absolute performance rankings and cannot be added or multiplied across sessions.
+
+I keep EXP-005 as the provisional primary closing candidate and explicitly include EXP-003 as comparator/fallback for the remaining assessment. EXP-003 deserves substantial thesis emphasis irrespective of final selection. Small effects and Kyber1024 control-operation regressions require matched repeat sessions; no universal winner is declared from one session. EXP-006 remains the useful mixed/adverse result demonstrating that fewer reductions alone do not guarantee a speed improvement. No further arithmetic search or VTune work is added.
+
+### Statistical timing support and sensitivity pilot
+
+I added [EXP-008's protocol](experiments/EXP-008-timing-leakage.md), native test harness, runner and raw-stream analysis. I pinned dudect source revision dc269651fb2567e46755cfb2a13d3875592968b5 as a method/reference oracle and retained its header/license. This is a custom dudect-style screen, with documented differences in timer, views and stopping, not unmodified dudect.
+
+The formal protocol compares original/EXP-003/EXP-005 across all parameters, eight paths, two synthetic secret-class profiles and two process repetitions. It fixes 50000 analysis observations plus 2000 retained calibration observations per process, two looks, three views and threshold |t| > 10. There are 324 measurement processes: 288 target cells and 36 controls. Every interval, AUX pair and class is retained in lossless archives, including predefined exclusions. The criterion is diagnostic; no calibrated family-wise error probability or constant-time proof is claimed.
+
+I development-checked all nine builds, 180 assembly extractions and 324 processes with a reduced 4000-observation budget. All 99 production bodies match accepted normal code, and the final build emits no warnings. No target signal was flagged at that small development budget, but two final uncropped positive controls were insensitive; I retain that inconclusive result. A separate 50000-observation control pilot detects all 18 positive controls in the final uncropped view (absolute t approximately 23.50–287.94); all 18 negative controls remain quiet under the final analysis. Detection of these deliberately large differences is not a sensitivity guarantee for tiny leaks.
+
+The initial analysis used a calibration-only cropping cutoff. One positive control subsequently shifted enough to leave only 9711 class-1 samples at the first cropped look. I preserved that attempt and changed to a fixed-rule pooled class-blind 99th percentile at each planned look before formal collection. The uncropped view remains mandatory and visible. All 36 control processes meet the final coverage/sensitivity rules on reanalysis. No target observations were used to choose this correction. Four numerical/corrupt-stream tests pass, including an independent oracle compiled from the pinned upstream Welch core.
+
+[Support review](evidence/ACT-0017/timing-leakage-support-review.json) links exact support/raw development archives, initial failures and final control analysis. Temporary drivers substituted Git/source-cleanliness gates only for explicitly uncommitted development, restoring historical bytes from verified repository objects. The production runner enforces committed clean support, pins accepted inputs and restores both historical variants without editing the production checkout. It fails if any of the 99 production assembly bodies differs from the accepted normal code. Formal EXP-008/RUN-0001 has not been created.
+
+### Visual artifacts and correction
+
+I added a [formal EXP-007 coverage matrix](../analysis/figures/ACT-0017/exp007-secret-flow.svg), with PDF/PNG, 99 marked-process data rows, provenance and a bounded caption. I inspected its rendering. It distinguishes quiet targets from sensitive deliberate controls and is not a security score.
+
+I corrected trailing spaces/tabs in the three initial SVGs and their generator. My ACT-0016 whitespace check omitted SVG files, so its unqualified passing-check statement was incomplete. All original PNG/PDF/CSV outputs and all 22 data inputs remain byte-identical. I retain the pre-correction provenance and old/new SVG hashes in [correction evidence](evidence/ACT-0017/figure-review.json); the initial figure directory now identifies the ACT-0017 revision. Earlier result directories and review evidence are unchanged.
+
+### Remaining practical work and manual handoff
+
+The arithmetic trials and formal dynamic-flow assessment are complete. I next commit the accepted EXP-007 run and reviewed ACT-0017 support, then collect EXP-008/RUN-0001. I review all signals/controls, diagnose or reproduce findings, complete a fresh original/EXP-003/EXP-005 comparison across sessions, and assemble the final security/results/reproduction package. That finite closing sequence precedes the thesis draft and supervisor feedback.
+
+I use these commands manually from the repository root, reviewing the staged content before committing:
+
+```sh
+git diff --check
+git add -- README.md notes/ analysis/ \
+  scripts/run_timing_leakage.py scripts/analyse_timing_leakage.py \
+  tests/test_timing_leakage.c tests/timing_leakage_protocol.json \
+  tests/check_welch_reference.c tests/test_timing_leakage_analysis.py \
+  tests/reference/dudect/ results/EXP-007/RUN-0001/
+git diff --cached --check
+git diff --cached --stat
+git diff --cached
+git commit -m "Review EXP-007 and prepare bounded timing-leakage testing"
+git status --short
+python3 -B scripts/run_timing_leakage.py --experiment EXP-008 --run RUN-0001 --cpu 0
+echo $?
+```
+
+If the run completes, I preserve and commit its result directory and request review of the assessment, control results, raw streams and assembly. An exit-zero completion is not a security pass. A failed/interrupted attempt remains under its original ID; any retry uses a new ID.
+
+Final verification preserves all 2080 pre-existing archived result files, all production arithmetic, all earlier scripts/tests/evidence and HEAD. Python syntax, JSON, relative links, SVG XML and LF/trailing-whitespace checks pass, explicitly including SVG. Every archived development raw stream and support snapshot matches its recorded hash, including decompression identity. Formal protocol pins and all three source contracts verify. The [verification record](evidence/ACT-0017/final-verification.json) lists the 14 modified tracked files and 25 new support/evidence files; EXP-007 result files are additionally awaiting their user commit. No formal EXP-008 directory was created.

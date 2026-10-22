@@ -1,0 +1,81 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-007/RUN-0001/build/flow-baseline-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002100 <pqcrystals_kyber768_ref_indcpa_dec>:
+    2100:	f3 0f 1e fa          	endbr64
+    2104:	41 57                	push   %r15
+    2106:	41 56                	push   %r14
+    2108:	41 55                	push   %r13
+    210a:	41 54                	push   %r12
+    210c:	55                   	push   %rbp
+    210d:	53                   	push   %rbx
+    210e:	48 81 ec 00 10 00 00 	sub    $0x1000,%rsp
+    2115:	48 83 0c 24 00       	orq    $0x0,(%rsp)
+    211a:	48 83 ec 18          	sub    $0x18,%rsp
+    211e:	48 89 f3             	mov    %rsi,%rbx
+    2121:	48 89 fd             	mov    %rdi,%rbp
+    2124:	49 89 e6             	mov    %rsp,%r14
+    2127:	49 89 d5             	mov    %rdx,%r13
+    212a:	4c 8d a4 24 00 04 00 	lea    0x400(%rsp),%r12
+    2131:	00 
+    2132:	4c 8d bc 24 00 0a 00 	lea    0xa00(%rsp),%r15
+    2139:	00 
+    213a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    2141:	00 00 
+    2143:	48 89 84 24 08 10 00 	mov    %rax,0x1008(%rsp)
+    214a:	00 
+    214b:	31 c0                	xor    %eax,%eax
+    214d:	4c 89 e7             	mov    %r12,%rdi
+    2150:	e8 0b 02 00 00       	call   2360 <pqcrystals_kyber768_ref_polyvec_decompress>
+    2155:	48 8d b3 c0 03 00 00 	lea    0x3c0(%rbx),%rsi
+    215c:	4c 89 f7             	mov    %r14,%rdi
+    215f:	48 8d 9c 24 00 02 00 	lea    0x200(%rsp),%rbx
+    2166:	00 
+    2167:	e8 04 0b 00 00       	call   2c70 <pqcrystals_kyber768_ref_poly_decompress>
+    216c:	4c 89 ee             	mov    %r13,%rsi
+    216f:	4c 89 ff             	mov    %r15,%rdi
+    2172:	e8 59 03 00 00       	call   24d0 <pqcrystals_kyber768_ref_polyvec_frombytes>
+    2177:	4c 89 e7             	mov    %r12,%rdi
+    217a:	e8 a1 03 00 00       	call   2520 <pqcrystals_kyber768_ref_polyvec_ntt>
+    217f:	4c 89 e2             	mov    %r12,%rdx
+    2182:	4c 89 fe             	mov    %r15,%rsi
+    2185:	48 89 df             	mov    %rbx,%rdi
+    2188:	e8 f3 03 00 00       	call   2580 <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery>
+    218d:	48 89 df             	mov    %rbx,%rdi
+    2190:	e8 4b 26 00 00       	call   47e0 <pqcrystals_kyber768_ref_poly_invntt_tomont>
+    2195:	4c 89 f6             	mov    %r14,%rsi
+    2198:	48 89 da             	mov    %rbx,%rdx
+    219b:	48 89 df             	mov    %rbx,%rdi
+    219e:	e8 7d 27 00 00       	call   4920 <pqcrystals_kyber768_ref_poly_sub>
+    21a3:	48 89 df             	mov    %rbx,%rdi
+    21a6:	e8 05 27 00 00       	call   48b0 <pqcrystals_kyber768_ref_poly_reduce>
+    21ab:	48 89 de             	mov    %rbx,%rsi
+    21ae:	48 89 ef             	mov    %rbp,%rdi
+    21b1:	e8 2a 11 00 00       	call   32e0 <pqcrystals_kyber768_ref_poly_tomsg>
+    21b6:	48 8b 84 24 08 10 00 	mov    0x1008(%rsp),%rax
+    21bd:	00 
+    21be:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+    21c5:	00 00 
+    21c7:	75 12                	jne    21db <pqcrystals_kyber768_ref_indcpa_dec+0xdb>
+    21c9:	48 81 c4 18 10 00 00 	add    $0x1018,%rsp
+    21d0:	5b                   	pop    %rbx
+    21d1:	5d                   	pop    %rbp
+    21d2:	41 5c                	pop    %r12
+    21d4:	41 5d                	pop    %r13
+    21d6:	41 5e                	pop    %r14
+    21d8:	41 5f                	pop    %r15
+    21da:	c3                   	ret
+    21db:	e8 00 ef ff ff       	call   10e0 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:
