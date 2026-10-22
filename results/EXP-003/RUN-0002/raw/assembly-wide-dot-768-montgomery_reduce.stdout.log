@@ -1,0 +1,24 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-003/RUN-0002/build/wide-dot-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000005430 <pqcrystals_kyber768_ref_montgomery_reduce>:
+    5430:	f3 0f 1e fa                                     	endbr64
+    5434:	66 69 c7 01 f3                                  	imul   $0xf301,%di,%ax
+    5439:	98                                              	cwtl
+    543a:	69 c0 ff f2 ff ff                               	imul   $0xfffff2ff,%eax,%eax
+    5440:	01 f8                                           	add    %edi,%eax
+    5442:	c1 e8 10                                        	shr    $0x10,%eax
+    5445:	c3                                              	ret
+
+Disassembly of section .fini:
