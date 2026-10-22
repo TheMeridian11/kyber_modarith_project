@@ -3,20 +3,21 @@
 ## Identity and stopping point
 
 - Activity: ACT-0014.
-- Lifecycle: planned; arithmetic unapplied, candidate validation/assembly/timing not-run.
+- Lifecycle: running; manual edits committed and RUN-0001 correctness/counts/scoped assembly accepted in ACT-0015. Formal timing and performance-retention decision pending.
 - Variant: keygen-dot, cumulative on EXP-005.
 - Predecessor: EXP-005 validation source 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648; timing source 4bd813ed71a90c7722275dc802336852214a5388; timing results eb4c34586c7531bc87dcd165e952d3278cea0b5e.
 - Original reference: upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
-- Planned first run: EXP-006/RUN-0001, correctness/counts/assembly collection only.
+- Accepted first run: [EXP-006/RUN-0001](../runs/EXP-006-RUN-0001.md), correctness/counts/scoped assembly. Source/support commit 4c9d539eba8903c2404591b8024e7afef15bbf47; results commit 571f597a0b35fd0c9df264402d4b74d07a725204.
+- Next: [EXP-005 versus EXP-006 timing protocol](../keygen_dot_timing.md), planned RUN-0002.
 - Origin: local inspection of indcpa.c, polyvec.c, poly.c and reduce.c, extending the consumer-specific reasoning in EXP-005. I make no novelty claim or attribution of this exact proposal to an unreviewed paper.
 
 I make this the final planned optimisation trial before freezing the candidate set. A correct but slower result completes the experiment and can be rejected for performance. It does not require another optimisation. The [practical completion checklist](../practical_completion.md) then requires the focused security assessment, final comparisons and reproducibility outputs.
 
 ## Question and isolated change
 
-Key generation currently calls polyvec_basemul_acc_montgomery, which ends with poly_reduce, and then immediately calls poly_tomont on that result. The wide dot already returns representable Montgomery residues before its final Barrett centring. I ask whether keygen can skip that centring, retain poly_tomont and defer centring until the existing final public-key reduction after adding the error vector.
+In EXP-005, key generation calls polyvec_basemul_acc_montgomery, which ends with poly_reduce, and then immediately calls poly_tomont on that result. The wide dot already returns representable Montgomery residues before its final Barrett centring. I ask whether keygen can skip that centring, retain poly_tomont and defer centring until the existing final public-key reduction after adding the error vector.
 
-I propose a separate keygen-only function containing the existing wide-dot arithmetic and ending in poly_tomont instead of poly_reduce. The keygen call replaces the old dot-plus-tomont pair. The general dot function stays unchanged because encryption/decryption callers feed the centred result into the EXP-003 inverse transform. The new API includes the scale conversion and is not interchangeable with that general API.
+I proposed, and have now manually applied, a separate keygen-only function containing the existing wide-dot arithmetic and ending in poly_tomont instead of poly_reduce. The keygen call replaces the old dot-plus-tomont pair. The general dot function stays unchanged because encryption/decryption callers feed the centred result into the EXP-003 inverse transform. The new API includes the scale conversion and is not interchangeable with that general API.
 
 Duplicating the small kernel intentionally isolates this caller-specific contract. It can increase code size, change inlining, call placement, register use or instruction-cache behaviour. I will measure and report these tradeoffs; fewer reductions do not guarantee faster code. No allocation, parameter, noise distribution, cryptographic security level or protection flag changes.
 
@@ -26,7 +27,7 @@ Duplicating the small kernel intentionally isolates this caller-specific contrac
 | Kyber768 | 2304 -> 1536 | 768 | 3328 / 4736 | 7296 / 8832 / 13056 |
 | Kyber1024 | 3072 -> 2048 | 1024 | 4224 / 5888 | 9728 / 11264 / 16384 |
 
-These are source-derived predictions, not measured EXP-006 counts. Saving K*256 calls removes one third of EXP-005 keygen Barrett calls, not one third of keygen time. Encap and decap remain control operations with no predicted direct arithmetic benefit.
+These were source-derived predictions before execution. RUN-0001 now confirms all ninety instrumented observations against them. Saving K*256 calls removes one third of EXP-005 keygen Barrett calls, not one third of keygen time. Encap and decap remain control operations with no predicted direct arithmetic benefit.
 
 ## Range, representation and consumer argument
 
@@ -44,9 +45,9 @@ Montgomery reduction contributes R^-1 with R=2^16. The wide-dot result has the o
 
 This proof is conditional on the documented callers and target arithmetic assumptions. The actual matrix has the tighter 3328 bound; I do not broaden this keygen API into a general replacement. The general dot's centred output, encryption/decryption paths, malformed-input handling and EXP-003's inverse-input bound remain intact. Input/output objects at the keygen call are distinct. New callers or changed bounds require a new argument.
 
-## Exact manual changes
+## Applied manual changes — preserved edit record
 
-I manually apply the following three edits, preserving all other bytes and using LF line endings. These are proposed edits; the assistant has not modified arithmetic files or compiled this proposed implementation. The preflight requires exact source hashes, including whitespace.
+I manually applied and committed the following three edits, preserving all other bytes and using LF line endings. These snippets preserve the applied change; they are not another edit to perform. RUN-0001 now verifies the exact source hashes, including whitespace. The assistant prepared support/records and reviewed the evidence without editing arithmetic.
 
 ### 1. Add the dedicated function to polyvec.c
 
@@ -145,15 +146,15 @@ I reject or revise a candidate that violates compatibility, range or reviewed se
 
 I prepared scripts/run_keygen_dot_validation.py and tests/test_keygen_dot.c. The test uses an ordinary int64 modular dot oracle, not the production reducers, but shares the twiddle table and coefficient layout. It covers 45/53/61 vectors for Kyber512/768/1024: zero, dense endpoints, index-bit patterns, sparse endpoints and deterministic interior values. Each build performs 11520/13568/15616 coefficient checks, 46080/54272/62464 error-addition/final-reduction checks and 180/212/244 polynomial serialization comparisons. Error patterns include both conservative endpoints, alternating signs and interior values.
 
-The formal runner will build baseline/candidate in normal and UBSan modes and compare four complete 100-fixture KEM transcripts per parameter. It also runs the existing upstream candidate suites and ten-fixture reduction counts. It collects normal assembly for keygen, the general dot, poly_tomont and both reducers, plus the candidate-only keygen dot. The planned total is 69 steps, 138 raw streams, eighteen executables and 33 assembly extracts. Assembly review remains pending after collection; no timings are collected. Unchanged standalone basemul/inverse tests are not rerun as separate oracles.
+The formal runner built baseline/candidate in normal and UBSan modes and compared four complete 100-fixture KEM transcripts per parameter. It also runs the existing upstream candidate suites and ten-fixture reduction counts. It collects normal assembly for keygen, the general dot, poly_tomont and both reducers, plus the candidate-only keygen dot. The completed total is 69 steps, 138 raw streams, eighteen executables and 33 assembly extracts. The original collection manifest retains assembly review pending; ACT-0015 records the completed review separately. No formal timings were collected. Unchanged standalone basemul/inverse tests are not rerun as separate oracles.
 
 [Development evidence](../evidence/ACT-0014/keygen-dot-validation-support-smoke.json) records twelve successful real normal/UBSan builds of the existing original reference and EXP-005, with EXPECT_KEYGEN=0 and two KEM fixtures per build. The new arithmetic/addition/serialization oracle passes on these existing paths and all four transcripts per parameter match. Unapplied/altered-source guards reject before collection; current EXP-005 counts reject the EXP-006 prediction. Formula and bounds checks pass. Temporary outputs were removed after recording identities. No Git commands, metadata collection, formal run, arithmetic edits, EXP-006 candidate execution or performance measurement occurred in these support checks.
 
-The smoke check verifies the support machinery, not the proposed optimisation. The full candidate must still be manually applied, committed and validated. Its generated code, counts, speed and retention decision remain pending.
+That ACT-0014 smoke check verified only the support machinery. Subsequent manual application and RUN-0001 now establish the actual candidate validation/counts/scoped assembly findings below. Speed and performance retention remain pending.
 
-## Manual execution sequence
+## Historical execution sequence — already completed
 
-After applying the three snippets and reviewing all new support/records, I use:
+After applying the three snippets and reviewing source/support/records, I executed the following sequence. RUN-0001 exists and must not be reused:
 
 ~~~bash
 git diff --check
@@ -183,4 +184,18 @@ git commit -m "Record EXP-006 keygen dot validation"
 git status --short
 ~~~
 
-I then review the actual bounds/bytes/counts/assembly evidence before preparing a fresh matched comparison against EXP-005. I do not reuse an older comparison runner with an EXP-006 label or compare separate-run summary medians as if they were matched controls. The eventual timing protocol will be committed before collection.
+ACT-0015 now accepts the actual bounds/bytes/counts/scoped assembly evidence and prepares the [fresh matched comparison against EXP-005](../keygen_dot_timing.md). I commit that new support and protocol before RUN-0002. No further arithmetic edit or repeat of RUN-0001 is needed.
+
+## Accepted correctness and security/assembly findings (ACT-0015)
+
+I verified all 69 steps, 138 raw streams, eighteen binaries, seven support files and committed source identities. Twelve normal/UBSan builds pass the targeted dot/addition/serialization checks and four-way 100-fixture KEM transcript comparisons per parameter, including the tested invalid/noncanonical cases. Three upstream suites and ninety count observations pass. Keygen Barrett is now 1024/1536/2048; all Montgomery and encap/decap counts remain unchanged. The [run review](../runs/EXP-006-RUN-0001.md) records exact hashes, scope and limitations.
+
+The applied transformation preserves the conditional range and scale argument above. The wide dot's raw outputs fit int16_t, retained poly_tomont stays within its input/output bounds, and the final public-key addition/reduction gives matching tested coefficients/bytes. General dot and inverse-input centring remain untouched. Passing UBSan does not replace the narrowing argument or prove arbitrary-input safety.
+
+The new dedicated dot matches the general dot's normal instructions after function-symbol renaming except its final tail jump from poly_reduce to poly_tomont, after restoring its stack frame. Branches and addresses follow public pair parity/positions and a fixed 128-pair loop. The general dot, poly_tomont and both reducers retain EXP-005 normalised bodies. The changed keygen call path preserves skpv reduction, raw-error NTT, final addition/reduction and serialization.
+
+Keygen bodies change 442->423, 512->521 and 988->980 bytes; new dot bodies add 285/355/413 bytes. The scoped sum therefore grows 266/364/405 bytes, without claiming that this is total executable growth. Keygen local stack including saved registers changes 5272->5272, 9384->9368 and 15032->15032, excluding return address/callees. Each new dot uses 72 local bytes including saves and no canary, matching the preserved general dot's pattern. Keygen canaries, endbr64 and page probes remain; no protection flag is disabled. Kyber768's matrix calls become unrolled and Kyber1024 retains public-matrix rejection sampling, so timing reflects compiler/call-layout effects as well as removed reductions.
+
+No new secret-coefficient-dependent branch/address choice is observed in the scoped changed path. This does not establish whole-program constant time, statistical leakage resistance, power/EM/fault resistance, exhaustive memory safety, signed portability or final ML-KEM conformance. The inherited EXP-002 dot-canary tradeoff remains recorded. Focused dynamic security checks are still required; VTune is excluded from the plan by the user's ACT-0015 preference.
+
+Six development timing builds match all 33 reviewed bodies and twelve short processes pass both-order comparison checks. These are support checks, not evidence of speed. I now proceed to RUN-0002 and retain this as the final planned optimisation trial before the closing security and direct/repeat-session evaluation.

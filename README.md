@@ -33,7 +33,9 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-005 accepted correctness and security/assembly review](notes/runs/EXP-005-RUN-0001.md)
 - [EXP-003 versus EXP-005 timing protocol](notes/error_ntt_timing.md)
 - [EXP-005 measured timings and security interpretation](notes/runs/EXP-005-RUN-0002.md)
-- [EXP-006 final planned optimisation and manual edits](notes/experiments/EXP-006-keygen-dot.md)
+- [EXP-006 plan, bounds and applied changes](notes/experiments/EXP-006-keygen-dot.md)
+- [EXP-006 accepted correctness and security/assembly review](notes/runs/EXP-006-RUN-0001.md)
+- [EXP-005 versus EXP-006 timing protocol](notes/keygen_dot_timing.md)
 - [Required implementation-security assessment](notes/implementation_security.md)
 - [Practical completion checklist](notes/practical_completion.md)
 - [Experiment record template](notes/templates/experiment.md)
@@ -48,7 +50,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 - external/kyber-official/: pinned upstream checkout; preserve its source.
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
-- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul, EXP-002 vector-dot-product, EXP-003 inverse-NTT and EXP-005 keygen error-vector changes.
+- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul, EXP-002 vector-dot-product, EXP-003 inverse-NTT, EXP-005 keygen error-vector and EXP-006 keygen dot-product changes.
 - scripts/: environment collection and benchmark automation.
 - benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
@@ -79,18 +81,18 @@ The [EXP-001](notes/runs/EXP-001-RUN-0002.md), [EXP-002](notes/runs/EXP-002-RUN-
 | EXP-003: inverse-NTT schedule | Initial validation/timings accepted | Does reducing Barrett frequency help within the required bounds? |
 | EXP-004: optional interaction study | Deferred; never run | Would controlled separate variants answer a distinct interaction question? |
 | EXP-005: error-vector NTT reduction | Initial validation/timings accepted with tradeoffs | Does deferring this reduction improve keygen over EXP-003? |
-| EXP-006: keygen dot-product reduction | Final planned trial; manual edit/validation pending | Can keygen omit dot-output centring before its retained scale conversion? |
+| EXP-006: keygen dot-product reduction | Correctness/counts/scoped assembly accepted; timing pending | Can keygen omit dot-output centring before its retained scale conversion? |
 | Final security assessment | Required; dynamic checks pending | Do the selected changes introduce detectable implementation-security problems? |
 | Final direct/repeat-session comparison and thesis artifacts | Pending | What total improvement and limitations can I defend? |
 
 EXP-005 saves 512/768/1024 keygen Barrett calls while preserving Montgomery and encap/decap counts. Accepted deterministic/invalid-input transcripts, targeted arithmetic tests, upstream suites and exercised UBSan checks agree. Raw-error/addition bounds are 23299/26627 for Kyber512 and 23298/26626 otherwise; skpv and inverse-input centring remain intact. Reviewed keygen canaries, endbr64 and page probes remain. Keygen code grows by 17/33/40 bytes and local stack changes by +16/+16/0 bytes; the earlier EXP-002 dot-product canary tradeoff persists.
 
-These checks support bounded correctness and implementation-safety conclusions. They do not establish whole-program constant time, statistical leakage resistance or production approval. Following the supervisor requirement clarified in ACT-0014, I will complete the [focused security assessment](notes/implementation_security.md): secret-flow checks and secret-class timing measurements alongside the existing proofs/tests/assembly. VTune is optional performance profiling, not a replacement for this assessment. Final ML-KEM conformance and physical side-channel/fault resistance remain outside the established claims.
+These checks support bounded correctness and implementation-safety conclusions. They do not establish whole-program constant time, statistical leakage resistance or production approval. Following the supervisor requirement clarified in ACT-0014, I will complete the [focused security assessment](notes/implementation_security.md): secret-flow checks and secret-class timing measurements alongside the existing proofs/tests/assembly. VTune is excluded from the remaining work at my request in ACT-0015; the focused security assessment remains required. Final ML-KEM conformance and physical side-channel/fault resistance remain outside the established claims.
 
-I am near the end of arithmetic changes, but practical work remains. [EXP-006](notes/experiments/EXP-006-keygen-dot.md) is the final planned candidate: a dedicated keygen dot function retains poly_tomont while omitting its preceding Barrett centring. The general dot and inverse-input contracts stay unchanged. The new validation support passes checks on existing baseline/EXP-005 paths; the proposed arithmetic has not been applied, compiled or validated. After this trial, I freeze the search, assess security, compare the selected version directly with the original reference across repeat sessions, and prepare reproducible thesis tables/figures. The [completion checklist](notes/practical_completion.md) defines the remaining work and stopping criteria.
+I am near the end of arithmetic changes, but practical work remains. [EXP-006](notes/experiments/EXP-006-keygen-dot.md) is the final planned candidate: a dedicated keygen dot function retains poly_tomont while omitting its preceding Barrett centring. The general dot and inverse-input contracts stay unchanged. The actual [RUN-0001 validation](notes/runs/EXP-006-RUN-0001.md) passes all 69 steps, normal/UBSan compatibility checks, targeted arithmetic oracles, upstream suites and counts. Keygen saves another 512/768/1024 Barrett calls, with all other counts unchanged. The scoped assembly confirms the retained scale conversion and general dot, keygen canaries and public control/indexing. A new 285/355/413-byte dot body is added; keygen local stack changes by 0/-16/0 bytes. These code/stack findings and the inherited dot-canary tradeoff are recorded. Next I commit the new support/records and run the [fresh EXP-005/EXP-006 timing comparison](notes/keygen_dot_timing.md); no further arithmetic edit is needed. After this trial, I freeze the search, assess security, compare the selected version directly with the original reference across repeat sessions, and prepare reproducible thesis tables/figures. The [completion checklist](notes/practical_completion.md) defines the remaining work and stopping criteria.
 
 EXP-004 was reserved for studying interactions between independently controlled optimisations. Existing retained variants already build on one another, so repeating the same combination would duplicate work. It was not run or rejected and is not required to finish this scope.
 
-EXP-005 validation source is 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648 with results af3408156a334c52676b51a5348540c17234390c. Latest timing/support source is 4bd813ed71a90c7722275dc802336852214a5388 with results eb4c34586c7531bc87dcd165e952d3278cea0b5e. The source identifies executed code; the results commit archives outputs.
+EXP-005 validation source is 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648 with results af3408156a334c52676b51a5348540c17234390c. Latest timing/support source is 4bd813ed71a90c7722275dc802336852214a5388 with results eb4c34586c7531bc87dcd165e952d3278cea0b5e. The source identifies executed code; the results commit archives outputs. EXP-006 validation source/support is 4c9d539eba8903c2404591b8024e7afef15bbf47, with results 571f597a0b35fd0c9df264402d4b74d07a725204. EXP-006 formal performance remains pending.
 
 I manually apply arithmetic changes and perform Git operations, reviewing support code before committing it. I retain failed and inconclusive outcomes, use distinct experiment/run IDs, and keep validation evidence separate from performance results. The legacy summary script remains unused.

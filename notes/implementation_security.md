@@ -2,15 +2,15 @@
 
 ## Purpose and current status
 
-In ACT-0014 I clarified the supervisor's requirements: I need to evaluate how the optimisations affect implementation security and justify the measurement method. VTune was a suggestion, not a mandatory tool. I therefore treat the focused security assessment below as required practical work. I do not treat successful performance measurements, public-looking source or a passing sanitizer as a complete security result.
+In ACT-0014 I clarified the supervisor's requirements: I need to evaluate how the optimisations affect implementation security and justify the measurement method. VTune was a suggestion, not a mandatory tool; in ACT-0015 I chose to exclude it from the remaining work. I therefore treat the focused security assessment below as required practical work. I do not treat successful performance measurements, public-looking source or a passing sanitizer as a complete security result.
 
 My scope is the pinned Kyber reference C implementation, the recorded GCC/x86-64 build and the tested execution environment. The changes alter reduction scheduling and intermediate representatives, not parameters or the intended mathematical algorithm. The question is whether they introduce incorrect arithmetic, changed invalid-input behaviour, secret-dependent control/address use, observable timing dependence or compiler-hardening tradeoffs. The project does not establish final FIPS 203 conformance or certification of a production implementation.
 
 | Evidence layer | What I can establish | Current status |
 |---|---|---|
-| Mathematical contracts | Caller ranges, Montgomery scale, intermediate/narrowing bounds and downstream contracts | Documented for EXP-001/002/003/005; EXP-006 argument proposed |
-| Functional and invalid-input checks | Agreement on deterministic outputs and sampled malformed/noncanonical cases | Accepted for retained EXP-001/002/003/005; EXP-006 not-run |
-| Exercised undefined behaviour | UBSan observations on selected paths, alongside explicit narrowing arguments | Accepted for existing candidates; not an exhaustive proof |
+| Mathematical contracts | Caller ranges, Montgomery scale, intermediate/narrowing bounds and downstream contracts | Documented and reviewed for EXP-001/002/003/005/006 |
+| Functional and invalid-input checks | Agreement on deterministic outputs and sampled malformed/noncanonical cases | Accepted for EXP-001/002/003/005/006 within the tested scope |
+| Exercised undefined behaviour | UBSan observations on selected paths, alongside explicit narrowing arguments | Accepted for existing candidates including EXP-006; not an exhaustive proof |
 | Generated code and hardening | Actual branches, addresses, reducers, code size, local stack and protection instructions in scoped functions | Reviewed per run; inherited EXP-002 local-canary tradeoff retained |
 | Dynamic secret-flow checking | Executed branches/addresses influenced by marked secrets | Not-run; required |
 | Statistical timing-leakage checks | Detectable timing differences between chosen secret classes on this build/target | Not-run; required |
@@ -37,7 +37,7 @@ The Kyber1024 keygen body includes public-matrix rejection sampling. Marking all
 | Fused base multiplication / wide dot | K, coefficient positions, twiddle indices; fixed public matrix or ciphertext-side operand where appropriate | Secret transformed-vector values and relevant secret intermediates | Use the documented operand-specific bounds, including general noncanonical-input envelopes where applicable |
 | Staged inverse NTT | Stage schedule, loop bounds and twiddle table | Centred secret-derived transform inputs, fixed versus random and boundary versus interior patterns | Entry coefficients in [-1664,1664]; retained stage bounds apply |
 | Raw error NTT and final addition | K, NTT schedule and fixed public operands | Secret error coefficients and resulting additions | Sample noise within [-ETA1,ETA1]; stress patterns separately labelled within proven internal bounds |
-| Proposed keygen dot path | Public matrix, K, indices and scale conversion | Centred secret vector and error-addition values | Matrix [0,3328], secret vector [-1664,1664], EXP-005 addition bounds |
+| Keygen dot path (EXP-006) | Public matrix, K, indices and scale conversion | Centred secret vector and error-addition values | Matrix [0,3328], secret vector [-1664,1664], EXP-005 addition bounds |
 
 Synthetic stress classes within a proven kernel contract need not all be reachable as whole-KEM inputs. I label them as stress tests and also include valid generated fixtures. I do not interpret an out-of-contract overflow as an attack against the documented implementation, or silently discard a within-contract finding.
 
@@ -62,10 +62,6 @@ I use separate outcomes: detected dependency or timing difference; no evidence d
 
 I also retain non-timing findings: code growth, measured local stack changes, protection instructions and the EXP-002 dot-product canary removal. Canary presence is a compiler-hardening observation, not proof of memory safety; endbr64 presence does not prove runtime CET enforcement. Larger representatives change bit patterns, so timing evidence does not answer power/EM/fault questions. These limitations belong in the thesis security results table, including negative and unresolved findings.
 
-## Optional role of VTune
+## Scope decision: no VTune work
 
-VTune Hotspots can help identify functions consuming CPU time and relate performance to call stacks. This could explain why a reduction-count saving produces a small or uneven whole-KEM gain. Our preserved CSVs already provide the primary durations; VTune is not required to view those results. [Intel Hotspots documentation](https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/basic-hotspots-analysis.html).
-
-I would use a separate profiling run after selecting the final candidate, only if the performance explanation needs it. Intel distinguishes software sampling from hardware event collection; availability, privileges and overhead depend on the collection method. WSL support does not guarantee access to every hardware counter in this configuration. I would check the actual setup before relying on those metrics. [Intel collection documentation](https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/collect.html), [Intel system requirements](https://www.intel.com/content/www/us/en/developer/articles/release-notes/vtune-profiler/current.html).
-
-A profile showing fewer hotspots or CPU cycles does not test whether different secrets take different time. Profiling therefore remains optional explanatory evidence; it does not replace the required secret-flow/timing-leakage assessment. I keep profiler-instrumented measurements separate from the normal primary benchmarks.
+In ACT-0015 I chose to exclude VTune installation, profiling and analysis from the remaining practical plan. The ACT-0014 literature review remains recorded as historical provenance, but no profiling task is pending. Primary performance evidence comes from the retained normal-build paired timing data, reduction counts and generated-code review. Required secret-flow and statistical timing-leakage checks remain in scope; removing an optional profiler does not remove the supervisor's security-assessment requirement.

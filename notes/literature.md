@@ -59,12 +59,12 @@ Related primary demonstration: https://github.com/agl/ctgrind
 - Implementation decision: prefer supported installed Memcheck interfaces after inspecting the pinned headers rather than assuming an old ctgrind patch works. Tool installation, interface verification, harness sensitivity and actual checks remain pending.
 - Scope: this technique does not certify all paths, hardware instruction timing, physical leakage or exhaustive memory safety. Public-matrix rejection branches require correct public-input classification.
 
-## LIT-007 Optional performance profiling
+## LIT-007 Performance profiling considered and excluded
 
 Intel Corporation. (n.d.). *Hotspots analysis*. In *Intel VTune Profiler user guide* (Version 2025.4). https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/basic-hotspots-analysis.html
 
 - Inspected in ACT-0014: official Hotspots documentation, [collection-method documentation](https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/collect.html), and [release/system requirements](https://www.intel.com/content/www/us/en/developer/articles/release-notes/vtune-profiler/current.html).
-- Relationship: optional explanation of per-function CPU costs and call stacks after final candidate selection. Existing raw CSV timing results already support primary performance analysis; they do not require VTune for viewing.
+- Scope decision in ACT-0015: I excluded VTune from the remaining practical work at my request. I retain this earlier primary-source review as provenance, not a pending installation/profiling task. Existing raw CSV timing results support primary performance analysis.
 - Constraints: software and hardware sampling have different collection requirements/overheads. WSL support does not establish which hardware events this local setup exposes. Check actual availability before relying on profiler metrics.
 - Security boundary: hotspot/CPU measurements do not compare secret-input timing classes and do not replace the required leakage assessment. Keep profiling runs separate from primary normal-build timings.
 
