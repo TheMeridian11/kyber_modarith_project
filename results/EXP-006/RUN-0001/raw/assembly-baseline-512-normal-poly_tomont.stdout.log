@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-006/RUN-0001/build/baseline-512-normal:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000043e0 <pqcrystals_kyber512_ref_poly_tomont>:
+    43e0:	f3 0f 1e fa                                     	endbr64
+    43e4:	55                                              	push   %rbp
+    43e5:	48 8d af 00 02 00 00                            	lea    0x200(%rdi),%rbp
+    43ec:	53                                              	push   %rbx
+    43ed:	48 89 fb                                        	mov    %rdi,%rbx
+    43f0:	48 83 ec 08                                     	sub    $0x8,%rsp
+    43f4:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    43f8:	0f bf 3b                                        	movswl (%rbx),%edi
+    43fb:	48 83 c3 02                                     	add    $0x2,%rbx
+    43ff:	69 ff 49 05 00 00                               	imul   $0x549,%edi,%edi
+    4405:	e8 16 0a 00 00                                  	call   4e20 <pqcrystals_kyber512_ref_montgomery_reduce>
+    440a:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    440e:	48 39 eb                                        	cmp    %rbp,%rbx
+    4411:	75 e5                                           	jne    43f8 <pqcrystals_kyber512_ref_poly_tomont+0x18>
+    4413:	48 83 c4 08                                     	add    $0x8,%rsp
+    4417:	5b                                              	pop    %rbx
+    4418:	5d                                              	pop    %rbp
+    4419:	c3                                              	ret
+
+Disassembly of section .fini:

@@ -1,0 +1,8 @@
+keygen_dot_vectors=45
+keygen_dot_coefficient_checks=11520
+keygen_dot_addition_checks=46080
+keygen_dot_serialization_checks=180
+keygen_dot_oracle=pass
+kem_fixtures=100
+kem_checks=pass
+transcript=public-deterministic-test-vectors

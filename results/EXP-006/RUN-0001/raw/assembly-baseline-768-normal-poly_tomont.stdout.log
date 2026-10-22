@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-006/RUN-0001/build/baseline-768-normal:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000044f0 <pqcrystals_kyber768_ref_poly_tomont>:
+    44f0:	f3 0f 1e fa                                     	endbr64
+    44f4:	55                                              	push   %rbp
+    44f5:	48 8d af 00 02 00 00                            	lea    0x200(%rdi),%rbp
+    44fc:	53                                              	push   %rbx
+    44fd:	48 89 fb                                        	mov    %rdi,%rbx
+    4500:	48 83 ec 08                                     	sub    $0x8,%rsp
+    4504:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    4508:	0f bf 3b                                        	movswl (%rbx),%edi
+    450b:	48 83 c3 02                                     	add    $0x2,%rbx
+    450f:	69 ff 49 05 00 00                               	imul   $0x549,%edi,%edi
+    4515:	e8 66 09 00 00                                  	call   4e80 <pqcrystals_kyber768_ref_montgomery_reduce>
+    451a:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    451e:	48 39 eb                                        	cmp    %rbp,%rbx
+    4521:	75 e5                                           	jne    4508 <pqcrystals_kyber768_ref_poly_tomont+0x18>
+    4523:	48 83 c4 08                                     	add    $0x8,%rsp
+    4527:	5b                                              	pop    %rbx
+    4528:	5d                                              	pop    %rbp
+    4529:	c3                                              	ret
+
+Disassembly of section .fini:
