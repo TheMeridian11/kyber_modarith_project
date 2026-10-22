@@ -1,0 +1,1057 @@
+{
+  "accepted_for_comparison": true,
+  "activity": "ACT-0009",
+  "archived_run_modified": false,
+  "assembly": {
+    "1024": {
+      "fused-basemul": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r14",
+            "+0x6: mov %rdx,%r14",
+            "+0x9: push %r13",
+            "+0xb: mov %rsi,%r13",
+            "+0xe: push %r12",
+            "+0x10: push %rbp",
+            "+0x11: mov %rdi,%rbp",
+            "+0x14: push %rbx",
+            "+0x15: mov $0x200,%ebx",
+            "+0x1a: sub $0x210,%rsp",
+            "+0x21: mov %fs:0x28,%rax",
+            "+0x2a: mov %rax,0x208(%rsp)",
+            "+0x32: xor %eax,%eax",
+            "+0x34: mov %rsp,%r12",
+            "+0x37: call <pqcrystals_kyber1024_ref_poly_basemul_montgomery>",
+            "+0x3c: lea (%r14,%rbx,1),%rdx",
+            "+0x40: lea 0x0(%r13,%rbx,1),%rsi",
+            "+0x45: mov %r12,%rdi",
+            "+0x48: add $0x200,%rbx",
+            "+0x4f: call <pqcrystals_kyber1024_ref_poly_basemul_montgomery>",
+            "+0x54: mov %r12,%rdx",
+            "+0x57: mov %rbp,%rsi",
+            "+0x5a: mov %rbp,%rdi",
+            "+0x5d: call <pqcrystals_kyber1024_ref_poly_add>",
+            "+0x62: cmp $0x800,%rbx",
+            "+0x69: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x3c>",
+            "+0x6b: mov %rbp,%rdi",
+            "+0x6e: call <pqcrystals_kyber1024_ref_poly_reduce>",
+            "+0x73: mov 0x208(%rsp),%rax",
+            "+0x7b: sub %fs:0x28,%rax",
+            "+0x84: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x96>",
+            "+0x86: add $0x210,%rsp",
+            "+0x8d: pop %rbx",
+            "+0x8e: pop %rbp",
+            "+0x8f: pop %r12",
+            "+0x91: pop %r13",
+            "+0x93: pop %r14",
+            "+0x95: ret",
+            "+0x96: call <__stack_chk_fail@plt>"
+          ],
+          "size_bytes": 155
+        }
+      },
+      "wide-dot": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r15",
+            "+0x6: xor %r15d,%r15d",
+            "+0x9: push %r14",
+            "+0xb: push %r13",
+            "+0xd: push %r12",
+            "+0xf: push %rbp",
+            "+0x10: mov %rsi,%rbp",
+            "+0x13: push %rbx",
+            "+0x14: mov %rdx,%rbx",
+            "+0x17: sub $0x18,%rsp",
+            "+0x1b: mov %rdi,0x8(%rsp)",
+            "+0x20: jmp <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x74>",
+            "+0x22: nopw 0x0(%rax,%rax,1)",
+            "+0x28: call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "+0x2d: neg %r14d",
+            "+0x30: movswl %ax,%edi",
+            "+0x33: movswl %r14w,%r14d",
+            "+0x37: imul %r14d,%edi",
+            "+0x3b: add $0x4,%rbp",
+            "+0x3f: add $0x4,%rbx",
+            "+0x43: add %r13d,%edi",
+            "+0x46: call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "+0x4b: mov 0x8(%rsp),%r14",
+            "+0x50: mov %r12d,%edi",
+            "+0x53: mov %ax,(%r14,%r15,4)",
+            "+0x58: call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "+0x5d: mov %ax,0x2(%r14,%r15,4)",
+            "+0x63: add $0x1,%r15",
+            "+0x67: cmp $0x80,%r15",
+            "+0x6e: je <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x185>",
+            "+0x74: movswl 0x0(%rbp),%edx",
+            "+0x78: movswl 0x200(%rbp),%eax",
+            "+0x7f: lea <pqcrystals_kyber1024_ref_zetas>(%rip),%rcx",
+            "+0x86: movswl 0x2(%rbp),%r12d",
+            "+0x8b: movswl 0x2(%rbx),%r13d",
+            "+0x90: movswl 0x202(%rbp),%r10d",
+            "+0x98: movswl (%rbx),%esi",
+            "+0x9b: mov %edx,%edi",
+            "+0x9d: mov %eax,%r9d",
+            "+0xa0: movswl 0x202(%rbx),%r11d",
+            "+0xa8: movswl 0x200(%rbx),%r8d",
+            "+0xb0: imul %r13d,%edx",
+            "+0xb4: imul %esi,%edi",
+            "+0xb7: mov %r10d,%r14d",
+            "+0xba: imul %r8d,%r9d",
+            "+0xbe: imul %r12d,%esi",
+            "+0xc2: imul %r10d,%r8d",
+            "+0xc6: movswl 0x402(%rbp),%r10d",
+            "+0xce: imul %r11d,%eax",
+            "+0xd2: add %r9d,%edi",
+            "+0xd5: mov %r12d,%r9d",
+            "+0xd8: add %edx,%esi",
+            "+0xda: imul %r11d,%r14d",
+            "+0xde: movswl 0x400(%rbx),%edx",
+            "+0xe5: movswl 0x402(%rbx),%r11d",
+            "+0xed: imul %r13d,%r9d",
+            "+0xf1: add %r8d,%eax",
+            "+0xf4: add %eax,%esi",
+            "+0xf6: movswl 0x400(%rbp),%eax",
+            "+0xfd: add %r14d,%r9d",
+            "+0x100: mov %eax,%r8d",
+            "+0x103: imul %r11d,%eax",
+            "+0x107: imul %edx,%r8d",
+            "+0x10b: imul %r10d,%edx",
+            "+0x10f: add %edi,%r8d",
+            "+0x112: mov %r10d,%edi",
+            "+0x115: add %eax,%edx",
+            "+0x117: movswl 0x600(%rbp),%eax",
+            "+0x11e: imul %r11d,%edi",
+            "+0x122: add %esi,%edx",
+            "+0x124: movswl 0x600(%rbx),%esi",
+            "+0x12b: mov %eax,%r13d",
+            "+0x12e: imul %esi,%r13d",
+            "+0x132: add %r9d,%edi",
+            "+0x135: movswl 0x602(%rbx),%r9d",
+            "+0x13d: imul %r9d,%eax",
+            "+0x141: add %r8d,%r13d",
+            "+0x144: movswl 0x602(%rbp),%r8d",
+            "+0x14c: imul %r8d,%esi",
+            "+0x150: mov %r8d,%r10d",
+            "+0x153: imul %r9d,%r10d",
+            "+0x157: lea (%rax,%rsi,1),%r12d",
+            "+0x15b: mov %r15d,%eax",
+            "+0x15e: shr $1,%eax",
+            "+0x160: add %r10d,%edi",
+            "+0x163: add %edx,%r12d",
+            "+0x166: add $0x40,%eax",
+            "+0x169: movswl (%rcx,%rax,2),%r14d",
+            "+0x16e: test $0x1,%r15b",
+            "+0x172: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x28>",
+            "+0x178: call <pqcrystals_kyber1024_ref_montgomery_reduce>",
+            "+0x17d: movswl %ax,%edi",
+            "+0x180: jmp <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x37>",
+            "+0x185: mov 0x8(%rsp),%rdi",
+            "+0x18a: add $0x18,%rsp",
+            "+0x18e: pop %rbx",
+            "+0x18f: pop %rbp",
+            "+0x190: pop %r12",
+            "+0x192: pop %r13",
+            "+0x194: pop %r14",
+            "+0x196: pop %r15",
+            "+0x198: jmp <pqcrystals_kyber1024_ref_poly_reduce>"
+          ],
+          "size_bytes": 413
+        }
+      }
+    },
+    "512": {
+      "fused-basemul": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r12",
+            "+0x6: mov %rdx,%r12",
+            "+0x9: push %rbp",
+            "+0xa: mov %rsi,%rbp",
+            "+0xd: push %rbx",
+            "+0xe: mov %rdi,%rbx",
+            "+0x11: sub $0x210,%rsp",
+            "+0x18: mov %fs:0x28,%rax",
+            "+0x21: mov %rax,0x208(%rsp)",
+            "+0x29: xor %eax,%eax",
+            "+0x2b: call <pqcrystals_kyber512_ref_poly_basemul_montgomery>",
+            "+0x30: lea 0x200(%rbp),%rsi",
+            "+0x37: mov %rsp,%rbp",
+            "+0x3a: lea 0x200(%r12),%rdx",
+            "+0x42: mov %rbp,%rdi",
+            "+0x45: call <pqcrystals_kyber512_ref_poly_basemul_montgomery>",
+            "+0x4a: mov %rbx,%rdi",
+            "+0x4d: mov %rbp,%rdx",
+            "+0x50: mov %rbx,%rsi",
+            "+0x53: call <pqcrystals_kyber512_ref_poly_add>",
+            "+0x58: mov %rbx,%rdi",
+            "+0x5b: call <pqcrystals_kyber512_ref_poly_reduce>",
+            "+0x60: mov 0x208(%rsp),%rax",
+            "+0x68: sub %fs:0x28,%rax",
+            "+0x71: jne <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x7f>",
+            "+0x73: add $0x210,%rsp",
+            "+0x7a: pop %rbx",
+            "+0x7b: pop %rbp",
+            "+0x7c: pop %r12",
+            "+0x7e: ret",
+            "+0x7f: call <__stack_chk_fail@plt>"
+          ],
+          "size_bytes": 132
+        }
+      },
+      "wide-dot": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r15",
+            "+0x6: mov %rdx,%rcx",
+            "+0x9: mov %rsi,%r15",
+            "+0xc: push %r14",
+            "+0xe: push %r13",
+            "+0x10: mov %rdi,%r13",
+            "+0x13: push %r12",
+            "+0x15: push %rbp",
+            "+0x16: push %rbx",
+            "+0x17: xor %ebx,%ebx",
+            "+0x19: sub $0x18,%rsp",
+            "+0x1d: jmp <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x69>",
+            "+0x1f: nop",
+            "+0x20: mov %rcx,0x8(%rsp)",
+            "+0x25: neg %r14d",
+            "+0x28: call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "+0x2d: movswl %r14w,%r14d",
+            "+0x31: movswl %ax,%edi",
+            "+0x34: imul %r14d,%edi",
+            "+0x38: add %ebp,%edi",
+            "+0x3a: call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "+0x3f: mov %r12d,%edi",
+            "+0x42: mov %ax,0x0(%r13,%rbx,4)",
+            "+0x48: call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "+0x4d: mov 0x8(%rsp),%rcx",
+            "+0x52: mov %ax,0x2(%r13,%rbx,4)",
+            "+0x58: add $0x1,%rbx",
+            "+0x5c: cmp $0x80,%rbx",
+            "+0x63: je <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x107>",
+            "+0x69: movswl (%r15,%rbx,4),%edx",
+            "+0x6e: movswl 0x2(%rcx,%rbx,4),%r12d",
+            "+0x74: movswl 0x200(%r15,%rbx,4),%eax",
+            "+0x7d: movswl (%rcx,%rbx,4),%r8d",
+            "+0x82: movswl 0x2(%r15,%rbx,4),%r11d",
+            "+0x88: mov %edx,%ebp",
+            "+0x8a: imul %r12d,%edx",
+            "+0x8e: movswl 0x200(%rcx,%rbx,4),%esi",
+            "+0x96: movswl 0x202(%r15,%rbx,4),%r9d",
+            "+0x9f: mov %eax,%edi",
+            "+0xa1: imul %r8d,%ebp",
+            "+0xa5: movswl 0x202(%rcx,%rbx,4),%r10d",
+            "+0xae: imul %esi,%edi",
+            "+0xb1: imul %r11d,%r8d",
+            "+0xb5: mov %r9d,%r14d",
+            "+0xb8: imul %r9d,%esi",
+            "+0xbc: imul %r10d,%eax",
+            "+0xc0: add %edi,%ebp",
+            "+0xc2: mov %r11d,%edi",
+            "+0xc5: add %r8d,%edx",
+            "+0xc8: imul %r12d,%edi",
+            "+0xcc: imul %r10d,%r14d",
+            "+0xd0: add %esi,%eax",
+            "+0xd2: lea <pqcrystals_kyber512_ref_zetas>(%rip),%rsi",
+            "+0xd9: lea (%rdx,%rax,1),%r12d",
+            "+0xdd: mov %ebx,%eax",
+            "+0xdf: shr $1,%eax",
+            "+0xe1: add %r14d,%edi",
+            "+0xe4: add $0x40,%eax",
+            "+0xe7: movswl (%rsi,%rax,2),%r14d",
+            "+0xec: test $0x1,%bl",
+            "+0xef: jne <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x20>",
+            "+0xf5: mov %rcx,0x8(%rsp)",
+            "+0xfa: call <pqcrystals_kyber512_ref_montgomery_reduce>",
+            "+0xff: movswl %ax,%edi",
+            "+0x102: jmp <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x34>",
+            "+0x107: add $0x18,%rsp",
+            "+0x10b: mov %r13,%rdi",
+            "+0x10e: pop %rbx",
+            "+0x10f: pop %rbp",
+            "+0x110: pop %r12",
+            "+0x112: pop %r13",
+            "+0x114: pop %r14",
+            "+0x116: pop %r15",
+            "+0x118: jmp <pqcrystals_kyber512_ref_poly_reduce>"
+          ],
+          "size_bytes": 285
+        }
+      }
+    },
+    "768": {
+      "fused-basemul": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r13",
+            "+0x6: push %r12",
+            "+0x8: mov %rdx,%r12",
+            "+0xb: push %rbp",
+            "+0xc: mov %rsi,%rbp",
+            "+0xf: push %rbx",
+            "+0x10: mov %rdi,%rbx",
+            "+0x13: sub $0x218,%rsp",
+            "+0x1a: mov %fs:0x28,%rax",
+            "+0x23: mov %rax,0x208(%rsp)",
+            "+0x2b: xor %eax,%eax",
+            "+0x2d: mov %rsp,%r13",
+            "+0x30: call <pqcrystals_kyber768_ref_poly_basemul_montgomery>",
+            "+0x35: lea 0x200(%r12),%rdx",
+            "+0x3d: lea 0x200(%rbp),%rsi",
+            "+0x44: mov %r13,%rdi",
+            "+0x47: call <pqcrystals_kyber768_ref_poly_basemul_montgomery>",
+            "+0x4c: mov %r13,%rdx",
+            "+0x4f: mov %rbx,%rsi",
+            "+0x52: mov %rbx,%rdi",
+            "+0x55: call <pqcrystals_kyber768_ref_poly_add>",
+            "+0x5a: lea 0x400(%r12),%rdx",
+            "+0x62: lea 0x400(%rbp),%rsi",
+            "+0x69: mov %r13,%rdi",
+            "+0x6c: call <pqcrystals_kyber768_ref_poly_basemul_montgomery>",
+            "+0x71: mov %rbx,%rdi",
+            "+0x74: mov %r13,%rdx",
+            "+0x77: mov %rbx,%rsi",
+            "+0x7a: call <pqcrystals_kyber768_ref_poly_add>",
+            "+0x7f: mov %rbx,%rdi",
+            "+0x82: call <pqcrystals_kyber768_ref_poly_reduce>",
+            "+0x87: mov 0x208(%rsp),%rax",
+            "+0x8f: sub %fs:0x28,%rax",
+            "+0x98: jne <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0xa8>",
+            "+0x9a: add $0x218,%rsp",
+            "+0xa1: pop %rbx",
+            "+0xa2: pop %rbp",
+            "+0xa3: pop %r12",
+            "+0xa5: pop %r13",
+            "+0xa7: ret",
+            "+0xa8: call <__stack_chk_fail@plt>"
+          ],
+          "size_bytes": 173
+        }
+      },
+      "wide-dot": {
+        "montgomery_reduce": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: imul $0xf301,%di,%ax",
+            "+0x9: cwtl",
+            "+0xa: imul $0xfffff2ff,%eax,%eax",
+            "+0x10: add %edi,%eax",
+            "+0x12: shr $0x10,%eax",
+            "+0x15: ret"
+          ],
+          "size_bytes": 22
+        },
+        "polyvec_basemul_acc_montgomery": {
+          "instructions": [
+            "+0x0: endbr64",
+            "+0x4: push %r15",
+            "+0x6: push %r14",
+            "+0x8: xor %r14d,%r14d",
+            "+0xb: push %r13",
+            "+0xd: push %r12",
+            "+0xf: mov %rsi,%r12",
+            "+0x12: push %rbp",
+            "+0x13: mov %rdx,%rbp",
+            "+0x16: push %rbx",
+            "+0x17: sub $0x18,%rsp",
+            "+0x1b: mov %rdi,0x8(%rsp)",
+            "+0x20: jmp <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x73>",
+            "+0x22: nopw 0x0(%rax,%rax,1)",
+            "+0x28: call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "+0x2d: neg %r13d",
+            "+0x30: movswl %ax,%edi",
+            "+0x33: movswl %r13w,%r13d",
+            "+0x37: imul %r13d,%edi",
+            "+0x3b: add $0x4,%r12",
+            "+0x3f: add $0x4,%rbp",
+            "+0x43: add %r15d,%edi",
+            "+0x46: call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "+0x4b: mov 0x8(%rsp),%r15",
+            "+0x50: mov %ebx,%edi",
+            "+0x52: mov %ax,(%r15,%r14,4)",
+            "+0x57: call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "+0x5c: mov %ax,0x2(%r15,%r14,4)",
+            "+0x62: add $0x1,%r14",
+            "+0x66: cmp $0x80,%r14",
+            "+0x6d: je <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x14b>",
+            "+0x73: movswl (%r12),%ecx",
+            "+0x78: movswl 0x0(%rbp),%r9d",
+            "+0x7d: lea <pqcrystals_kyber768_ref_zetas>(%rip),%rdx",
+            "+0x84: movswl 0x200(%r12),%eax",
+            "+0x8d: movswl 0x200(%rbp),%r8d",
+            "+0x95: mov %ecx,%edi",
+            "+0x97: movswl 0x2(%r12),%ebx",
+            "+0x9d: movswl 0x2(%rbp),%r13d",
+            "+0xa2: mov %eax,%esi",
+            "+0xa4: imul %r9d,%edi",
+            "+0xa8: movswl 0x202(%r12),%r10d",
+            "+0xb1: movswl 0x202(%rbp),%r11d",
+            "+0xb9: imul %r8d,%esi",
+            "+0xbd: imul %ebx,%r9d",
+            "+0xc1: mov %r10d,%r15d",
+            "+0xc4: imul %r13d,%ecx",
+            "+0xc8: imul %r10d,%r8d",
+            "+0xcc: add %esi,%edi",
+            "+0xce: mov %ebx,%esi",
+            "+0xd0: movswl 0x400(%r12),%ebx",
+            "+0xd9: imul %r11d,%eax",
+            "+0xdd: imul %r13d,%esi",
+            "+0xe1: add %r9d,%ecx",
+            "+0xe4: movswl 0x402(%rbp),%r9d",
+            "+0xec: imul %r11d,%r15d",
+            "+0xf0: add %r8d,%eax",
+            "+0xf3: movswl 0x402(%r12),%r8d",
+            "+0xfc: add %eax,%ecx",
+            "+0xfe: movswl 0x400(%rbp),%eax",
+            "+0x105: add %r15d,%esi",
+            "+0x108: mov %ebx,%r15d",
+            "+0x10b: imul %eax,%r15d",
+            "+0x10f: imul %r9d,%ebx",
+            "+0x113: imul %r8d,%eax",
+            "+0x117: add %edi,%r15d",
+            "+0x11a: mov %r8d,%edi",
+            "+0x11d: imul %r9d,%edi",
+            "+0x121: add %eax,%ebx",
+            "+0x123: mov %r14d,%eax",
+            "+0x126: shr $1,%eax",
+            "+0x128: add %ecx,%ebx",
+            "+0x12a: add $0x40,%eax",
+            "+0x12d: add %esi,%edi",
+            "+0x12f: movswl (%rdx,%rax,2),%r13d",
+            "+0x134: test $0x1,%r14b",
+            "+0x138: jne <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x28>",
+            "+0x13e: call <pqcrystals_kyber768_ref_montgomery_reduce>",
+            "+0x143: movswl %ax,%edi",
+            "+0x146: jmp <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x37>",
+            "+0x14b: mov 0x8(%rsp),%rdi",
+            "+0x150: add $0x18,%rsp",
+            "+0x154: pop %rbx",
+            "+0x155: pop %rbp",
+            "+0x156: pop %r12",
+            "+0x158: pop %r13",
+            "+0x15a: pop %r14",
+            "+0x15c: pop %r15",
+            "+0x15e: jmp <pqcrystals_kyber768_ref_poly_reduce>"
+          ],
+          "size_bytes": 355
+        }
+      }
+    }
+  },
+  "assembly_facts": [
+    {
+      "conditional_branches": [
+        "+0x71: jne <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x7f>"
+      ],
+      "explicit_stack_reservation_bytes": 528,
+      "function_bytes": 132,
+      "local_stack_bytes_excluding_entry_return_and_callees": 552,
+      "parameter_set": "Kyber512",
+      "saved_register_bytes": 24,
+      "stack_canary_present": true,
+      "variant": "fused-basemul"
+    },
+    {
+      "conditional_branches": [
+        "+0x63: je <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x107>",
+        "+0xef: jne <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery+0x20>"
+      ],
+      "explicit_stack_reservation_bytes": 24,
+      "function_bytes": 285,
+      "local_stack_bytes_excluding_entry_return_and_callees": 72,
+      "parameter_set": "Kyber512",
+      "saved_register_bytes": 48,
+      "stack_canary_present": false,
+      "variant": "wide-dot"
+    },
+    {
+      "conditional_branches": [
+        "+0x98: jne <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0xa8>"
+      ],
+      "explicit_stack_reservation_bytes": 536,
+      "function_bytes": 173,
+      "local_stack_bytes_excluding_entry_return_and_callees": 568,
+      "parameter_set": "Kyber768",
+      "saved_register_bytes": 32,
+      "stack_canary_present": true,
+      "variant": "fused-basemul"
+    },
+    {
+      "conditional_branches": [
+        "+0x6d: je <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x14b>",
+        "+0x138: jne <pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery+0x28>"
+      ],
+      "explicit_stack_reservation_bytes": 24,
+      "function_bytes": 355,
+      "local_stack_bytes_excluding_entry_return_and_callees": 72,
+      "parameter_set": "Kyber768",
+      "saved_register_bytes": 48,
+      "stack_canary_present": false,
+      "variant": "wide-dot"
+    },
+    {
+      "conditional_branches": [
+        "+0x69: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x3c>",
+        "+0x84: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x96>"
+      ],
+      "explicit_stack_reservation_bytes": 528,
+      "function_bytes": 155,
+      "local_stack_bytes_excluding_entry_return_and_callees": 568,
+      "parameter_set": "Kyber1024",
+      "saved_register_bytes": 40,
+      "stack_canary_present": true,
+      "variant": "fused-basemul"
+    },
+    {
+      "conditional_branches": [
+        "+0x6e: je <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x185>",
+        "+0x172: jne <pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery+0x28>"
+      ],
+      "explicit_stack_reservation_bytes": 24,
+      "function_bytes": 413,
+      "local_stack_bytes_excluding_entry_return_and_callees": 72,
+      "parameter_set": "Kyber1024",
+      "saved_register_bytes": 48,
+      "stack_canary_present": false,
+      "variant": "wide-dot"
+    }
+  ],
+  "assembly_provenance": [
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-512-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-512-normal",
+      "executable_sha256": "27ba982a56b83ec89c752f7303ceb52eecba5628b193a33e011f8fc8f88a787e",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "a3f211c3e02a0479234d1c653a5adf96be058531e5ea4557fcceb18db00fcde7",
+      "parameter_set": "Kyber512",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-512-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-512-normal",
+      "executable_sha256": "27ba982a56b83ec89c752f7303ceb52eecba5628b193a33e011f8fc8f88a787e",
+      "function": "montgomery_reduce",
+      "output_sha256": "6055d010a455ef545f07a8acac439f6efbc0ec24ff832e6b083fd0305a04b5d5",
+      "parameter_set": "Kyber512",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-512"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-512",
+      "executable_sha256": "014ac66850cf1000e9bbcc3a9512a86a1ba9192c2015affcc51c63c19d88c29a",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "207245a0a0624d733b5cd058b4eadec33d6eba1ab36a18e26aa91354f740d245",
+      "parameter_set": "Kyber512",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-512"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-512",
+      "executable_sha256": "014ac66850cf1000e9bbcc3a9512a86a1ba9192c2015affcc51c63c19d88c29a",
+      "function": "montgomery_reduce",
+      "output_sha256": "82b25397ccd1d7bd63f521ca04d7421525e8dadf194d0ecf7bd0ddae2ffe736a",
+      "parameter_set": "Kyber512",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-512-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-512-normal",
+      "executable_sha256": "2b944f2faecc5beb31dffcd1f47c3ca4e37e37f8894b89d84df49b3197b823b4",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "c40fee237acd4e279b0bb7adb462fa3ae36847c2d5ed1d9c7de8813d4a346078",
+      "parameter_set": "Kyber512",
+      "variant": "wide-dot"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber512_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-512-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-512-normal",
+      "executable_sha256": "2b944f2faecc5beb31dffcd1f47c3ca4e37e37f8894b89d84df49b3197b823b4",
+      "function": "montgomery_reduce",
+      "output_sha256": "0f60be72886576ec3950692c7508e2629588ec7eeebb9aff30a27fa71a01691c",
+      "parameter_set": "Kyber512",
+      "variant": "wide-dot"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-768-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-768-normal",
+      "executable_sha256": "8d71452562dbe0dd14ce747d18b753f127e915dee8fe56cd8b312f16de24ed6e",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "1d0944768bab2d478814d0ae7c05f4a5fc87ed0852bd06831aa07d541e1a73a1",
+      "parameter_set": "Kyber768",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-768-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-768-normal",
+      "executable_sha256": "8d71452562dbe0dd14ce747d18b753f127e915dee8fe56cd8b312f16de24ed6e",
+      "function": "montgomery_reduce",
+      "output_sha256": "8fc7d47923bf8496436d873ba565dbe09062a1dc435707b1e26de701e6719a1f",
+      "parameter_set": "Kyber768",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-768"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-768",
+      "executable_sha256": "1143f916cf1fd2af15d502db1504b8dfd50522de84879be5f69ed17f5d9a8e26",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "ad82754ed7a614848a9ab1123334b454cce52265759a790b6053fce9d1ff71d6",
+      "parameter_set": "Kyber768",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-768"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-768",
+      "executable_sha256": "1143f916cf1fd2af15d502db1504b8dfd50522de84879be5f69ed17f5d9a8e26",
+      "function": "montgomery_reduce",
+      "output_sha256": "b0dcded07828a4fdf9cbb058785bbfce45133fd6010f2048006deb3775d8bbc4",
+      "parameter_set": "Kyber768",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-768-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-768-normal",
+      "executable_sha256": "0dd28880133b8d054e75b3737954eb36153ca32c54f29b4823696b9052dd0447",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "ed80f2e189f00338a792310a2999c76d2973d1f3a2ba0742cff468fdd9648358",
+      "parameter_set": "Kyber768",
+      "variant": "wide-dot"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber768_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-768-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-768-normal",
+      "executable_sha256": "0dd28880133b8d054e75b3737954eb36153ca32c54f29b4823696b9052dd0447",
+      "function": "montgomery_reduce",
+      "output_sha256": "5b12e141be26133e887cb46e8e61dfc33bade4c9182491338398479c18c8b8ef",
+      "parameter_set": "Kyber768",
+      "variant": "wide-dot"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-1024-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-1024-normal",
+      "executable_sha256": "79a5173cbfdb7173457915878b862b25e55b84dfa43b1a6cf08b248e7bc44711",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "8b23648226c145ce86464cdcea8b7fb3f6a032f72bca8d3356219923dd5048cd",
+      "parameter_set": "Kyber1024",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/baseline-1024-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/baseline-1024-normal",
+      "executable_sha256": "79a5173cbfdb7173457915878b862b25e55b84dfa43b1a6cf08b248e7bc44711",
+      "function": "montgomery_reduce",
+      "output_sha256": "483faec9acd5d2d5ccd5f2c12026f0be122e5807a093d7af2289942de3165c07",
+      "parameter_set": "Kyber1024",
+      "variant": "baseline"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-1024"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-1024",
+      "executable_sha256": "528e0933a9fb6741727cf560a47937fc4d1f0f15be2e43aa1e99191c983dd17a",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "df431b47f3cffe2c80fe48fb93931aef666ff8b2759875b220324375e88acc73",
+      "parameter_set": "Kyber1024",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-001/RUN-0002/build/fused-basemul-1024"
+      ],
+      "executable": "results/EXP-001/RUN-0002/build/fused-basemul-1024",
+      "executable_sha256": "528e0933a9fb6741727cf560a47937fc4d1f0f15be2e43aa1e99191c983dd17a",
+      "function": "montgomery_reduce",
+      "output_sha256": "b22bdc9a3f15e4fbe0f31ac58fbb10e118659ad0e95ea476c7baeb49639e6a12",
+      "parameter_set": "Kyber1024",
+      "variant": "fused-basemul"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_polyvec_basemul_acc_montgomery",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-1024-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-1024-normal",
+      "executable_sha256": "ab20d50bf7b204e20e8c7f65afa5e3aab471971c1d99d02af96dfede284a19d2",
+      "function": "polyvec_basemul_acc_montgomery",
+      "output_sha256": "c3b8fbb53221fa3e3bd9478ec8c8d2f6f57855ab16cac723c9d1fa3b919c37cf",
+      "parameter_set": "Kyber1024",
+      "variant": "wide-dot"
+    },
+    {
+      "argv": [
+        "/usr/bin/objdump",
+        "-d",
+        "--insn-width=16",
+        "--disassemble=pqcrystals_kyber1024_ref_montgomery_reduce",
+        "/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-002/RUN-0001/build/wide-dot-1024-normal"
+      ],
+      "executable": "results/EXP-002/RUN-0001/build/wide-dot-1024-normal",
+      "executable_sha256": "ab20d50bf7b204e20e8c7f65afa5e3aab471971c1d99d02af96dfede284a19d2",
+      "function": "montgomery_reduce",
+      "output_sha256": "40613d43d49f4b623dac644090fff77c72e290607d43e51a79767039c724b421",
+      "parameter_set": "Kyber1024",
+      "variant": "wide-dot"
+    }
+  ],
+  "baseline_matches_pinned_upstream": true,
+  "candidate_changes_relative_to_EXP001": [
+    "polyvec.c"
+  ],
+  "completed_steps": 48,
+  "count_observations": 90,
+  "git_commands_executed": false,
+  "manifest": "results/EXP-002/RUN-0001/manifest.json",
+  "manifest_sha256": "ea9a712b65629b4746e0f87bf4236ae4126f645f61a8b13ce39521395786f0db",
+  "metadata_sha256": "d77119e9095d2f9780a322c383195b2708fd1a73bfdbf5df868c137942e8dc73",
+  "normal_and_ubsan_diagnostics": "expected success markers only; no sanitizer diagnostics",
+  "original_baseline_assembly_matches_EXP001_polyvec_and_reducer": true,
+  "raw_assembly_whitespace": {
+    "action": "preserved unchanged; future incremental runner uses --insn-width=16",
+    "cause": "objdump wrapped instruction-byte continuation lines retain trailing spaces",
+    "files": [
+      {
+        "line_numbers": [
+          53,
+          58,
+          60,
+          68,
+          76,
+          97,
+          101
+        ],
+        "path": "raw/assembly-wide-dot-1024-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      },
+      {
+        "line_numbers": [
+          26,
+          28,
+          33,
+          42,
+          53,
+          55
+        ],
+        "path": "raw/assembly-baseline-768-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      },
+      {
+        "line_numbers": [
+          51,
+          53,
+          60,
+          62,
+          71,
+          76,
+          80
+        ],
+        "path": "raw/assembly-wide-dot-768-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      },
+      {
+        "line_numbers": [
+          49,
+          55,
+          57,
+          61
+        ],
+        "path": "raw/assembly-wide-dot-512-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      },
+      {
+        "line_numbers": [
+          28,
+          30,
+          48,
+          50
+        ],
+        "path": "raw/assembly-baseline-1024-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      },
+      {
+        "line_numbers": [
+          25,
+          27,
+          33,
+          43,
+          45
+        ],
+        "path": "raw/assembly-baseline-512-normal-polyvec_basemul_acc_montgomery.stdout.log"
+      }
+    ]
+  },
+  "record_type": "saved-validation-and-assembly-review",
+  "reduction_counts": [
+    {
+      "barrett_calls": 2048,
+      "montgomery_calls": 4864,
+      "operation": "keygen",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 4736,
+      "montgomery_calls": 6400,
+      "operation": "encap",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 6656,
+      "montgomery_calls": 9728,
+      "operation": "decap",
+      "parameter_set": "Kyber512",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 3072,
+      "montgomery_calls": 7296,
+      "operation": "keygen",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 6400,
+      "montgomery_calls": 8832,
+      "operation": "encap",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 8576,
+      "montgomery_calls": 13056,
+      "operation": "decap",
+      "parameter_set": "Kyber768",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 4096,
+      "montgomery_calls": 9728,
+      "operation": "keygen",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 8064,
+      "montgomery_calls": 11264,
+      "operation": "encap",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    },
+    {
+      "barrett_calls": 10496,
+      "montgomery_calls": 16384,
+      "operation": "decap",
+      "parameter_set": "Kyber1024",
+      "samples": 10
+    }
+  ],
+  "reference_manifest": "results/EXP-001/RUN-0002/manifest.json",
+  "reference_manifest_sha256": "49fe9de386a4a6aa3fc6d3b4ba6466593db4c5f4f7f59cd6a11256935552c5bd",
+  "reference_source_commit": "d407b5134f14a96a4572b3af1132a8f715e0a28d",
+  "results_commit": "b943e50b9fee417ae21bffb4822b2aa6f3309a83",
+  "results_parent_matches_source": true,
+  "review_findings": {
+    "arithmetic": "signed 16-bit loads extended to 32-bit; products and sums stay in 32-bit registers under documented bounds; outputs stored after reduction",
+    "division_or_indirect_call_in_reviewed_bodies": false,
+    "new_secret_dependent_branch_or_index": "none identified in reviewed dot-product and Montgomery reducer",
+    "performance": "not measured for EXP-002; reduced calls and stack do not establish faster execution",
+    "scope": "changed normal-build function and unchanged Montgomery reducer; unchanged callees rely on prior source/evidence; no whole-program constant-time proof, statistical leakage test, power/EM or fault assessment",
+    "stack_canary": "EXP001 local canary present; EXP002 local canary absent after local array removal with unchanged flags; observed hardening change, not a proof of safety or exploitability",
+    "wide_dot_control_flow": "inner K loop unrolled; outer exit compares public pair counter with 128; parity branch tests public counter bit 0",
+    "wide_dot_memory_accesses": "input component offsets and output indices follow public pair counter; zetas index is 64 + pair/2; fixed stack slots",
+    "wide_dot_reducer_calls": "four static call sites but exactly three dynamically executed calls per pair on either parity path; tail jump to unchanged poly_reduce"
+  },
+  "source_and_support_match_current_and_source_commit": true,
+  "source_commit": "61279b2b2373c7594e40f06712bc9f93b734b8ed",
+  "tracked_files_match_results_commit": 474,
+  "transcripts": [
+    {
+      "bytes_per_transcript": 416000,
+      "coefficient_pairs_per_build": 5504,
+      "dot_vectors_per_build": 43,
+      "fixtures_per_build": 100,
+      "parameter_set": "Kyber512",
+      "sha256": "70d835bb80a255c51474acc92f9e241b8e41e975f09e16e23ceee27d387cfa71",
+      "transcripts": 4
+    },
+    {
+      "bytes_per_transcript": 595200,
+      "coefficient_pairs_per_build": 5632,
+      "dot_vectors_per_build": 44,
+      "fixtures_per_build": 100,
+      "parameter_set": "Kyber768",
+      "sha256": "89b95e65dbcf7e5b2422a949905d223b16c40f6c9df101a22df05d09a29136c6",
+      "transcripts": 4
+    },
+    {
+      "bytes_per_transcript": 806400,
+      "coefficient_pairs_per_build": 5760,
+      "dot_vectors_per_build": 45,
+      "fixtures_per_build": 100,
+      "parameter_set": "Kyber1024",
+      "sha256": "83a7089b4f9e4cdd8be36ef5b2b4c1208ea2620a88fb058e65d1b6dc0eab88f3",
+      "transcripts": 4
+    }
+  ],
+  "upstream_functional_suites_passed": 3,
+  "verified_executables": 18,
+  "verified_raw_streams": 96,
+  "verified_support_files": 7
+}

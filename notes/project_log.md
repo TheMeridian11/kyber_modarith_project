@@ -292,3 +292,42 @@ I added tests/test_fused_dot.c and scripts/run_dot_validation.py. The test drive
 I made no arithmetic or Git changes during this activity. Existing result records are preserved, and the exact optimisation code is supplied for manual application.
 
 Final verification confirmed that all 256 archived result files, every arithmetic source, the pinned upstream files and Git HEAD remain unchanged. Tested support hashes match, proposed count formulas and bounds agree, documentation links and whitespace checks pass, and EXP-002/RUN-0001 has not been created. The pending change set contains the two new support files, two new research records, two evidence records and five updated project documents.
+
+## ACT-0009 — Vector-wide fusion validated and incremental timings prepared
+
+- **Completed:** I verified EXP-002/RUN-0001, reviewed its normal-build dot-product/reducer assembly and the retained EXP-001 control, recorded correctness/security and code/stack findings, and prepared a fresh paired timing runner.
+- **Results:** All 48 steps, 96 raw-stream hashes, 18 executable hashes and seven support-file identities verified. Twelve transcripts agree within parameter sets, vector oracles and exercised-path UBSan checks pass, and all 90 count observations match predictions. Six development builds matched the reviewed assembly and produced 432 valid operation rows in two short blocks.
+- **Learned:** EXP-002 reduces each dot product from EXP-001's 384K Montgomery calls to 384. Its local stack setup is smaller, its function body is larger, and the compiler emits no local stack-canary check in the new function. These are observed implementation tradeoffs, not a measured speedup or complete security guarantee.
+- **Pending:** I need to review/commit the new comparison support and records, then execute and preserve EXP-002/RUN-0002. EXP-002 has no formal performance result yet.
+- **Next:** Compare fresh EXP-001 and EXP-002 process pairs, inspect effect size/variation and both execution orders, then decide whether the incremental change helps under these conditions.
+
+### Accepted evidence and analysis
+
+The validation source is 61279b2b2373c7594e40f06712bc9f93b734b8ed; results commit b943e50b9fee417ae21bffb4822b2aa6f3309a83 directly follows it. All 474 tracked files initially matched the results commit. I verified those identities through stored objects without running Git commands. Current sources/support also match the committed build inputs. Only polyvec.c differs from accepted EXP-001; ntt.c and the pinned baseline are preserved.
+
+The [run review](runs/EXP-002-RUN-0001.md) and [verification evidence](evidence/ACT-0009/exp-002-run-0001-review.json) record exact hashes, transcripts, counts and reviewed instructions. Four transcripts per parameter agree, with 100 deterministic fixtures per build including tested invalid-input/rejection behaviour. Every build passes 43/44/45 whole-vector oracle cases across 128 coefficient pairs; these common cases repeat across variants/build modes, rather than representing independent input designs. Six UBSan builds have no sanitizer diagnostics. The three candidate upstream functional suites pass. I did not repeat the full saved validation.
+
+Observed keygen/encap/decap Montgomery calls are 4864/6400/9728 for Kyber512, 7296/8832/13056 for Kyber768 and 9728/11264/16384 for Kyber1024. Barrett calls are unchanged. The new assembly unrolls the K-component loop and executes three reductions for each of 128 coefficient pairs. Its four static reducer-call sites include alternative first calls for odd/even paths; they are not four dynamic calls per pair. This confirms the mechanism without predicting a timing percentage.
+
+### Implementation security and resource tradeoffs
+
+The reviewed branches test public pair termination and parity. Coefficient/output addresses, component offsets and zeta selection follow public indices. Products and accumulators remain 32-bit, consistent with the maximum 54512640 cross sum and 32794112 twiddle-containing sum. The unchanged 22-byte Montgomery reducer and final poly_reduce preserve the required scale and centred outputs. No new secret-dependent branch/index, division or indirect call was identified in the inspected bodies. Existing compiler assumptions and caller bounds remain conditions of this conclusion.
+
+The dot-product symbols grow from 132/173/155 to 285/355/413 bytes. Explicit stack reservations fall from 528/536/528 to 24 bytes; including saved registers, local stack setup falls from 552/568/568 to 72 bytes. Entry return addresses and callee stack use are excluded; I make no whole-binary or peak-stack claim.
+
+The generated EXP-001 function has stack-canary checks; the new EXP-002 function does not after removal of its local array, with compiler flags unchanged. This changes local corruption-detection coverage and is documented as a hardening tradeoff. No flag was disabled, and the fixed-index bounds/exercised checks do not become an all-input memory-safety or security proof. Any runtime change includes code layout, loop/memory changes and this compiler-generated difference as well as reduction savings. Whole-program constant-time security, statistical leakage, power/EM leakage and fault resistance remain unestablished or unassessed.
+
+### Incremental timing support and preservation
+
+I added scripts/run_incremental_comparison.py, reusing the established C harness, build/record helpers, strict CSV parser and paired-effect calculation. When I invoke it, read-only git show restores the accepted EXP-001 sources from d407b5134f14a96a4572b3af1132a8f715e0a28d into the new run's ignored build directory, with every file hash verified. It rebuilds both variants and compares their dot-product/reducer instructions with this review before measurement. It does not check out or modify the current arithmetic. Explicit exp001_/exp002_ analysis columns prevent ambiguity about the control.
+
+The [incremental protocol](incremental_timing.md) retains five pairs per parameter, 100 warm-ups and 1000 measured exchanges per process, alternating order and fixed logical-CPU affinity. That is 30 processes and 90000 operation durations, the same budget as EXP-001's comparison. Old measurements are context, not the fresh control. Repeated rows are not independent experiments. I will preserve regressions/inconclusive effects and will not repeat the run merely to obtain a preferred outcome.
+
+[Development evidence](evidence/ACT-0009/incremental-comparison-smoke.json) records six real builds, twelve assembly matches, twelve short processes and 432 valid operation rows. Hash/source guards, changed assembly, comparison labels/direction and missing/duplicate/unequal groups were checked. Git-state/existence operations were mocked, historical bytes came from verified stored objects, and the read-only Git invocation was tested with a mocked subprocess. No Git commands or metadata collector ran. These short durations are excluded from performance conclusions.
+
+The 33 whitespace warnings in six saved assembly logs are objdump byte-continuation formatting. I preserved them and the original manifest's execution-time assembly_review=pending field; this later review resolves the pending action. New disassembly uses --insn-width=16 and the development outputs have no trailing whitespace. No arithmetic files or archived results were changed.
+
+- Incremental runner SHA-256: 0f82a43e55aa3b6b1d15aa88c31707d63da6a3547d108161cbda5dfa996c84d7.
+- Review evidence SHA-256: 532c6144783764d11b7c429325d8e964d19072f9be82a03c7cdf4b9d92d563ad.
+
+Final verification confirmed that all 354 archived result files, all arithmetic/upstream sources and Git HEAD remain unchanged. The tested support/review hashes still match, documentation links and whitespace checks pass, and EXP-002/RUN-0002 has not been created. This activity changes four existing project documents and adds one runner, two evidence records and two explanatory records.

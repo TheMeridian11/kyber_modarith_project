@@ -21,7 +21,9 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [Accepted candidate validation and assembly review](notes/runs/EXP-001-RUN-0001.md)
 - [Matched baseline/candidate timing protocol](notes/paired_timing.md)
 - [EXP-001 measured timing results](notes/runs/EXP-001-RUN-0002.md)
-- [EXP-002 plan, bounds and manual replacement](notes/experiments/EXP-002-wide-dot.md)
+- [EXP-002 plan, bounds and applied replacement](notes/experiments/EXP-002-wide-dot.md)
+- [EXP-002 accepted validation and assembly](notes/runs/EXP-002-RUN-0001.md)
+- [EXP-001 versus EXP-002 timing protocol](notes/incremental_timing.md)
 - [Experiment record template](notes/templates/experiment.md)
 - [Run record template](notes/templates/run_record.md)
 - [Literature and idea provenance](notes/literature.md)
@@ -34,7 +36,7 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 - external/kyber-official/: pinned upstream checkout; preserve its source.
 - implementation/kyber-baseline-ref/: reference source used for the baseline.
-- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul change.
+- implementation/kyber-optimised-ref/: experimental source containing the manually applied EXP-001 basemul and EXP-002 vector-dot-product changes.
 - scripts/: environment collection and benchmark automation.
 - benchmarks/: measurement harnesses that leave cryptographic arithmetic unchanged.
 - results/: raw outputs, per-run provenance and derived results.
@@ -58,10 +60,10 @@ All five pairs favoured EXP-001 for Kyber512, Kyber1024 and Kyber768 keygen. Kyb
 | EXP-000: baseline preparation | Complete | What does the unchanged reference do? |
 | EXP-001/RUN-0001: validation and assembly | Accepted | Does the first change preserve tested behaviour under the reviewed bounds? |
 | EXP-001/RUN-0002: matched timings | Accepted and analysed | Did the first change make complete KEM operations faster here? |
-| EXP-002: vector-wide fusion | Plan and validation support ready; manual change pending | Can delaying reductions across all K vector components improve further? |
-| EXP-002/RUN-0001: next validation run | Pending manual application and commit | Does the larger accumulation remain correct and safe within the new bounds? |
+| EXP-002/RUN-0001: vector-wide fusion validation and assembly | Accepted | Does the larger accumulation preserve tested behaviour under the new bounds? |
+| EXP-002/RUN-0002: incremental timings | Support checked; formal run pending | Is EXP-002 faster than EXP-001 in fresh matched pairs? |
 
-EXP-002 replaces polyvec_basemul_acc_montgomery in the candidate polyvec.c and retains the accepted ntt.c. I apply the [exact replacement](notes/experiments/EXP-002-wide-dot.md) manually. Its next run checks vector arithmetic, KEM compatibility, UBSan and predicted counts, and retains assembly. That run will not measure speed. A later fresh EXP-001/EXP-002 timing comparison follows accepted validation and assembly review.
+I applied EXP-002 to polyvec_basemul_acc_montgomery and retained the accepted ntt.c. Its 48 saved validation steps, byte comparisons, exercised-path UBSan checks and all 90 count observations pass. Assembly confirms 384 Montgomery calls per dot product, a smaller local stack setup and a larger function body. The local stack-canary check is absent in the new generated function; the [review](notes/runs/EXP-002-RUN-0001.md) documents that hardening change and the bounded security evidence. EXP-002 has no measured speed result yet. The next action is a [fresh paired comparison against EXP-001](notes/incremental_timing.md); no further arithmetic edit is needed.
 
 The first timing comparison used source d407b5134f14a96a4572b3af1132a8f715e0a28d; results are in 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712. Source, binaries and measurements are preserved. Complete constant-time guarantees, statistical leakage resistance and final ML-KEM conformance remain unestablished; faster execution is not a security certificate.
 

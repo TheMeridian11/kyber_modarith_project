@@ -3,19 +3,20 @@
 ## Identity and current stage
 
 - Originating activity: ACT-0008.
-- Lifecycle: planned; arithmetic replacement supplied for manual application.
+- Lifecycle: running; manual implementation and RUN-0001 validation/assembly accepted in ACT-0009; timing pending.
 - Variant: wide-dot.
 - Predecessor: EXP-001 fused-basemul, retained as a validated research reference after [its timing comparison](../runs/EXP-001-RUN-0002.md).
 - Predecessor arithmetic validated at 8345f6a0fb273917ed4499356f0966d1c5dc7fc2; matched timings at d407b5134f14a96a4572b3af1132a8f715e0a28d, results 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712.
 - Original reference: upstream 3edd5af5991927164edd4aacebfcbee00b8064e7, unchanged in implementation/kyber-baseline-ref.
-- Next record: EXP-002/RUN-0001, correctness, arithmetic checks, counts and retained assembly; no timings.
+- Accepted record: [EXP-002/RUN-0001](../runs/EXP-002-RUN-0001.md), source 61279b2b2373c7594e40f06712bc9f93b734b8ed, results b943e50b9fee417ae21bffb4822b2aa6f3309a83.
+- Next record: EXP-002/RUN-0002, fresh incremental timings against EXP-001.
 - Origin: local analysis of the pinned source, LIT-003. No novelty claim or unreviewed literature attribution.
 
-EXP-001 has already been timed. I now test whether accumulating across the vector before reduction gives further benefit. After this manual change, I validate the new arithmetic and inspect its generated code before measuring performance.
+EXP-001 has already been timed. I now test whether accumulating across the vector before reduction gives further benefit. I have applied the manual change and accepted its saved validation and generated-code review. Performance measurement is next.
 
 ## Change and prediction
 
-A vector dot product sums K polynomial products. EXP-001 performs three Montgomery reductions for each coefficient pair in each component, or 384K per dot product. I propose summing the ordinary products across all K components first, then using three reductions per pair, or 384 per dot product for every parameter set.
+A vector dot product sums K polynomial products. EXP-001 performs three Montgomery reductions for each coefficient pair in each component, or 384K per dot product. I sum the ordinary products across all K components first, then using three reductions per pair, or 384 per dot product for every parameter set.
 
 This changes only polyvec_basemul_acc_montgomery and adds its required ntt.h/reduce.h includes in the candidate polyvec.c. I retain the accepted EXP-001 ntt.c unchanged. The new KEM vector path computes directly and no longer calls the per-polynomial basemul path. Consequently, these are successive treatments, not independent savings to add together. Standalone basemul retains its accepted EXP-001 implementation.
 
@@ -33,7 +34,7 @@ Relative to EXP-001, predicted savings are 384(K-1) per dot product. There are K
 | Kyber768 | 9600 -> 7296 | 11904 -> 8832 | 16896 -> 13056 |
 | Kyber1024 | 14336 -> 9728 | 17024 -> 11264 | 23296 -> 16384 |
 
-These are predictions, not observations. Barrett counts should remain 2048/4736/6656, 3072/6400/8576 and 4096/8064/10496 for keygen/encap/decap. The final poly_reduce is retained. Reduced call counts do not predict a particular runtime percentage.
+These source-derived predictions are now confirmed by all 90 RUN-0001 observations. Barrett counts remain 2048/4736/6656, 3072/6400/8576 and 4096/8064/10496 for keygen/encap/decap. The final poly_reduce is retained. Reduced call counts do not predict a particular runtime percentage.
 
 ## Algebra and range argument
 
@@ -57,9 +58,9 @@ All products and accumulations use int32_t. Every input to montgomery_reduce rem
 
 This is a contract for these callers and K values, not arbitrary int16_t vector inputs. Changing K, removing a preceding reduction or widening deserialised inputs requires a new argument.
 
-## Exact manual replacement
+## Applied manual replacement
 
-In implementation/kyber-optimised-ref/polyvec.c, use this include block, preserving the remainder of the file:
+I applied the following include block and complete function replacement in implementation/kyber-optimised-ref/polyvec.c, preserving the remainder. This is the retained implementation record; it does not need to be applied again:
 
 ~~~c
 #include <stdint.h>
@@ -107,7 +108,7 @@ void polyvec_basemul_acc_montgomery(poly *r, const polyvec *a,
 }
 ~~~
 
-This proposal has not been applied or executed. The source guard permits this function and the two includes to change while requiring all other candidate sources, including ntt.c, to match the accepted EXP-001 version.
+This replacement has been applied and passed the recorded validation. The source guard permits this function and the two includes to change while requiring all other candidate sources, including ntt.c, to match the accepted EXP-001 version.
 
 ## Implementation security and correctness
 
@@ -116,9 +117,10 @@ This proposal has not been applied or executed. The source guard permits this fu
 | Montgomery scale | Preserve the inner M(S11); check an independent ordinary-modular oracle and byte-identical API transcripts. |
 | Overflow and narrowing | The larger vector sums require the new bounds above. Run normal and UBSan builds; retain explicit casts and final poly_reduce. |
 | Twiddle and coefficient indexing | Pair indices select coefficients 2*pair and 2*pair+1 in 0..255; zeta indices are 64..127. Test all pairs and both signs. |
-| Timing behaviour | Loop bounds, vector indices and the parity branch depend only on public indices and K. No proposed secret-dependent control or indexing; generated-code inspection remains pending. |
+| Timing behaviour | Loop bounds, vector indices and the parity branch depend only on public indices and K. The reviewed assembly branches on public pair termination/parity and uses public coefficient/twiddle indices; no new secret-dependent branch/address was identified in the inspected scope. |
 | Invalid inputs and rejection | Recheck corrupted/random ciphertexts, malformed secret keys and noncanonical public keys against the original reference. Preserve rejection and encoding code. |
-| Memory | The source replaces a 512-byte temporary polynomial with scalar accumulators. Actual stack/register allocation and code size remain unmeasured until assembly review; no heap allocation is added. |
+| Memory | The source replaces a 512-byte temporary polynomial with scalar accumulators. Reviewed local stack including saved registers falls from 552/568/568 to 72 bytes; dot-function sizes rise from 132/173/155 to 285/355/413 bytes. These exclude callee stack and are not whole-program measurements. No heap allocation is added. |
+| Stack hardening | The old function has a canary check; the new scalar implementation does not under the same flags. No protection flag was disabled. I record reduced local corruption-detection coverage, without treating the tests as a proof of memory safety or security. |
 | Portability | Existing GCC signed-narrowing/shift assumptions remain. No cross-compiler guarantee is inferred. |
 | Broader leakage | Statistical timing leakage, whole-program constant-time proof, power/EM leakage and fault resistance are not established by these checks. |
 
@@ -128,17 +130,17 @@ A faster result cannot override a failed arithmetic, compatibility or security g
 
 I added tests/test_fused_dot.c and scripts/run_dot_validation.py. The driver reuses the existing public KEM fixtures and transcript format, and replaces the standalone kernel test with a vector-dot-product oracle. Per parameter/build it checks 41+K full vectors: zero, sixteen aligned sign corners, sixteen alternating-component sign corners, K isolated-component cases and eight deterministic interior vectors. Each vector checks all 128 coefficient pairs against an independent test-only int64_t oracle and the exact centred result.
 
-After manual application and a source/support commit, I run:
+I executed the following after the source/support commit. This is historical; RUN-0001 is already allocated and must not be reused:
 
 ~~~bash
 python3 -B scripts/run_dot_validation.py --experiment EXP-002 --run RUN-0001
 echo $?
 ~~~
 
-The runner builds the original baseline and the new candidate in normal and UBSan modes, compares 100 KEM fixtures byte for byte across the four transcripts per parameter set, runs the candidate's existing upstream functional suite, checks ten count fixtures and retains dot-product/reducer assembly. The original source and accepted EXP-001 ntt.c are protected by hashes. Full execution and assembly review are pending; this command does not measure speed.
+The runner builds the original baseline and the new candidate in normal and UBSan modes, compares 100 KEM fixtures byte for byte across the four transcripts per parameter set, runs the candidate's existing upstream functional suite, checks ten count fixtures and retains dot-product/reducer assembly. The original source and accepted EXP-001 ntt.c are protected by hashes. The saved execution and later assembly review are accepted. All twelve transcripts match within parameter sets, vector oracles and exercised UBSan checks pass, and counts match predictions. This command did not measure speed.
 
 [Development support evidence](../evidence/ACT-0008/dot-validation-support-smoke.json) records twelve builds using only the existing baseline and accepted EXP-001 arithmetic, with two KEM fixtures each. All vector-oracle checks and four-way transcript comparisons passed without compiler/sanitizer diagnostics. The preflight rejects an unapplied change before allocating a run, and the count parser rejects EXP-001 counts presented as EXP-002 predictions. These checks exercise support code, not the proposed optimisation.
 
-If validation and assembly are accepted, the next timing comparison will use fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; its old timing rows will not substitute for a fresh paired control. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
+With validation and assembly accepted, the [next timing comparison](../incremental_timing.md) uses fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; its old timing rows will not substitute for a fresh paired control. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
 
-Current status: manual implementation pending; candidate validation/counts/assembly not-run; performance not-run; retention decision pending.
+Current status: manual implementation complete; candidate validation/counts/assembly accepted within the recorded scope; performance not-run; final retention decision pending. The changed loop, function size and local canary coverage accompany the arithmetic savings, so any runtime effect cannot be attributed solely to reduction-call counts.
