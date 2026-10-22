@@ -1,0 +1,6 @@
+dot_product_vectors=45
+dot_product_coefficient_pairs=5760
+dot_product_oracle=pass
+kem_fixtures=100
+kem_checks=pass
+transcript=public-deterministic-test-vectors
