@@ -1,0 +1,10 @@
+parameter_set,operation,samples,montgomery_calls,barrett_calls
+Kyber512,keygen,10,6656,2048
+Kyber512,encap,10,9088,4736
+Kyber512,decap,10,13312,6656
+Kyber768,keygen,10,11904,3072
+Kyber768,encap,10,14976,6400
+Kyber768,decap,10,20736,8576
+Kyber1024,keygen,10,18432,4096
+Kyber1024,encap,10,22144,8064
+Kyber1024,decap,10,29440,10496
