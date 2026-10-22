@@ -3,13 +3,14 @@
 ## Identity and scope
 
 - Originating activity: ACT-0010.
-- Lifecycle: running; RUN-0001 validation/counts/assembly accepted in ACT-0011; incremental timing pending.
+- Lifecycle: closed initial evaluation; validation/counts/assembly and incremental timing accepted. Outcome: supported for the targeted encap/decap benefit. Decision: keep as a research reference with observed keygen tradeoffs.
 - Variant: staged-invntt, containing the accepted EXP-002 arithmetic plus the applied inverse-NTT change.
 - Predecessor: EXP-002 wide-dot, validated at 61279b2b2373c7594e40f06712bc9f93b734b8ed and timed at a32a81d12225e00a8b3e0baeb32734f44cf78ab3; timing results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f.
 - Original reference: pinned upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
 - Validation source: 9ec22141e6acc98812438544be0bec5b35d00b5c; results commit: 705f21f7f07dcd4162052aacda3adbcc54c4051a.
 - Accepted record: [EXP-003/RUN-0001](../runs/EXP-003-RUN-0001.md), validation/counts/assembly only.
-- Next record: EXP-003/RUN-0002, [fresh EXP-002 versus EXP-003 timings](../invntt_timing.md).
+- Accepted timing: [EXP-003/RUN-0002](../runs/EXP-003-RUN-0002.md), source cf8ae0dd700bb41628c158016a7c15926a0b790f, results 23b4736206a8f79d13fb4898d474eb327e1dab3c.
+- Next treatment: [EXP-005 error-vector reduction deferral](EXP-005-error-ntt.md), not yet applied.
 - Idea origin: local source/range analysis of LIT-003. No novelty claim or attribution of this exact schedule to the unreviewed full text of LIT-001.
 
 I retain EXP-002 and change only invntt in implementation/kyber-optimised-ref/ntt.c. The accepted basemul and vector-dot-product functions remain in place. This is an incremental experiment conditional on EXP-002, not a standalone estimate of the inverse-NTT treatment on the original reference. This scope avoids a redundant branch of combination experiments. EXP-004 remains optional if a later interaction or combination question warrants it; it is not an automatic extra step.
@@ -124,4 +125,14 @@ I verified actual inverse/reducer assembly against retained EXP-002 binaries. Th
 
 The original centred-input and downstream bounds still hold for the current KEM call paths. No arbitrary-int16 input guarantee, whole-program constant-time proof, statistical leakage result or production security approval follows. The original manifest remains immutable with its execution-stage assembly_review=pending field; the [later review](../evidence/ACT-0011/exp-003-run-0001-review.json) records acceptance separately.
 
-Performance remains unmeasured. The checked [timing support](../invntt_timing.md) rebuilds both EXP-002 and EXP-003, verifies all eighteen relevant function bodies and uses the established five-pair protocol. The short development check is excluded from performance conclusions. I will retain regressions and inconclusive groups, investigate unexpected keygen movement, and decide performance retention from RUN-0002 rather than from call counts.
+At ACT-0011, performance remained unmeasured. The [timing protocol](../invntt_timing.md) specified fresh EXP-002/EXP-003 builds, eighteen assembly comparisons and five pairs per parameter. Development timings were excluded. The completed formal result is recorded below.
+
+## ACT-0012 timing result and retention
+
+I verified [RUN-0002](../runs/EXP-003-RUN-0002.md) and reproduced all 90000 raw durations into the exact saved 90 summaries, 45 pairs and nine aggregates. All eighteen timing-build inverse/reducer bodies match the earlier assembly review. Encapsulation/decapsulation improve in all 30 pairs: median reductions are 4.69%/4.64% for Kyber512, 4.98%/4.90% for Kyber768 and 4.30%/4.63% for Kyber1024. Both order groups favour EXP-003 for these operations.
+
+Keygen median changes are -0.31%, -0.51% and +0.70%; negative means slower. Kyber512 crosses zero, Kyber768 is slower in all five pairs and Kyber1024 faster in all five. Keygen does not call invntt and its two inspected entry points retain the same normalised instructions and entry locations. I retain these small effects without crediting them to inverse reduction savings or asserting an identified noise/layout cause.
+
+I keep EXP-003 for its consistent targeted benefit, with the keygen tradeoffs and the single-session/compiler/WSL scope recorded. Five pairs, reused fixtures and unequal order groups do not establish universal gains or formal significance. The range/security assessment remains conditional on current callers; no new leakage test or whole-program constant-time proof was performed. Larger inverse code, smaller local stack and compiler/layout changes accompany call savings, so their timing contributions remain confounded.
+
+The next proposed experiment is EXP-005, narrowly deferring the error vector's forward-NTT reduction in key generation. It preserves the reductions that establish this experiment's centred inverse inputs. EXP-004 remains deferred for a separate interaction question; cumulative original-baseline performance still requires a later direct comparison.

@@ -1,6 +1,6 @@
 # EXP-003 incremental timing comparison
 
-I prepared this comparison after accepting [EXP-003/RUN-0001 correctness, counts and assembly](runs/EXP-003-RUN-0001.md). Formal EXP-003 timing remains pending. I will measure whether the fixed inverse-NTT reduction schedule improves on accepted EXP-002, conditional on the retained earlier optimisations.
+I prepared this comparison after accepting [EXP-003/RUN-0001 correctness, counts and assembly](runs/EXP-003-RUN-0001.md). The [accepted RUN-0002 review](runs/EXP-003-RUN-0002.md) records consistent encap/decap benefit and small keygen tradeoffs. This document preserves the protocol specified before measurement, conditional on retained earlier optimisations.
 
 ## Sources and acceptance gate
 
@@ -30,16 +30,16 @@ The earlier correctness/security limits remain, including centred inputs and the
 
 ## Execute and preserve
 
-After reviewing and committing the new support and records, I run:
+I used the following command after reviewing and committing support and records. It is historical; RUN-0002 exists and must not be reused:
 
 ~~~bash
 python3 -B scripts/run_invntt_comparison.py --experiment EXP-003 --run RUN-0002 --cpu 0
 echo $?
 ~~~
 
-The runner invokes the metadata collector itself. Optional --host-os, --power-mode and --background-load values describe observed facts. RUN-0002 is reserved as the next intended record but has not been created by the support check.
+The runner invokes the metadata collector itself. Optional --host-os, --power-mode and --background-load values describe observed facts. The ACT-0011 support check created no formal run; the subsequently completed RUN-0002 was verified in ACT-0012.
 
-After exit code zero and Comparison status: completed, I inspect and preserve the complete run:
+After exit code zero and Comparison status: completed, I inspected and preserved the complete run using:
 
 ~~~bash
 cat results/EXP-003/RUN-0002/derived/comparison.csv
@@ -49,7 +49,7 @@ git diff --cached --stat
 git commit -m "Record EXP-003 incremental timing comparison"
 ~~~
 
-A failed/interrupted run is preserved for diagnosis; these success commands do not turn it into accepted evidence. Acceptance still requires review of the saved hashes, assembly, rows, provenance and reproducibility of the derived analysis.
+A failed/interrupted run is preserved for diagnosis; these success commands do not turn it into accepted evidence. ACT-0012 completed the required review of saved hashes, assembly, rows, provenance and reproducibility of the derived analysis.
 
 ## Development check
 

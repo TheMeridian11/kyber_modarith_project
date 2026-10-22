@@ -225,7 +225,9 @@ void indcpa_keypair_derand(uint8_t pk[KYBER_INDCPA_PUBLICKEYBYTES],
     poly_getnoise_eta1(&e.vec[i], noiseseed, nonce++);
 
   polyvec_ntt(&skpv);
-  polyvec_ntt(&e);
+  /* e is only added to pkpv before the existing final reduction. */
+  for(i=0;i<KYBER_K;i++)
+    ntt(e.vec[i].coeffs);
 
   // matrix-vector multiplication
   for(i=0;i<KYBER_K;i++) {
