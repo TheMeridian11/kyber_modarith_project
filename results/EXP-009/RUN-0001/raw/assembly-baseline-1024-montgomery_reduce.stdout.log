@@ -1,0 +1,24 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0001/build/bench-baseline-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000051d0 <pqcrystals_kyber1024_ref_montgomery_reduce>:
+    51d0:	f3 0f 1e fa                                     	endbr64
+    51d4:	66 69 c7 01 f3                                  	imul   $0xf301,%di,%ax
+    51d9:	98                                              	cwtl
+    51da:	69 c0 ff f2 ff ff                               	imul   $0xfffff2ff,%eax,%eax
+    51e0:	01 f8                                           	add    %edi,%eax
+    51e2:	c1 e8 10                                        	shr    $0x10,%eax
+    51e5:	c3                                              	ret
+
+Disassembly of section .fini:

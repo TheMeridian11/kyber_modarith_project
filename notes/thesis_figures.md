@@ -74,3 +74,18 @@ I reproduce the audit with local ignored build files still present, then generat
 ```
 
 The retained review supplies all plot data even if ignored binaries later disappear; repeating the full identity audit requires those exact binaries or a separately documented rebuild. The next figures will use EXP-009's actual three sessions and show each session's effects and all three direct contrasts. I do not turn the development session into a thesis performance result.
+
+## ACT-0019 preliminary direct-performance figure
+
+I generated [SVG](../analysis/figures/ACT-0019/exp009-session1-effects.svg), [PDF](../analysis/figures/ACT-0019/exp009-session1-effects.pdf) and [300-dpi PNG](../analysis/figures/ACT-0019/exp009-session1-effects.png) exports of the accepted first EXP-009 session. I retain [all 324 plotted pairs](../analysis/figures/ACT-0019/exp009-session1-effects.csv), [input/code/output provenance](../analysis/figures/ACT-0019/provenance.json) and [render/reproduction review](evidence/ACT-0019/figure-review.json). I inspected the rendering and regenerated all five outputs byte-for-byte.
+
+**Draft caption.** I show the direct original-to-EXP-003, original-to-EXP-005 and EXP-003-to-EXP-005 time reductions for EXP-009/RUN-0001, session 1 of the three predeclared sessions. Each dot is a within-block comparison of process medians, each based on 1000 operation timings. Diamonds show medians of 12 paired effects; horizontal spans show their observed ranges, not confidence intervals. The three parameter sets and all operations are shown, including mixed and negative effects. Positive means faster. The top two comparison rows share a scale; the bottom row expands the marginal effects. Point jitter follows block order only to improve visibility and has no numerical meaning. No durations are excluded. These single-host WSL results are preliminary; no cross-session repeatability or final candidate ranking is established here.
+
+I reproduce the raw/build audit while the exact local ignored binaries and restored sources remain available, then generate into a new directory with the previously pinned plotting environment:
+
+```sh
+python3 -B analysis/review_final_session.py --output /tmp/exp009-session1-review-copy.json
+/tmp/kyber-thesis-figures/bin/python -B analysis/build_final_session_figures.py --output /tmp/exp009-session1-figure-copy
+```
+
+The figure generator reanalyses the retained raw data and checks the accepted review, so it does not require ignored binaries. Repeating the full identity audit does require the original build files or a separately documented rebuild. The first-session graph is a progress artifact for later thesis composition. I will show all three session estimates and their descriptive range in the final performance figures after the remaining sessions are accepted; I will not substitute this preliminary figure for that closing evidence.

@@ -1,0 +1,22 @@
+{
+  "activity_id": "ACT-0019",
+  "session": 1,
+  "planned_sessions": 3,
+  "inputs": {
+    "results/EXP-009/RUN-0001/manifest.json": "a068bcb78596f81035d666fe32159a4a817b662043913027baa32dac13ceaee9",
+    "results/EXP-009/RUN-0001/derived/comparison.csv": "dd9c39e75a736670097c923c21f5061e6bfc8c08164d6ed0f8022db730bbfd4b",
+    "results/EXP-009/RUN-0001/derived/paired-comparison.csv": "0e9cb3c9a7530275407c4a6191268089442f2d7cf9ca8e1a7269676c7530378b",
+    "notes/evidence/ACT-0019/exp-009-run-0001-review.json": "91ef689b6adff3d5b2bef2c197963fe7625c86ecea7ecf1bd307d547c8b16e17"
+  },
+  "generator_sha256": "3ead4cd52fc500d9779d457b302536a3eb06741c09ffe7b7f09980d747e41160",
+  "frozen_analyser_sha256": "5a0a9cc8e3dd7e0db825d97b108e2c75f11b5b2254655cc7488b3feb26f19403",
+  "python": "3.12.3",
+  "matplotlib": "3.10.8",
+  "outputs": {
+    "exp009-session1-effects.csv": "0e9cb3c9a7530275407c4a6191268089442f2d7cf9ca8e1a7269676c7530378b",
+    "exp009-session1-effects.pdf": "00b97da6e3279a00ba27f67a92b5f882bdb1cf9699134d920d481d5ef654cbd3",
+    "exp009-session1-effects.png": "0466b42fb99e90814e9954ff23de53efea0b00e7d7cba955bee5269d29391c27",
+    "exp009-session1-effects.svg": "20e3fa4151ae621adbfb4240119e79fdc714be1915c57dc8dbb4de006c35a7a6"
+  },
+  "interpretation": "All within-session paired effects; no confidence intervals or final candidate ranking."
+}

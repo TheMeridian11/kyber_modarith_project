@@ -1,0 +1,81 @@
+{
+  "activity_id": "ACT-0019",
+  "source_commit_unchanged": "8a5e36e5d041507cc5649c7d43edb8468000f476",
+  "git_commands_executed": false,
+  "new_benchmarks_executed": false,
+  "production_arithmetic_modified": false,
+  "preserved_archived_result_files": 3564,
+  "preserved_exp009_run0001_files": 455,
+  "prior_tracked_files": 3342,
+  "modified_tracked_files_sha256": {
+    "README.md": "441a412c4a8c9cc1c30377339b841aa1e59f353a31b5f4bb2795ebcf5980e71f",
+    "notes/experiment_register.md": "3581a3d47078eb84d294caf80babce2aa502a3490b804b0646696237828f4554",
+    "notes/git_handoff.md": "572279172f4da6a7f83e08ebd21fdb1d3698666cc9af351287ce2f2ab75b2df6",
+    "notes/implementation_security.md": "d0199f225ed83e789c9772f66e2b6f0e6c2e7da9fca475efae65c78e72f56086",
+    "notes/practical_completion.md": "61a94b4bc4a5e607744ac479236e49e9055438626dd14083a8dfdc35d04f99c5",
+    "notes/project_log.md": "7c8cfdc228729514695af1797cabf6795215518f90b5d8917814eadd5a9dd0d2",
+    "notes/reduction_map.md": "8cfe513acef1adff57404dc529a3e4a8a3007cc27c060ec0e6a91876ac8ff1da",
+    "notes/thesis_figures.md": "4666ed3e52bf020b9138940c62b7da82f8e9989b622c9e9ce4481d4ab0c5fc4f",
+    "notes/thesis_writing_plan.md": "a4cb08cbf77dfcbe2ba75bd39050d57744935c0b453aa7120675cc73cc30152a"
+  },
+  "new_support_files_sha256": {
+    "analysis/build_final_session_figures.py": "3ead4cd52fc500d9779d457b302536a3eb06741c09ffe7b7f09980d747e41160",
+    "analysis/figures/ACT-0019/exp009-session1-effects.csv": "0e9cb3c9a7530275407c4a6191268089442f2d7cf9ca8e1a7269676c7530378b",
+    "analysis/figures/ACT-0019/exp009-session1-effects.pdf": "00b97da6e3279a00ba27f67a92b5f882bdb1cf9699134d920d481d5ef654cbd3",
+    "analysis/figures/ACT-0019/exp009-session1-effects.png": "0466b42fb99e90814e9954ff23de53efea0b00e7d7cba955bee5269d29391c27",
+    "analysis/figures/ACT-0019/exp009-session1-effects.svg": "20e3fa4151ae621adbfb4240119e79fdc714be1915c57dc8dbb4de006c35a7a6",
+    "analysis/figures/ACT-0019/provenance.json": "487d5bba68d2e80d42bb9648aebbb097714ca1256c1dbb30f37e366a4331cefb",
+    "analysis/review_final_session.py": "ba1a4269bc339cd6b8a29b31c6f12cdc0b9a9d3a3515f14d4ccbbdf613f75bfe",
+    "notes/evidence/ACT-0019/exp-009-run-0001-review.json": "91ef689b6adff3d5b2bef2c197963fe7625c86ecea7ecf1bd307d547c8b16e17",
+    "notes/evidence/ACT-0019/figure-review.json": "33666e098e3608d5f9f3cd724c58c9cb2971019ed9925b8a7f1cf51de1168ef5",
+    "notes/evidence/ACT-0019/source-and-branch-review.json": "7452730635edb6ca7bfcadf2172996e1a569bf11f99299a04781071a98b86ec9",
+    "notes/runs/EXP-009-RUN-0001.md": "b1476a88e1f24e18ce1e7165b497ea14b0f4a43a5509271a990eddcad0f99c4a"
+  },
+  "this_record": "notes/evidence/ACT-0019/final-verification.json",
+  "new_support_file_count_including_this_record": 12,
+  "modified_tracked_file_count": 9,
+  "frozen_measurement_support_unchanged": 23,
+  "accepted_input_hashes_unchanged": 14,
+  "checks": {
+    "authored_text_LF_and_trailing_whitespace": "pass",
+    "python_syntax": "pass",
+    "json_parse": "pass",
+    "svg_xml": "pass",
+    "relative_markdown_links": "pass",
+    "figure_input_output_hashes": "pass",
+    "full_run_audit": "pass",
+    "independent_medians_effects_ranges": "pass",
+    "exact_review_and_figure_reproduction": "pass"
+  },
+  "checked_text_files": [
+    "README.md",
+    "analysis/build_final_session_figures.py",
+    "analysis/figures/ACT-0019/exp009-session1-effects.csv",
+    "analysis/figures/ACT-0019/exp009-session1-effects.svg",
+    "analysis/figures/ACT-0019/provenance.json",
+    "analysis/review_final_session.py",
+    "notes/evidence/ACT-0019/exp-009-run-0001-review.json",
+    "notes/evidence/ACT-0019/figure-review.json",
+    "notes/evidence/ACT-0019/source-and-branch-review.json",
+    "notes/experiment_register.md",
+    "notes/git_handoff.md",
+    "notes/implementation_security.md",
+    "notes/practical_completion.md",
+    "notes/project_log.md",
+    "notes/reduction_map.md",
+    "notes/runs/EXP-009-RUN-0001.md",
+    "notes/thesis_figures.md",
+    "notes/thesis_writing_plan.md"
+  ],
+  "checked_relative_markdown_links": 257,
+  "remaining_session_directories_absent": [
+    "RUN-0002",
+    "RUN-0003"
+  ],
+  "remaining_actions": [
+    "User review/commit of ACT-0019 and RUN-0001 results",
+    "Separately launch sessions 2 and 3 under frozen support",
+    "Audit and combine all sessions; select candidate; consolidate final security/figures/reproduction handoff"
+  ],
+  "security_scope": "Existing bounded findings retained; no new leakage or dedicated invalid-input/sanitizer collection."
+}

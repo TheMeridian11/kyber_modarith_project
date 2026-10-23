@@ -36,20 +36,20 @@ The strongest narrative connects an argument to each experiment: expected reduct
 | Secret branch/address findings | EXP-007/RUN-0001 and coverage figure | Directly tests original/EXP-005/EXP-006 on exercised paths |
 | Statistical timing findings | EXP-008/RUN-0001 and timing-screen figure | Directly tests original/EXP-003/EXP-005; no detected difference within finite classes/budget |
 | Code, local stack and hardening tradeoffs | Scoped assembly review in each accepted run | Local function observations; canary/endbr instructions are not broad safety guarantees |
-| Cumulative benefit and closing candidate | EXP-009's three direct sessions and final interpretation | Pending; report session variation and adverse cells, no pooled-inner-sample inference |
+| Cumulative benefit and closing candidate | EXP-009's three direct sessions and final interpretation | Session 1 accepted in ACT-0019; sessions 2 and 3 pending. Report session variation and adverse cells, no pooled-inner-sample inference |
 
 Suggested results sentence: “Across the prespecified EXP-008 target cells, no statistic exceeded the diagnostic threshold; positive and negative controls met their criteria. This supports no detected class-dependent timing difference within the tested paths, input classes, compiler, platform and sample budget.” I do not replace it with “the implementation is secure” or “the optimisations have no effect on security.”
 
 ## Practical finish line
 
-The optimisation search and planned security collection/review are complete. The remaining practical work is: collect and audit the three EXP-009 sessions; choose and explain the closing candidate; generate final direct-comparison and consolidated code/stack/security tables; verify reproduction and repository handover. I can start Methods and the already accepted Results now while those measurements are collected. Completing this bounded list is the point to label the practical component complete and assemble the supervisor draft/repository handover.
+The optimisation search and planned security collection/review are complete. The remaining practical work is: collect and audit EXP-009 sessions 2 and 3 (session 1 is accepted); choose and explain the closing candidate; generate final direct-comparison and consolidated code/stack/security tables; verify reproduction and repository handover. I can start Methods and the already accepted Results now while those measurements are collected. Completing this bounded list is the point to label the practical component complete and assemble the supervisor draft/repository handover.
 
 ## Map the original four research questions to the completed study
 
 | Original question | Evidence and writing decision |
 |---|---|
 | RQ1: Which stages/components are most affected by modular-arithmetic overhead? | Use the reduction-site audit, per-operation call counts and targeted changes to explain where reducing work affected complete KEM time. Narrow the wording to reduction frequency and measured impact; without a runtime profile I cannot claim an exact percentage of time spent inside every function or rank all hotspots. |
-| RQ2: How do optimisations affect keygen, encapsulation and decapsulation runtime? | Use the incremental studies plus the pending EXP-009 direct comparisons. Separate the cumulative original-to-EXP-003/005 result from the additional EXP-003-to-005 effect, and retain EXP-006's adverse cells. |
+| RQ2: How do optimisations affect keygen, encapsulation and decapsulation runtime? | Use the incremental studies plus the EXP-009 direct comparisons, with session 1 accepted and sessions 2 and 3 pending. Separate the cumulative original-to-EXP-003/005 result from the additional EXP-003-to-005 effect, and retain EXP-006's adverse cells. |
 | RQ3: Are correctness and interoperability with the baseline preserved? | Describe deterministic byte/transcript comparisons, cross-implementation checks, round trips, malformed/noncanonical cases and unchanged formats. These substantially expand the draft's proposed shared-secret check, with tested coverage and bounds stated. |
 | RQ4: What performance, memory and constant-time tradeoffs arise? | Connect operation times, reduction counts, scoped code/local-stack observations, range/scale arguments, canary changes, EXP-007 and EXP-008. State the limits of every layer. There is no measured whole-program peak-memory/heap result or complete constant-time proof. |
 

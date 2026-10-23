@@ -42,6 +42,7 @@ The source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned 
 - [EXP-008 statistical timing-leakage protocol](notes/experiments/EXP-008-timing-leakage.md)
 - [EXP-008 accepted timing-screen findings](notes/runs/EXP-008-RUN-0001.md)
 - [EXP-009 final three-session comparison](notes/experiments/EXP-009-final-comparison.md)
+- [EXP-009 accepted session 1 and direct results](notes/runs/EXP-009-RUN-0001.md)
 - [Thesis writing plan](notes/thesis_writing_plan.md) and [Git/branch handoff](notes/git_handoff.md)
 - [Reproducible thesis figures and captions](notes/thesis_figures.md)
 - [Required implementation-security assessment](notes/implementation_security.md)
@@ -69,15 +70,20 @@ These records distinguish planned changes, observed changes, executed checks, me
 
 I have completed the five planned arithmetic trials (EXP-001/002/003/005/006) and frozen the optimisation search. I select EXP-005 as the provisional primary candidate, with EXP-003 retained as an explicit closing comparator/fallback. EXP-005 includes EXP-003's inverse-NTT improvements; its percentages describe an additional change, not a competing replacement. EXP-006 remains a secondary research comparison: fewer reductions did not produce a general speed improvement. The current arithmetic checkout still contains EXP-006; the security runner restores EXP-005 faithfully into its build directory, without changing that checkout.
 
-The latest matched comparison measures EXP-006 relative to freshly rebuilt EXP-005:
+The latest direct comparison is accepted [EXP-009/RUN-0001](notes/runs/EXP-009-RUN-0001.md), session 1 of 3. Its median paired time reductions relative to the original are:
 
-| Parameter | Keygen | Encap | Decap |
-|---|---:|---:|---:|
-| Kyber512 | -2.55% | -2.39% | -1.89% |
-| Kyber768 | +0.22% | -0.82% | -0.72% |
-| Kyber1024 | +1.67% | -0.43% | -0.02% |
+| Candidate | Parameter | Keygen | Encap | Decap |
+|---|---|---:|---:|---:|
+| EXP-003 | Kyber512 | +5.97% | +15.29% | +15.43% |
+| EXP-003 | Kyber768 | +13.24% | +18.48% | +18.64% |
+| EXP-003 | Kyber1024 | +16.01% | +19.32% | +19.94% |
+| EXP-005 | Kyber512 | +10.72% | +15.90% | +15.84% |
+| EXP-005 | Kyber768 | +13.54% | +19.07% | +18.68% |
+| EXP-005 | Kyber1024 | +17.38% | +19.27% | +19.59% |
 
-Positive means faster; these are medians of five paired percentage reductions. All Kyber512 pairs regress; all five Kyber1024 keygen pairs improve. Kyber768 keygen and Kyber1024 decap are mixed. I retain all regressions, observed ranges and order effects in the [full review](notes/runs/EXP-006-RUN-0002.md). I reproduced all 90000 duration rows and all three derived CSVs exactly, verified source/tool/binary identities and matched all 33 reviewed timing assembly bodies. No outliers were removed. These single-session incremental effects are not cumulative gains over the original reference or leakage measurements.
+Positive means faster; each cell is the median of 12 within-block percentage reductions. Both candidates beat the original in every paired operation/block comparison in this session. EXP-005 additionally improves keygen over EXP-003 by +5.26%/+0.49%/+1.62%, while Kyber1024 decapsulation is 0.36% slower in all twelve pairs. I retain those tradeoffs and defer final selection until sessions 2 and 3. All 324000 duration rows and three derived tables reproduce; 108 production bodies match accepted assembly. These performance results are separate from leakage testing.
+
+The [EXP-006 review](notes/runs/EXP-006-RUN-0002.md) remains the adverse/secondary trial: keygen −2.55%/+0.22%/+1.67% against EXP-005, with mostly regressive control operations. No result or raw evidence is removed from the history.
 
 | Stage | Current state |
 |---|---|
@@ -87,7 +93,7 @@ Positive means faster; these are medians of five paired percentage reductions. A
 | EXP-006 | Trial closed with mixed performance; not adopted as the general candidate; preserved as a research result |
 | EXP-007 secret-flow assessment | RUN-0001 accepted: 144 quiet target processes, all 18 deliberate dependencies detected; bounded branch/address finding |
 | EXP-008 statistical timing-leakage assessment | RUN-0001 accepted: 288 quiet target processes; 18 positive controls detected and 18 negatives quiet; bounded claim |
-| EXP-009 final direct comparison | Protocol and complete development session verified; collect three formal sessions with 12 balanced blocks each |
+| EXP-009 final direct comparison | RUN-0001/session 1 accepted; two formal sessions remain, with unchanged support and 12 balanced blocks each |
 | Thesis artifacts | Performance/count, secret-flow and timing-screen figures available; final direct-performance and consolidated handover remain |
 
 EXP-006 saves another 512/768/1024 keygen Barrett calls but grows the scoped keygen-plus-new-dot code by 266/364/405 bytes. Keygen local-stack changes are 0/-16/0 bytes. Existing keygen protections remain; the EXP-002 general-dot local-canary tradeoff persists, and the extra dedicated dot has the same no-canary pattern. Correctness, sampled invalid inputs, range/scale/narrowing arguments and exercised UBSan checks support bounded implementation-safety conclusions. Layout/compiler effects are possible performance contributors, not established causes.
@@ -96,6 +102,6 @@ The [accepted EXP-007 run](notes/runs/EXP-007-RUN-0001.md) compares original/EXP
 
 I now move from finding optimisations to checking and explaining the selected result. The [completion checklist](notes/practical_completion.md) specifies the remaining direct repeat-session evaluation, consolidated security report and reproducible handover. There is no requirement to invent more optimisations. EXP-004 was reserved for a separately controlled interaction study; existing cumulative variants do not by themselves isolate interactions.
 
-I generated [paired effects](analysis/figures/ACT-0016/exp006-paired-effects.svg), an [incremental-results overview](analysis/figures/ACT-0016/incremental-effects-overview.svg) and [reduction-count plots](analysis/figures/ACT-0016/reduction-counts.svg). PNG/PDF versions, exact data, captions and input/code checksums accompany them. ACT-0017 adds the [EXP-007 coverage matrix](analysis/figures/ACT-0017/exp007-secret-flow.svg) and corrects generated SVG trailing whitespace without changing the original plotted data. ACT-0018 adds the [timing-screen diagnostics](analysis/figures/ACT-0018/exp008-timing-screen.svg), full statistic table and a thesis writing plan. Final direct-performance figures will use audited EXP-009 data.
+I generated [paired effects](analysis/figures/ACT-0016/exp006-paired-effects.svg), an [incremental-results overview](analysis/figures/ACT-0016/incremental-effects-overview.svg) and [reduction-count plots](analysis/figures/ACT-0016/reduction-counts.svg). PNG/PDF versions, exact data, captions and input/code checksums accompany them. ACT-0017 adds the [EXP-007 coverage matrix](analysis/figures/ACT-0017/exp007-secret-flow.svg) and corrects generated SVG trailing whitespace without changing the original plotted data. ACT-0018 adds the [timing-screen diagnostics](analysis/figures/ACT-0018/exp008-timing-screen.svg), full statistic table and a thesis writing plan. ACT-0019 adds a [preliminary session-1 comparison](analysis/figures/ACT-0019/exp009-session1-effects.svg) with all 324 pairs; final cross-session figures await sessions 2 and 3.
 
-EXP-006 timing/support source is 02cdbb13b49e649953dc05653bcb94002491b236; results are committed in 42d68a7da90f5d19d0539a0e8825a24852121e41. The [run record](notes/runs/EXP-006-RUN-0002.md) identifies validation and historical control commits separately. I manually perform arithmetic edits and Git operations, reviewing support before committing it. Formal runs require that commit; ACT-0017 accepts the formal EXP-007 run from source 5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4. ACT-0018 accepts formal EXP-008/RUN-0001 from source 50db1e8cb1cbd7eada48b4a47a1fe5bd92ae2f6d. I next commit its results and ACT-0018 support, then follow the EXP-009 commands. A branch backup push can happen after committing; final main integration follows closing review. The legacy summary script remains unused.
+EXP-006 timing/support source is 02cdbb13b49e649953dc05653bcb94002491b236; results are committed in 42d68a7da90f5d19d0539a0e8825a24852121e41. The [run record](notes/runs/EXP-006-RUN-0002.md) identifies validation and historical control commits separately. I manually perform arithmetic edits and Git operations, reviewing support before committing it. Formal runs require that commit; ACT-0017 accepts the formal EXP-007 run from source 5dfac7ba0a775dfe8812a9ef1ef3e2403c0b9ba4. ACT-0018 accepts formal EXP-008/RUN-0001 from source 50db1e8cb1cbd7eada48b4a47a1fe5bd92ae2f6d. Those results and ACT-0018 support are committed in 8a5e36e5d041507cc5649c7d43edb8468000f476 and the supplied push output/local tracking ref agree that this branch history was backed up. ACT-0019 accepts EXP-009 session 1; I next commit its results and review, then collect sessions 2 and 3. A normal branch push after committing backs up the new results; final main integration follows closing review. The legacy summary script remains unused.

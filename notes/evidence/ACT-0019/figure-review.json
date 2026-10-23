@@ -1,0 +1,19 @@
+{
+  "activity_id": "ACT-0019",
+  "figure": "analysis/figures/ACT-0019/exp009-session1-effects",
+  "visual_review": "Rendered PNG inspected: all nine panels, full axes, all comparisons, signed labels, preliminary-session notice and limits readable; no clipped text observed.",
+  "all_outputs_reproduced_byte_for_byte": true,
+  "audit_reproduced_byte_for_byte": true,
+  "plotted_pairs": 324,
+  "contrasts": 3,
+  "groups": 27,
+  "final_candidate_selected": false,
+  "outputs": {
+    "exp009-session1-effects.csv": "0e9cb3c9a7530275407c4a6191268089442f2d7cf9ca8e1a7269676c7530378b",
+    "exp009-session1-effects.pdf": "00b97da6e3279a00ba27f67a92b5f882bdb1cf9699134d920d481d5ef654cbd3",
+    "exp009-session1-effects.png": "0466b42fb99e90814e9954ff23de53efea0b00e7d7cba955bee5269d29391c27",
+    "exp009-session1-effects.svg": "20e3fa4151ae621adbfb4240119e79fdc714be1915c57dc8dbb4de006c35a7a6",
+    "provenance.json": "487d5bba68d2e80d42bb9648aebbb097714ca1256c1dbb30f37e366a4331cefb"
+  },
+  "audit_sha256": "91ef689b6adff3d5b2bef2c197963fe7625c86ecea7ecf1bd307d547c8b16e17"
+}
