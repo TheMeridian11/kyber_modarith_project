@@ -1,0 +1,54 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-exp005-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000053a0 <pqcrystals_kyber1024_ref_basemul>:
+    53a0:	f3 0f 1e fa          	endbr64
+    53a4:	41 55                	push   %r13
+    53a6:	49 89 f5             	mov    %rsi,%r13
+    53a9:	41 54                	push   %r12
+    53ab:	41 89 cc             	mov    %ecx,%r12d
+    53ae:	55                   	push   %rbp
+    53af:	48 89 fd             	mov    %rdi,%rbp
+    53b2:	45 0f bf e4          	movswl %r12w,%r12d
+    53b6:	53                   	push   %rbx
+    53b7:	48 89 d3             	mov    %rdx,%rbx
+    53ba:	48 83 ec 08          	sub    $0x8,%rsp
+    53be:	0f bf 7e 02          	movswl 0x2(%rsi),%edi
+    53c2:	0f bf 42 02          	movswl 0x2(%rdx),%eax
+    53c6:	0f af f8             	imul   %eax,%edi
+    53c9:	e8 12 06 00 00       	call   59e0 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    53ce:	0f bf 33             	movswl (%rbx),%esi
+    53d1:	41 0f bf 55 00       	movswl 0x0(%r13),%edx
+    53d6:	0f bf 5b 02          	movswl 0x2(%rbx),%ebx
+    53da:	41 0f bf 4d 02       	movswl 0x2(%r13),%ecx
+    53df:	0f bf f8             	movswl %ax,%edi
+    53e2:	41 0f af fc          	imul   %r12d,%edi
+    53e6:	0f af da             	imul   %edx,%ebx
+    53e9:	0f af d6             	imul   %esi,%edx
+    53ec:	0f af ce             	imul   %esi,%ecx
+    53ef:	01 d7                	add    %edx,%edi
+    53f1:	01 cb                	add    %ecx,%ebx
+    53f3:	e8 e8 05 00 00       	call   59e0 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    53f8:	89 df                	mov    %ebx,%edi
+    53fa:	66 89 45 00          	mov    %ax,0x0(%rbp)
+    53fe:	e8 dd 05 00 00       	call   59e0 <pqcrystals_kyber1024_ref_montgomery_reduce>
+    5403:	66 89 45 02          	mov    %ax,0x2(%rbp)
+    5407:	48 83 c4 08          	add    $0x8,%rsp
+    540b:	5b                   	pop    %rbx
+    540c:	5d                   	pop    %rbp
+    540d:	41 5c                	pop    %r12
+    540f:	41 5d                	pop    %r13
+    5411:	c3                   	ret
+
+Disassembly of section .fini:

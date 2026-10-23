@@ -1,0 +1,12 @@
+{
+  "activity_id": "ACT-0018",
+  "visual_inspection": "PNG inspected: readable labels, intact captions, controls and threshold visible",
+  "reproduction": "SVG/PDF/PNG/CSV and provenance byte-identical",
+  "outputs": {
+    "provenance.json": "cf118526397b8512d083a04e637d13dbf78f0dbecfca2a51db6478fffca980a5",
+    "exp008-timing-screen.csv": "45222ec064283cd9d3dca7050aa224ab82f02655d38eca4c34fe2203381b4b3c",
+    "exp008-timing-screen.svg": "2ca9d580bc1d72edb4d86296197130c44cb46990066e3175fe7b6b39949d3fa2",
+    "exp008-timing-screen.pdf": "62dcabcac92b2d304a4a05a8a9b0b1b3daadabda95c8c5fa4fe519fe4448a979",
+    "exp008-timing-screen.png": "398039ecb113791a25c4dbb79941d4e8aaa75560ca5ae94310d2592dc4541239"
+  }
+}

@@ -1,0 +1,89 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000005040 <pqcrystals_kyber512_ref_ntt>:
+    5040:	f3 0f 1e fa          	endbr64
+    5044:	41 57                	push   %r15
+    5046:	49 89 ff             	mov    %rdi,%r15
+    5049:	41 56                	push   %r14
+    504b:	41 55                	push   %r13
+    504d:	41 54                	push   %r12
+    504f:	55                   	push   %rbp
+    5050:	bd 0a fd ff ff       	mov    $0xfffffd0a,%ebp
+    5055:	53                   	push   %rbx
+    5056:	48 83 ec 28          	sub    $0x28,%rsp
+    505a:	c7 44 24 1c 07 00 00 	movl   $0x7,0x1c(%rsp)
+    5061:	00 
+    5062:	c7 44 24 0c 01 00 00 	movl   $0x1,0xc(%rsp)
+    5069:	00 
+    506a:	c7 44 24 10 80 00 00 	movl   $0x80,0x10(%rsp)
+    5071:	00 
+    5072:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    5078:	8b 44 24 10          	mov    0x10(%rsp),%eax
+    507c:	45 31 e4             	xor    %r12d,%r12d
+    507f:	8d 70 ff             	lea    -0x1(%rax),%esi
+    5082:	83 c0 01             	add    $0x1,%eax
+    5085:	89 74 24 14          	mov    %esi,0x14(%rsp)
+    5089:	89 44 24 18          	mov    %eax,0x18(%rsp)
+    508d:	0f 1f 00             	nopl   (%rax)
+    5090:	8b 44 24 10          	mov    0x10(%rsp),%eax
+    5094:	83 44 24 0c 01       	addl   $0x1,0xc(%rsp)
+    5099:	45 89 e5             	mov    %r12d,%r13d
+    509c:	44 01 e0             	add    %r12d,%eax
+    509f:	89 c0                	mov    %eax,%eax
+    50a1:	48 89 c3             	mov    %rax,%rbx
+    50a4:	4c 29 e8             	sub    %r13,%rax
+    50a7:	4d 8d 34 47          	lea    (%r15,%rax,2),%r14
+    50ab:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+    50b0:	43 0f bf 3c 6e       	movswl (%r14,%r13,2),%edi
+    50b5:	0f af fd             	imul   %ebp,%edi
+    50b8:	e8 e3 08 00 00       	call   59a0 <pqcrystals_kyber512_ref_montgomery_reduce>
+    50bd:	43 0f b7 0c 6f       	movzwl (%r15,%r13,2),%ecx
+    50c2:	29 c1                	sub    %eax,%ecx
+    50c4:	66 43 89 0c 6e       	mov    %cx,(%r14,%r13,2)
+    50c9:	66 43 01 04 6f       	add    %ax,(%r15,%r13,2)
+    50ce:	49 83 c5 01          	add    $0x1,%r13
+    50d2:	41 39 dd             	cmp    %ebx,%r13d
+    50d5:	72 d9                	jb     50b0 <pqcrystals_kyber512_ref_ntt+0x70>
+    50d7:	41 8d 44 24 01       	lea    0x1(%r12),%eax
+    50dc:	8b 74 24 18          	mov    0x18(%rsp),%esi
+    50e0:	39 c3                	cmp    %eax,%ebx
+    50e2:	b8 00 00 00 00       	mov    $0x0,%eax
+    50e7:	0f 43 44 24 14       	cmovae 0x14(%rsp),%eax
+    50ec:	41 01 f4             	add    %esi,%r12d
+    50ef:	41 01 c4             	add    %eax,%r12d
+    50f2:	41 81 fc ff 00 00 00 	cmp    $0xff,%r12d
+    50f9:	77 15                	ja     5110 <pqcrystals_kyber512_ref_ntt+0xd0>
+    50fb:	8b 44 24 0c          	mov    0xc(%rsp),%eax
+    50ff:	48 8d 15 5a 60 00 00 	lea    0x605a(%rip),%rdx        # b160 <pqcrystals_kyber512_ref_zetas>
+    5106:	0f bf 2c 42          	movswl (%rdx,%rax,2),%ebp
+    510a:	eb 84                	jmp    5090 <pqcrystals_kyber512_ref_ntt+0x50>
+    510c:	0f 1f 40 00          	nopl   0x0(%rax)
+    5110:	d1 6c 24 10          	shrl   $1,0x10(%rsp)
+    5114:	83 6c 24 1c 01       	subl   $0x1,0x1c(%rsp)
+    5119:	74 14                	je     512f <pqcrystals_kyber512_ref_ntt+0xef>
+    511b:	8b 44 24 0c          	mov    0xc(%rsp),%eax
+    511f:	48 8d 35 3a 60 00 00 	lea    0x603a(%rip),%rsi        # b160 <pqcrystals_kyber512_ref_zetas>
+    5126:	0f bf 2c 46          	movswl (%rsi,%rax,2),%ebp
+    512a:	e9 49 ff ff ff       	jmp    5078 <pqcrystals_kyber512_ref_ntt+0x38>
+    512f:	48 83 c4 28          	add    $0x28,%rsp
+    5133:	5b                   	pop    %rbx
+    5134:	5d                   	pop    %rbp
+    5135:	41 5c                	pop    %r12
+    5137:	41 5d                	pop    %r13
+    5139:	41 5e                	pop    %r14
+    513b:	41 5f                	pop    %r15
+    513d:	c3                   	ret
+
+Disassembly of section .fini:

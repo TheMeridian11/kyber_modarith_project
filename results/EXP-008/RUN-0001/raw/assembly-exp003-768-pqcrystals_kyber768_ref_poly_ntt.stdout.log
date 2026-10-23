@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-exp003-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000005060 <pqcrystals_kyber768_ref_poly_ntt>:
+    5060:	f3 0f 1e fa          	endbr64
+    5064:	55                   	push   %rbp
+    5065:	53                   	push   %rbx
+    5066:	48 89 fb             	mov    %rdi,%rbx
+    5069:	48 8d ab 00 02 00 00 	lea    0x200(%rbx),%rbp
+    5070:	48 83 ec 08          	sub    $0x8,%rsp
+    5074:	e8 97 01 00 00       	call   5210 <pqcrystals_kyber768_ref_ntt>
+    5079:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    5080:	0f bf 3b             	movswl (%rbx),%edi
+    5083:	48 83 c3 02          	add    $0x2,%rbx
+    5087:	e8 b4 0a 00 00       	call   5b40 <pqcrystals_kyber768_ref_barrett_reduce>
+    508c:	66 89 43 fe          	mov    %ax,-0x2(%rbx)
+    5090:	48 39 eb             	cmp    %rbp,%rbx
+    5093:	75 eb                	jne    5080 <pqcrystals_kyber768_ref_poly_ntt+0x20>
+    5095:	48 83 c4 08          	add    $0x8,%rsp
+    5099:	5b                   	pop    %rbx
+    509a:	5d                   	pop    %rbp
+    509b:	c3                   	ret
+
+Disassembly of section .fini:

@@ -1,0 +1,58 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-baseline-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000053b0 <pqcrystals_kyber768_ref_basemul>:
+    53b0:	f3 0f 1e fa          	endbr64
+    53b4:	41 55                	push   %r13
+    53b6:	41 89 cd             	mov    %ecx,%r13d
+    53b9:	41 54                	push   %r12
+    53bb:	49 89 f4             	mov    %rsi,%r12
+    53be:	45 0f bf ed          	movswl %r13w,%r13d
+    53c2:	55                   	push   %rbp
+    53c3:	48 89 d5             	mov    %rdx,%rbp
+    53c6:	53                   	push   %rbx
+    53c7:	48 89 fb             	mov    %rdi,%rbx
+    53ca:	48 83 ec 08          	sub    $0x8,%rsp
+    53ce:	0f bf 7e 02          	movswl 0x2(%rsi),%edi
+    53d2:	0f bf 42 02          	movswl 0x2(%rdx),%eax
+    53d6:	0f af f8             	imul   %eax,%edi
+    53d9:	e8 22 06 00 00       	call   5a00 <pqcrystals_kyber768_ref_montgomery_reduce>
+    53de:	0f bf f8             	movswl %ax,%edi
+    53e1:	66 89 03             	mov    %ax,(%rbx)
+    53e4:	41 0f af fd          	imul   %r13d,%edi
+    53e8:	e8 13 06 00 00       	call   5a00 <pqcrystals_kyber768_ref_montgomery_reduce>
+    53ed:	66 89 03             	mov    %ax,(%rbx)
+    53f0:	41 0f bf 3c 24       	movswl (%r12),%edi
+    53f5:	0f bf 45 00          	movswl 0x0(%rbp),%eax
+    53f9:	0f af f8             	imul   %eax,%edi
+    53fc:	e8 ff 05 00 00       	call   5a00 <pqcrystals_kyber768_ref_montgomery_reduce>
+    5401:	66 01 03             	add    %ax,(%rbx)
+    5404:	41 0f bf 3c 24       	movswl (%r12),%edi
+    5409:	0f bf 45 02          	movswl 0x2(%rbp),%eax
+    540d:	0f af f8             	imul   %eax,%edi
+    5410:	e8 eb 05 00 00       	call   5a00 <pqcrystals_kyber768_ref_montgomery_reduce>
+    5415:	66 89 43 02          	mov    %ax,0x2(%rbx)
+    5419:	41 0f bf 7c 24 02    	movswl 0x2(%r12),%edi
+    541f:	0f bf 45 00          	movswl 0x0(%rbp),%eax
+    5423:	0f af f8             	imul   %eax,%edi
+    5426:	e8 d5 05 00 00       	call   5a00 <pqcrystals_kyber768_ref_montgomery_reduce>
+    542b:	66 01 43 02          	add    %ax,0x2(%rbx)
+    542f:	48 83 c4 08          	add    $0x8,%rsp
+    5433:	5b                   	pop    %rbx
+    5434:	5d                   	pop    %rbp
+    5435:	41 5c                	pop    %r12
+    5437:	41 5d                	pop    %r13
+    5439:	c3                   	ret
+
+Disassembly of section .fini:

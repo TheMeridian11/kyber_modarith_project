@@ -1,0 +1,18 @@
+{
+  "activity_id": "ACT-0018",
+  "inputs": {
+    "notes/evidence/ACT-0018/exp-008-run-0001-review.json": "0616ab228cc85baa667afc9fd99ecfadd966ff47067c7d043a91ac5b162eb34e",
+    "results/EXP-008/RUN-0001/manifest.json": "4db56f69b3884d15314f8cc47e08cba15b433462a9e288933684f65b19f16b1e"
+  },
+  "generator_sha256": "5f410e84421dd55c92f21d9d5a1159c77ca1d9d475dd1235564a8587fbe097b7",
+  "python": "3.12.3",
+  "matplotlib": "3.10.8",
+  "numpy": "2.5.4",
+  "outputs": {
+    "exp008-timing-screen.csv": "45222ec064283cd9d3dca7050aa224ab82f02655d38eca4c34fe2203381b4b3c",
+    "exp008-timing-screen.pdf": "62dcabcac92b2d304a4a05a8a9b0b1b3daadabda95c8c5fa4fe519fe4448a979",
+    "exp008-timing-screen.png": "398039ecb113791a25c4dbb79941d4e8aaa75560ca5ae94310d2592dc4541239",
+    "exp008-timing-screen.svg": "2ca9d580bc1d72edb4d86296197130c44cb46990066e3175fe7b6b39949d3fa2"
+  },
+  "interpretation": "Descriptive diagnostic maxima, not calibrated family-wise inference, sensitivity bound or security score"
+}

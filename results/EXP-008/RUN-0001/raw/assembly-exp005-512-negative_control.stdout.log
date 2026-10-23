@@ -1,0 +1,24 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-exp005-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+000000000000a020 <negative_control>:
+    a020:	f3 0f 1e fa          	endbr64
+    a024:	8b 05 76 52 00 00    	mov    0x5276(%rip),%eax        # f2a0 <work+0xf00>
+    a02a:	89 c2                	mov    %eax,%edx
+    a02c:	c1 e2 04             	shl    $0x4,%edx
+    a02f:	8d 44 10 1d          	lea    0x1d(%rax,%rdx,1),%eax
+    a033:	89 05 27 40 00 00    	mov    %eax,0x4027(%rip)        # e060 <sink>
+    a039:	c3                   	ret
+
+Disassembly of section .fini:

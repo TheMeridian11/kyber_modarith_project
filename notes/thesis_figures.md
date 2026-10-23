@@ -44,7 +44,7 @@ I will extend the set when relevant evidence exists:
 - A security evidence matrix that distinguishes range arguments, compatibility, exercised sanitizers, assembly/hardening, formal dynamic-flow results and statistical timing outcomes, with clear not-run/inconclusive states.
 - Statistical leakage diagnostics including sensitivity controls and chosen secret classes/budgets once those are fixed and collected. A quiet plot will not be labelled proof of constant time.
 
-I will choose additional visuals when they clarify a defensible thesis claim. I will preserve adverse results, units, comparators, sample structure, tool/source identities and limitations in captions and linked evidence. These initial figures are ready to use as report drafts; final direct-performance and security conclusions are still pending.
+I will choose additional visuals when they clarify a defensible thesis claim. I will preserve adverse results, units, comparators, sample structure, tool/source identities and limitations in captions and linked evidence. These initial figures are ready to use as report drafts; final direct-performance and consolidated security reporting remain pending.
 
 ## ACT-0017 formal secret-flow coverage figure
 
@@ -58,4 +58,19 @@ I reproduce it using the same figure environment:
 /tmp/kyber-thesis-figures/bin/python -B analysis/build_security_figures.py
 ```
 
-The initial exports remain under ACT-0016 with their explicit ACT-0017 whitespace revision; the new security figure is under ACT-0017. Statistical timing plots wait for formal EXP-008 observations and their review. I retain the existing incremental heatmap to explain that EXP-003's sizeable inverse-NTT benefit is already part of EXP-005. A final original/EXP-003/EXP-005 figure will use fresh matched data, not constructed cumulative percentages.
+The initial exports remain under ACT-0016 with their explicit ACT-0017 whitespace revision; the new security figure is under ACT-0017. ACT-0018 below adds the audited formal EXP-008 timing plot. I retain the existing incremental heatmap to explain that EXP-003's sizeable inverse-NTT benefit is already part of EXP-005. A final original/EXP-003/EXP-005 figure will use fresh matched data, not constructed cumulative percentages.
+
+## ACT-0018 formal timing-screen diagnostics
+
+I generated [SVG](../analysis/figures/ACT-0018/exp008-timing-screen.svg), [PDF](../analysis/figures/ACT-0018/exp008-timing-screen.pdf) and [PNG](../analysis/figures/ACT-0018/exp008-timing-screen.png), with [all 1944 statistics](../analysis/figures/ACT-0018/exp008-timing-screen.csv) and [provenance](../analysis/figures/ACT-0018/provenance.json). I inspected the PNG and independently regenerated all five outputs byte-for-byte.
+
+**Draft caption.** I show the maximum absolute Welch statistic for each target path and implementation/parameter combination in EXP-008/RUN-0001. Each cell covers two synthetic profiles, two process repetitions, two fixed looks and three views (24 statistics); no target statistic exceeds the predeclared diagnostic threshold 10. Every process retains 50000 analysis observations plus 2000 calibration observations. The lower panel shows each negative control's maximum across its six statistics, and each deliberate positive control's final uncropped mean statistic, matching their acceptance rules. All 18 positives are detected and all 18 negatives are quiet. Timing uses TSC ticks. These are bounded empirical observations, not calibrated family-wise inference, tiny-leak sensitivity guarantees, an implementation ranking or a whole-program constant-time proof.
+
+I reproduce the audit with local ignored build files still present, then generate the figure into a new directory using the pinned plotting environment:
+
+```sh
+/tmp/kyber-thesis-figures/bin/python -B analysis/review_timing_leakage.py --out /tmp/exp008-review-copy.json
+/tmp/kyber-thesis-figures/bin/python -B analysis/build_timing_leakage_figures.py --output /tmp/exp008-figure-copy
+```
+
+The retained review supplies all plot data even if ignored binaries later disappear; repeating the full identity audit requires those exact binaries or a separately documented rebuild. The next figures will use EXP-009's actual three sessions and show each session's effects and all three direct contrasts. I do not turn the development session into a thesis performance result.

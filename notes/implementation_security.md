@@ -13,7 +13,7 @@ My scope is the pinned Kyber reference C implementation, the recorded GCC/x86-64
 | Exercised undefined behaviour | UBSan observations on selected paths, alongside explicit narrowing arguments | Accepted for existing candidates including EXP-006; not an exhaustive proof |
 | Generated code and hardening | Actual branches, addresses, reducers, code size, local stack and protection instructions in scoped functions | Reviewed per run; inherited EXP-002 local-canary tradeoff retained |
 | Dynamic secret-flow checking | Executed branches/addresses influenced by marked secrets | Formal EXP-007/RUN-0001 accepted in ACT-0017: 144 quiet target processes, 18 sensitive positive controls |
-| Statistical timing-leakage checks | Detectable timing differences between chosen secret classes on this build/target | EXP-008 support/pilot prepared; formal collection not-run and required |
+| Statistical timing-leakage checks | Detectable timing differences between chosen secret classes on this build/target | EXP-008/RUN-0001 accepted in ACT-0018: 288 quiet target processes, maximum absolute t 2.91016; all 36 controls meet criteria |
 | Whole-program/formal/physical security | Exhaustive constant time, power/EM, fault resistance, all-target behaviour | Not established; outside this practical claim |
 
 ## Why I use complementary methods
@@ -52,7 +52,7 @@ I prepared EXP-007 in ACT-0016 and accepted its formal RUN-0001 in ACT-0017. The
 5. In a pilot, select a finite sample budget and sensitivity controls. Then commit the exact budgets, class generators/seeds, batching, repetitions, statistical tests/thresholds and any multiple-test or sequential-stopping policy before formal candidate runs. Use the pinned tool's documented test interpretation. Do not extend sampling until a desired conclusion appears or select only favourable classes after seeing candidate results.
 6. Preserve raw timing/class observations or an equivalently auditable retained stream, tool output and intermediate/final statistics. Record affinity, timer, sample count, environment and exclusions. Repeat a detected effect with the same predeclared procedure and compare the original/predecessor to distinguish inherited behaviour, harness defects and candidate changes. WSL scheduling and host activity can reduce sensitivity; a noisy or insensitive setup is reported as inconclusive and investigated.
 
-ACT-0017 completes the pinned-reference review and development sensitivity pilot. EXP-008 specifies 50000 analysis observations per process, two fixed looks, three statistical views and a threshold of |t| > 10; it records multiple-test and dependence limitations without claiming a calibrated family-wise probability. Formal collection remains pending. This is a bounded assessment plan, not a claim that all possible secret distributions or microarchitectural effects will be tested.
+ACT-0017 completes the pinned-reference review and development sensitivity pilot. EXP-008 specifies 50000 analysis observations per process, two fixed looks, three statistical views and a threshold of |t| > 10; it records multiple-test and dependence limitations without claiming a calibrated family-wise probability. Formal collection is now accepted in ACT-0018. This is a bounded assessment, not a claim that all possible secret distributions or microarchitectural effects will be tested.
 
 ## Reporting and selection rules
 
@@ -68,7 +68,7 @@ In ACT-0015 I chose to exclude VTune installation, profiling and analysis from t
 
 ## ACT-0016 executed support checks and remaining claims
 
-This section records the earlier handoff; ACT-0017 below updates completion status.
+This section records the earlier handoff; ACT-0017 and ACT-0018 below update completion status.
 
 I selected EXP-005 as the primary closing candidate after EXP-006's mixed timing result; EXP-006 remains a secondary comparison. The new tests leave arithmetic untouched and restore all 35 EXP-005 files from their committed source. I pinned Valgrind 3.22.0, used actual installed client-request headers and recorded the launcher, valgrind.bin, Memcheck runtime/preloads, headers, compiler and disassembler hashes. I disable default suppressions and preserve XML/error counts and process outputs.
 
@@ -87,3 +87,11 @@ I expanded the initial six-path development matrix after checking the actual ope
 I prepared a native [EXP-008 fixed-budget screen](experiments/EXP-008-timing-leakage.md) for original/EXP-003/EXP-005. Development control measurements at 50000 observations detect all 18 deliberately leaky controls, with all 18 negatives quiet under the final analysis. Smaller development matrices remain labelled support tests and retain their insensitive controls. The final protocol uses a class-blind within-look percentile after a calibration-only cutoff proved stale in one development control. I retain both analyses and raw observations. The Welch calculation agrees with the pinned upstream implementation on independent numerical fixtures. Formal candidate security conclusions await committed collection and review.
 
 I distinguish a large deliberate leak detected by the controls from a sensitivity bound on small real effects, which is not established. No signal within the finite budget is not proof of constant time. No implementation-security numeric score is inferred from the coverage figure.
+
+## ACT-0018 accepted timing evidence
+
+I accepted [EXP-008/RUN-0001](runs/EXP-008-RUN-0001.md) from committed support after independently recomputing all 1944 statistics and checking all 1026 raw files, 105 source identities and 180 assembly bodies. All 288 target processes are quiet at the frozen threshold; all 18 positive and 18 negative controls meet their criteria. Zero retained observations are excluded for invalid intervals/AUX changes. The largest target absolute t is 2.91016; the threshold is 10.
+
+This establishes no detected timing difference within the selected paths/classes/budget, alongside the separate dynamic evidence. EXP-008 directly includes EXP-003, whereas EXP-007 directly includes EXP-006; I do not silently equate those variant matrices. The unchanged reviewed body identities support reuse only within their stated scope. Whole-KEM implicit rejection, other platforms/compilers, tiny-leak sensitivity and physical/fault channels remain unestablished. The existing general-dot local-canary tradeoff remains visible.
+
+The planned security collection is complete. I carry these findings into the final consolidated security/code/stack table and the [EXP-009 comparison](experiments/EXP-009-final-comparison.md), which verifies exact source and normal-code identities before throughput collection. New source or build differences would require the affected assessment again. The [timing-screen figure](thesis_figures.md) is diagnostic evidence, not a numerical security score.

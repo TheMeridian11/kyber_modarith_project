@@ -1,0 +1,32 @@
+{
+  "head": "50db1e8cb1cbd7eada48b4a47a1fe5bd92ae2f6d",
+  "local_main": "dac387fe75fa260ccecd1211c57b716025ed2ad4",
+  "local_origin_main": "dac387fe75fa260ccecd1211c57b716025ed2ad4",
+  "main_is_ancestor": true,
+  "commits_ahead_of_local_main": 33,
+  "remote_state": "not-contacted; local remote-tracking ref only",
+  "source_commit_support_blobs": "all match",
+  "historical_source_blobs": "70 exact matches",
+  "largest_nonbuild_files": [
+    [
+      3914894,
+      "notes/evidence/ACT-0017/timing-leakage-final-smoke.tar.gz"
+    ],
+    [
+      3906283,
+      "notes/evidence/ACT-0017/timing-leakage-initial-smoke.tar.gz"
+    ],
+    [
+      2250649,
+      "results/EXP-008/RUN-0001/manifest.json"
+    ],
+    [
+      2106145,
+      "notes/evidence/ACT-0017/timing-controls-initial.tar.gz"
+    ],
+    [
+      1388208,
+      "notes/evidence/ACT-0016/secret-flow-support-smoke.json"
+    ]
+  ]
+}

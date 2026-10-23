@@ -1,0 +1,4 @@
+# Preserve retained experimental evidence byte-for-byte across checkouts.
+results/** -text
+# Raw tool formatting is evidence, including objdump byte-continuation spaces.
+results/EXP-*/RUN-*/raw/*.log -whitespace

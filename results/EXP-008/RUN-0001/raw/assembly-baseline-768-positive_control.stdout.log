@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-baseline-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000009f30 <positive_control>:
+    9f30:	f3 0f 1e fa          	endbr64
+    9f34:	f6 05 25 5a 00 00 01 	testb  $0x1,0x5a25(%rip)        # f960 <work+0x1480>
+    9f3b:	74 2b                	je     9f68 <positive_control+0x38>
+    9f3d:	ba 40 00 00 00       	mov    $0x40,%edx
+    9f42:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    9f48:	8b 05 12 41 00 00    	mov    0x4112(%rip),%eax        # e060 <sink>
+    9f4e:	69 c0 0d 66 19 00    	imul   $0x19660d,%eax,%eax
+    9f54:	05 5f f3 6e 3c       	add    $0x3c6ef35f,%eax
+    9f59:	89 05 01 41 00 00    	mov    %eax,0x4101(%rip)        # e060 <sink>
+    9f5f:	83 ea 01             	sub    $0x1,%edx
+    9f62:	75 e4                	jne    9f48 <positive_control+0x18>
+    9f64:	c3                   	ret
+    9f65:	0f 1f 00             	nopl   (%rax)
+    9f68:	8b 05 f2 40 00 00    	mov    0x40f2(%rip),%eax        # e060 <sink>
+    9f6e:	69 c0 0d 66 19 00    	imul   $0x19660d,%eax,%eax
+    9f74:	05 5f f3 6e 3c       	add    $0x3c6ef35f,%eax
+    9f79:	89 05 e1 40 00 00    	mov    %eax,0x40e1(%rip)        # e060 <sink>
+    9f7f:	c3                   	ret
+
+Disassembly of section .fini:

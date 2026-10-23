@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment": "EXP-009",
+  "record_type": "three-way-final-timing",
+  "sessions": 3,
+  "blocks": 12,
+  "iterations": 1000,
+  "warmup": 100,
+  "cpu": 0,
+  "session_seeds": [
+    1,
+    2027,
+    4051
+  ],
+  "variants": [
+    "baseline",
+    "exp003",
+    "exp005"
+  ],
+  "comparisons": [
+    [
+      "baseline",
+      "exp003"
+    ],
+    [
+      "baseline",
+      "exp005"
+    ],
+    [
+      "exp003",
+      "exp005"
+    ]
+  ],
+  "permutations": [
+    [
+      "baseline",
+      "exp003",
+      "exp005"
+    ],
+    [
+      "baseline",
+      "exp005",
+      "exp003"
+    ],
+    [
+      "exp003",
+      "baseline",
+      "exp005"
+    ],
+    [
+      "exp003",
+      "exp005",
+      "baseline"
+    ],
+    [
+      "exp005",
+      "baseline",
+      "exp003"
+    ],
+    [
+      "exp005",
+      "exp003",
+      "baseline"
+    ]
+  ],
+  "timer": "CLOCK_MONOTONIC_RAW",
+  "units": "ns",
+  "fixture_rule": "session_seed + block - 1; identical across variants within each parameter/block",
+  "order_rule": "permutation index (block-1 + 2*(session-1) + parameter_index) modulo 6; parameter order rotates each block",
+  "exclusions": "none; every duration retained; any execution, functional or integrity failure invalidates the whole attempt",
+  "stopping": "three separately launched complete sessions; retain every failed/interrupted attempt; no effect-dependent extension",
+  "analysis": "process medians -> matched within-block effects -> session medians -> descriptive three-session range; no pooled inner-sample inference",
+  "keypair_assembly": {
+    "baseline-512": "results/EXP-005/RUN-0001/raw/assembly-baseline-512-normal-indcpa_keypair_derand.stdout.log",
+    "baseline-768": "results/EXP-005/RUN-0001/raw/assembly-baseline-768-normal-indcpa_keypair_derand.stdout.log",
+    "baseline-1024": "results/EXP-005/RUN-0001/raw/assembly-baseline-1024-normal-indcpa_keypair_derand.stdout.log",
+    "exp003-512": "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-512-indcpa_keypair_derand.stdout.log",
+    "exp003-768": "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-768-indcpa_keypair_derand.stdout.log",
+    "exp003-1024": "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-1024-indcpa_keypair_derand.stdout.log",
+    "exp005-512": "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-512-indcpa_keypair_derand.stdout.log",
+    "exp005-768": "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-768-indcpa_keypair_derand.stdout.log",
+    "exp005-1024": "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-1024-indcpa_keypair_derand.stdout.log"
+  },
+  "accepted_inputs": {
+    "results/EXP-008/RUN-0001/manifest.json": "4db56f69b3884d15314f8cc47e08cba15b433462a9e288933684f65b19f16b1e",
+    "notes/evidence/ACT-0018/exp-008-run-0001-review.json": "0616ab228cc85baa667afc9fd99ecfadd966ff47067c7d043a91ac5b162eb34e",
+    "results/EXP-003/RUN-0001/manifest.json": "70a9d98f92494ffa5ead0804565797060f3349f35d167cb68607ca66f2cb4615",
+    "results/EXP-005/RUN-0001/manifest.json": "6bf9833c02e9744e92360cecd37d6668cb4c4dc01ad4803ee72315fce8f0bd5d",
+    "results/EXP-005/RUN-0002/manifest.json": "22cf2fcc0533c6e35a8063b6709b4d11cb391b742e0850cd0204d94bf0db6668",
+    "results/EXP-005/RUN-0001/raw/assembly-baseline-512-normal-indcpa_keypair_derand.stdout.log": "44a5bf5849abd83184827a95f02717842ddf10e923edd80c5377ad4cce911242",
+    "results/EXP-005/RUN-0001/raw/assembly-baseline-768-normal-indcpa_keypair_derand.stdout.log": "7feb9bc245748d885ae6ead1e5d75052eb3a49e80f334e94badb6ab4480d8be9",
+    "results/EXP-005/RUN-0001/raw/assembly-baseline-1024-normal-indcpa_keypair_derand.stdout.log": "58cf242fe4c0283bdcdf9bfbcc5c5a3d759f64a5694bda989664bc38a80a014d",
+    "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-512-indcpa_keypair_derand.stdout.log": "df0b9d2c32cc028f04a20aae551d7d21b3c2631a68bd7159910bd02cfabbd886",
+    "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-768-indcpa_keypair_derand.stdout.log": "c0b0aa1220a5aadfcf806933664656faefe85b17531d9bcff72e4deceb63c94d",
+    "results/EXP-005/RUN-0002/raw/assembly-staged-invntt-1024-indcpa_keypair_derand.stdout.log": "75112e22a506fcff151464744fbf327af1309f2812d94330da6e2a21924d9344",
+    "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-512-indcpa_keypair_derand.stdout.log": "00bb3ad2ffb36266888814b9a785fc9aceabaaf0dd3029ab7a10ae41b111ec70",
+    "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-768-indcpa_keypair_derand.stdout.log": "8325221b153339262048411f92cdfa115e37c85ad7e5b8898c8c2e18114d126e",
+    "results/EXP-005/RUN-0002/raw/assembly-raw-error-ntt-1024-indcpa_keypair_derand.stdout.log": "09e85b15e59788cec12ef79999f596a8ecbba2eb72973d043c5706a553f7de75"
+  },
+  "timeout_seconds": 120
+}

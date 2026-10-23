@@ -1,0 +1,38 @@
+{
+  "activity_id": "ACT-0018",
+  "source_path": "C:/UTS_UNI/TRM/Final Thesis draft for trm/Draft Introduction Chapter.docx",
+  "sha256": "89b110336556e1b46b53f01a4fb0127e4d0dab5e10ca23294b166f278f046a88",
+  "discovery": "Original attachment path recovered from this conversation opening through the app thread reader",
+  "scope": "Read-only content review of body paragraphs, the experiment table, OMML equations and reference list; not a layout audit or bibliographic verification",
+  "comments_present": false,
+  "tracked_insertions": 0,
+  "tracked_deletions": 0,
+  "original_modified": false,
+  "reviewed_sections": [
+    "Background and Context",
+    "Aim and Significance",
+    "Research Objectives/Questions",
+    "Brief Overview of Methodology, Planned Experiments and Analysis",
+    "Introduction to the Methodology",
+    "Intended Datasets/Population/Sampling",
+    "Planned Experiment and Analysis",
+    "Reliability and Validity Discussion",
+    "Ethical Stance",
+    "References"
+  ],
+  "questions": [
+    "RQ1 modular-arithmetic overhead by stage/component",
+    "RQ2 runtime effects across three KEM operations",
+    "RQ3 correctness and baseline interoperability",
+    "RQ4 performance, memory and constant-time tradeoffs"
+  ],
+  "main_revisions": [
+    "Targeted wider intermediates and reduction placement; int16_t coefficient arrays retained",
+    "Reduction audit/counts and controlled interventions replace proposed profiling",
+    "Matched blocks/sessions distinguish inference from inner observations",
+    "Scoped code/local-stack evidence, not total heap/peak-memory profiling",
+    "Bounded complementary security methods replace vague timing-consistency claims",
+    "Pinned reference Kyber is not certified final ML-KEM",
+    "AVX2 collaborator work remains separate follow-on scope"
+  ]
+}

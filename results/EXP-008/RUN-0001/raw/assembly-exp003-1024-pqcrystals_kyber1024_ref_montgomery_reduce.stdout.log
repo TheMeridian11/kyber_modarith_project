@@ -1,0 +1,24 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-exp003-1024:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000059c0 <pqcrystals_kyber1024_ref_montgomery_reduce>:
+    59c0:	f3 0f 1e fa          	endbr64
+    59c4:	66 69 c7 01 f3       	imul   $0xf301,%di,%ax
+    59c9:	98                   	cwtl
+    59ca:	69 c0 ff f2 ff ff    	imul   $0xfffff2ff,%eax,%eax
+    59d0:	01 f8                	add    %edi,%eax
+    59d2:	c1 e8 10             	shr    $0x10,%eax
+    59d5:	c3                   	ret
+
+Disassembly of section .fini:

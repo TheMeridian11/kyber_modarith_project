@@ -1,0 +1,30 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+000000000000a710 <error_path>:
+    a710:	f3 0f 1e fa          	endbr64
+    a714:	53                   	push   %rbx
+    a715:	48 8d 1d 84 46 00 00 	lea    0x4684(%rip),%rbx        # eda0 <work+0xa00>
+    a71c:	48 89 df             	mov    %rbx,%rdi
+    a71f:	e8 6c a7 ff ff       	call   4e90 <pqcrystals_kyber512_ref_poly_ntt>
+    a724:	48 89 da             	mov    %rbx,%rdx
+    a727:	48 81 eb 00 02 00 00 	sub    $0x200,%rbx
+    a72e:	48 89 df             	mov    %rbx,%rdi
+    a731:	48 89 de             	mov    %rbx,%rsi
+    a734:	e8 a7 a8 ff ff       	call   4fe0 <pqcrystals_kyber512_ref_poly_add>
+    a739:	48 89 df             	mov    %rbx,%rdi
+    a73c:	5b                   	pop    %rbx
+    a73d:	e9 5e a8 ff ff       	jmp    4fa0 <pqcrystals_kyber512_ref_poly_reduce>
+
+Disassembly of section .fini:

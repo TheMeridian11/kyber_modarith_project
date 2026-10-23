@@ -1,0 +1,53 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-008/RUN-0001/build/leak-exp003-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+000000000000a880 <basemul_path>:
+    a880:	f3 0f 1e fa          	endbr64
+    a884:	41 54                	push   %r12
+    a886:	45 31 e4             	xor    %r12d,%r12d
+    a889:	55                   	push   %rbp
+    a88a:	48 8d 2d cf 08 00 00 	lea    0x8cf(%rip),%rbp        # b160 <pqcrystals_kyber512_ref_zetas>
+    a891:	53                   	push   %rbx
+    a892:	48 8d 1d 07 43 00 00 	lea    0x4307(%rip),%rbx        # eba0 <work+0x800>
+    a899:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    a8a0:	44 89 e0             	mov    %r12d,%eax
+    a8a3:	d1 e8                	shr    $1,%eax
+    a8a5:	83 c0 40             	add    $0x40,%eax
+    a8a8:	0f bf 4c 45 00       	movswl 0x0(%rbp,%rax,2),%ecx
+    a8ad:	41 f6 c4 01          	test   $0x1,%r12b
+    a8b1:	74 35                	je     a8e8 <basemul_path+0x68>
+    a8b3:	f7 d9                	neg    %ecx
+    a8b5:	48 8d 93 00 fc ff ff 	lea    -0x400(%rbx),%rdx
+    a8bc:	48 89 df             	mov    %rbx,%rdi
+    a8bf:	41 83 c4 01          	add    $0x1,%r12d
+    a8c3:	48 8d b3 00 f8 ff ff 	lea    -0x800(%rbx),%rsi
+    a8ca:	0f bf c9             	movswl %cx,%ecx
+    a8cd:	48 83 c3 04          	add    $0x4,%rbx
+    a8d1:	e8 ca aa ff ff       	call   53a0 <pqcrystals_kyber512_ref_basemul>
+    a8d6:	41 81 fc 80 00 00 00 	cmp    $0x80,%r12d
+    a8dd:	75 c1                	jne    a8a0 <basemul_path+0x20>
+    a8df:	5b                   	pop    %rbx
+    a8e0:	5d                   	pop    %rbp
+    a8e1:	41 5c                	pop    %r12
+    a8e3:	c3                   	ret
+    a8e4:	0f 1f 40 00          	nopl   0x0(%rax)
+    a8e8:	48 8d 93 00 fc ff ff 	lea    -0x400(%rbx),%rdx
+    a8ef:	48 8d b3 00 f8 ff ff 	lea    -0x800(%rbx),%rsi
+    a8f6:	48 89 df             	mov    %rbx,%rdi
+    a8f9:	41 83 c4 01          	add    $0x1,%r12d
+    a8fd:	e8 9e aa ff ff       	call   53a0 <pqcrystals_kyber512_ref_basemul>
+    a902:	48 83 c3 04          	add    $0x4,%rbx
+    a906:	eb 98                	jmp    a8a0 <basemul_path+0x20>
+
+Disassembly of section .fini:
