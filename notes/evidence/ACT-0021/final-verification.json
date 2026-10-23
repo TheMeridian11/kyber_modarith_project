@@ -1,0 +1,33 @@
+{
+  "activity_id": "ACT-0021",
+  "head_unchanged": "66c707f9dc8cef556d1133fb48d6fb1f71e989e7",
+  "source_checkout_unchanged": "EXP-006; actual restoration pending",
+  "production_source_files_preserved": 35,
+  "archived_results_preserved": 4474,
+  "modified_tracked_files_sha256": {
+    "README.md": "4db26c3977d3f0704a9df69b5879429006ca378ad819e6f66916c56a19f29c41",
+    "notes/git_handoff.md": "3b7eecd2cf61afb147ddb876c484fa62090d95db09f33508ff70656ebcdcb1f1",
+    "notes/practical_completion.md": "a5fd65fc9fb2855a16cd35f7f3385f9d80adbe42300c5525750fff9da042842d",
+    "notes/project_log.md": "35ea4404a5d38f9a902503c0346e904ce196a3f62e19e903f19b2645acfdc2d5"
+  },
+  "new_evidence_files": [
+    "notes/evidence/ACT-0021/source-and-handoff-review.json",
+    "notes/evidence/ACT-0021/final-verification.json"
+  ],
+  "source_review_sha256": "63e4b11e01b3d46590cb9c1eb0b1b7014c88e6b060b734840f7076fc3337c0a2",
+  "all_other_tracked_files_unchanged": true,
+  "checks": {
+    "authored_LF_and_trailing_whitespace": "pass",
+    "relative_markdown_links": "pass",
+    "documented_shell_syntax_only": "pass",
+    "restore_exact_commit_and_three_paths": "pass",
+    "documented_hash_check_python_syntax": "pass",
+    "documented_hash_check_on_retained_selected_source": "pass (35 files; production source untouched)"
+  },
+  "relative_links_checked": 190,
+  "git_commands_executed": false,
+  "new_benchmarks_executed": false,
+  "new_security_tests_executed": false,
+  "practical_handoff_complete": false,
+  "remaining": "Manual three-file restoration; actual 35-file identity and documentation review; user handoff commit/push; fresh remote check and history-preserving main integration."
+}

@@ -1,57 +1,47 @@
 # Git handoff and final branch integration
 
-## Current verified state
+## Current verified state — ACT-0022
 
-I work on reduction-counters at 99733b9f5401236708ca25be9efd807cff60d7ce. The supplied push output reports success and the local origin/reduction-counters ref equals that commit. This backs up ACT-0019 and EXP-009/RUN-0001, but not the two later uncommitted result directories. Local main and origin/main remain dac387fe75fa260ccecd1211c57b716025ed2ad4, an ancestor 35 commits behind. I verified local objects/refs without running Git or contacting the remote. [Evidence](evidence/ACT-0020/source-and-branch-review.json).
+I work on reduction-counters at 66c707f9dc8cef556d1133fb48d6fb1f71e989e7, the closing-results commit. The supplied successful push and matching local origin/reduction-counters ref establish the reported backup. All 4474 archived result files and ACT-0020's reports, final selection and graphs are committed. ACT-0021 verified that commit's exact scope. [Backup review](evidence/ACT-0021/source-and-handoff-review.json).
 
-All three sessions are accepted and the [final candidate is EXP-005](final_candidate.md). The 910 archived files in RUN-0002/RUN-0003 and the ACT-0020 reports/graphs still need the user commit and push. The ignored build directories remain local; their commands and binary identities are retained. All original raw bytes and all frozen measurement support are preserved.
+I have now restored and reviewed the actual selected EXP-005 working source. All 35 files match analysis/final_candidate.json, the verified historical snapshot at 4bd813ed71a90c7722275dc802336852214a5388, both accepted security manifests and all three final comparison manifests. The actual source diff exactly matches the previously reviewed 2 insertions and 41 deletions across indcpa.c, polyvec.c and polyvec.h. No repair was needed. The red deletion lines in git diff remove the expected EXP-006-only function and declaration; they do not indicate an error. [Final source review](evidence/ACT-0022/selected-source-review.json).
 
-## Commit and back up the closing evidence
+The source now contains cumulative EXP-001/002/003/005. Keygen calls the general dot product followed by poly_tomont, retains the EXP-005 raw error-vector transform and keeps secret-vector centring and the final public-key reduction. EXP-006 remains preserved in historical commits and results. The selection manifest's checkout_at_selection field accurately describes ACT-0020 and is retained unchanged as historical evidence.
 
-I perform Git commands manually, review the staged content and stop if a command fails:
+I granted a one-time exception allowing the assistant to repair this restoration if needed. Inspection found it already correct, so no assistant production-source edit was necessary. Git operations remain manual under the research workflow. The scientific work, source review, reproduced evidence and handoff documentation are complete. No additional experiment or source repair is required before the commands below. The final commit/push and main integration have not yet happened.
+
+## 1. Commit and push the reviewed handoff
+
+I review and commit the existing restoration together with ACT-0021/ACT-0022 documentation and evidence. I do not rerun the restore command. The exact intended scope is:
+
+- Three source files: implementation/kyber-optimised-ref/indcpa.c, polyvec.c and polyvec.h.
+- README.md and ten notes: experiment_register.md, final_candidate.md, final_comparison.md, final_security_summary.md, git_handoff.md, implementation_security.md, practical_completion.md, project_log.md, reduction_map.md and thesis_writing_plan.md.
+- Two evidence files in notes/evidence/ACT-0021/ and two in notes/evidence/ACT-0022/.
+
+That is 18 changed/new files relative to the closing-results commit: 14 modified tracked files and four new evidence files. Existing results, analysis code/data, selection pins and figures are unchanged. [Final verification](evidence/ACT-0022/final-verification.json) records the exact reviewed hashes. I run each command in order, inspect its output and stop on any failure or unexpected staged file:
 
 ```sh
 git diff --check
-git add -- README.md notes/ analysis/ \
-  results/EXP-009/RUN-0002/ results/EXP-009/RUN-0003/
+git status --short
+git add -- README.md \
+  implementation/kyber-optimised-ref/indcpa.c \
+  implementation/kyber-optimised-ref/polyvec.c \
+  implementation/kyber-optimised-ref/polyvec.h \
+  notes/experiment_register.md notes/final_candidate.md \
+  notes/final_comparison.md notes/final_security_summary.md \
+  notes/git_handoff.md notes/implementation_security.md \
+  notes/practical_completion.md notes/project_log.md \
+  notes/reduction_map.md notes/thesis_writing_plan.md \
+  notes/evidence/ACT-0021/ notes/evidence/ACT-0022/
 git diff --cached --check
 git diff --cached --stat
 git diff --cached
-git commit -m "Complete EXP-009 comparisons and select EXP-005 for the thesis"
+git commit -m "Restore selected EXP-005 source and complete the thesis handoff"
 git push
 git status --short
 ```
 
-A normal push sends committed history. It does not include any untracked result files merely because a benchmark finished. I preserve all cited experiment commits and do not use force push to resolve a rejection. No further timing session is required by the completed protocol.
-
-## Manual selected-source handoff
-
-The current implementation/kyber-optimised-ref directory still contains EXP-006. I checked all 35 source identities against [the selected snapshot](../analysis/final_candidate.json); only indcpa.c, polyvec.c and polyvec.h differ. The selected EXP-005 bytes have already been validated and measured in all closing sessions.
-
-After committing the evidence above and checking the tree, I can restore those exact three historical files as a separate, reviewable source commit. This is restoration of the measured candidate, not a new arithmetic treatment. The assistant has not executed this step:
-
-```sh
-git restore --source=4bd813ed71a90c7722275dc802336852214a5388 --worktree -- \
-  implementation/kyber-optimised-ref/indcpa.c \
-  implementation/kyber-optimised-ref/polyvec.c \
-  implementation/kyber-optimised-ref/polyvec.h
-python3 -B - <<'PY'
-from pathlib import Path
-import hashlib, json
-root = Path.cwd()
-pin = json.loads((root / "analysis/final_candidate.json").read_text())
-directory = root / "implementation/kyber-optimised-ref"
-actual = {p.relative_to(directory).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-          for p in directory.rglob("*") if p.is_file()
-          and (p.suffix in (".c", ".h") or p.name == "Makefile")}
-assert actual == pin["source_file_sha256"], "Selected-source identity mismatch; stop and inspect"
-print("Selected EXP-005 source identity: pass (35 files)")
-PY
-git diff --check
-git diff -- implementation/kyber-optimised-ref/
-```
-
-I request the final handoff review after this identity check, before labelling the working checkout or practical handoff complete. That review updates the current-status documentation from EXP-006 to the actually verified selected source, checks reproduction instructions and records the final commit scope. I then commit the exact restored files and the corresponding reviewed documentation together, and make a normal push. There is no need to invent new optimisations or rerun a valid session merely because its effect is small. If the restored source does not match all 35 pinned files, I stop and resolve the discrepancy before making equivalence claims.
+I expect the final status to be empty. A pager may show a colon or END while viewing a long diff; I press q to return to the terminal prompt. Diff colours and a pager are not build/test failures. I preserve cited commits; no reset, history rewrite or force push is needed. This handoff review is complete, so a successful staged review/commit/push does not require another experimental review before proceeding to main integration.
 
 ## Reproduce the accepted analysis
 
@@ -71,8 +61,23 @@ python3 -B analysis/review_final_comparison.py --output /tmp/exp009-final-audit-
 
 [Figure instructions](thesis_figures.md) use the pinned plotting environment and a new output directory. ACT-0020 reproduced all three combined-analysis files, all three audit reports and all thirteen final figure/data/provenance files byte-for-byte. This demonstrates reproduction from retained evidence, not a new clean-environment performance study. The frozen protocol/experiment files remain unchanged so those identities remain verifiable.
 
-## Final integration later
+Existing ignored binaries are not relabelled by restoring source files. Accepted executable identities remain those recorded by their manifests and retained run build directories. The current source identity review reuses those accepted results; it does not claim that a new build or test was executed in ACT-0022. Historical measurement/validation runners retain their original variant gates and frozen support; replaying an old experiment uses its documented source revision and a new run ID, rather than editing those gates to fit the final checkout. No such replay is required to finish this study.
 
-Once all EXP-009 results, final selection, figures and reproduction checks are accepted and committed, I fetch origin and inspect current branch ancestry. If main is still an ancestor, a fast-forward merge can move main to the reviewed work while preserving every cited commit; `git merge --ff-only reduction-counters` refuses if that condition is not met. I first update local main appropriately from the fetched origin/main. If either history has diverged, I inspect it and prepare a normal history-preserving merge or pull request instead. I do not squash, rebase or force-push the cited experiment history. [Git merge documentation](https://git-scm.com/docs/git-merge).
+## 2. Integrate the reviewed branch into main
 
-The initial local ancestry makes a straightforward final integration likely, but it does not establish the remote state. No push, fetch, switch, merge, commit, reset or branch deletion was executed by the assistant. Branch cleanup is optional after the final history is safely present on the remote.
+After the handoff commit is pushed and git status --short is empty, I fetch origin so the remote-tracking refs reflect the server. [Git fetch documentation](https://git-scm.com/docs/git-fetch). I run each command separately, inspect its result and stop on any failure:
+
+```sh
+git fetch origin
+git status --short
+git switch main
+git merge --ff-only origin/main
+git merge --ff-only reduction-counters
+git push origin main
+git status --short
+git branch -vv
+```
+
+I proceed past the status check only with a clean working tree. The first merge updates local main from fetched origin/main; the second advances main to the reviewed research branch if ancestry permits. Fast-forward-only merges refuse divergent histories instead of creating an unexpected merge. [Git merge documentation](https://git-scm.com/docs/git-merge). If either merge or the push is rejected, I retain the output and review the changed history before proceeding. A protected main branch may instead require a pull request with history-preserving integration. I do not squash, rebase or force-push the cited experiment history.
+
+I retain reduction-counters as a research-history branch; deleting it is unnecessary. I report successful main integration only after the commands actually succeed. Local main and origin/main were still dac387fe75fa260ccecd1211c57b716025ed2ad4 at the ACT-0022 inspection, 36 commits behind the closing-results commit; the pending handoff commit will add another commit. The fetch above establishes fresh remote state. The assistant has executed no Git command or production arithmetic edit. Branch integration is repository housekeeping and does not delay drafting the thesis from the already accepted evidence.

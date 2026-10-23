@@ -105,3 +105,7 @@ This supplies performance/build continuity and exercised round trips. It is not 
 ## ACT-0020 consolidated conclusion
 
 I completed all predeclared security/performance collection and selected EXP-005 with explicit tradeoffs. The [final matrix](final_security_summary.md) consolidates the mathematical, sampled functional, sanitizer, assembly, dynamic-flow and statistical findings, including variant-coverage differences and unassessed attack classes. The [selection record](final_candidate.md) quantifies the keygen code/local-frame costs and preserves the inherited general-dot canary change. All three EXP-009 sessions match the reviewed source/normal-code identities; their operation timings are not additional leakage evidence. Final selected-source/repository handoff remains, with no new security experiment required by the completed protocol.
+
+## ACT-0022 selected-source handoff
+
+I verified the restored working implementation against all 35 selected EXP-005 hashes, the historical Git blobs, both accepted security manifests and all three EXP-009 manifests. The source diff exactly restores the selected snapshot, with no repair or new arithmetic treatment. I reuse the accepted evidence only within its existing compiler, input-contract, path and budget limits; I did not execute another security test. The source/documentation handoff review is complete, with the final commit/push and main integration left to the manual [Git handoff](git_handoff.md).

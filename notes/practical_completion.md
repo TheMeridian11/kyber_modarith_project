@@ -2,7 +2,7 @@
 
 ## Where I am
 
-I have completed the planned arithmetic trials, dynamic secret-flow assessment, bounded statistical timing screen and all three final performance sessions. In ACT-0020 I select EXP-005 as the primary thesis candidate, retain EXP-003 as a substantial comparator/workload-dependent alternative and preserve EXP-006 as the adverse trial. The experimental work, final comparison, candidate decision and consolidated evidence outputs are complete. Remaining handoff work identifies the selected source in the working tree, checks that restoration/reproduction instructions and repository commits are correct, and preserves the cited history. I do not need additional timing sessions or optimisations under the completed protocol.
+I have completed the planned arithmetic trials, dynamic secret-flow assessment, bounded statistical timing screen and all three final performance sessions. In ACT-0020 I select EXP-005 as the primary thesis candidate, retain EXP-003 as a substantial comparator/workload-dependent alternative and preserve EXP-006 as the adverse trial. The experimental work, final comparison, candidate decision and consolidated evidence outputs are complete. ACT-0022 verifies the restored selected source and completes the source/documentation handoff review. The remaining actions are the manual handoff commit/push and history-preserving main integration. I do not need additional timing sessions or optimisations under the completed protocol.
 
 | Experiment | Simple description | State |
 |---|---|---|
@@ -29,7 +29,7 @@ The [EXP-005 timing review](runs/EXP-005-RUN-0002.md) finds median paired keygen
 - [x] Review actual correctness, bounds, counts, assembly, local stack and hardening findings: [ACT-0015 acceptance](runs/EXP-006-RUN-0001.md).
 - [x] Prepare and development-check the [fresh EXP-005/EXP-006 timing protocol](keygen_dot_timing.md).
 - [x] Review/commit that support and execute EXP-006/RUN-0002; [ACT-0016 review](runs/EXP-006-RUN-0002.md) retains all regressions and mixed outcomes.
-- [x] Select EXP-005 as primary, keep EXP-006 as a secondary research comparison and freeze the optimisation search. The current checkout remains EXP-006; test runners restore the exact EXP-005 source separately.
+- [x] Select EXP-005 as primary, keep EXP-006 as a secondary research comparison and freeze the optimisation search. At that checkpoint the checkout remained EXP-006; ACT-0022 verifies its exact restoration to selected EXP-005.
 
 ### 2. Complete the required implementation-security assessment
 
@@ -64,11 +64,14 @@ The session or matched process pair is an experimental unit for the correspondin
 - [x] Add final direct-reference/session/spread figures, keygen code/local-stack tradeoffs and the consolidated security matrix in ACT-0020.
 - [x] Write the [complete comparison and method summary](final_comparison.md), [candidate rationale](final_candidate.md) and [security conclusion](final_security_summary.md), retaining the adverse EXP-006 and deferred EXP-004 context.
 - [x] Reproduce the retained-data analysis, all final audit reports and all three final figures byte-for-byte; verify source/tool/build identities and preserve all original results.
-- [ ] Complete the manual selected-source restoration/hash check and final repository handoff. The current checkout is still EXP-006; the exact selected 35-file EXP-005 identity and commands are in the [handoff](git_handoff.md). A fresh-environment rerun is not claimed by retained-data reproduction.
-- [ ] Mark practical work complete only once these outputs and bounded conclusions exist. Then write the thesis draft and present it with the repository to the supervisor for feedback, as planned.
+- [x] Commit and back up the complete experimental evidence, final reports and graphs: verified in ACT-0021 at 66c707f9dc8cef556d1133fb48d6fb1f71e989e7.
+- [x] Complete the manual selected-source restoration and actual 35-file identity review: accepted in ACT-0022, with the expected three-file diff and no repair needed.
+- [x] Finish current-status documentation, evidence-preservation checks and the reviewed [Git handoff](git_handoff.md). Scientific work and source/documentation review are complete. Retained-data reproduction is not a fresh-environment rerun.
+- [ ] Execute the final handoff commit/push and main integration, checking the resulting status. These are repository publication steps, not unfinished experiments.
+- [ ] Complete the thesis draft and present it with the repository to the supervisor for feedback.
 
 ## What does not need to expand automatically
 
 I do not need to implement every possible reduction change, complete EXP-004, port to another hardware family, prove whole-program constant time, establish final ML-KEM certification or use VTune. I explicitly excluded VTune in ACT-0015. New work is justified if a finding prevents a defensible conclusion or supervisor feedback changes the scope. The optional full-text literature checks and bibliographic work also belong in thesis preparation; I must complete them before making claims that depend on those sources.
 
-The immediate action is to review/commit both new session directories and ACT-0020, back up the branch, then complete the manual selected-source/repository handoff. The predeclared experimental collection and candidate decision are finished; no additional measurements are scheduled. I can write the complete Methods, Results and Discussion using the [writing plan](thesis_writing_plan.md). I mark the full practical handoff complete once the selected-source and repository checks are finished, then present the thesis draft and repository for supervisor feedback.
+ACT-0021 verifies that both new session directories and ACT-0020 are committed in 66c707f9dc8cef556d1133fb48d6fb1f71e989e7 and that the supplied push succeeded with a matching local tracking ref. All 4474 archived result files are tracked. ACT-0022 accepts that restoration and completes the working-source/documentation review. The immediate repository action is the final handoff commit/push, followed by the documented main integration. No additional measurements are scheduled. I can write the complete Methods, Results and Discussion using the [writing plan](thesis_writing_plan.md), then present the thesis draft and repository for supervisor feedback. I record Git publication as completed only after the manual commands succeed.

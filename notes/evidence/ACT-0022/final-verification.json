@@ -1,0 +1,53 @@
+{
+  "activity_id": "ACT-0022",
+  "head_unchanged": "66c707f9dc8cef556d1133fb48d6fb1f71e989e7",
+  "selected_source_identity": "EXP-005; all 35 files match selection and historical objects",
+  "source_repair_needed": false,
+  "assistant_production_edits": false,
+  "git_commands_executed": false,
+  "new_builds_or_experiments_executed": false,
+  "archived_result_files_preserved": 4474,
+  "frozen_support_files_preserved": 23,
+  "all_analysis_data_code_pins_and_figures_unchanged": true,
+  "all_prior_activity_evidence_unchanged": true,
+  "modified_tracked_files_relative_to_head_sha256": {
+    "README.md": "1b28152ed0d909840e410cebf119aa757b85606af2c6999daac00143fb8b3da0",
+    "implementation/kyber-optimised-ref/indcpa.c": "900541c7291e25feb86e0d42fc2e8daa3fc606d99130e496edddd1955ec479c2",
+    "implementation/kyber-optimised-ref/polyvec.c": "dfc90791d53d07638f9b987ac362db968ce6f401cc1885e7b1aa5a79eac25144",
+    "implementation/kyber-optimised-ref/polyvec.h": "650e12181c2459f12fe613bc5241442e4f2742378ef919cbb06083376e6e7ed3",
+    "notes/experiment_register.md": "90523bc46456b072de1985e8fc3e4b60a7a940be930d92e840d74d874dd8edf8",
+    "notes/final_candidate.md": "708f83731433bb2254ee66f73612e13552e7932697b8d27f874f8d037f365e84",
+    "notes/final_comparison.md": "6682710828ad13b15a50970095eddacfdb662037909eb70f70ad3dba138dbbdb",
+    "notes/final_security_summary.md": "359abcf2ace48d1d222d396257271a0552358f59a075c3795738e45b56fe4025",
+    "notes/git_handoff.md": "7b64ee821418fb8e97dab44a4b80961862c4f9cb6d85dd4870deea605a8ef565",
+    "notes/implementation_security.md": "8efdda03b09709a8c8222bed9e000b38e9534c701e89bf2a61f902048f44de93",
+    "notes/practical_completion.md": "76b04933ca81b809454c068dac4a51c87203e53392bc9c43c148da7cd7d2f3e4",
+    "notes/project_log.md": "bf4cc920ece047ff2846f2ff0eff1cf52e11da61f760d9a9dfd9582483cb0ee8",
+    "notes/reduction_map.md": "5015599a72e29d8decdc755d177466b87aa53481cd1149b83479b36602a8b6df",
+    "notes/thesis_writing_plan.md": "548c57bcd571dd9c552488e675fb3bc463dfd73ac094815fda2f429d1da84d93"
+  },
+  "modified_tracked_count": 14,
+  "new_evidence_files_sha256": {
+    "notes/evidence/ACT-0021/final-verification.json": "4fdb5e4483d6618d2e83ea9be167bfd5ebee4dcced2941a31300e776320a8bde",
+    "notes/evidence/ACT-0021/source-and-handoff-review.json": "63e4b11e01b3d46590cb9c1eb0b1b7014c88e6b060b734840f7076fc3337c0a2",
+    "notes/evidence/ACT-0022/selected-source-review.json": "3c0d4f1e60f7e678a697c5993dc652a01f42e541aaf95b8ce2b000be263879bf"
+  },
+  "this_record": "notes/evidence/ACT-0022/final-verification.json",
+  "new_evidence_count_including_this_record": 4,
+  "reviewed_total_commit_file_count": 18,
+  "checks": {
+    "actual_source_matches_selected_snapshot": "pass",
+    "actual_source_diff_matches_prospective_review": "pass",
+    "accepted_security_and_performance_source_identity": "pass (five manifests)",
+    "all_archived_results_and_prior_artifacts_preserved": "pass",
+    "authored_LF_trailing_whitespace_and_JSON": "pass",
+    "relative_markdown_links": "pass",
+    "documented_shell_syntax_only": "pass",
+    "explicit_staging_scope_matches_18_reviewed_files": "pass"
+  },
+  "checked_relative_markdown_links": 288,
+  "source_and_documentation_handoff_review_complete": true,
+  "final_handoff_commit_push_and_main_integration": "pending manual execution",
+  "supervisor_summary_location": "notes/thesis_writing_plan.md; one-paragraph summary",
+  "original_word_draft_edited": false
+}

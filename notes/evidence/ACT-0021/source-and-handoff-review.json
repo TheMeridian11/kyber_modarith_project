@@ -1,0 +1,67 @@
+{
+  "activity_id": "ACT-0021",
+  "review_scope": "Committed closing evidence and prospective manual restoration; not a completed checkout handoff.",
+  "head_commit": "66c707f9dc8cef556d1133fb48d6fb1f71e989e7",
+  "head_subject": "Complete EXP-009 comparisons and select EXP-005 for the thesis",
+  "parent_commit": "99733b9f5401236708ca25be9efd807cff60d7ce",
+  "local_refs": {
+    "refs/heads/reduction-counters": "66c707f9dc8cef556d1133fb48d6fb1f71e989e7",
+    "refs/remotes/origin/reduction-counters": "66c707f9dc8cef556d1133fb48d6fb1f71e989e7",
+    "refs/heads/main": "dac387fe75fa260ccecd1211c57b716025ed2ad4",
+    "refs/remotes/origin/main": "dac387fe75fa260ccecd1211c57b716025ed2ad4"
+  },
+  "local_main_first_parent_distance": 36,
+  "user_supplied_push": "Successful push 99733b9..66c707f to origin/reduction-counters; subsequent git status --short empty.",
+  "remote_contacted_by_assistant": false,
+  "local_object_verification": "SHA-1 object identity, type and length verified; working files compared to committed blobs.",
+  "tracked_regular_files": 4750,
+  "tracked_gitlinks": {
+    "external/kyber-official": "3edd5af5991927164edd4aacebfcbee00b8064e7"
+  },
+  "tracked_working_mismatches_at_start": [],
+  "closing_commit_changes": {
+    "total": 950,
+    "modified": 9,
+    "added": 941,
+    "removed": [],
+    "new_archived_run_files": 910,
+    "support_and_review_files": 40
+  },
+  "act0020_recorded_file_hashes_match_commit": true,
+  "archived_result_files_tracked_and_verified": 4474,
+  "archived_results_sha256_inventory_digest": "69a631a7f0ee4f0bc8e3d7a2c84872a92cdcadba1bdf51252be2074e78f7904b",
+  "selected_candidate": "EXP-005",
+  "selected_source_commit": "4bd813ed71a90c7722275dc802336852214a5388",
+  "selected_historical_source_files_verified": 35,
+  "selection_manifest_sha256": "30c94828d86ee0660b0bd7e7fcab9d7ecf81dc617cd5ad6191a9282c23897541",
+  "current_source_still_exp006": true,
+  "unchanged_selected_source_files": 32,
+  "manual_restoration_files": [
+    {
+      "path": "implementation/kyber-optimised-ref/indcpa.c",
+      "current_sha256": "664a62a2efe3771cc9bbd70e70a7823db1df0cc42cf82dfcefeb386705132be2",
+      "selected_sha256": "900541c7291e25feb86e0d42fc2e8daa3fc606d99130e496edddd1955ec479c2",
+      "removed_lines": 1,
+      "added_lines": 2
+    },
+    {
+      "path": "implementation/kyber-optimised-ref/polyvec.c",
+      "current_sha256": "880c7733174e89356a4bc9e5fd75353694693bf4ab328396d08c59e3fbed4f16",
+      "selected_sha256": "dfc90791d53d07638f9b987ac362db968ce6f401cc1885e7b1aa5a79eac25144",
+      "removed_lines": 36,
+      "added_lines": 0
+    },
+    {
+      "path": "implementation/kyber-optimised-ref/polyvec.h",
+      "current_sha256": "c95db983c8b6f2284df16897c268733fa580b476e9e385c069c637193220dac1",
+      "selected_sha256": "650e12181c2459f12fe613bc5241442e4f2742378ef919cbb06083376e6e7ed3",
+      "removed_lines": 4,
+      "added_lines": 0
+    }
+  ],
+  "expected_restoration_patch_sha256": "3e7fcb8a04376dfbbe9db66aac930f615d488da19e2cf0ab2106e5617bbf225a",
+  "virtual_three_file_restoration_matches_all_selected_files": true,
+  "actual_restoration_executed": false,
+  "git_commands_executed_by_assistant": false,
+  "new_benchmarks_executed": false
+}
