@@ -1,0 +1,425 @@
+{
+  "activity_id": "ACT-0023",
+  "record_type": "documentation-consolidation-review",
+  "status": "completed",
+  "scope": "Editorial revision of project narratives; preserve experimental rationale, adverse findings, limitations, source identity and research evidence.",
+  "source_checkpoint": {
+    "commit": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+    "branch": "main",
+    "local_refs": {
+      "refs/heads/main": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      "refs/heads/reduction-counters": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      "refs/remotes/origin/main": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      "refs/remotes/origin/reduction-counters": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34"
+    },
+    "remote_queried": false,
+    "initial_tracked_changes": []
+  },
+  "editorial_changes": {
+    "markdown_files_reviewed": 53,
+    "markdown_files_changed": 48,
+    "before_lines": 4718,
+    "after_lines": 3582,
+    "descriptions": [
+      "Removed conversational planning and repeated commit/push sequences.",
+      "Replaced stale next steps with completed outcomes and links.",
+      "Condensed the activity log while retaining evidence links and development/formal distinctions.",
+      "Used consistent technical prose while preserving evidence provenance."
+    ],
+    "files": {
+      "README.md": {
+        "before_sha256": "1b28152ed0d909840e410cebf119aa757b85606af2c6999daac00143fb8b3da0",
+        "after_sha256": "5b75f83c935e6a1409fc46e5a0461a265e1e3d73a222d7ece4ee8b57120873b1",
+        "before_lines": 110,
+        "after_lines": 48
+      },
+      "notes/benchmark_conditions.md": {
+        "before_sha256": "11f90fdce1bf92067ed89c9a5231cbae9b53ef28279b6457bd861588b81316b6",
+        "after_sha256": "9b8f80e33111655c3e16a673e06859af8c616d2e6e4197c9561bdcb1d400c3b4",
+        "before_lines": 28,
+        "after_lines": 28
+      },
+      "notes/error_ntt_timing.md": {
+        "before_sha256": "536a99cf442965db1774a9b9ac3cf3e939b2e5368f7e89e3877a912726771179",
+        "after_sha256": "1b70badc4f9db9a7859c4613699b25b5a8abd325c2ea86eeebf9967f97c1c591",
+        "before_lines": 76,
+        "after_lines": 49
+      },
+      "notes/experiment_register.md": {
+        "before_sha256": "90523bc46456b072de1985e8fc3e4b60a7a940be930d92e840d74d874dd8edf8",
+        "after_sha256": "bbc45f63d4f9f88ce762b58398d01c54c0db76d12c73b0e7da00691b9fd60a10",
+        "before_lines": 24,
+        "after_lines": 20
+      },
+      "notes/experiments/EXP-000-baseline.md": {
+        "before_sha256": "e08e49232a40977beaefbcf001ff8d22b47664757a3ff8c84ca011d957f01a31",
+        "after_sha256": "8241bd1bad70022077d49cf0c4725310369d4c2a84775357782ad241c3ad2232",
+        "before_lines": 63,
+        "after_lines": 63
+      },
+      "notes/experiments/EXP-001-fused-basemul.md": {
+        "before_sha256": "09ffcfe6f3ef198a30fb9150946738593d34060ae89260d4d9518c5740689fa1",
+        "after_sha256": "f735f9d4f9024e15d2f4415ff6d7e9fac99f91bb3b06f09b032984f058bc7037",
+        "before_lines": 168,
+        "after_lines": 168
+      },
+      "notes/experiments/EXP-002-wide-dot.md": {
+        "before_sha256": "557398351ff033e41ee037e6530da18c35a6a9b5b013d2f69d9d87a0828a1e97",
+        "after_sha256": "4d13e71e93bd98df76008e45513711ae286f136a2a84358b314c068213a8ee5e",
+        "before_lines": 152,
+        "after_lines": 152
+      },
+      "notes/experiments/EXP-003-staged-invntt.md": {
+        "before_sha256": "cb022880c20a2b1380a0fc48a270bf2dc940609bdc424a9b530b811c5f0e2313",
+        "after_sha256": "b720f48f31daa907a9b2d5857b03ea2c3afb4ce736f22215af1a0df7ebd094d1",
+        "before_lines": 138,
+        "after_lines": 138
+      },
+      "notes/experiments/EXP-005-error-ntt.md": {
+        "before_sha256": "2baa84400f6bb6d4e7431b0aa22d9f1156eada4430a72a4c67e6cf94a12626e6",
+        "after_sha256": "8c1ea6d5982144913c9c62ae188ac61941ba683cf54c3c00fc2304d7d744d000",
+        "before_lines": 145,
+        "after_lines": 138
+      },
+      "notes/experiments/EXP-006-keygen-dot.md": {
+        "before_sha256": "306ec4d3f945fa55261f3f7c8a759b584d6da692c01bd7fa6bb1232ffe131918",
+        "after_sha256": "2a3ac7c08aeb68a6d318c9d9d7b2617184071dbe7d6b452e287f999b133d67ee",
+        "before_lines": 208,
+        "after_lines": 185
+      },
+      "notes/final_candidate.md": {
+        "before_sha256": "708f83731433bb2254ee66f73612e13552e7932697b8d27f874f8d037f365e84",
+        "after_sha256": "c82f275416cd0c5eac73393a13d7fc80ee9b6eddc1f5911658235d9d70d44737",
+        "before_lines": 51,
+        "after_lines": 51
+      },
+      "notes/final_comparison.md": {
+        "before_sha256": "6682710828ad13b15a50970095eddacfdb662037909eb70f70ad3dba138dbbdb",
+        "after_sha256": "43139357ce4441d69c36249539cea834a1df5034b2d921367fb289833f5c553f",
+        "before_lines": 79,
+        "after_lines": 79
+      },
+      "notes/final_security_summary.md": {
+        "before_sha256": "359abcf2ace48d1d222d396257271a0552358f59a075c3795738e45b56fe4025",
+        "after_sha256": "065ebe9d23d73caeef51178c506451b4554c607c86765c559cbdff26151aa4e2",
+        "before_lines": 35,
+        "after_lines": 35
+      },
+      "notes/git_handoff.md": {
+        "before_sha256": "7b64ee821418fb8e97dab44a4b80961862c4f9cb6d85dd4870deea605a8ef565",
+        "after_sha256": "b09372a6c67517d0ccc814afa2f4cc4ae356d926fe9e3b6779d3a8d7daef9a3a",
+        "before_lines": 83,
+        "after_lines": 35
+      },
+      "notes/implementation_security.md": {
+        "before_sha256": "8efdda03b09709a8c8222bed9e000b38e9534c701e89bf2a61f902048f44de93",
+        "after_sha256": "5b80506b91293b30672c121d37fc32a30d4f9c2c5b78964336fca998b10d6d9b",
+        "before_lines": 111,
+        "after_lines": 72
+      },
+      "notes/incremental_timing.md": {
+        "before_sha256": "53b4c3377e150977e7dca80793f3d6a887c29f2b4b319b0f579a9b3c5fa8851a",
+        "after_sha256": "7c08baa516d288eaecb808fcce70553571f23f22e8732d9bda14f30d6ce49ac5",
+        "before_lines": 44,
+        "after_lines": 44
+      },
+      "notes/invntt_timing.md": {
+        "before_sha256": "9ff356fd0fa488444273ce937aa1ad72d56f1b21181546869c711e82b3a1388b",
+        "after_sha256": "4e41a2306a7887f8db6ae46abe4b635d58439d305cca82a41ffc2367558a3037",
+        "before_lines": 58,
+        "after_lines": 48
+      },
+      "notes/keygen_dot_timing.md": {
+        "before_sha256": "dc4c8c0b62f9c2047299b26f226e1f029a7577b195dd3a2fe72e54b54a11e0b3",
+        "after_sha256": "88082320fcd18b8b24032974bf0e209f5c8d843cc0e53793f811626b16870bbd",
+        "before_lines": 78,
+        "after_lines": 49
+      },
+      "notes/literature.md": {
+        "before_sha256": "9b976ab31154b5612d5d3058fcb59740cfc1428706407eced16e17288262b3db",
+        "after_sha256": "419ad3cdfa13ad8a7ac913279dde912e7eeba317427429ce4c415b2afbe549fe",
+        "before_lines": 98,
+        "after_lines": 98
+      },
+      "notes/paired_timing.md": {
+        "before_sha256": "c49ef46cab55b52361316fe8580f3433a1f61e21dd05cb39238790f7612963e3",
+        "after_sha256": "a2127a719757879ff82c752ef55c7a936dbad4a23e81b3fb77998cb6cb6ad2cd",
+        "before_lines": 54,
+        "after_lines": 54
+      },
+      "notes/practical_completion.md": {
+        "before_sha256": "76b04933ca81b809454c068dac4a51c87203e53392bc9c43c148da7cd7d2f3e4",
+        "after_sha256": "193cb88a2da87e5c85ad4a49a71670ca5442d6e49f7338c27b3f8a7e80331e29",
+        "before_lines": 77,
+        "after_lines": 24
+      },
+      "notes/project_log.md": {
+        "before_sha256": "bf4cc920ece047ff2846f2ff0eff1cf52e11da61f760d9a9dfd9582483cb0ee8",
+        "after_sha256": "2cc81a7f513756b3f4a5b3f6e567cd7a62c2dfce65f035de7edd044af11e4e6e",
+        "before_lines": 919,
+        "after_lines": 137
+      },
+      "notes/raw_timing.md": {
+        "before_sha256": "7d8375149f42dab601c1330afd04e64448008d7f9743033fb60a0648f8b725b4",
+        "after_sha256": "a6af340637e90d907be1d9e28fb0fbad839d9b11b3ae1e71d84b153062c7a428",
+        "before_lines": 67,
+        "after_lines": 67
+      },
+      "notes/reduction_counts.md": {
+        "before_sha256": "0bb5ea4c9c70d86abb580e4a170a6aefc4fe6edd43d965ad468fe3d527a8c60c",
+        "after_sha256": "5bc450cf3c76bac91d9138366194d4f701402d91a98b9151349e8d9644dd527e",
+        "before_lines": 55,
+        "after_lines": 55
+      },
+      "notes/reduction_map.md": {
+        "before_sha256": "5015599a72e29d8decdc755d177466b87aa53481cd1149b83479b36602a8b6df",
+        "after_sha256": "6e0f217ce028e20282c1d3d5cb5c125a966565772be94326aaa4f7ed4420f3f0",
+        "before_lines": 36,
+        "after_lines": 34
+      },
+      "notes/research_workflow.md": {
+        "before_sha256": "48df49abda8f65615b7ce7730defd69137a4a87c6328361adb9d9e163c573e15",
+        "after_sha256": "021e2c6e4d8fb27df9cd4a7a530b7603b22b4d171d4ade0cb465706ae805d677",
+        "before_lines": 94,
+        "after_lines": 60
+      },
+      "notes/runs/EXP-000-RUN-0001.md": {
+        "before_sha256": "7e61ace76c43d69c87f6bb3f9c501e336df4dfad016d8512a5d1cf024f4abe17",
+        "after_sha256": "561abd13429aec331ecffcc1976551d99927bb6d4d9a6880921444da5caf1bf6",
+        "before_lines": 46,
+        "after_lines": 46
+      },
+      "notes/runs/EXP-000-RUN-0003.md": {
+        "before_sha256": "93882fce1f73c3fc4b0534ce1219edf5cbba8c30611bda12d2eac564c0ed9bda",
+        "after_sha256": "a16f0973911f7a664d5bd4874a97b2c3d54389aad5ff97b7fb0a11a0b285733c",
+        "before_lines": 49,
+        "after_lines": 49
+      },
+      "notes/runs/EXP-000-RUN-0004.md": {
+        "before_sha256": "ee754e1abb05643deb57f0078b5dd63e3fd654de66c11dd40cdacf8f896054ad",
+        "after_sha256": "8f109a1cab81286f30347b73f5fde2bb3a7fc936c5ca2659ca1e79a2c7318beb",
+        "before_lines": 30,
+        "after_lines": 30
+      },
+      "notes/runs/EXP-001-RUN-0001.md": {
+        "before_sha256": "c0b16f17b625c3e920565c0a0e076bc397279586a61a255113b3e3cb4b3e4490",
+        "after_sha256": "79fa679b96a9ed84610e8c0efd7bc01af9f589e9c8de01222db13fc1091173ee",
+        "before_lines": 54,
+        "after_lines": 54
+      },
+      "notes/runs/EXP-001-RUN-0002.md": {
+        "before_sha256": "b1862cdf82c5a6ce26d802c30cd8d52121d8b68e180c4c4d29a7a92e57e4286b",
+        "after_sha256": "a35713e4b84422b2c89ec2418e744d8a487e5b6cab040946b12fe4d6537ad5be",
+        "before_lines": 58,
+        "after_lines": 58
+      },
+      "notes/runs/EXP-002-RUN-0001.md": {
+        "before_sha256": "25cd334fe18d28a8f799e39ec07037d4ab475d3e645acb67290c9f52417ef1b0",
+        "after_sha256": "98606d5857b3e55f5601e112c7210df77b3b87da2fdf3c4766d4b4e0ba5b7529",
+        "before_lines": 59,
+        "after_lines": 59
+      },
+      "notes/runs/EXP-002-RUN-0002.md": {
+        "before_sha256": "ece40fd66bba6a7e2841cc2d4ce13dc2a5d203a86d65b3fa4014b98b73b1e216",
+        "after_sha256": "9680154fccaf93cf15661c3502fc9fc3c7e93917314fafdad9b30434b9b0c08d",
+        "before_lines": 71,
+        "after_lines": 71
+      },
+      "notes/runs/EXP-003-RUN-0001.md": {
+        "before_sha256": "a5c2e795780e3d87d71de3eb154c871044db34f69b8c19a13073aa5522af9eb0",
+        "after_sha256": "f055c1161415eaca30669d661c12349964f96658854288077c3b380ea0c8623d",
+        "before_lines": 70,
+        "after_lines": 70
+      },
+      "notes/runs/EXP-003-RUN-0002.md": {
+        "before_sha256": "d0183dce9bfca14070144e193bbbf5fc693bc0d2cd13e5d0b686b7a192510d1c",
+        "after_sha256": "42c0020306574228475ead25daef0b0d08390fe7dbdd1fe90df1e665236f1686",
+        "before_lines": 72,
+        "after_lines": 72
+      },
+      "notes/runs/EXP-005-RUN-0001.md": {
+        "before_sha256": "e3244f21a3771e498611a6041db5852d41a097b490671892577edde87ce8a759",
+        "after_sha256": "2f63a4b4885d69df8888fec960868e27057082c1b87c29282d5d8f283cc07113",
+        "before_lines": 72,
+        "after_lines": 72
+      },
+      "notes/runs/EXP-005-RUN-0002.md": {
+        "before_sha256": "80bc6a4cf95eb59e4470aa356d675db23073366c65b293343db829b0e8706291",
+        "after_sha256": "d7e4abcfc432e8941cd191d456122b9d1099b446457e28925dc6d8f1fe106a32",
+        "before_lines": 75,
+        "after_lines": 73
+      },
+      "notes/runs/EXP-006-RUN-0001.md": {
+        "before_sha256": "ffa1276b5c444459e7e34c5ec2b14f205341ff2a1e9210be59716e5d8e5ea5ad",
+        "after_sha256": "94fb4a8a912130fb92b052821bcc3ea6fd9b510555aab16947c1c986a78cd979",
+        "before_lines": 70,
+        "after_lines": 70
+      },
+      "notes/runs/EXP-006-RUN-0002.md": {
+        "before_sha256": "d2e431002316a810cfe5a23f58a813f66acc43b7a3fe17af4ce64224319eef50",
+        "after_sha256": "c6545c61e4682315313b14ba5537f6a9536a43165f2218e69aebecaf20534318",
+        "before_lines": 75,
+        "after_lines": 75
+      },
+      "notes/runs/EXP-007-RUN-0001.md": {
+        "before_sha256": "c89441ac620e751c4c1b4b2b7cb83d82b428f9f07ddbc7718c3d9058708e203d",
+        "after_sha256": "f7e72e507eca1f1bac040043e2f5ae15179edfacd8b22c4f4034e888034c5a8f",
+        "before_lines": 44,
+        "after_lines": 44
+      },
+      "notes/runs/EXP-008-RUN-0001.md": {
+        "before_sha256": "e0bd2fe37afd1072c4012425d2b8a380f1673b35f927b893c1d05dc3b497f910",
+        "after_sha256": "684232345f5f6e7ba435d0ab393ef34e1d958a8beced59d910b21b152561e117",
+        "before_lines": 45,
+        "after_lines": 45
+      },
+      "notes/runs/EXP-009-RUN-0001.md": {
+        "before_sha256": "b1476a88e1f24e18ce1e7165b497ea14b0f4a43a5509271a990eddcad0f99c4a",
+        "after_sha256": "6fa9019ef6d4aa40451f106e4c5ef38f0835e893825f2251bd63e5806a670917",
+        "before_lines": 104,
+        "after_lines": 102
+      },
+      "notes/runs/EXP-009-RUN-0002.md": {
+        "before_sha256": "e300c68dc19244055b1d4c6e0d2e58db4f463564f4f45ae03f77ac3dadbf06c9",
+        "after_sha256": "1d0ffcc947f5bc8bf6540a41a64522ec8df3ea00ac62c40cf09db4db09745576",
+        "before_lines": 41,
+        "after_lines": 41
+      },
+      "notes/runs/EXP-009-RUN-0003.md": {
+        "before_sha256": "9d8eb9b761d87ac348ebb67ea3f19c1618bd0fcf2b8318ea500def6fec0d2cd7",
+        "after_sha256": "5e19a9f92f5863c9997ea80cf829afe38aa9a7009df026bf9d1d215a31c77e08",
+        "before_lines": 41,
+        "after_lines": 41
+      },
+      "notes/templates/run_record.md": {
+        "before_sha256": "8ef53545a0b23db38d74f845b3f5d412787c0c7af60378467dd5e5a97af27331",
+        "after_sha256": "502cd4acd10dff000468f02e8235b8e31f8d58f9154998797d135394579ffd9f",
+        "before_lines": 56,
+        "after_lines": 56
+      },
+      "notes/thesis_figures.md": {
+        "before_sha256": "644082a1c618682e090883b9f8ba438b3f8f4f5d42801f3cf77fa22c08ac231b",
+        "after_sha256": "542e097110ea581c933f2beff1db80387a9efb7eb11a27864a0e851d8182b093",
+        "before_lines": 121,
+        "after_lines": 109
+      },
+      "notes/thesis_writing_plan.md": {
+        "before_sha256": "548c57bcd571dd9c552488e675fb3bc463dfd73ac094815fda2f429d1da84d93",
+        "after_sha256": "54fc91ef87ba27e77b0c9d4289274d8b3feb7719c3f2d53d333b346c72125882",
+        "before_lines": 83,
+        "after_lines": 83
+      },
+      "notes/validation_runner.md": {
+        "before_sha256": "05b8c569bdb3afd4631898975d072514e424b88cbef21b425c58674577ca590a",
+        "after_sha256": "84ba57d5102f71447c88d8a83eb84bb35f45911813c87cf0e24590ef3b3d6a0f",
+        "before_lines": 58,
+        "after_lines": 58
+      }
+    }
+  },
+  "preservation": {
+    "selected_source_files": 35,
+    "selected_source_matches_manifest": true,
+    "selected_manifest_sha256": "30c94828d86ee0660b0bd7e7fcab9d7ecf81dc617cd5ad6191a9282c23897541",
+    "archived_results_files": 4474,
+    "archived_results_unchanged": true,
+    "prior_evidence_files": 59,
+    "prior_evidence_unchanged": true,
+    "tracked_non_markdown_files": 4701,
+    "tracked_non_markdown_unchanged": true,
+    "frozen_protocols": {
+      "notes/experiments/EXP-007-secret-flow.md": "d826129da1486d947d0ede35b0efce81897508b08dab17627bf3202bab299252",
+      "notes/experiments/EXP-008-timing-leakage.md": "49053fab57ee93e98f957d71c945aed4187f442ffae54037b931ec62e752f7b3",
+      "notes/experiments/EXP-009-final-comparison.md": "397c11c44effdb372484e6c8dbf30d29929b4e81d0f82a7f80b222e8fdf312de"
+    },
+    "unchanged_scientific_table_files": [
+      "notes/experiment_register.md",
+      "notes/experiments/EXP-000-baseline.md",
+      "notes/experiments/EXP-001-fused-basemul.md",
+      "notes/experiments/EXP-002-wide-dot.md",
+      "notes/experiments/EXP-003-staged-invntt.md",
+      "notes/experiments/EXP-005-error-ntt.md",
+      "notes/experiments/EXP-006-keygen-dot.md",
+      "notes/experiments/EXP-007-secret-flow.md",
+      "notes/experiments/EXP-008-timing-leakage.md",
+      "notes/final_candidate.md",
+      "notes/final_comparison.md",
+      "notes/final_security_summary.md",
+      "notes/implementation_security.md",
+      "notes/raw_timing.md",
+      "notes/reduction_counts.md",
+      "notes/reduction_map.md",
+      "notes/runs/EXP-000-RUN-0001.md",
+      "notes/runs/EXP-000-RUN-0002.md",
+      "notes/runs/EXP-000-RUN-0003.md",
+      "notes/runs/EXP-000-RUN-0004.md",
+      "notes/runs/EXP-001-RUN-0001.md",
+      "notes/runs/EXP-001-RUN-0002.md",
+      "notes/runs/EXP-002-RUN-0001.md",
+      "notes/runs/EXP-002-RUN-0002.md",
+      "notes/runs/EXP-003-RUN-0001.md",
+      "notes/runs/EXP-003-RUN-0002.md",
+      "notes/runs/EXP-005-RUN-0001.md",
+      "notes/runs/EXP-005-RUN-0002.md",
+      "notes/runs/EXP-006-RUN-0001.md",
+      "notes/runs/EXP-006-RUN-0002.md",
+      "notes/runs/EXP-007-RUN-0001.md",
+      "notes/runs/EXP-008-RUN-0001.md",
+      "notes/runs/EXP-009-RUN-0001.md",
+      "notes/runs/EXP-009-RUN-0002.md",
+      "notes/runs/EXP-009-RUN-0003.md",
+      "notes/templates/experiment.md",
+      "notes/thesis_figures.md"
+    ],
+    "unchanged_scientific_table_blocks": 74,
+    "unchanged_non_shell_code_blocks": 9,
+    "editorial_summary_tables": [
+      "README.md: concise final findings",
+      "notes/practical_completion.md: completed stages",
+      "notes/research_workflow.md: record conventions",
+      "notes/thesis_writing_plan.md: completed repository status"
+    ],
+    "historical_narratives_recoverable_from_commit": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34"
+  },
+  "validation": {
+    "local_document_links": 460,
+    "markdown_anchor_links": 2,
+    "broken_links": [],
+    "lf_and_no_trailing_whitespace": true,
+    "reproduced_audit_command": "python3 -B analysis/review_final_comparison.py --output /tmp/kyber-act0023-audit-reproduction",
+    "reproduced_audit_outputs": {
+      "notes/evidence/ACT-0020/exp-009-run-0002-review.json": {
+        "sha256": "cbeb0c8db341876d125196f63953f496b858033fd6a9f50a3735853294952f98",
+        "byte_identical": true
+      },
+      "notes/evidence/ACT-0020/exp-009-run-0003-review.json": {
+        "sha256": "3b8a235d880f5d9cef7be99837e9f07ccb1e39652999dbcb26db2cf6a89a38a6",
+        "byte_identical": true
+      },
+      "notes/evidence/ACT-0020/exp-009-three-session-review.json": {
+        "sha256": "0bf84e2ff5079fa1dee1b21b395e8b2c4ee4654578160338c2c739b6d5a10bf0",
+        "byte_identical": true
+      }
+    },
+    "accepted_sessions": 3,
+    "duration_rows": 972000,
+    "assembly_bodies": 324,
+    "reader_summary_checks": {
+      "readme_rounded_cells": 18,
+      "matched_retained_aggregate": true,
+      "supervisor_ranges": {
+        "keygen": "10.7–17.5%",
+        "encap": "16.1–19.3%",
+        "decap": "16.0–19.7%"
+      }
+    }
+  },
+  "limits": [
+    "Retained-data and identity audit; no new benchmark or security collection.",
+    "Branch state is from local refs; no fresh remote query.",
+    "Three frozen protocols intentionally retain their original precollection wording.",
+    "Bibliographic/full-text checks listed in the literature record remain separate writing tasks."
+  ],
+  "git_operations_executed": false,
+  "production_arithmetic_edited": false
+}

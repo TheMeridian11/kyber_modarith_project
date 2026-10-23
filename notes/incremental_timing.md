@@ -6,7 +6,7 @@ I completed this protocol after [EXP-002/RUN-0001 validation and assembly](runs/
 
 I use scripts/run_incremental_comparison.py with the existing timing harness, CSV parser and paired-effect calculations. The control is fused-basemul (EXP-001); the candidate is wide-dot (EXP-002). I rebuild and time both in the same session. Historical EXP-001 durations do not substitute for a fresh control.
 
-The runner restores the 35 accepted EXP-001 source files from d407b5134f14a96a4572b3af1132a8f715e0a28d into the new run's ignored build/exp001-source directory using read-only git show. Each file must match the SHA-256 in the accepted EXP-001 manifest. This does not check out a branch, modify the current arithmetic, or alter Git history/index state. The current candidate must match EXP-002/RUN-0001. Both source identities are recorded separately from the new support/run source commit.
+The runner restores the 35 accepted EXP-001 source files from [d407b5134f14](source_revisions.md) into the new run's ignored build/exp001-source directory using read-only git show. Each file must match the SHA-256 in the accepted EXP-001 manifest. This does not check out a branch, modify the current arithmetic, or alter Git history/index state. The current candidate must match EXP-002/RUN-0001. Both source identities are recorded separately from the new support/run source commit.
 
 Both variants use the same reviewed GCC executable, normal -O3 flags and uninstrumented harness. Before measurement, their actual vector-dot-product and Montgomery-reducer assembly must match the ACT-0009 review. The comparison preserves instruction offsets, sizes, operands and symbolic branch targets while normalising resolved code/data locations. Objdump uses --insn-width=16 for new logs. A mismatch stops the attempt and preserves its evidence.
 
@@ -26,7 +26,7 @@ Input generation, output checks and CSV formatting remain outside measured opera
 
 ## Run and preserve
 
-I used the following command after committing the runner, evidence and notes. It is historical; RUN-0002 exists and must not be reused:
+Historical invocation (new executions require a fresh ID):
 
 ~~~bash
 python3 -B scripts/run_incremental_comparison.py --experiment EXP-002 --run RUN-0002 --cpu 0
@@ -41,4 +41,4 @@ I accept execution only with exit code zero, completed status, passing assembly/
 
 [Development evidence](evidence/ACT-0009/incremental-comparison-smoke.json) records six real compilations, twelve assembly matches and two short blocks of twelve measured exchanges, yielding 432 operation rows. Historical-file hash failures, changed restored/candidate source, changed loop bounds/branch targets, wrong-variant assembly and incomplete/duplicate/unequal comparison groups were rejected or failed matching. Synthetic positive and negative effects confirmed direction, experiment labels and aggregation.
 
-The short check used temporary files, mocked Git-state/existence operations and read historical source directly from verified stored objects. The read-only git show invocation was checked with a mocked subprocess; no Git commands or metadata collector ran. The saved formal EXP-002 validation was not repeated. Development durations are excluded from performance conclusions. This check preceded the formal clean-source execution, whose saved artifacts and complete derived analysis were verified in ACT-0010.
+The short check used temporary files, mocked Git-state/existence operations and read historical source directly from verified stored objects. Historical-source retrieval was checked with a mocked subprocess. This infrastructure check did not repeat the saved formal EXP-002 validation. Development durations are excluded from performance conclusions. This check preceded the formal clean-source execution, whose saved artifacts and complete derived analysis were verified in ACT-0010.

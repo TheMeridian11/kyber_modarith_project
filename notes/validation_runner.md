@@ -10,7 +10,7 @@ The program returns a nonzero exit code on a detected comparison failure. It use
 
 ## Invocation
 
-After reviewing and committing the support files, I run these commands from the repository root in Ubuntu/WSL:
+Historical baseline invocation from the repository root in Ubuntu/WSL (use a fresh run ID for any new execution):
 
 ```bash
 python3 -B scripts/run_validation.py --experiment EXP-000 --run RUN-0002
@@ -20,7 +20,7 @@ python3 -m json.tool results/EXP-000/RUN-0002/manifest.json
 
 The default timeout is 120 seconds for each build or test. I may supply --host-os, --power-mode and --background-load with facts I have verified. Unspecified values remain unknown. A timeout limit is execution control, not a measured performance result.
 
-The collector requires committed files outside results/ and refuses an existing run directory. I do not manually run the collector with RUN-0002 first: the validation runner reserves that ID itself.
+The collector requires committed files outside results/ and refuses an existing run directory. The validation runner reserves the ID itself; a separate collector invocation would preallocate it.
 
 ## Output and build policy
 

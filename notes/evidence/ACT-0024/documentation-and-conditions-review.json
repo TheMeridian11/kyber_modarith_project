@@ -1,0 +1,492 @@
+{
+  "activity_id": "ACT-0024",
+  "record_type": "documentation-readiness-and-benchmark-conditions-review",
+  "status": "completed",
+  "scope": "Final review of project Markdown, shorter revision references and completed benchmark conditions; historical observations and research outcomes preserved.",
+  "editorial_review": {
+    "markdown_files_reviewed": [
+      "README.md",
+      "notes/benchmark_conditions.md",
+      "notes/error_ntt_timing.md",
+      "notes/experiment_register.md",
+      "notes/experiments/EXP-000-baseline.md",
+      "notes/experiments/EXP-001-fused-basemul.md",
+      "notes/experiments/EXP-002-wide-dot.md",
+      "notes/experiments/EXP-003-staged-invntt.md",
+      "notes/experiments/EXP-005-error-ntt.md",
+      "notes/experiments/EXP-006-keygen-dot.md",
+      "notes/experiments/EXP-007-secret-flow.md",
+      "notes/experiments/EXP-008-timing-leakage.md",
+      "notes/experiments/EXP-009-final-comparison.md",
+      "notes/final_candidate.md",
+      "notes/final_comparison.md",
+      "notes/final_security_summary.md",
+      "notes/git_handoff.md",
+      "notes/implementation_security.md",
+      "notes/incremental_timing.md",
+      "notes/invntt_timing.md",
+      "notes/keygen_dot_timing.md",
+      "notes/literature.md",
+      "notes/paired_timing.md",
+      "notes/practical_completion.md",
+      "notes/project_log.md",
+      "notes/raw_timing.md",
+      "notes/reduction_counts.md",
+      "notes/reduction_map.md",
+      "notes/research_workflow.md",
+      "notes/runs/EXP-000-RUN-0001.md",
+      "notes/runs/EXP-000-RUN-0002.md",
+      "notes/runs/EXP-000-RUN-0003.md",
+      "notes/runs/EXP-000-RUN-0004.md",
+      "notes/runs/EXP-001-RUN-0001.md",
+      "notes/runs/EXP-001-RUN-0002.md",
+      "notes/runs/EXP-002-RUN-0001.md",
+      "notes/runs/EXP-002-RUN-0002.md",
+      "notes/runs/EXP-003-RUN-0001.md",
+      "notes/runs/EXP-003-RUN-0002.md",
+      "notes/runs/EXP-005-RUN-0001.md",
+      "notes/runs/EXP-005-RUN-0002.md",
+      "notes/runs/EXP-006-RUN-0001.md",
+      "notes/runs/EXP-006-RUN-0002.md",
+      "notes/runs/EXP-007-RUN-0001.md",
+      "notes/runs/EXP-008-RUN-0001.md",
+      "notes/runs/EXP-009-RUN-0001.md",
+      "notes/runs/EXP-009-RUN-0002.md",
+      "notes/runs/EXP-009-RUN-0003.md",
+      "notes/source_revisions.md",
+      "notes/templates/experiment.md",
+      "notes/templates/run_record.md",
+      "notes/thesis_figures.md",
+      "notes/thesis_writing_plan.md",
+      "notes/validation_runner.md"
+    ],
+    "changed_existing_documents": {
+      "README.md": {
+        "before_sha256": "5b75f83c935e6a1409fc46e5a0461a265e1e3d73a222d7ece4ee8b57120873b1",
+        "after_sha256": "2e31108876ac21f9b5ae4b790165d4ebeef0dff34a66b76f78bc5e0c68c4d819"
+      },
+      "notes/benchmark_conditions.md": {
+        "before_sha256": "9b8f80e33111655c3e16a673e06859af8c616d2e6e4197c9561bdcb1d400c3b4",
+        "after_sha256": "e07218ffb1706fb1f746ce36b2c4cae31019d76cbc06ff620700c3691da1c430"
+      },
+      "notes/error_ntt_timing.md": {
+        "before_sha256": "1b70badc4f9db9a7859c4613699b25b5a8abd325c2ea86eeebf9967f97c1c591",
+        "after_sha256": "0eadba07b566bad5bff70e06d4a51af1002cf811a212e9edc21353d06a73e9fb"
+      },
+      "notes/experiments/EXP-000-baseline.md": {
+        "before_sha256": "8241bd1bad70022077d49cf0c4725310369d4c2a84775357782ad241c3ad2232",
+        "after_sha256": "f925ee32c0f5edf04638b6eb75b7777da80376c9be8974e688f98d83e22979dc"
+      },
+      "notes/experiments/EXP-001-fused-basemul.md": {
+        "before_sha256": "f735f9d4f9024e15d2f4415ff6d7e9fac99f91bb3b06f09b032984f058bc7037",
+        "after_sha256": "416383c9bfce8781149e76f7fd19ddd7a5ce92eece84c5e4da4421767542b2a6"
+      },
+      "notes/experiments/EXP-002-wide-dot.md": {
+        "before_sha256": "4d13e71e93bd98df76008e45513711ae286f136a2a84358b314c068213a8ee5e",
+        "after_sha256": "0d4b0e206c7016989eaa441c6f603a0f116fb0d9d70b4f24ea80ebccaaf3ef0d"
+      },
+      "notes/experiments/EXP-003-staged-invntt.md": {
+        "before_sha256": "b720f48f31daa907a9b2d5857b03ea2c3afb4ce736f22215af1a0df7ebd094d1",
+        "after_sha256": "d3077277d7e7e12f716873f4bab06072c2c7eb07d6fb1e07f59334443b8480f0"
+      },
+      "notes/experiments/EXP-005-error-ntt.md": {
+        "before_sha256": "8c1ea6d5982144913c9c62ae188ac61941ba683cf54c3c00fc2304d7d744d000",
+        "after_sha256": "9dff92a0db27ca971c24ce3283a3dd14a836ddf11d6ffe0879b002213b8b400e"
+      },
+      "notes/experiments/EXP-006-keygen-dot.md": {
+        "before_sha256": "2a3ac7c08aeb68a6d318c9d9d7b2617184071dbe7d6b452e287f999b133d67ee",
+        "after_sha256": "6d3de4a0b3e742a88326fcd0e9882df186cdc3ccf37495b571888c1bcb3964b7"
+      },
+      "notes/final_candidate.md": {
+        "before_sha256": "c82f275416cd0c5eac73393a13d7fc80ee9b6eddc1f5911658235d9d70d44737",
+        "after_sha256": "8a98f31ac04d0b978c39c0b43749a8ae29d31667618a464f0212995da851b277"
+      },
+      "notes/final_comparison.md": {
+        "before_sha256": "43139357ce4441d69c36249539cea834a1df5034b2d921367fb289833f5c553f",
+        "after_sha256": "22a19423fdcf19164ea20d9293da7eabe00c8b0af496807bf0644a57ca952db5"
+      },
+      "notes/final_security_summary.md": {
+        "before_sha256": "065ebe9d23d73caeef51178c506451b4554c607c86765c559cbdff26151aa4e2",
+        "after_sha256": "e1bcb12d01c318b0a4f356531803f7d8da9861d6ab5c74f187e709e2744b5f0b"
+      },
+      "notes/git_handoff.md": {
+        "before_sha256": "b09372a6c67517d0ccc814afa2f4cc4ae356d926fe9e3b6779d3a8d7daef9a3a",
+        "after_sha256": "76f392f8e2aa6e3bd58835aa16b3c878681fb1f92364598cd7b1ae1cb0059035"
+      },
+      "notes/incremental_timing.md": {
+        "before_sha256": "7c08baa516d288eaecb808fcce70553571f23f22e8732d9bda14f30d6ce49ac5",
+        "after_sha256": "16c1f7b60ec9130e88c7193adf6dd553565baa694ba1abb3e3f7e6a155953ae4"
+      },
+      "notes/invntt_timing.md": {
+        "before_sha256": "4e41a2306a7887f8db6ae46abe4b635d58439d305cca82a41ffc2367558a3037",
+        "after_sha256": "c278110a3129eb452878d0180917a19daac35d749d8a75faa47413786a09e3b4"
+      },
+      "notes/keygen_dot_timing.md": {
+        "before_sha256": "88082320fcd18b8b24032974bf0e209f5c8d843cc0e53793f811626b16870bbd",
+        "after_sha256": "cd34c748f09d53b420f8e79db64d86197ebd70cc51305baa315db7fe6942b220"
+      },
+      "notes/literature.md": {
+        "before_sha256": "419ad3cdfa13ad8a7ac913279dde912e7eeba317427429ce4c415b2afbe549fe",
+        "after_sha256": "17aacae56938ca11ec119d174a33933b568d6bac65f9b3e511ad223f3ff0caed"
+      },
+      "notes/practical_completion.md": {
+        "before_sha256": "193cb88a2da87e5c85ad4a49a71670ca5442d6e49f7338c27b3f8a7e80331e29",
+        "after_sha256": "4f6be60cc9de77d96b5c3581af60679fc53dbeeaa803169e08023acc82ff7bfc"
+      },
+      "notes/project_log.md": {
+        "before_sha256": "2cc81a7f513756b3f4a5b3f6e567cd7a62c2dfce65f035de7edd044af11e4e6e",
+        "after_sha256": "35b3588f8e4c4b02e991952648a91466186770ad903ebc0e57f24781cd6c975d"
+      },
+      "notes/reduction_map.md": {
+        "before_sha256": "6e0f217ce028e20282c1d3d5cb5c125a966565772be94326aaa4f7ed4420f3f0",
+        "after_sha256": "6b465e6712422d5ded59018661a59dffd486953a555b8ef7f656f46cfc637180"
+      },
+      "notes/runs/EXP-000-RUN-0001.md": {
+        "before_sha256": "561abd13429aec331ecffcc1976551d99927bb6d4d9a6880921444da5caf1bf6",
+        "after_sha256": "39148437e97a0a1d4b05670821f2591d9565225fe636a94f6dc4ea5c11640bb9"
+      },
+      "notes/runs/EXP-000-RUN-0002.md": {
+        "before_sha256": "fdb2cdfa160a1a22c9521835d27230bf80296a7da60570205b3b23294f8f72a7",
+        "after_sha256": "7987b28bf9563749a6eaa6bad223a20fb0be928595fa4fc89d793b6a6475e311"
+      },
+      "notes/runs/EXP-000-RUN-0003.md": {
+        "before_sha256": "a16f0973911f7a664d5bd4874a97b2c3d54389aad5ff97b7fb0a11a0b285733c",
+        "after_sha256": "eb9a5117b924a542d2c037e53a20434dc8f59c1ca5aed04cb9f3f7dd9938e330"
+      },
+      "notes/runs/EXP-000-RUN-0004.md": {
+        "before_sha256": "8f109a1cab81286f30347b73f5fde2bb3a7fc936c5ca2659ca1e79a2c7318beb",
+        "after_sha256": "d61384d289b8003dec80f22ea79b34cbc1864ee9fac1858d14c919f278f69bbb"
+      },
+      "notes/runs/EXP-001-RUN-0001.md": {
+        "before_sha256": "79fa679b96a9ed84610e8c0efd7bc01af9f589e9c8de01222db13fc1091173ee",
+        "after_sha256": "2acb0a3c3107a816c98c075cdd0eb42b95fed182f2c1c1269bc7db80f3c96908"
+      },
+      "notes/runs/EXP-001-RUN-0002.md": {
+        "before_sha256": "a35713e4b84422b2c89ec2418e744d8a487e5b6cab040946b12fe4d6537ad5be",
+        "after_sha256": "c45d76845a25025f4c245393ae8050589e1a4dfdb3ee21e2bc8caf8343f2c2a3"
+      },
+      "notes/runs/EXP-002-RUN-0001.md": {
+        "before_sha256": "98606d5857b3e55f5601e112c7210df77b3b87da2fdf3c4766d4b4e0ba5b7529",
+        "after_sha256": "3c570131208cb5997337da5c0339c168eb5d594a272708e3521f5eee2ab16601"
+      },
+      "notes/runs/EXP-002-RUN-0002.md": {
+        "before_sha256": "9680154fccaf93cf15661c3502fc9fc3c7e93917314fafdad9b30434b9b0c08d",
+        "after_sha256": "a9438c120764653907d414d351c62ff1b81e98705adc95a7f5f4a057cabf676d"
+      },
+      "notes/runs/EXP-003-RUN-0001.md": {
+        "before_sha256": "f055c1161415eaca30669d661c12349964f96658854288077c3b380ea0c8623d",
+        "after_sha256": "7cd31297f5a761e4ced0ac8ecaae3ee3c76defa375928b5bf7559853c3ba0ff4"
+      },
+      "notes/runs/EXP-003-RUN-0002.md": {
+        "before_sha256": "42c0020306574228475ead25daef0b0d08390fe7dbdd1fe90df1e665236f1686",
+        "after_sha256": "ed6614fafd576d6de573f5110dbec2c95e58563c244cf9a872749aa976f29868"
+      },
+      "notes/runs/EXP-005-RUN-0001.md": {
+        "before_sha256": "2f63a4b4885d69df8888fec960868e27057082c1b87c29282d5d8f283cc07113",
+        "after_sha256": "3104bc64da83443e806c24a37087c386d889a11fb19decc7abe8d5192f0cdf58"
+      },
+      "notes/runs/EXP-005-RUN-0002.md": {
+        "before_sha256": "d7e4abcfc432e8941cd191d456122b9d1099b446457e28925dc6d8f1fe106a32",
+        "after_sha256": "bc404fa73ee90dc0507bd9ab1ae1736a95c470dfc2d133b9e78f995dba357912"
+      },
+      "notes/runs/EXP-006-RUN-0001.md": {
+        "before_sha256": "94fb4a8a912130fb92b052821bcc3ea6fd9b510555aab16947c1c986a78cd979",
+        "after_sha256": "6ed80f5629916bf150e5879b058dafc298c371438b52632eae24dacabff2d73a"
+      },
+      "notes/runs/EXP-006-RUN-0002.md": {
+        "before_sha256": "c6545c61e4682315313b14ba5537f6a9536a43165f2218e69aebecaf20534318",
+        "after_sha256": "ad9b54457df5b71c2014dcdac2eb4df69997ed95d4d733013d6c6eed891806f4"
+      },
+      "notes/runs/EXP-007-RUN-0001.md": {
+        "before_sha256": "f7e72e507eca1f1bac040043e2f5ae15179edfacd8b22c4f4034e888034c5a8f",
+        "after_sha256": "851b3ccdabcdb8f4649f92a12675d81eac1ef5a16a19a17aa21259efef2dd9f2"
+      },
+      "notes/runs/EXP-008-RUN-0001.md": {
+        "before_sha256": "684232345f5f6e7ba435d0ab393ef34e1d958a8beced59d910b21b152561e117",
+        "after_sha256": "8ba2f0b027da693b7d1851bccafb8ba54c4f5b713797351f90c77d0d74b018ad"
+      },
+      "notes/runs/EXP-009-RUN-0001.md": {
+        "before_sha256": "6fa9019ef6d4aa40451f106e4c5ef38f0835e893825f2251bd63e5806a670917",
+        "after_sha256": "d5a4fd2839a99de4c3f602286d1302f344d98cea98bf7d79356e4ec902efd13c"
+      },
+      "notes/runs/EXP-009-RUN-0002.md": {
+        "before_sha256": "1d0ffcc947f5bc8bf6540a41a64522ec8df3ea00ac62c40cf09db4db09745576",
+        "after_sha256": "b814f30aa09b1e7eb50867fc3e455d8609ef2f40f483b905977fd9dfb8169bbf"
+      },
+      "notes/runs/EXP-009-RUN-0003.md": {
+        "before_sha256": "5e19a9f92f5863c9997ea80cf829afe38aa9a7009df026bf9d1d215a31c77e08",
+        "after_sha256": "0cec3fd86c6331d6760e830fdecd4b5cad88da8b7fb78a7f28655ce0e6727426"
+      },
+      "notes/thesis_writing_plan.md": {
+        "before_sha256": "54fc91ef87ba27e77b0c9d4289274d8b3feb7719c3f2d53d333b346c72125882",
+        "after_sha256": "bc387425ad9492a935badc77a872f91f79cdb2c6539d85da1d3da905690a9a63"
+      }
+    },
+    "added_document": {
+      "path": "notes/source_revisions.md",
+      "sha256": "145e816205d76efc51308102dd01dc297f3e9e679f488ccbceb8085fff7654fc"
+    },
+    "shortened_existing_revision_references": 132,
+    "revision_index_entries": 38,
+    "short_ids_unambiguous_within_index": true,
+    "full_identity_and_short_link_mapping_checked": true,
+    "style": "First-person research interpretation and neutral methods/results prose; obsolete instructions scoped to historical stages or replaced with completed outcomes.",
+    "authorship_scope": "Editorial consistency is not evidence that every text was written without assistance or that the study was unassisted.",
+    "frozen_protocol_exception": "Three hash-pinned protocols retain collection-time wording, source IDs and workflow descriptions. Current accepted outcomes are in the linked run reviews and final summaries."
+  },
+  "benchmark_conditions": {
+    "path": "notes/benchmark_conditions.md",
+    "input_records": [
+      {
+        "run": "EXP-000/RUN-0003",
+        "metadata_path": "results/EXP-000/RUN-0003/metadata.json",
+        "metadata_sha256": "b5c28042e167907efba92be7edd1c433f4b64e7f0e45c3c136b6f32aaa197d2d",
+        "manifest_path": "results/EXP-000/RUN-0003/manifest.json",
+        "manifest_sha256": "af54bf4ba3ba6ab516f10d47db2884751bafe8ea5996ba5872e7505b449574cf"
+      },
+      {
+        "run": "EXP-001/RUN-0002",
+        "metadata_path": "results/EXP-001/RUN-0002/metadata.json",
+        "metadata_sha256": "6f483fe18e64f65c6c678db802fad1eb6f55f19b500356d6bb5d29f684a04273",
+        "manifest_path": "results/EXP-001/RUN-0002/manifest.json",
+        "manifest_sha256": "49fe9de386a4a6aa3fc6d3b4ba6466593db4c5f4f7f59cd6a11256935552c5bd"
+      },
+      {
+        "run": "EXP-002/RUN-0002",
+        "metadata_path": "results/EXP-002/RUN-0002/metadata.json",
+        "metadata_sha256": "4eb22f8100ce3209e42af50e7a68ced2ab2c898ba73db9c0607a585a6fb02b6d",
+        "manifest_path": "results/EXP-002/RUN-0002/manifest.json",
+        "manifest_sha256": "ce21246bd9a1b8cc5fa4696be528dff018a75b71e82f66f87af3cf3be8b006de"
+      },
+      {
+        "run": "EXP-003/RUN-0002",
+        "metadata_path": "results/EXP-003/RUN-0002/metadata.json",
+        "metadata_sha256": "46fece92a55cf7d0cab096100452ee611b303750ea18c047c63b11122e4002b4",
+        "manifest_path": "results/EXP-003/RUN-0002/manifest.json",
+        "manifest_sha256": "ce1d1514a6d61039572c4dd3cd6d8005bf36f938d1968b2db1e5e60defec2b72"
+      },
+      {
+        "run": "EXP-005/RUN-0002",
+        "metadata_path": "results/EXP-005/RUN-0002/metadata.json",
+        "metadata_sha256": "d1258c5e19aad1ac051932ae069d3ba9a0639718c237f0aa39f9b7304e55350c",
+        "manifest_path": "results/EXP-005/RUN-0002/manifest.json",
+        "manifest_sha256": "22cf2fcc0533c6e35a8063b6709b4d11cb391b742e0850cd0204d94bf0db6668"
+      },
+      {
+        "run": "EXP-006/RUN-0002",
+        "metadata_path": "results/EXP-006/RUN-0002/metadata.json",
+        "metadata_sha256": "ea498a6a681e1346a54ea1f1928477f0b79c42de4a96800c88fce5f757d8d445",
+        "manifest_path": "results/EXP-006/RUN-0002/manifest.json",
+        "manifest_sha256": "116fe9186c1cc099423958ba5ca49f23199ee82a70c19823b213ef21544d984c"
+      },
+      {
+        "run": "EXP-009/RUN-0001",
+        "metadata_path": "results/EXP-009/RUN-0001/metadata.json",
+        "metadata_sha256": "f4cf5f602cc4da3215b328d51c2e02a791ba28e9e2ede661a2c9181bcfcb2693",
+        "manifest_path": "results/EXP-009/RUN-0001/manifest.json",
+        "manifest_sha256": "a068bcb78596f81035d666fe32159a4a817b662043913027baa32dac13ceaee9"
+      },
+      {
+        "run": "EXP-009/RUN-0002",
+        "metadata_path": "results/EXP-009/RUN-0002/metadata.json",
+        "metadata_sha256": "af7da5a42af4cd4cf4dd8f5369b676045cf79ffb478bf432f56601fd89aa6e73",
+        "manifest_path": "results/EXP-009/RUN-0002/manifest.json",
+        "manifest_sha256": "9725df8bf9cba81670b04645aa095045f4875958c3b6e142802d676493582645"
+      },
+      {
+        "run": "EXP-009/RUN-0003",
+        "metadata_path": "results/EXP-009/RUN-0003/metadata.json",
+        "metadata_sha256": "96fde2b0ad59b9a2c0fcf0b85c5b408b1265ed705b3c061f99d11e14e8303ae9",
+        "manifest_path": "results/EXP-009/RUN-0003/manifest.json",
+        "manifest_sha256": "ba987a8954b10cbaaa12388e7466d428d08ceda73156953ba5b03e0f15230586"
+      }
+    ],
+    "recorded_environment_shared_by_all_nine_runs": {
+      "architecture": "x86_64",
+      "available_compiler": {
+        "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "requested": "gcc",
+        "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+        "version": "13.3.0"
+      },
+      "collector_affinity": [
+        0
+      ],
+      "cpu_model": "12th Gen Intel(R) Core(TM) i9-12900KS",
+      "kernel_release": "5.15.167.4-microsoft-standard-WSL2",
+      "linux_visible_ram_bytes": 16646680576,
+      "logical_cpus_visible": 24,
+      "os": {
+        "ID": "ubuntu",
+        "PRETTY_NAME": "Ubuntu 24.04.2 LTS",
+        "VERSION_ID": "24.04"
+      },
+      "python": {
+        "path": "/usr/bin/python3.12",
+        "version": "3.12.3"
+      },
+      "scaling_governors": null,
+      "wsl_detected": true
+    },
+    "recorded_compiler": {
+      "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "requested": "gcc",
+      "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+      "version": "13.3.0"
+    },
+    "recorded_common_build_flags": [
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Wmissing-prototypes",
+      "-Wredundant-decls",
+      "-Wshadow",
+      "-Wpointer-arith",
+      "-O3",
+      "-fomit-frame-pointer",
+      "-z",
+      "noexecstack"
+    ],
+    "original_manual_conditions_unchanged": {
+      "background_load": "unknown",
+      "host_os": "unknown",
+      "physical_core_placement": "unknown",
+      "power_mode": "unknown"
+    },
+    "representative_build_argv_matches_manifest": true,
+    "final_timer_diagnostics": {
+      "1": {
+        "processes": 108,
+        "clock_resolution_ns": 1,
+        "empty_timer_pair_min_range_ns": [
+          11,
+          12
+        ]
+      },
+      "2": {
+        "processes": 108,
+        "clock_resolution_ns": 1,
+        "empty_timer_pair_min_range_ns": [
+          10,
+          12
+        ]
+      },
+      "3": {
+        "processes": 108,
+        "clock_resolution_ns": 1,
+        "empty_timer_pair_min_range_ns": [
+          11,
+          13
+        ]
+      }
+    },
+    "retrospective_account": {
+      "basis": "Researcher recollection supplied during this review; not a contemporaneous condition log.",
+      "hardware": "Unchanged since the three final sessions.",
+      "host_and_guest": "Windows machine with project conducted through Ubuntu WSL.",
+      "custom_cpu_settings": "No custom settings recalled; uncertainty retained and default configuration not verified.",
+      "background_workload": "A few browser tabs; no other intentional workload recalled. Exact background processes/utilisation not recorded."
+    },
+    "current_host_observations": {
+      "basis": [
+        "Get-CimInstance Win32_ComputerSystem",
+        "Get-CimInstance Win32_Processor",
+        "Get-CimInstance Win32_PhysicalMemory",
+        "Get-CimInstance Win32_OperatingSystem",
+        "wsl --version",
+        "powercfg /GETACTIVESCHEME"
+      ],
+      "manufacturer": "Micro-Star International Co., Ltd.",
+      "model": "MS-7D91",
+      "cpu": "12th Gen Intel(R) Core(TM) i9-12900KS",
+      "physical_cores": 16,
+      "logical_processors": 24,
+      "installed_ram_bytes": 34359738368,
+      "os_caption": "Microsoft Windows 11 Pro",
+      "os_architecture": "64-bit",
+      "os_version": "10.0.26200",
+      "os_build": "26200",
+      "windows_version_from_wsl": "10.0.26200.9711",
+      "wsl_package_version": "2.4.13.0",
+      "active_power_scheme": "Balanced",
+      "interpretation": "Hardware description is retrospectively corroborated by the unchanged-hardware account. Current software and power settings are not substituted for historical values."
+    },
+    "remaining_unknowns": [
+      "Power plan during measurement",
+      "Exact historical CPU/BIOS/turbo/frequency/voltage settings",
+      "Break/cooling/restart intervals between sessions",
+      "Historical Windows build and WSL package version",
+      "Exact background processes/utilisation",
+      "Physical host core placement, temperature and effective frequency"
+    ]
+  },
+  "preservation": {
+    "selected_source_files": 35,
+    "selected_source_matches_manifest": true,
+    "selected_manifest_sha256": "30c94828d86ee0660b0bd7e7fcab9d7ecf81dc617cd5ad6191a9282c23897541",
+    "archived_results_files": 4474,
+    "archived_results_unchanged": true,
+    "prior_evidence_files": 59,
+    "prior_evidence_unchanged": true,
+    "act0023_review_unchanged": true,
+    "existing_non_markdown_files_checked": 4702,
+    "existing_non_markdown_unchanged": true,
+    "frozen_protocols": {
+      "notes/experiments/EXP-007-secret-flow.md": "d826129da1486d947d0ede35b0efce81897508b08dab17627bf3202bab299252",
+      "notes/experiments/EXP-008-timing-leakage.md": "49053fab57ee93e98f957d71c945aed4187f442ffae54037b931ec62e752f7b3",
+      "notes/experiments/EXP-009-final-comparison.md": "397c11c44effdb372484e6c8dbf30d29929b4e81d0f82a7f80b222e8fdf312de"
+    },
+    "existing_tables_unchanged_after_expanding_short_revision_links": 80,
+    "existing_non_shell_code_blocks_retained": 9
+  },
+  "validation": {
+    "local_markdown_links": 621,
+    "anchor_links": 2,
+    "broken_links": [],
+    "lf_and_no_trailing_whitespace": true,
+    "audit_command": "python3 -B analysis/review_final_comparison.py --output /tmp/kyber-act0024-audit-reproduction",
+    "reproduced_audit_outputs": {
+      "notes/evidence/ACT-0020/exp-009-run-0002-review.json": {
+        "sha256": "cbeb0c8db341876d125196f63953f496b858033fd6a9f50a3735853294952f98",
+        "byte_identical": true
+      },
+      "notes/evidence/ACT-0020/exp-009-run-0003-review.json": {
+        "sha256": "3b8a235d880f5d9cef7be99837e9f07ccb1e39652999dbcb26db2cf6a89a38a6",
+        "byte_identical": true
+      },
+      "notes/evidence/ACT-0020/exp-009-three-session-review.json": {
+        "sha256": "0bf84e2ff5079fa1dee1b21b395e8b2c4ee4654578160338c2c739b6d5a10bf0",
+        "byte_identical": true
+      }
+    },
+    "accepted_sessions": 3,
+    "duration_rows": 972000,
+    "assembly_bodies": 324,
+    "contrast_groups": 27,
+    "readme_result_table_unchanged": true
+  },
+  "repository_state": {
+    "head": "refs/heads/main",
+    "observed_local_refs": {
+      ".git/refs/heads/main": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      ".git/refs/heads/reduction-counters": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      ".git/refs/remotes/origin/main": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34",
+      ".git/refs/remotes/origin/reduction-counters": "b2bd620d3eac1434b1c5f8902a0a17a6e7c22b34"
+    },
+    "fresh_remote_query": false,
+    "documentation_changes_uncommitted": true
+  },
+  "readiness": {
+    "methods_results_discussion_can_begin": true,
+    "remaining_writing_work": [
+      "Develop the thesis argument from the accepted findings",
+      "Verify literature-dependent claims against full texts",
+      "State unrecorded conditions and experimental scope as limitations",
+      "Integrate figures/citations and obtain supervisor feedback"
+    ],
+    "no_new_experiment_required_by_completed_protocol": true
+  },
+  "git_operations_executed": false,
+  "new_benchmark_or_security_collection": false,
+  "production_arithmetic_edited": false
+}

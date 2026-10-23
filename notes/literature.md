@@ -1,6 +1,6 @@
 # Literature and idea provenance
 
-I use APA 7 references and verified locators in the thesis. These entries retain the findings of the preliminary literature review. No new literature retrieval occurred during ACT-0001 or ACT-0002. Bibliographic verification and full-text review are distinct; publication years are retained.
+These entries record source provenance and the scope of each literature review. Thesis citations use APA 7 references and verified locators. Bibliographic verification, abstract/source-code inspection and full-text review are distinct; outstanding checks remain explicit.
 
 ## LIT-001 Modular arithmetic optimisation
 
@@ -22,7 +22,7 @@ National Institute of Standards and Technology. (2024). *Module-lattice-based ke
 
 ## LIT-003 Experimental software
 
-pq-crystals. (n.d.). *Kyber* (Commit 3edd5af5991927164edd4aacebfcbee00b8064e7) [Computer software]. GitHub. https://github.com/pq-crystals/kyber/tree/3edd5af5991927164edd4aacebfcbee00b8064e7
+pq-crystals. (n.d.). *Kyber* (Commit [3edd5af59919](source_revisions.md)) [Computer software]. GitHub. https://github.com/pq-crystals/kyber/tree/3edd5af5991927164edd4aacebfcbee00b8064e7
 
 - Inspected: local pinned source and provenance; upstream README in the earlier review.
 - Relationship: EXP-000 and every implementation comparison. ACT-0012 traced EXP-005's error-vector consumer and conservative forward-NTT/addition bounds directly through indcpa.c, polyvec.c, poly.c, ntt.c, reduce.c, params.h and cbd.c; no new external literature was retrieved for that local-source argument.
@@ -34,8 +34,8 @@ pq-crystals. (n.d.). *Kyber* (Commit 3edd5af5991927164edd4aacebfcbee00b8064e7) [
 Reparaz, O. (n.d.). *dudect* [Computer software]. GitHub. https://github.com/oreparaz/dudect
 
 - Inspected in ACT-0014: author-maintained repository README, its discussion of input classes/testing limits, and the [author's methodological discussion](https://www.reparaz.net/oscar/misc/dudect.html). This is repository/author-page review, not full-paper review.
-- Relationship: the required focused implementation-security assessment will compare timing classes separately from throughput measurements. No leakage test has been executed in this project yet.
-- Limitation: no detected difference within a tested budget is not a constant-time proof; compiler, platform and chosen secret classes matter. I will pin a tool revision and commit the protocol after a sensitivity pilot.
+- Relationship: [EXP-008](runs/EXP-008-RUN-0001.md) compares secret timing classes separately from operation-performance measurements, using the pinned custom protocol described below.
+- Limitation: no detected difference within a tested budget is not a constant-time proof; compiler, platform and chosen secret classes matter. ACT-0017 records the pinned revision and sensitivity pilot; the formal protocol was fixed before collection.
 - Publication trail: the repository links the DATE 2017 paper by Oscar Reparaz, Josep Balasch and Ingrid Verbauwhede. The ePrint PDF retrieval at https://eprint.iacr.org/2016/1123.pdf returned HTTP 403 during ACT-0014. I do not claim to have read its full text.
 - Outstanding: verify complete APA publication details and exact paper locators through legitimate access before using its detailed methods in the thesis. The practical tool choice here is supported by the inspected primary repository/author discussion.
 
@@ -55,8 +55,8 @@ Valgrind Developers. (n.d.). *Memcheck: A memory error detector*. In *Valgrind u
 Related primary demonstration: https://github.com/agl/ctgrind
 
 - Inspected in ACT-0014: Memcheck section 4.2.2 on uninitialised-value uses and origin diagnostics; the ctgrind author's repository description of marking secrets and detecting their use in branches/addresses.
-- Relationship: planned dynamic checks complement generated-code inspection and timing measurements. I will classify public/secret values, mark only secret operands, inspect reports and retain the exercised-path limits. A generic undefined-value warning needs diagnosis; it is not automatically a cryptographic vulnerability.
-- Implementation decision: prefer supported installed Memcheck interfaces after inspecting the pinned headers rather than assuming an old ctgrind patch works. Tool installation, interface verification, harness sensitivity and actual checks remain pending.
+- Relationship: [EXP-007](runs/EXP-007-RUN-0001.md) complements generated-code inspection and timing measurements by classifying public/secret values, marking secret operands and inspecting executed-path diagnostics. A generic undefined-value warning needs diagnosis; it is not automatically a cryptographic vulnerability.
+- Implementation decision: use the verified Memcheck client-request interface. ACT-0016 records header/runtime inspection and harness sensitivity; ACT-0017 accepts formal dynamic collection.
 - Scope: this technique does not certify all paths, hardware instruction timing, physical leakage or exhaustive memory safety. Public-matrix rejection branches require correct public-input classification.
 
 ## LIT-007 Performance profiling considered and excluded
@@ -64,7 +64,7 @@ Related primary demonstration: https://github.com/agl/ctgrind
 Intel Corporation. (n.d.). *Hotspots analysis*. In *Intel VTune Profiler user guide* (Version 2025.4). https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/basic-hotspots-analysis.html
 
 - Inspected in ACT-0014: official Hotspots documentation, [collection-method documentation](https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2025-4/collect.html), and [release/system requirements](https://www.intel.com/content/www/us/en/developer/articles/release-notes/vtune-profiler/current.html).
-- Scope decision in ACT-0015: I excluded VTune from the remaining practical work at my request. I retain this earlier primary-source review as provenance, not a pending installation/profiling task. Existing raw CSV timing results support primary performance analysis.
+- Scope decision in ACT-0015: VTune was excluded from the practical study. This source review remains as provenance; performance analysis uses the retained normal-build timing measurements.
 - Constraints: software and hardware sampling have different collection requirements/overheads. WSL support does not establish which hardware events this local setup exposes. Check actual availability before relying on profiler metrics.
 - Security boundary: hotspot/CPU measurements do not compare secret-input timing classes and do not replace the required leakage assessment. Keep profiling runs separate from primary normal-build timings.
 
@@ -72,11 +72,11 @@ Intel Corporation. (n.d.). *Hotspots analysis*. In *Intel VTune Profiler user gu
 
 I inspected the official Memcheck manual (sections 4.2.2 and 4.7) and the actual Ubuntu valgrind 1:3.22.0-0ubuntu3 package headers. In usr/include/valgrind/memcheck.h, VALGRIND_MAKE_MEM_UNDEFINED and VALGRIND_MAKE_MEM_DEFINED map to Memcheck client requests; valgrind.h supplies RUNNING_ON_VALGRIND. I inspected the emitted XML protocol 4, error kinds UninitCondition/UninitValue, completion states, origin stacks and occurrence counts in real positive-control executions. Exact package/header/runtime hashes and retained reports are in [ACT-0016 support evidence](evidence/ACT-0016/secret-flow-support-smoke.json). This is interface/source and local execution evidence, not a new whole-program proof or a full-text paper review. [Official manual](https://valgrind.org/docs/manual/mc-manual.html).
 
-The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer complementary questions; numerical leakage-test budgets and a pinned dudect revision remain to be prepared. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
+The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer complementary questions; the subsequent EXP-008 protocol fixes its budget and dudect reference revision. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
 
 ## ACT-0017 pinned timing-method review
 
-I inspected the full dudect header and repository license at dc269651fb2567e46755cfb2a13d3875592968b5. Source locators: t_push/t_compute/t_init for Welford/Welch accumulation, cpucycles for the upstream timer, update_statistics/prepare_percentiles for cropping and the online second-order view, and report/dudect_main for threshold 10 and sequential interpretation. I preserve exact source/license hashes in tests/timing_leakage_protocol.json and the original files under tests/reference/dudect/. This is a source-code review, not a newly obtained full-paper review. [Pinned primary source](https://github.com/oreparaz/dudect/blob/dc269651fb2567e46755cfb2a13d3875592968b5/src/dudect.h).
+I inspected the full dudect header and repository license at [dc269651fb25](source_revisions.md). Source locators: t_push/t_compute/t_init for Welford/Welch accumulation, cpucycles for the upstream timer, update_statistics/prepare_percentiles for cropping and the online second-order view, and report/dudect_main for threshold 10 and sequential interpretation. I preserve exact source/license hashes in tests/timing_leakage_protocol.json and the original files under tests/reference/dudect/. This is a source-code review, not a newly obtained full-paper review. [Pinned primary source](https://github.com/oreparaz/dudect/blob/dc269651fb2567e46755cfb2a13d3875592968b5/src/dudect.h).
 
 EXP-008 uses a custom finite dudect-style screen. It retains balanced classes, observable kernels, Welch testing and threshold 10, but changes the timer to fenced RDTSCP, archives every interval, uses two fixed looks and three specified views, and does not use the upstream 100 cropped views or open-ended stopping. The pooled second-moment transform also differs from the upstream online per-class centring. I document these differences and do not call the experiment unmodified dudect or claim identical power/error calibration. An independent C oracle uses the unmodified pinned t_push/t_compute to verify my Python Welch calculation.
 
@@ -84,7 +84,7 @@ Intel Corporation. (2016). *Intel 64 and IA-32 architectures software developer'
 
 I inspected the RDTSCP entry, printed pages 4-547–4-548 (PDF indices 548–549), for TSC/AUX outputs, the CPUID feature bit and instruction-ordering limits. I also inspected the official [manual index](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). The protocol uses memory/load fences and compiler barriers around the counter read, verifies the emitted sequence and records TSC ticks rather than claiming frequency-scaled core cycles. Guest AUX equality and affinity do not prove physical-host placement or freedom from preemption. This is a focused timer-method review, not a general hardware audit.
 
-ACT-0017 accepts formal EXP-007 dynamic-flow evidence and executes separate statistical-harness development checks. The earlier LIT-004/LIT-006 pending statements describe their original review stage; formal statistical collection remains pending, while dynamic collection is complete.
+ACT-0017 accepts formal EXP-007 dynamic-flow evidence and records separate statistical-harness development checks. ACT-0018 accepts [EXP-008](runs/EXP-008-RUN-0001.md). Both collections are complete; the outstanding full-text and bibliographic checks above remain separate thesis-writing tasks.
 
 ## New-source fields
 

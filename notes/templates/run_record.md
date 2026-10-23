@@ -1,6 +1,6 @@
 # EXP-NNN RUN-NNNN Run record
 
-I use this field specification for the future full execution manifest and as a readable fallback for exploratory runs. No values here are observations. Unavailable fields say unknown/not-collected with a reason.
+This template specifies a readable run record and the fields required to interpret an execution manifest. No values here are observations. Unavailable fields say unknown/not-collected with a reason.
 
 The initial metadata collector writes metadata.json for a metadata-only snapshot. It does not fill the build or execution evidence described below. Its record type remains metadata-only, benchmark_executed is false, and execution checks remain not-run.
 

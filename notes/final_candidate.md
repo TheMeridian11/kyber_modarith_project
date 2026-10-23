@@ -2,13 +2,13 @@
 
 ## Decision and exact identity
 
-I select **EXP-005 as the primary final thesis candidate** after accepting all three predeclared EXP-009 sessions. I retain EXP-003 as a substantial result, explicit comparator and a reasonable alternative for workloads prioritising Kyber1024 encapsulation/decapsulation or a simpler keygen path. I retain EXP-006 as the mixed/adverse trial; I do not adopt it as the general candidate.
+**EXP-005 is the final thesis candidate**, selected after all three predeclared comparison sessions. It combines the earlier arithmetic changes with the key-generation error-vector reduction deferral. EXP-003 remains a substantial comparator and a reasonable alternative for workloads prioritising Kyber1024 encapsulation/decapsulation or a simpler keygen path. EXP-006 is retained as the mixed/adverse trial.
 
-The selected source is the 35-file implementation/kyber-optimised-ref snapshot at **4bd813ed71a90c7722275dc802336852214a5388**, pinned file-by-file in the [selection manifest](../analysis/final_candidate.json). This is cumulative EXP-001 fused base multiplication, EXP-002 wide vector dot product, EXP-003 staged inverse NTT and EXP-005 keygen error-vector reduction deferral. The original is upstream 3edd5af5991927164edd4aacebfcbee00b8064e7. I do not describe this historical Kyber implementation as certified final-standard ML-KEM.
+The selected source is the 35-file implementation/kyber-optimised-ref snapshot at **[4bd813ed71a9](source_revisions.md)**, pinned file-by-file in the [selection manifest](../analysis/final_candidate.json). This is cumulative EXP-001 fused base multiplication, EXP-002 wide vector dot product, EXP-003 staged inverse NTT and EXP-005 keygen error-vector reduction deferral. The original is upstream [3edd5af59919](source_revisions.md). I do not describe this historical Kyber implementation as certified final-standard ML-KEM.
 
-ACT-0022 verifies that the actual production checkout now matches all 35 selected EXP-005 source hashes and the verified historical Git blobs. I manually restored indcpa.c, polyvec.c and polyvec.h; the other 32 files already matched. The actual diff is exactly the reviewed 2 insertions and 41 deletions, with no repair needed. [Source review](evidence/ACT-0022/selected-source-review.json). The selection manifest retains its accurate historical checkout-at-selection observation from ACT-0020; it is not the current checkout status. This restores the already tested candidate and introduces no new optimisation or measurement.
+ACT-0022 verifies that the actual production checkout now matches all 35 selected EXP-005 source hashes and the verified historical Git blobs. Restoration changed indcpa.c, polyvec.c and polyvec.h; the other 32 files already matched. The actual diff is exactly the reviewed 2 insertions and 41 deletions, with no repair needed. [Source review](evidence/ACT-0022/selected-source-review.json). The selection manifest retains its accurate historical checkout-at-selection observation from ACT-0020; it is not the current checkout status. This restores the already tested candidate and introduces no new optimisation or measurement.
 
-## Why I choose it
+## Basis for selection
 
 The [complete comparison](final_comparison.md) independently audits 972000 duration rows and retains all three contrasts, all operations, all parameters and all adverse pairs. Each candidate beats the original in every paired operation/block comparison across the three sessions. The following additional keygen benefits recur in every session median:
 
@@ -26,7 +26,7 @@ EXP-005's Kyber1024 encapsulation and decapsulation session medians are slower t
 
 Kyber512/768 control-operation medians are mildly positive, but EXP-005 changes only the keygen call path. I do not attribute those movements to removed arithmetic in encapsulation or decapsulation. Compiler layout and environmental effects are possible explanations, not established mechanisms. Some individual pairs are worse than their session summaries; all remain visible in the full data and all-pairs figure.
 
-I rechecked the following scoped code/local-stack facts against all three sessions' matching keygen bodies and the accepted ACT-0013 review:
+The following code/local-stack measurements match all three sessions' keygen bodies and the accepted ACT-0013 review:
 
 | Parameter | Keygen body bytes EXP-003 → EXP-005 | Additional body bytes | Local stack bytes EXP-003 → EXP-005 | Additional local stack |
 |---|---:|---:|---:|---:|
@@ -48,4 +48,4 @@ The raw error-vector change has a caller-specific bound/consumer argument and sa
 
 I give EXP-003 substantial emphasis because its inverse-transform scheduling produced a clear incremental encapsulation/decapsulation benefit and is already part of EXP-005. The final cumulative improvement must not be attributed wholly to EXP-005's last change. EXP-006 is also valuable evidence: fewer reductions alone did not ensure better measured performance. Together, the progression, adverse trial and layered security assessment answer the study's performance/correctness/tradeoff questions.
 
-All predeclared performance and security collection is complete. I close EXP-009, keep both candidates and the adverse trial, and move to thesis writing with the selected source and handoff documentation verified in ACT-0022. I do not add hybrid parameter-specific variants, new optimisations or more timing sessions based on these outcomes. The [Git handoff](git_handoff.md) separates committing this evidence, backing up the branch and later preserving all cited history during main integration.
+All predeclared performance and security collection is complete. The stopping decision retains both candidates and the adverse trial without adding outcome-dependent timing sessions or hybrid variants. ACT-0022 verified the restored source; the ACT-0023 repository check records its completed integration. The [repository record](git_handoff.md) documents the source and reproduction commands.

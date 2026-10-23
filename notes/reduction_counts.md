@@ -50,6 +50,6 @@ I compiled all three parameter sets and ran two fixture exchanges each: 18 opera
 
 [Retained development evidence](evidence/ACT-0005/counts-smoke.json) contains the exact source hashes, compile commands, raw observations and check outcomes. This is a check of uncommitted support files, not the committed RUN-0004. The recorded baseline orchestration was subsequently accepted as RUN-0004 in ACT-0006.
 
-## What follows
+## Subsequent experiments
 
-I accepted [RUN-0004](runs/EXP-000-RUN-0004.md) and can move to [EXP-001: fused base multiplication](experiments/EXP-001-fused-basemul.md). Its initial hypothesis is five to three Montgomery reductions per coefficient pair. I will establish the required ranges, apply the isolated change, check byte-level compatibility and arithmetic behaviour, then compare uninstrumented baseline and candidate timing builds. I will use fresh matched timing blocks rather than relying only on this pilot's earlier measurements.
+The accepted [RUN-0004 baseline](runs/EXP-000-RUN-0004.md) supplies the original counts for the later arithmetic trials. [EXP-001](experiments/EXP-001-fused-basemul.md) first reduced base multiplication from five to three Montgomery calls per coefficient pair. Each trial then paired its bounds, compatibility and count checks with a fresh uninstrumented timing comparison. The [final comparison](final_comparison.md) measures cumulative effects directly against the original.

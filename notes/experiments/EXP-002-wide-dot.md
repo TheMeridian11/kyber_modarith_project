@@ -6,10 +6,10 @@
 - Lifecycle: closed for the initial evaluation; validation/assembly accepted in ACT-0009 and incremental timings accepted in ACT-0010. Outcome: supported within the recorded run. Decision: keep as the next research reference.
 - Variant: wide-dot.
 - Predecessor: EXP-001 fused-basemul, retained as a validated research reference after [its timing comparison](../runs/EXP-001-RUN-0002.md).
-- Predecessor arithmetic validated at 8345f6a0fb273917ed4499356f0966d1c5dc7fc2; matched timings at d407b5134f14a96a4572b3af1132a8f715e0a28d, results 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712.
-- Original reference: upstream 3edd5af5991927164edd4aacebfcbee00b8064e7, unchanged in implementation/kyber-baseline-ref.
-- Accepted record: [EXP-002/RUN-0001](../runs/EXP-002-RUN-0001.md), source 61279b2b2373c7594e40f06712bc9f93b734b8ed, results b943e50b9fee417ae21bffb4822b2aa6f3309a83.
-- Accepted timing record: [EXP-002/RUN-0002](../runs/EXP-002-RUN-0002.md), source a32a81d12225e00a8b3e0baeb32734f44cf78ab3, results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f.
+- Predecessor arithmetic validated at [8345f6a0fb27](../source_revisions.md); matched timings at [d407b5134f14](../source_revisions.md), results [337e4ba6ff1f](../source_revisions.md).
+- Original reference: upstream [3edd5af59919](../source_revisions.md), unchanged in implementation/kyber-baseline-ref.
+- Accepted record: [EXP-002/RUN-0001](../runs/EXP-002-RUN-0001.md), source [61279b2b2373](../source_revisions.md), results [b943e50b9fee](../source_revisions.md).
+- Accepted timing record: [EXP-002/RUN-0002](../runs/EXP-002-RUN-0002.md), source [a32a81d12225](../source_revisions.md), results [5a09a01496fa](../source_revisions.md).
 - Origin: local analysis of the pinned source, LIT-003. No novelty claim or unreviewed literature attribution.
 
 EXP-001 has already been timed. I tested whether accumulating across the vector before reduction gives further benefit. The applied arithmetic, saved validation, generated-code review and fresh incremental timing comparison are now accepted within their recorded scopes.
@@ -58,7 +58,7 @@ All products and accumulations use int32_t. Every input to montgomery_reduce rem
 
 This is a contract for these callers and K values, not arbitrary int16_t vector inputs. Changing K, removing a preceding reduction or widening deserialised inputs requires a new argument.
 
-## Applied manual replacement
+## Implemented treatment
 
 I applied the following include block and complete function replacement in implementation/kyber-optimised-ref/polyvec.c, preserving the remainder. This is the retained implementation record; it does not need to be applied again:
 
@@ -126,11 +126,11 @@ This replacement has been applied and passed the recorded validation. The source
 
 A faster result cannot override a failed arithmetic, compatibility or security gate. Sampled tests and source bounds complement each other; neither becomes a blanket security certificate.
 
-## Validation and next measurement
+## Validation and timing
 
-I added tests/test_fused_dot.c and scripts/run_dot_validation.py. The driver reuses the existing public KEM fixtures and transcript format, and replaces the standalone kernel test with a vector-dot-product oracle. Per parameter/build it checks 41+K full vectors: zero, sixteen aligned sign corners, sixteen alternating-component sign corners, K isolated-component cases and eight deterministic interior vectors. Each vector checks all 128 coefficient pairs against an independent test-only int64_t oracle and the exact centred result.
+Validation uses tests/test_fused_dot.c and scripts/run_dot_validation.py. The driver reuses the existing public KEM fixtures and transcript format, and replaces the standalone kernel test with a vector-dot-product oracle. Per parameter/build it checks 41+K full vectors: zero, sixteen aligned sign corners, sixteen alternating-component sign corners, K isolated-component cases and eight deterministic interior vectors. Each vector checks all 128 coefficient pairs against an independent test-only int64_t oracle and the exact centred result.
 
-I executed the following after the source/support commit. This is historical; RUN-0001 is already allocated and must not be reused:
+Historical validation invocation (new executions require a fresh run ID):
 
 ~~~bash
 python3 -B scripts/run_dot_validation.py --experiment EXP-002 --run RUN-0001
@@ -141,7 +141,7 @@ The runner builds the original baseline and the new candidate in normal and UBSa
 
 [Development support evidence](../evidence/ACT-0008/dot-validation-support-smoke.json) records twelve builds using only the existing baseline and accepted EXP-001 arithmetic, with two KEM fixtures each. All vector-oracle checks and four-way transcript comparisons passed without compiler/sanitizer diagnostics. The preflight rejects an unapplied change before allocating a run, and the count parser rejects EXP-001 counts presented as EXP-002 predictions. These checks exercise support code, not the proposed optimisation.
 
-After validation and assembly acceptance, the [recorded timing comparison](../incremental_timing.md) used fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; its old timing rows will not substitute for a fresh paired control. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
+After validation and assembly acceptance, the [recorded timing comparison](../incremental_timing.md) used fresh EXP-001 versus EXP-002 processes to measure the incremental effect. The accepted EXP-001 source remains recoverable from the recorded commits; the comparison uses fresh paired controls rather than its old timing rows. Any claim versus the original baseline must use a suitable direct comparison, not the sum of separately measured percentages.
 
 Current status: initial implementation/validation/counts/assembly/timing evaluation complete; retain EXP-002 as a research reference within the recorded scopes. The changed loop, function size and local canary coverage accompany the arithmetic savings, so the measured runtime effect cannot be attributed solely to reduction-call counts.
 

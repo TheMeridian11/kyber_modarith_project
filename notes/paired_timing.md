@@ -15,13 +15,13 @@ For each of Kyber512, Kyber768 and Kyber1024:
 - Seed 1 and the existing SHAKE256 fixture rule are reused across variants and blocks. There are 1000 measured fixture indices per parameter set, not 5000 independent inputs.
 - All observations are retained. No timer-overhead subtraction, outlier removal, selective retry or early stopping is used.
 
-This produces 30 measured processes, 90000 operation durations, 90 per-process summary rows, 45 paired comparison rows and nine aggregate rows. It doubles the baseline pilot's observation count because it measures two implementations. This is a practical automated comparison budget, not 90000 manually designed tests. The prior pilot remains context; the primary comparison uses the freshly measured baseline in each pair.
+This produces 30 measured processes, 90000 operation durations, 90 per-process summary rows, 45 paired comparison rows and nine aggregate rows. It doubles the baseline pilot's observation count because it measures two implementations. The 90000 durations are inner observations within the 30 measured processes. The prior pilot remains context; the primary comparison uses the freshly measured baseline in each pair.
 
 The timer remains CLOCK_MONOTONIC_RAW in nanoseconds. Fixture generation, warm-up, CSV formatting and secret comparisons remain outside measured intervals. Deterministic APIs exclude operating-system randomness. These timings do not include invalid-ciphertext performance or establish timing-leakage resistance.
 
 ## Run and preserve
 
-I used the following command after committing the support files and records. It is historical; RUN-0002 already exists and must not be reused:
+Historical invocation (RUN-0002 already exists; new executions require a fresh ID):
 
 ~~~bash
 python3 -B scripts/run_comparison.py --experiment EXP-001 --run RUN-0002 --cpu 0
@@ -45,7 +45,7 @@ derived/process-summary.csv retains each process's median/minimum/maximum. deriv
 
 The primary estimate is the median of the paired effects. It is not generally the ratio of the two medians of process medians. The minimum/maximum describe these five pairs; they are not confidence intervals. Inner timing rows and repeated processes may share input, thermal and scheduling conditions, so I do not treat them as independent experiments.
 
-I will examine consistency across pairs and both orders before deciding whether the result supports improvement, regression or an inconclusive outcome. If an effect is small relative to variation or depends on order, I will report that and plan additional complete pairs if needed. I will not add repetitions simply to obtain a preferred result.
+The interpretation considers consistency across pairs and both orders. Small or order-dependent effects remain qualified; repetitions are not added to obtain a preferred result. The accepted [run review](runs/EXP-001-RUN-0002.md) applies these criteria to all five pairs.
 
 ## Support verification
 

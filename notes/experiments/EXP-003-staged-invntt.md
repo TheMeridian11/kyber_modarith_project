@@ -5,12 +5,12 @@
 - Originating activity: ACT-0010.
 - Lifecycle: closed initial evaluation; validation/counts/assembly and incremental timing accepted. Outcome: supported for the targeted encap/decap benefit. Decision: keep as a research reference with observed keygen tradeoffs.
 - Variant: staged-invntt, containing the accepted EXP-002 arithmetic plus the applied inverse-NTT change.
-- Predecessor: EXP-002 wide-dot, validated at 61279b2b2373c7594e40f06712bc9f93b734b8ed and timed at a32a81d12225e00a8b3e0baeb32734f44cf78ab3; timing results 5a09a01496fae8dd4b908934c2e5524f5d3ecc9f.
-- Original reference: pinned upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
-- Validation source: 9ec22141e6acc98812438544be0bec5b35d00b5c; results commit: 705f21f7f07dcd4162052aacda3adbcc54c4051a.
+- Predecessor: EXP-002 wide-dot, validated at [61279b2b2373](../source_revisions.md) and timed at [a32a81d12225](../source_revisions.md); timing results [5a09a01496fa](../source_revisions.md).
+- Original reference: pinned upstream [3edd5af59919](../source_revisions.md).
+- Validation source: [9ec22141e6ac](../source_revisions.md); results commit: [705f21f7f07d](../source_revisions.md).
 - Accepted record: [EXP-003/RUN-0001](../runs/EXP-003-RUN-0001.md), validation/counts/assembly only.
-- Accepted timing: [EXP-003/RUN-0002](../runs/EXP-003-RUN-0002.md), source cf8ae0dd700bb41628c158016a7c15926a0b790f, results 23b4736206a8f79d13fb4898d474eb327e1dab3c.
-- Next treatment: [EXP-005 error-vector reduction deferral](EXP-005-error-ntt.md), not yet applied.
+- Accepted timing: [EXP-003/RUN-0002](../runs/EXP-003-RUN-0002.md), source [cf8ae0dd700b](../source_revisions.md), results [23b4736206a8](../source_revisions.md).
+- Subsequent treatment: [EXP-005 error-vector reduction deferral](EXP-005-error-ntt.md).
 - Idea origin: local source/range analysis of LIT-003. No novelty claim or attribution of this exact schedule to the unreviewed full text of LIT-001.
 
 I retain EXP-002 and change only invntt in implementation/kyber-optimised-ref/ntt.c. The accepted basemul and vector-dot-product functions remain in place. This is an incremental experiment conditional on EXP-002, not a standalone estimate of the inverse-NTT treatment on the original reference. This scope avoids a redundant branch of combination experiments. EXP-004 remains optional if a later interaction or combination question warrants it; it is not an automatic extra step.
@@ -53,7 +53,7 @@ After the inverse transform, encryption adds noise of magnitude at most 2, givin
 
 ## Applied replacement, retained for reproducibility
 
-I manually replaced the complete invntt function in implementation/kyber-optimised-ref/ntt.c with the following. ACT-0011 verified an exact match and preserved surrounding source. This is the applied code record; no further arithmetic edit is needed for timing.
+The following complete invntt replacement in implementation/kyber-optimised-ref/ntt.c defines the treatment. ACT-0011 verified its exact source identity and preserved surrounding code.
 
 ~~~c
 void invntt(int16_t r[256]) {
@@ -83,7 +83,7 @@ void invntt(int16_t r[256]) {
 }
 ~~~
 
-I applied and committed this code before RUN-0001. The original ACT-0010 support check tested the preflight rejection of the then-unapplied change; ACT-0011 verifies the now-applied source and saved validation.
+RUN-0001 used this committed treatment. The earlier ACT-0010 development check tested preflight rejection of the unapplied change; ACT-0011 verifies the implemented source and saved validation.
 
 ## Implementation security and correctness gates
 
@@ -102,7 +102,7 @@ The sanitizer limitation follows GCC's explanation of signed-overflow instrument
 
 ## Validation budget and execution
 
-I prepared tests/test_staged_invntt.c and scripts/run_invntt_validation.py. The test reuses the established deterministic KEM fixtures but tests the changed inverse transform with an independent ordinary-modular oracle that calls neither reducer. Each build checks 47 full vectors, all 256 output coefficients: zero, both dense extremes, both signs for each of eight index-bit patterns, both signs at ten selected boundary positions and eight deterministic interior vectors. It compares residues and the final 3328 bound. This targets the changed arithmetic without repeating dedicated basemul/dot-product oracle suites.
+Validation uses tests/test_staged_invntt.c and scripts/run_invntt_validation.py. The test reuses the established deterministic KEM fixtures but tests the changed inverse transform with an independent ordinary-modular oracle that calls neither reducer. Each build checks 47 full vectors, all 256 output coefficients: zero, both dense extremes, both signs for each of eight index-bit patterns, both signs at ten selected boundary positions and eight deterministic interior vectors. It compares residues and the final 3328 bound. This targets the changed arithmetic without repeating dedicated basemul/dot-product oracle suites.
 
 The formal runner uses the original baseline and new cumulative candidate in normal and UBSan modes for all three parameters, with 100 KEM fixtures per build. It also runs the candidate's existing upstream functional suites, checks ten counting fixtures per parameter and retains invntt/Montgomery/Barrett assembly. The expected 54 steps include 18 disassembly extractions. No timings are collected. Source guards preserve all files except invntt itself, including EXP-002 polyvec.c and the accepted basemul.
 
@@ -115,9 +115,9 @@ echo $?
 
 I do not invoke the metadata collector separately. I preserve failed attempts and use a fresh run ID for a retry. After successful execution, I retain the run directory for review; the initial manifest will still mark assembly review pending until it is inspected separately.
 
-[Development support evidence](../evidence/ACT-0010/invntt-validation-support-smoke.json) records twelve real builds using only the existing original reference and accepted EXP-002, with two KEM fixtures each. All 47-vector oracles, transcript comparisons and exercised UBSan checks passed. The unapplied-change guard rejected the then-current EXP-002 source, and old EXP-002 counts were rejected against the new predictions. The interval induction/count formulas were checked separately. No Git commands, metadata collector, proposed candidate or formal run were executed during those support checks.
+[Development support evidence](../evidence/ACT-0010/invntt-validation-support-smoke.json) records twelve real builds using only the existing original reference and accepted EXP-002, with two KEM fixtures each. All 47-vector oracles, transcript comparisons and exercised UBSan checks passed. The unapplied-change guard rejected the then-current EXP-002 source, and old EXP-002 counts were rejected against the new predictions. The interval induction/count formulas were checked separately. Those support checks exercised the existing implementations and supplied no formal EXP-003 candidate evidence.
 
-## ACT-0011 validation decision and pending performance
+## ACT-0011 validation decision
 
 I accepted [RUN-0001](../runs/EXP-003-RUN-0001.md) after checking all 54 steps, 108 raw hashes, eighteen binaries, committed source/support, exact transcripts, oracle outputs, counts and generated code. All twelve builds passed 47 inverse-transform vectors and 100 KEM fixtures each; all six UBSan builds had no diagnostics, and all three candidate upstream suites passed. All 90 count observations match the table above. The oracle shares the transform layout and twiddles while using independent reduction arithmetic; sampled success is not exhaustive specification conformance.
 
@@ -135,4 +135,4 @@ Keygen median changes are -0.31%, -0.51% and +0.70%; negative means slower. Kybe
 
 I keep EXP-003 for its consistent targeted benefit, with the keygen tradeoffs and the single-session/compiler/WSL scope recorded. Five pairs, reused fixtures and unequal order groups do not establish universal gains or formal significance. The range/security assessment remains conditional on current callers; no new leakage test or whole-program constant-time proof was performed. Larger inverse code, smaller local stack and compiler/layout changes accompany call savings, so their timing contributions remain confounded.
 
-The next proposed experiment is EXP-005, narrowly deferring the error vector's forward-NTT reduction in key generation. It preserves the reductions that establish this experiment's centred inverse inputs. EXP-004 remains deferred for a separate interaction question; cumulative original-baseline performance still requires a later direct comparison.
+The subsequent [EXP-005](EXP-005-error-ntt.md) trial deferred the error vector's forward-NTT reduction in key generation while preserving the reductions that establish centred inverse inputs. EXP-004 remained deferred and was not executed. The [final direct comparison](../final_comparison.md) supplies cumulative original-reference performance.

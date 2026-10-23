@@ -3,13 +3,13 @@
 ## Identity and scope
 
 - Originating activity: ACT-0012.
-- Lifecycle: closed for initial evaluation; RUN-0001 accepted in ACT-0013 and RUN-0002 timing accepted in ACT-0014. Outcome: supported for observed keygen benefit. Decision: keep as next research reference with documented tradeoffs; final selection remains subject to repeat-session/security checks.
+- Lifecycle: closed for initial evaluation; RUN-0001 accepted in ACT-0013 and RUN-0002 timing accepted in ACT-0014. Outcome: supported for observed keygen benefit. Initial decision: retain with documented tradeoffs. The later [final selection](../final_candidate.md) incorporates the completed repeat-session and security evidence.
 - Variant: raw-error-ntt, cumulative on retained EXP-003.
-- Predecessor: EXP-003 staged-invntt, validated at 9ec22141e6acc98812438544be0bec5b35d00b5c and timed at cf8ae0dd700bb41628c158016a7c15926a0b790f; timing results 23b4736206a8f79d13fb4898d474eb327e1dab3c.
-- Original reference: pinned upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
+- Predecessor: EXP-003 staged-invntt, validated at [9ec22141e6ac](../source_revisions.md) and timed at [cf8ae0dd700b](../source_revisions.md); timing results [23b4736206a8](../source_revisions.md).
+- Original reference: pinned upstream [3edd5af59919](../source_revisions.md).
 - Accepted record: [EXP-005/RUN-0001](../runs/EXP-005-RUN-0001.md), correctness/counts/assembly only.
-- Source commit: 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648; results commit: af3408156a334c52676b51a5348540c17234390c.
-- Accepted timing: [EXP-005/RUN-0002](../runs/EXP-005-RUN-0002.md), using the [predeclared protocol](../error_ntt_timing.md); source 4bd813ed71a90c7722275dc802336852214a5388 and results eb4c34586c7531bc87dcd165e952d3278cea0b5e.
+- Source commit: [5a499bd1940c](../source_revisions.md); results commit: [af3408156a33](../source_revisions.md).
+- Accepted timing: [EXP-005/RUN-0002](../runs/EXP-005-RUN-0002.md), using the [predeclared protocol](../error_ntt_timing.md); source [4bd813ed71a9](../source_revisions.md) and results [eb4c34586c75](../source_revisions.md).
 - Idea origin: the previously noted optional error-vector pilot, developed through local inspection of LIT-003: indcpa_keypair_derand, polyvec_ntt, poly_ntt, ntt, poly_tomont, poly_add, poly_reduce, params.h and cbd.c. No novelty claim or attribution of this exact edit to an unreviewed paper is made.
 
 I allocate EXP-005 because EXP-004 is already reserved for a distinct optional interaction/combination question. EXP-004 remains deferred; I do not silently repurpose that record or add a redundant combination run. EXP-005 estimates an incremental treatment conditional on the retained preceding variants.
@@ -18,7 +18,7 @@ I allocate EXP-005 because EXP-004 is already reserved for a distinct optional i
 
 In EXP-003 key generation, both skpv and the error vector e pass through polyvec_ntt. That wrapper calls poly_ntt for each polynomial, which performs the forward NTT and then 256 Barrett reductions. The transformed error e is subsequently added once to pkpv, immediately before the existing final polyvec_reduce. It is not a multiplication input, a serialized secret-key vector, or an inverse-transform input.
 
-I proposed, and have now manually applied, calling ntt directly only for each polynomial of e. This leaves its transformed coefficients unreduced until the existing public-key reduction. The forward transform and its Montgomery calls are unchanged; the intervening addition preserves residues as long as its signed representation does not overflow. The skpv reduction, all encryption/decryption forward reductions, the vector-dot-product exit reduction and the inverse-transform schedule remain unchanged.
+The treatment calls ntt directly only for each polynomial of e. This leaves its transformed coefficients unreduced until the existing public-key reduction. The forward transform and its Montgomery calls are unchanged; the intervening addition preserves residues as long as its signed representation does not overflow. The skpv reduction, all encryption/decryption forward reductions, the vector-dot-product exit reduction and the inverse-transform schedule remain unchanged.
 
 The hypothesis is a key-generation duration reduction from removing K*256 Barrett calls. Encap and decap have no predicted arithmetic benefit and remain comparison controls. Compiler/layout effects or noise can still change any measured duration. No runtime percentage is inferred from call counts.
 
@@ -54,7 +54,7 @@ I do not remove or move any Montgomery multiplication or poly_tomont. The error 
 
 The final dot-product reductions that establish EXP-003's inverse-input bound of 1664 remain intact. EXP-003's inverse bound of 26624 is therefore unaffected. This proposal does not justify removing poly_ntt's reduction globally, omitting the secret-vector reduction, or passing unreduced error coefficients into the wide dot product. Changed consumers, parameter sets, noise distributions or reduction contracts require a new assessment.
 
-## Applied manual edit
+## Implemented treatment
 
 I applied the following replacement in implementation/kyber-optimised-ref/indcpa.c, inside indcpa_keypair_derand. This is the preserved edit record, not another edit to perform. I replaced only:
 
@@ -92,35 +92,28 @@ I reject or revise a candidate that fails the arithmetic/compatibility/security 
 
 ## Validation support and execution
 
-I added tests/test_error_ntt.c and scripts/run_error_ntt_validation.py. The test checks 47 full error-polynomial patterns: zero, dense extremes, both signs for eight index-bit patterns, both signs at ten boundary positions and eight deterministic interiors. The input range is the applicable ETA1. An ordinary modular forward-transform oracle calls neither reducer; it shares the twiddle table/transform layout, so it checks arithmetic equivalence rather than independently certifying the full specification.
+Validation uses tests/test_error_ntt.c and scripts/run_error_ntt_validation.py. The test checks 47 full error-polynomial patterns: zero, dense extremes, both signs for eight index-bit patterns, both signs at ten boundary positions and eight deterministic interiors. The input range is the applicable ETA1. An ordinary modular forward-transform oracle calls neither reducer; it shares the twiddle table/transform layout, so it checks arithmetic equivalence rather than independently certifying the full specification.
 
 For each vector, I compare raw ntt and centred poly_ntt residues and bounds, then add four offset patterns covering the conservative post-poly_tomont range [-3328,3328]. After the retained poly_reduce, both paths must give identical centred coefficients and serialized polynomial bytes. Per build this gives 12032 forward coefficient checks, 48128 addition/final-reduction coefficient checks and 188 serialization comparisons. The test explicitly checks representability before calling the addition. These targeted cases supplement the range proof; they are not exhaustive input coverage.
 
 The formal run uses the original reference and actual candidate, all three parameters, normal and UBSan modes, and 100 established deterministic KEM fixtures per build. It also runs the existing candidate upstream suites and ten count fixtures per parameter. It extracts indcpa_keypair_derand, ntt, Montgomery and Barrett bodies from all six normal binaries. The expected total is 60 steps, including 24 assembly extractions. Unchanged standalone basemul/dot/inverse oracle suites are not repeated; their source identities and accepted evidence are preserved. No timings are collected.
 
-After manual application, review and commit of source/support/notes, I executed the following command. RUN-0001 exists and must not be reused:
+Historical validation invocation (new executions require a fresh run ID):
 
 ~~~bash
 python3 -B scripts/run_error_ntt_validation.py --experiment EXP-005 --run RUN-0001
 echo $?
 ~~~
 
-The runner invokes the metadata collector itself. It requires committed source/support and a clean Git-visible tree outside results/. I preserve a failed/interrupted attempt and use a fresh ID for a retry. After exit code zero and completed status, I preserve the entire run directory for review:
+The runner invokes the metadata collector itself. It requires committed source/support and a clean Git-visible tree outside results/. Failed or interrupted attempts retain their records; any retry requires a fresh ID.
 
-~~~bash
-git add -- results/EXP-005/RUN-0001/
-git diff --cached --check
-git diff --cached --stat
-git commit -m "Record EXP-005 error-vector reduction validation"
-~~~
-
-The execution manifest retains assembly review pending as originally written. [ACT-0013](../runs/EXP-005-RUN-0001.md) now records acceptance separately without editing archived evidence. I prepared the fresh EXP-003/EXP-005 comparison after that acceptance.
+The execution manifest retains assembly review pending as originally written. [ACT-0013](../runs/EXP-005-RUN-0001.md) now records acceptance separately without editing archived evidence. The fresh EXP-003/EXP-005 comparison followed that acceptance.
 
 ## Historical development support status (ACT-0012)
 
 [ACT-0012 support evidence](../evidence/ACT-0012/error-ntt-validation-support-smoke.json) records twelve actual builds of only the existing original reference and accepted EXP-003, each with two KEM fixtures. The new oracle, addition/serialization checks and four-way transcripts pass for every parameter, with no compiler or exercised UBSan diagnostics. It verifies the test design through existing functions; it does not execute an edited EXP-005 key-generation call path.
 
-Before manual application, the unapplied-change guard rejected the then-current EXP-003 source before metadata collection/run allocation, a changed preserved arithmetic hash was rejected, and old EXP-003 counts failed the new predicted keygen counts. The interval induction and count formulas were checked independently. No arithmetic implementation was edited, including in temporary copies; no Git commands, metadata collector or formal EXP-005 run were executed. At that earlier activity, proposed candidate correctness, counts, assembly and performance were not-run. Subsequent manual application and RUN-0001 are reviewed below.
+Before candidate implementation, the unapplied-change guard rejected the then-current EXP-003 source before metadata collection/run allocation, a changed preserved arithmetic hash was rejected, and old EXP-003 counts failed the new predicted keygen counts. The interval induction and count formulas were checked independently. The support check exercised existing arithmetic only; it supplied no formal EXP-005 candidate correctness, count, assembly or performance evidence. The subsequent candidate validation is recorded below.
 
 ## Accepted validation and security findings (ACT-0013)
 
@@ -134,12 +127,12 @@ No new secret-error-dependent branch/index appears in the changed call path. The
 
 At ACT-0013 I accepted the validation gate and prepared [RUN-0002](../error_ntt_timing.md). Six real development builds matched all 24 reviewed functions and twelve short processes passed the comparison pipeline. These support checks were not thesis performance results; actual timing acceptance follows below.
 
-## Accepted initial timing and next action (ACT-0014)
+## Accepted initial timing (ACT-0014)
 
 I accept [RUN-0002](../runs/EXP-005-RUN-0002.md) after verifying all sixty steps, source/tool/binary identities, 120 raw streams and exact reproduction of all 90000 durations into the three derived CSVs. Median paired keygen reductions against fresh EXP-003 are +5.18%/+0.48%/+1.36% for Kyber512/768/1024; all fifteen keygen pairs are positive and both order groups favour EXP-005. The Kyber768 effect is small and comparable to unchanged-operation movements, so its magnitude/mechanism needs confirmation.
 
 Encap/decap medians are +0.78%/+0.54%, +0.89%/+0.42% and -0.12%/-0.50%. The Kyber1024 encap result is mixed and decap is slower in four of five pairs. I retain those outcomes rather than claiming every operation improved. Unchanged normalised encryption/decryption bodies and shifted IND-CPA entry addresses demonstrate a layout change, without proving a timing cause. Count savings, wrapper bypass, code growth and environment can contribute together; an individual Barrett-call cost is not measured.
 
-The timing-build keygen/NTT/reducer bodies match all 24 accepted validation bodies. This preserves the earlier correctness/range/security review under verified identities; it adds no secret-class leakage measurement or whole-program proof. I keep EXP-005 as the next research reference with its bounds, code/stack/canary observations and single-session limits. The required [security assessment](../implementation_security.md) and [final evaluation](../practical_completion.md) remain.
+The timing-build keygen/NTT/reducer bodies match all 24 accepted validation bodies. This preserves the earlier correctness/range/security review under verified identities; it adds no secret-class leakage measurement or whole-program proof. EXP-005 was retained with its bounds, code/stack/canary observations and single-session limits. The later [security assessment](../final_security_summary.md) and [three-session comparison](../final_comparison.md) support the final decision.
 
-The next and final planned optimisation trial is [EXP-006](EXP-006-keygen-dot.md), a keygen-only dot-output reduction deferral. It preserves the general dot's centred inverse-input contract. Its proposed code is unapplied and its result is unknown; no further optimisation search is required merely if it fails to improve performance.
+The final arithmetic trial, [EXP-006](EXP-006-keygen-dot.md), tested keygen-only dot-output reduction deferral while preserving the general dot's centred inverse-input contract. Its mixed outcome closed the optimisation search; EXP-005 was subsequently selected as the final candidate.

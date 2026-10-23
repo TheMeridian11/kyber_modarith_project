@@ -5,21 +5,21 @@
 - Originating activity: ACT-0006.
 - Lifecycle: closed initial evaluation; validation and matched timings accepted with parameter-specific limitations.
 - Candidate variant: fused-basemul.
-- Validated candidate source commit: 8345f6a0fb273917ed4499356f0966d1c5dc7fc2.
-- Validation results commit: 00398d18dddbccb99854bb6519fc896a23d90f22.
-- Baseline: pinned reference at upstream 3edd5af5991927164edd4aacebfcbee00b8064e7.
+- Validated candidate source commit: [8345f6a0fb27](../source_revisions.md).
+- Validation results commit: [00398d18dddb](../source_revisions.md).
+- Baseline: pinned reference at upstream [3edd5af59919](../source_revisions.md).
 - Baseline evidence: EXP-000/RUN-0002 functional checks, RUN-0003 timing pilot and [RUN-0004 counts](../runs/EXP-000-RUN-0004.md).
-- Baseline count source/results commits: 3757df58a02408fb9a701869cc1f3ac6f6159a8d / 2a8388c1701dcf66cb5dfa6906921f63bc574c55.
+- Baseline count source/results commits: [3757df58a024](../source_revisions.md) / [2a8388c1701d](../source_revisions.md).
 - Accepted record: [EXP-001/RUN-0001 validation and assembly review](../runs/EXP-001-RUN-0001.md).
 - Accepted timing record: [EXP-001/RUN-0002](../runs/EXP-001-RUN-0002.md).
-- Next treatment: [EXP-002 vector-wide fusion](EXP-002-wide-dot.md).
+- Subsequent treatment: [EXP-002 vector-wide fusion](EXP-002-wide-dot.md).
 - Origin: local analysis of the pinned source, LIT-003. I do not claim that this rearrangement is novel or attribute it to an unreviewed paper.
 
 I test whether combining products before Montgomery reduction improves key generation, encapsulation and decapsulation while preserving externally visible behaviour and the reviewed implementation assumptions.
 
 ## Isolated change and hypothesis
 
-I manually replaced only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I retain the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
+The treatment replaced only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I retain the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
 
 A polynomial contains 128 such pairs, so its base multiplication changes from 640 to 384 Montgomery calls. A K-element dot product changes from 640K to 384K calls. For keygen, encapsulation and decapsulation, predicted savings are respectively 256K^2, 256K(K+1) and 256K(K+2). Decapsulation includes re-encryption.
 
@@ -98,9 +98,9 @@ I do not mark security as passed merely because the program is faster or its sec
 
 ## Validation protocol and accepted execution
 
-I added tests/test_fused_basemul.c and scripts/run_candidate_validation.py as support code. I extended the existing count helpers with explicit optional source/prediction arguments; their baseline defaults remain unchanged. I subsequently applied the arithmetic replacement manually and completed RUN-0001 from the source commit recorded above.
+Validation uses tests/test_fused_basemul.c and scripts/run_candidate_validation.py. The count helpers accept explicit optional source/prediction arguments while retaining their baseline defaults. RUN-0001 tests the candidate source identified above.
 
-After applying the supplied basemul body and committing source, tests, scripts and records, I executed:
+Historical validation invocation (new executions require a fresh run ID):
 
 ~~~bash
 python3 -B scripts/run_candidate_validation.py --experiment EXP-001 --run RUN-0001
@@ -127,7 +127,7 @@ A completed run requires all commands and per-parameter checks to pass, exact tr
 
 ## Measurement and decision plan
 
-Candidate validation and scoped generated-code review are accepted. I prepared scripts/run_comparison.py for fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
+Candidate validation and scoped generated-code review are accepted. scripts/run_comparison.py measures fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
 
 RUN-0002 compared process-level medians within matched blocks and preserved every raw observation. Small uncertain effects remain inconclusive; a stronger claim would require additional planned complete blocks. I do not selectively repeat or remove outliers. A regression, no detectable effect or inconclusive result remains reportable. Any failed arithmetic or compatibility gate stops performance collection.
 
@@ -136,14 +136,14 @@ The change adds two int32_t local accumulators and one int16_t temporary. It doe
 ## Execution evidence and decision
 
 - Proposal algebra and caller-bound review: recorded with the stated assumptions.
-- Candidate implementation: manually applied; only basemul differs from the baseline.
+- Candidate implementation: only basemul differs from the baseline at this stage.
 - Candidate tests/counts/sanitizer checks: RUN-0001 passes, including exact sampled invalid-input/rejection compatibility and all predicted counts.
 - Candidate assembly review: completed in ACT-0007 for normal-build basemul and its reducer in all parameter sets; no new branch/index-based leakage mechanism found in that scope.
-- Statistical timing-leakage assessment: not-run.
+- Statistical timing-leakage assessment: not run on standalone EXP-001; later cumulative variants have separate EXP-008 evidence.
 - Performance comparison: RUN-0002 accepted; effects and limits recorded below.
 - Retention decision: keep as a validated research reference; Kyber768 encapsulation/decapsulation performance remains inconclusive.
 
-[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. That development check preceded manual application. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
+[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. That development check preceded candidate implementation. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
 
 ### ACT-0007 interpretation
 
@@ -155,7 +155,7 @@ ACT-0007 accepted the implementation for performance evaluation; ACT-0008 now re
 
 ### ACT-0008 measured outcome
 
-RUN-0002 used source d407b5134f14a96a4572b3af1132a8f715e0a28d and saved results in 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712. All 90000 rows and all derived summaries verified. The median paired reductions in process-median duration were:
+RUN-0002 used source [d407b5134f14](../source_revisions.md) and saved results in [337e4ba6ff1f](../source_revisions.md). All 90000 rows and all derived summaries verified. The median paired reductions in process-median duration were:
 
 | Parameter set | Keygen | Encap | Decap |
 |---|---:|---:|---:|

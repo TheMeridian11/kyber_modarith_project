@@ -6,7 +6,7 @@ I specify this protocol after accepting [EXP-005/RUN-0001](runs/EXP-005-RUN-0001
 
 I use scripts/run_error_ntt_comparison.py with the existing timing harness, strict CSV parser, paired-effect calculation and assembly normaliser. The control is staged-invntt (EXP-003); the candidate is raw-error-ntt (EXP-005). I rebuild and time both in the same session. Historical EXP-003 durations are not substituted for fresh control measurements.
 
-The runner restores 35 exact accepted EXP-003 files from source commit cf8ae0dd700bb41628c158016a7c15926a0b790f into the new run's ignored build/exp003-source directory, using read-only git show and checking every file against its accepted SHA-256. The current checkout/index and arithmetic stay in place. The current candidate must match EXP-005 validation source 5a499bd1940ce0ff8fd5d973f6f46b62b50c0648. The new support/orchestration commit is recorded separately from both arithmetic identities.
+The runner restores 35 exact accepted EXP-003 files from source commit [cf8ae0dd700b](source_revisions.md) into the new run's ignored build/exp003-source directory, using read-only git show and checking every file against its accepted SHA-256. The current checkout/index and arithmetic stay in place. The current candidate must match EXP-005 validation source [5a499bd1940c](source_revisions.md). The new support/orchestration commit is recorded separately from both arithmetic identities.
 
 Both variants use the same reviewed GCC executable and normal -O3 flags without counters or sanitizer. Before timing, the actual six executables must match all 24 reviewed function bodies: indcpa_keypair_derand, ntt, montgomery_reduce and barrett_reduce. Instruction offsets, operands, sizes and resolved symbolic targets remain part of the match; only relocation addresses are normalised. A mismatch stops the run and preserves its diagnostic record.
 
@@ -26,26 +26,11 @@ I inspect every pair, both order groups, absolute durations, timer diagnostics a
 
 I accept a performance benefit only when the validated candidate shows a consistent useful keygen reduction in the collected pairs, with the magnitude, order dependence and any other-operation tradeoffs documented. Small/mixed effects remain inconclusive; a slower result is retained. I subtract no timer overhead, remove no outliers and do not rerun merely to obtain a preferred outcome. Five pairs in one session do not establish formal significance or a universal gain. Unknown host/power/background/physical-core conditions stay unknown; guest affinity does not establish physical-core placement.
 
-The correctness, range and scoped security conclusions remain those in RUN-0001. Performance timing is not a leakage test. Incremental effects are conditional on EXP-001/002/003 already being present. I do not add or multiply medians from separate sessions into a total gain over the original reference; that requires a later direct comparison.
+The correctness, range and scoped security conclusions remain those in RUN-0001. Performance timing is not a leakage test. Incremental effects are conditional on EXP-001/002/003 already being present. I do not add or multiply medians from separate sessions into a total gain over the original reference; that requires the separate [direct comparison](final_comparison.md).
 
-## Historical execution sequence — already completed
+## Recorded execution
 
-The following commands document the completed run, not new instructions to repeat. Support commit is 4bd813ed71a90c7722275dc802336852214a5388 and results commit is eb4c34586c7531bc87dcd165e952d3278cea0b5e. I reviewed and committed the runner and thesis records:
-
-~~~bash
-git diff --check
-git add -- README.md scripts/run_error_ntt_comparison.py \
-  notes/project_log.md notes/experiment_register.md notes/reduction_map.md \
-  notes/experiments/EXP-005-error-ntt.md notes/runs/EXP-005-RUN-0001.md \
-  notes/error_ntt_timing.md notes/evidence/ACT-0013/
-git diff --cached --check
-git diff --cached --stat
-git diff --cached
-git commit -m "Review EXP-005 validation and add comparison against EXP-003"
-git status --short
-~~~
-
-After the source/support tree is clean, I run:
+The completed comparison used support commit [4bd813ed71a9](source_revisions.md); its results were archived in [eb4c34586c75](source_revisions.md). Historical invocation (new executions require a fresh run ID):
 
 ~~~bash
 python3 -B scripts/run_error_ntt_comparison.py \
@@ -55,22 +40,10 @@ python3 -B scripts/run_error_ntt_comparison.py \
 echo $?
 ~~~
 
-Optional --host-os, --power-mode and --background-load arguments describe observed facts. I keep workload and power conditions steady during the comparison. The ACT-0013 development check did not create RUN-0002.
-
-After exit code zero and Comparison status: completed, I inspect and preserve the entire result directory:
-
-~~~bash
-cat results/EXP-005/RUN-0002/derived/comparison.csv
-git add -- results/EXP-005/RUN-0002/
-git diff --cached --check
-git diff --cached --stat
-git commit -m "Record EXP-005 incremental timing comparison"
-~~~
-
-A failure is not accepted by these success commands; I preserve its record for diagnosis and use a new ID if a retry is required. ACT-0014 has completed that review of hashes, generated code, paired data and reproduced analysis; the result and limits are in the linked run record.
+Optional environment fields record observed facts; unverified values remain unknown. ACT-0014 accepted the run after checking hashes, generated code, paired data and reproduced analysis. Failed or interrupted attempts remain preserved under their original IDs.
 
 ## Development check
 
 [ACT-0013 support evidence](evidence/ACT-0013/error-ntt-comparison-smoke.json) records six real builds, 24 assembly matches and two short blocks of twelve measured exchanges and two warm-ups per process. All 432 operation rows, 36 summaries, eighteen pairs and nine aggregate rows pass, including both orders. Synthetic improvements/regressions confirm the sign, EXP-003/EXP-005 labels and median-of-paired-effects calculation. Changed source identities, wrong historical hashes, altered call/branch targets, wrong-variant assembly and missing/duplicate/unequal groups are rejected or fail matching.
 
-I used an isolated temporary directory, mocked Git state/existence checks and read exact historical bytes from SHA-1-verified stored objects. I reused the validation snapshot only as test input for compiler/provenance fields. No Git command, metadata collector, formal run or arithmetic edit was executed. Short development timings check the pipeline and provide no thesis speed estimate. An initial synthetic branch fixture changed only an absolute relocation address, which the normaliser correctly ignores; I corrected the fixture to change the resolved symbolic target. No runner correction was needed. Temporary binaries and CSVs were removed after verification, with their commands/hashes recorded in the development evidence.
+The development check used an isolated temporary directory, mocked Git state/existence checks and exact historical bytes from SHA-1-verified objects. The validation snapshot supplied compiler/provenance test inputs; this was not formal collection. Short development timings check the pipeline and provide no thesis speed estimate. An initial synthetic branch fixture changed only an absolute relocation address, which the normaliser correctly ignores; I corrected the fixture to change the resolved symbolic target. No runner correction was needed. Temporary binaries and CSVs were removed after verification, with their commands/hashes recorded in the development evidence.

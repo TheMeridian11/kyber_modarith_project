@@ -1,12 +1,12 @@
 # EXP-006 incremental timing comparison
 
-I specify this protocol after accepting [EXP-006/RUN-0001](runs/EXP-006-RUN-0001.md). It asks whether omitting only the keygen dot's intermediate Barrett centring improves on retained EXP-005. Keygen is the predicted beneficiary; encap/decap have unchanged arithmetic and serve as control operations. The protocol was executed as RUN-0002 and reviewed in ACT-0016; the [complete result](runs/EXP-006-RUN-0002.md) records the mixed outcome and EXP-005 primary-candidate decision. The commands below preserve the historical execution procedure; RUN-0002 must not be reused.
+This protocol followed acceptance of [EXP-006/RUN-0001](runs/EXP-006-RUN-0001.md). It asks whether omitting only the keygen dot's intermediate Barrett centring improves on retained EXP-005. Keygen is the predicted beneficiary; encap/decap have unchanged arithmetic and serve as control operations. The protocol was executed as RUN-0002 and reviewed in ACT-0016; the [complete result](runs/EXP-006-RUN-0002.md) records the mixed outcome and EXP-005 primary-candidate decision. The invocation below records the completed procedure; new executions require a fresh run ID.
 
 ## Sources and acceptance gates
 
 I use scripts/run_keygen_dot_comparison.py with the existing normal-build timing harness, strict CSV parser, paired-effect calculation and assembly normaliser. The control is raw-error-ntt (EXP-005); the candidate is keygen-dot (EXP-006). Both are rebuilt and measured together. I do not reuse old EXP-005 durations as fresh controls.
 
-The runner restores the exact 35 accepted EXP-005 source files from commit 4bd813ed71a90c7722275dc802336852214a5388 into the new run's ignored build/exp005-source directory using read-only git show, checking every file's SHA-256 against the accepted timing manifest. It does not alter the checkout/index. Reference manifest SHA-256 is 22cf2fcc0533c6e35a8063b6709b4d11cb391b742e0850cd0204d94bf0db6668. Current candidate arithmetic must match accepted validation source 4c9d539eba8903c2404591b8024e7afef15bbf47. The new support/orchestration commit is recorded separately.
+The runner restores the exact 35 accepted EXP-005 source files from commit [4bd813ed71a9](source_revisions.md) into the new run's ignored build/exp005-source directory using read-only git show, checking every file's SHA-256 against the accepted timing manifest. It does not alter the checkout/index. Reference manifest SHA-256 is 22cf2fcc0533c6e35a8063b6709b4d11cb391b742e0850cd0204d94bf0db6668. Current candidate arithmetic must match accepted validation source [4c9d539eba89](source_revisions.md). The new support/orchestration commit is recorded separately.
 
 Both variants use the same reviewed GCC executable and normal -O3 flags without counters or sanitizer. The actual six timing executables must match 33 reviewed bodies before measurement: keygen, general dot, poly_tomont and both reducers for both variants, plus the dedicated dot for EXP-006. Instruction offsets, operands, function sizes and resolved symbolic targets are retained; only relocation addresses are normalised. A mismatch stops the attempt and preserves diagnostics.
 
@@ -28,25 +28,9 @@ The source-derived benefit is another K*256 fewer keygen Barrett calls; Montgome
 
 Five pairs from one session do not establish formal significance, a universal gain or order independence. Unknown host/power/background/physical-core facts stay unknown; WSL guest affinity does not guarantee physical-core placement. Incremental effects depend on earlier optimisations already being present and cannot be added or multiplied across separate runs into a total original-reference gain. The final direct and repeat-session evaluation remains separate. Performance measurements are not a leakage test.
 
-## Review, commit, run and preserve
+## Recorded execution
 
-No further arithmetic change is required. I review and commit the new support and thesis records:
-
-~~~bash
-git diff --check
-git add -- README.md scripts/run_keygen_dot_comparison.py \
-  notes/project_log.md notes/experiment_register.md notes/reduction_map.md \
-  notes/experiments/EXP-006-keygen-dot.md notes/runs/EXP-006-RUN-0001.md \
-  notes/keygen_dot_timing.md notes/implementation_security.md \
-  notes/practical_completion.md notes/literature.md notes/evidence/ACT-0015/
-git diff --cached --check
-git diff --cached --stat
-git diff --cached
-git commit -m "Review EXP-006 validation and add comparison against EXP-005"
-git status --short
-~~~
-
-With a clean source/support tree, I run:
+Historical invocation for the accepted comparison (new executions require a fresh run ID):
 
 ~~~bash
 python3 -B scripts/run_keygen_dot_comparison.py \
@@ -56,23 +40,10 @@ python3 -B scripts/run_keygen_dot_comparison.py \
 echo $?
 ~~~
 
-Optional --host-os, --power-mode and --background-load arguments record observed facts; unknown values remain unknown. I keep workload and power conditions steady. RUN-0002 has not been created by the development check and must not be reused after an attempt.
-
-After exit code zero and Comparison status: completed, I inspect and preserve the full result:
-
-~~~bash
-cat results/EXP-006/RUN-0002/derived/comparison.csv
-git add -- results/EXP-006/RUN-0002/
-git diff --cached --check
-git diff --cached --stat
-git commit -m "Record EXP-006 incremental timing comparison"
-git status --short
-~~~
-
-A failed run is preserved for diagnosis instead of accepted by the success sequence. A completed run still needs review of hashes, actual generated code, all pairs and reproduced derived data before deciding whether to retain EXP-006 for performance.
+ACT-0016 accepted the completed run after verifying hashes, generated code, all paired observations and reproduced analysis. Optional environment fields retain unknown values unless verified. Failed or interrupted attempts remain preserved for diagnosis.
 
 ## Development verification
 
 [ACT-0015 support evidence](evidence/ACT-0015/keygen-dot-comparison-smoke.json) records six real builds, 33 exact reviewed-assembly matches and twelve short timing processes: two blocks, twelve measured exchanges and two warm-ups per process. All 432 operation rows, thirty-six summaries, eighteen pairs and nine aggregates pass. Both execution orders are covered. Synthetic gains/regressions verify direction, EXP-005/EXP-006 columns and median-of-paired-effects calculation. Missing/duplicate/unequal groups, wrong variants and altered source identities are rejected. Wrong historical hashes and changed symbolic call/branch targets, including a wrong dedicated-dot tail target, are detected.
 
-I used an isolated temporary directory and mocked Git state/existence checks. Exact historical bytes came from SHA-1-verified stored objects; the existing validation snapshot supplied development compiler/provenance inputs only. No Git command, metadata collector, formal run or arithmetic edit occurred. The first smoke attempt stopped before building because the copied review filename still referred to EXP-005; I corrected it to the ACT-0015 EXP-006 review. The completed check passed and temporary binaries/CSVs were removed after their hashes and commands were recorded. These short measurements verify the runner and provide no thesis speed estimate.
+The development check used an isolated temporary directory and mocked Git state/existence checks. Exact historical bytes came from SHA-1-verified objects; the validation snapshot supplied development compiler/provenance inputs only. The first smoke attempt stopped before building because the copied review filename still referred to EXP-005; I corrected it to the ACT-0015 EXP-006 review. The completed check passed and temporary binaries/CSVs were removed after their hashes and commands were recorded. These short measurements verify the runner and provide no thesis speed estimate.

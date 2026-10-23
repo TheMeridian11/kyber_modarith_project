@@ -29,11 +29,11 @@ These fixtures are public benchmark inputs. Their purpose is reproducibility; th
 
 Each iteration measures key generation, then encapsulation, then valid-ciphertext decapsulation. Fixture generation and shared-secret comparison are outside the timed intervals. The harness buffers results in memory and prints CSV after the measured loop.
 
-The deterministic API mode measures the KEM computation without operating-system randomness calls. I will compare candidates using this same mode. These numbers are not full RNG-inclusive API latency or CPU-cycle counts.
+The deterministic API mode measures the KEM computation without operating-system randomness calls. The subsequent candidate comparisons use the same mode. These numbers are not full RNG-inclusive API latency or CPU-cycle counts.
 
 The timer includes interruption and scheduling effects. The stderr log records reported clock resolution and the minimum of 1000 empty timer-pair probes as a diagnostic. I do not subtract that minimum from operation durations, and reported resolution is not a guarantee of accuracy.
 
-Logical CPU affinity limits guest scheduling movement. It does not establish physical-core placement under WSL or control host frequency, thermal behaviour or background load. Unknown manual conditions remain explicit in metadata. This first run is a pilot; I will use its observed variation when deciding later comparison repetitions.
+Logical CPU affinity limits guest scheduling movement. It does not establish physical-core placement under WSL or control host frequency, thermal behaviour or background load. Unknown manual conditions remain explicit in metadata. This pilot informed the initial five-pair comparison budget; the final comparison later used three sessions of twelve matched blocks.
 
 ## Execution and acceptance
 
