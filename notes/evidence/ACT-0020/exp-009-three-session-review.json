@@ -1,0 +1,650 @@
+{
+  "activity_id": "ACT-0020",
+  "aggregate_outputs": {
+    "provenance.json": "9d321b08ab80ee727446462f39d2cebe227e4b1ee236fec10b17316e61fb0153",
+    "session-effects.csv": "ed4121ba8996918224b99389f914436014955813abc54227ca9b991227212334",
+    "three-session-effects.csv": "f296a5565cb8d058f9e38007ef99543bed20a5655625c858f61c41977e04d87c"
+  },
+  "all_three_sessions_accepted": true,
+  "audit_driver_sha256": "d016e37f2d78f4d79e8537c9afcc56e5d263bb1179008b29d7c89eaad1898ea8",
+  "compiler_tools_sources_and_flags_identical": true,
+  "contrasts": [
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 6.234053471153322,
+      "median_session_improvement_pct": 5.9681307881204075,
+      "min_session_improvement_pct": 5.800779533876849,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        5.9681307881204075,
+        5.800779533876849,
+        6.234053471153322
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 15.84259103180747,
+      "median_session_improvement_pct": 15.38861006565677,
+      "min_session_improvement_pct": 15.287193792428571,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        15.287193792428571,
+        15.38861006565677,
+        15.84259103180747
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 15.797994240180246,
+      "median_session_improvement_pct": 15.586316763840719,
+      "min_session_improvement_pct": 15.432367021417864,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        15.432367021417864,
+        15.586316763840719,
+        15.797994240180246
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 13.237151182186818,
+      "median_session_improvement_pct": 13.183789219715209,
+      "min_session_improvement_pct": 13.117184783041008,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        13.237151182186818,
+        13.117184783041008,
+        13.183789219715209
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 18.55844103014224,
+      "median_session_improvement_pct": 18.475834578049792,
+      "min_session_improvement_pct": 18.47422681423878,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        18.475834578049792,
+        18.55844103014224,
+        18.47422681423878
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 18.644489268403063,
+      "median_session_improvement_pct": 18.642783850633073,
+      "min_session_improvement_pct": 18.57387986505283,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        18.642783850633073,
+        18.644489268403063,
+        18.57387986505283
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 16.07556368139194,
+      "median_session_improvement_pct": 16.065925594749572,
+      "min_session_improvement_pct": 16.008741828729562,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        16.008741828729562,
+        16.065925594749572,
+        16.07556368139194
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 19.5914749409479,
+      "median_session_improvement_pct": 19.48420698083596,
+      "min_session_improvement_pct": 19.31941945765709,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        19.31941945765709,
+        19.5914749409479,
+        19.48420698083596
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp003",
+      "max_session_improvement_pct": 20.08570040398292,
+      "median_session_improvement_pct": 20.00191105731678,
+      "min_session_improvement_pct": 19.94414356812237,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        19.94414356812237,
+        20.08570040398292,
+        20.00191105731678
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 10.921492353468826,
+      "median_session_improvement_pct": 10.720143052968755,
+      "min_session_improvement_pct": 10.654918233742944,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        10.720143052968755,
+        10.654918233742944,
+        10.921492353468826
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 16.23186657071396,
+      "median_session_improvement_pct": 16.091867890453138,
+      "min_session_improvement_pct": 15.895691851518372,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        15.895691851518372,
+        16.091867890453138,
+        16.23186657071396
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 16.051540324006723,
+      "median_session_improvement_pct": 15.962431870126604,
+      "min_session_improvement_pct": 15.843171358000946,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        15.843171358000946,
+        15.962431870126604,
+        16.051540324006723
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 13.54045332746232,
+      "median_session_improvement_pct": 13.441470200706684,
+      "min_session_improvement_pct": 13.23030916509516,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        13.54045332746232,
+        13.441470200706684,
+        13.23030916509516
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 19.130027744952123,
+      "median_session_improvement_pct": 19.075428034831525,
+      "min_session_improvement_pct": 19.06712738699411,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        19.06712738699411,
+        19.130027744952123,
+        19.075428034831525
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 18.932116782308718,
+      "median_session_improvement_pct": 18.801339843612823,
+      "min_session_improvement_pct": 18.68170523583843,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        18.68170523583843,
+        18.932116782308718,
+        18.801339843612823
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 17.519855530884605,
+      "median_session_improvement_pct": 17.46767447464849,
+      "min_session_improvement_pct": 17.37720813660063,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        17.37720813660063,
+        17.519855530884605,
+        17.46767447464849
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 19.70207993115642,
+      "median_session_improvement_pct": 19.301747800374525,
+      "min_session_improvement_pct": 19.270289369579697,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        19.270289369579697,
+        19.70207993115642,
+        19.301747800374525
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 20.14545175037143,
+      "median_session_improvement_pct": 19.711206464076767,
+      "min_session_improvement_pct": 19.58593955171591,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "baseline",
+      "session_estimates_pct": [
+        19.58593955171591,
+        20.14545175037143,
+        19.711206464076767
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 5.31297980860721,
+      "median_session_improvement_pct": 5.261169908735264,
+      "min_session_improvement_pct": 5.179997795004637,
+      "negative_blocks": 0,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 36,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        5.261169908735264,
+        5.179997795004637,
+        5.31297980860721
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 0.7066024747959809,
+      "median_session_improvement_pct": 0.6938735540000018,
+      "min_session_improvement_pct": 0.6671581507474267,
+      "negative_blocks": 6,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 30,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        0.7066024747959809,
+        0.6938735540000018,
+        0.6671581507474267
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 0.5527067186135326,
+      "median_session_improvement_pct": 0.4529838113286444,
+      "min_session_improvement_pct": 0.4314569558837411,
+      "negative_blocks": 8,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber512",
+      "positive_blocks": 28,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        0.5527067186135326,
+        0.4529838113286444,
+        0.4314569558837411
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 0.4877800798184284,
+      "median_session_improvement_pct": 0.48552222641096154,
+      "min_session_improvement_pct": 0.4648305888754811,
+      "negative_blocks": 7,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 29,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        0.48552222641096154,
+        0.4877800798184284,
+        0.4648305888754811
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 0.7300894044086403,
+      "median_session_improvement_pct": 0.6906224764772595,
+      "min_session_improvement_pct": 0.5944711393459312,
+      "negative_blocks": 2,
+      "negative_sessions": 0,
+      "operation": "encap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 34,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        0.5944711393459312,
+        0.7300894044086403,
+        0.6906224764772595
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 0.33189993398481943,
+      "median_session_improvement_pct": 0.22879489141461873,
+      "min_session_improvement_pct": 0.038172201801950356,
+      "negative_blocks": 10,
+      "negative_sessions": 0,
+      "operation": "decap",
+      "parameter_set": "Kyber768",
+      "positive_blocks": 26,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        0.038172201801950356,
+        0.33189993398481943,
+        0.22879489141461873
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": 1.621160062634347,
+      "median_session_improvement_pct": 1.522923894706707,
+      "min_session_improvement_pct": 1.32476076493791,
+      "negative_blocks": 2,
+      "negative_sessions": 0,
+      "operation": "keygen",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 34,
+      "positive_sessions": 3,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        1.621160062634347,
+        1.32476076493791,
+        1.522923894706707
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": -0.012360538421313239,
+      "median_session_improvement_pct": -0.14692696649498682,
+      "min_session_improvement_pct": -0.18588623291732054,
+      "negative_blocks": 20,
+      "negative_sessions": 3,
+      "operation": "encap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 16,
+      "positive_sessions": 0,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        -0.012360538421313239,
+        -0.18588623291732054,
+        -0.14692696649498682
+      ],
+      "sessions": 3
+    },
+    {
+      "candidate": "exp005",
+      "max_session_improvement_pct": -0.3009149670390787,
+      "median_session_improvement_pct": -0.35645287792634983,
+      "min_session_improvement_pct": -0.5825368498488248,
+      "negative_blocks": 30,
+      "negative_sessions": 3,
+      "operation": "decap",
+      "parameter_set": "Kyber1024",
+      "positive_blocks": 6,
+      "positive_sessions": 0,
+      "reference": "exp003",
+      "session_estimates_pct": [
+        -0.35645287792634983,
+        -0.5825368498488248,
+        -0.3009149670390787
+      ],
+      "sessions": 3
+    }
+  ],
+  "coverage": {
+    "aggregate_groups": 81,
+    "assembly_bodies": 324,
+    "builds": 27,
+    "completed_steps": 675,
+    "duration_rows": 972000,
+    "measured_roundtrips": 324000,
+    "measurement_processes": 324,
+    "paired_effects": 972,
+    "process_summaries": 972,
+    "raw_files": 1350,
+    "warmup_roundtrips": 32400
+  },
+  "inherited_tradeoff": "Both candidates retain the general-dot body without its former local array/canary; keygen canaries remain present.",
+  "keygen_code_and_local_stack": [
+    {
+      "body_bytes": 425,
+      "endbr64_present": true,
+      "local_stack_bytes": 5256,
+      "parameter_set": "Kyber512",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 1,
+      "stack_reservation_bytes": 5208,
+      "variant": "exp003"
+    },
+    {
+      "body_bytes": 442,
+      "endbr64_present": true,
+      "local_stack_bytes": 5272,
+      "parameter_set": "Kyber512",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 1,
+      "stack_reservation_bytes": 5224,
+      "variant": "exp005"
+    },
+    {
+      "body_bytes": 479,
+      "endbr64_present": true,
+      "local_stack_bytes": 9368,
+      "parameter_set": "Kyber768",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 2,
+      "stack_reservation_bytes": 9320,
+      "variant": "exp003"
+    },
+    {
+      "body_bytes": 512,
+      "endbr64_present": true,
+      "local_stack_bytes": 9384,
+      "parameter_set": "Kyber768",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 2,
+      "stack_reservation_bytes": 9336,
+      "variant": "exp005"
+    },
+    {
+      "body_bytes": 948,
+      "endbr64_present": true,
+      "local_stack_bytes": 15032,
+      "parameter_set": "Kyber1024",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 3,
+      "stack_reservation_bytes": 14984,
+      "variant": "exp003"
+    },
+    {
+      "body_bytes": 988,
+      "endbr64_present": true,
+      "local_stack_bytes": 15032,
+      "parameter_set": "Kyber1024",
+      "saved_register_bytes": 48,
+      "stack_canary_present": true,
+      "stack_page_probes": 3,
+      "stack_reservation_bytes": 14984,
+      "variant": "exp005"
+    }
+  ],
+  "limitations": [
+    "Three separate invocations on one WSL host; no independence, population significance or portability guarantee.",
+    "Unknown manual power/background/physical-core conditions and unrecorded break duration are not imputed.",
+    "Session ranges are descriptive, not confidence intervals; inner timings are not independent replicates.",
+    "Ordinary performance data add no new leakage finding; dedicated security claims retain their original scope.",
+    "Candidate selection is a documented workload-sensitive interpretation, not an automatic aggregate score."
+  ],
+  "manifest_sha256": {
+    "results/EXP-009/RUN-0001": "a068bcb78596f81035d666fe32159a4a817b662043913027baa32dac13ceaee9",
+    "results/EXP-009/RUN-0002": "9725df8bf9cba81670b04645aa095045f4875958c3b6e142802d676493582645",
+    "results/EXP-009/RUN-0003": "ba987a8954b10cbaaa12388e7466d428d08ceda73156953ba5b03e0f15230586"
+  },
+  "per_session_audit_code_sha256": "ba1a4269bc339cd6b8a29b31c6f12cdc0b9a9d3a3515f14d4ccbbdf613f75bfe",
+  "predeclared_collection_complete": true,
+  "previous_keygen_review_sha256": "e583f1ef74776363536778f409be2bc872ec6a99dfa223628c6557e9fee1669f",
+  "protocol_and_support_identical": true,
+  "record_type": "closing-three-session-review",
+  "session_reviews": {
+    "RUN-0001": {
+      "path": "notes/evidence/ACT-0019/exp-009-run-0001-review.json",
+      "rechecked": true,
+      "sha256": "91ef689b6adff3d5b2bef2c197963fe7625c86ecea7ecf1bd307d547c8b16e17"
+    },
+    "RUN-0002": {
+      "file": "exp-009-run-0002-review.json",
+      "rechecked": true,
+      "sha256": "cbeb0c8db341876d125196f63953f496b858033fd6a9f50a3735853294952f98"
+    },
+    "RUN-0003": {
+      "file": "exp-009-run-0003-review.json",
+      "rechecked": true,
+      "sha256": "3b8a235d880f5d9cef7be99837e9f07ccb1e39652999dbcb26db2cf6a89a38a6"
+    }
+  },
+  "source_commits": [
+    "8a5e36e5d041507cc5649c7d43edb8468000f476",
+    "99733b9f5401236708ca25be9efd807cff60d7ce",
+    "99733b9f5401236708ca25be9efd807cff60d7ce"
+  ],
+  "source_difference_exp003_to_exp005": [
+    "indcpa.c"
+  ]
+}

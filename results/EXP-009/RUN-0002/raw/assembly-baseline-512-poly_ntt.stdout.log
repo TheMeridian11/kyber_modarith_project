@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0002/build/bench-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004810 <pqcrystals_kyber512_ref_poly_ntt>:
+    4810:	f3 0f 1e fa                                     	endbr64
+    4814:	55                                              	push   %rbp
+    4815:	53                                              	push   %rbx
+    4816:	48 89 fb                                        	mov    %rdi,%rbx
+    4819:	48 8d ab 00 02 00 00                            	lea    0x200(%rbx),%rbp
+    4820:	48 83 ec 08                                     	sub    $0x8,%rsp
+    4824:	e8 97 01 00 00                                  	call   49c0 <pqcrystals_kyber512_ref_ntt>
+    4829:	0f 1f 80 00 00 00 00                            	nopl   0x0(%rax)
+    4830:	0f bf 3b                                        	movswl (%rbx),%edi
+    4833:	48 83 c3 02                                     	add    $0x2,%rbx
+    4837:	e8 04 0b 00 00                                  	call   5340 <pqcrystals_kyber512_ref_barrett_reduce>
+    483c:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    4840:	48 39 eb                                        	cmp    %rbp,%rbx
+    4843:	75 eb                                           	jne    4830 <pqcrystals_kyber512_ref_poly_ntt+0x20>
+    4845:	48 83 c4 08                                     	add    $0x8,%rsp
+    4849:	5b                                              	pop    %rbx
+    484a:	5d                                              	pop    %rbp
+    484b:	c3                                              	ret
+
+Disassembly of section .fini:

@@ -1,0 +1,27 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0002/build/bench-exp005-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000005440 <pqcrystals_kyber512_ref_barrett_reduce>:
+    5440:	f3 0f 1e fa                                     	endbr64
+    5444:	0f bf d7                                        	movswl %di,%edx
+    5447:	89 f8                                           	mov    %edi,%eax
+    5449:	69 d2 bf 4e 00 00                               	imul   $0x4ebf,%edx,%edx
+    544f:	81 c2 00 00 00 02                               	add    $0x2000000,%edx
+    5455:	48 63 d2                                        	movslq %edx,%rdx
+    5458:	48 c1 fa 1a                                     	sar    $0x1a,%rdx
+    545c:	66 69 d2 01 0d                                  	imul   $0xd01,%dx,%dx
+    5461:	29 d0                                           	sub    %edx,%eax
+    5463:	c3                                              	ret
+
+Disassembly of section .fini:

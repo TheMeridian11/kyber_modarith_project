@@ -1,0 +1,30 @@
+{
+  "activity_id": "ACT-0020",
+  "complete_sessions": 3,
+  "inputs": {
+    "notes/evidence/ACT-0020/exp-009-three-session-review.json": "0bf84e2ff5079fa1dee1b21b395e8b2c4ee4654578160338c2c739b6d5a10bf0",
+    "analysis/final-comparison-EXP-009/provenance.json": "9d321b08ab80ee727446462f39d2cebe227e4b1ee236fec10b17316e61fb0153",
+    "results/EXP-009/RUN-0001/manifest.json": "a068bcb78596f81035d666fe32159a4a817b662043913027baa32dac13ceaee9",
+    "results/EXP-009/RUN-0002/manifest.json": "9725df8bf9cba81670b04645aa095045f4875958c3b6e142802d676493582645",
+    "results/EXP-009/RUN-0003/manifest.json": "ba987a8954b10cbaaa12388e7466d428d08ceda73156953ba5b03e0f15230586"
+  },
+  "generator_sha256": "5887cb6ebf2911776de237e061265e88bbfeebdb39c742aa37a426b45fc43ebe",
+  "frozen_analyser_sha256": "5a0a9cc8e3dd7e0db825d97b108e2c75f11b5b2254655cc7488b3feb26f19403",
+  "python": "3.12.3",
+  "matplotlib": "3.10.8",
+  "outputs": {
+    "exp005-keygen-tradeoffs.csv": "069e4efaad805064db138f0eac0e4d6983c53f15c90eb286291255835e7f19a7",
+    "exp005-keygen-tradeoffs.pdf": "3f21d627698be3a2eaa7b190ce99b6cee3379848007fa679d58d440fdf64355b",
+    "exp005-keygen-tradeoffs.png": "d25aaa14f5f25b05a7dc02aae43d96c76e29e0e787bcb48bc21ea5d65ee035e3",
+    "exp005-keygen-tradeoffs.svg": "a55df29b59df4ca706031f9b33d62863ba0166cc099589f5ffc01d58f4d19737",
+    "exp009-all-paired-effects.csv": "73a8599a2d975e1f450a1fc00ba481dd79d56ef3f77b595c92fd87e0a5f49fa8",
+    "exp009-all-paired-effects.pdf": "01b2b21ac7976fcc1da9d9a223b1cb53a4f4afc7e5705422538e3a8e837146f2",
+    "exp009-all-paired-effects.png": "ed1cea4b50b5b09c6755fd7115b1cb60e38e4005b947dc5409f31e4a357951c0",
+    "exp009-all-paired-effects.svg": "8a34465b28915a3a267a62ddbee0016ecfcfaf96bb6430cc00434a947922d245",
+    "exp009-three-session-effects.csv": "ed4121ba8996918224b99389f914436014955813abc54227ca9b991227212334",
+    "exp009-three-session-effects.pdf": "fe62e894351d40b3402268ba5a5e91f49fbdab2461916267db048c1e5218c5c6",
+    "exp009-three-session-effects.png": "05b7486f6a30a254d64885eaa8ad64929b054ce43d128bba8587e5fb0a18d0df",
+    "exp009-three-session-effects.svg": "eda4721d734201f39c019022dec247179feb5454bb26022ccd0bdb19cea5b4c8"
+  },
+  "interpretation": "Three-session descriptive effects and scoped frame costs; no calibrated confidence intervals or universal winner."
+}

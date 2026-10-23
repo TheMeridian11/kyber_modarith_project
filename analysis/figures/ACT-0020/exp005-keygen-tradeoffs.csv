@@ -1,0 +1,7 @@
+body_bytes,endbr64_present,local_stack_bytes,parameter_set,saved_register_bytes,stack_canary_present,stack_page_probes,stack_reservation_bytes,variant
+425,True,5256,Kyber512,48,True,1,5208,exp003
+442,True,5272,Kyber512,48,True,1,5224,exp005
+479,True,9368,Kyber768,48,True,2,9320,exp003
+512,True,9384,Kyber768,48,True,2,9336,exp005
+948,True,15032,Kyber1024,48,True,3,14984,exp003
+988,True,15032,Kyber1024,48,True,3,14984,exp005

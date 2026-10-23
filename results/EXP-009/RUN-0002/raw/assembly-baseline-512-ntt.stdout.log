@@ -1,0 +1,86 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0002/build/bench-baseline-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000049c0 <pqcrystals_kyber512_ref_ntt>:
+    49c0:	f3 0f 1e fa                                     	endbr64
+    49c4:	41 57                                           	push   %r15
+    49c6:	49 89 ff                                        	mov    %rdi,%r15
+    49c9:	41 56                                           	push   %r14
+    49cb:	41 55                                           	push   %r13
+    49cd:	41 54                                           	push   %r12
+    49cf:	55                                              	push   %rbp
+    49d0:	bd 0a fd ff ff                                  	mov    $0xfffffd0a,%ebp
+    49d5:	53                                              	push   %rbx
+    49d6:	48 83 ec 28                                     	sub    $0x28,%rsp
+    49da:	c7 44 24 1c 07 00 00 00                         	movl   $0x7,0x1c(%rsp)
+    49e2:	c7 44 24 0c 01 00 00 00                         	movl   $0x1,0xc(%rsp)
+    49ea:	c7 44 24 10 80 00 00 00                         	movl   $0x80,0x10(%rsp)
+    49f2:	66 0f 1f 44 00 00                               	nopw   0x0(%rax,%rax,1)
+    49f8:	8b 44 24 10                                     	mov    0x10(%rsp),%eax
+    49fc:	45 31 e4                                        	xor    %r12d,%r12d
+    49ff:	8d 70 ff                                        	lea    -0x1(%rax),%esi
+    4a02:	83 c0 01                                        	add    $0x1,%eax
+    4a05:	89 74 24 14                                     	mov    %esi,0x14(%rsp)
+    4a09:	89 44 24 18                                     	mov    %eax,0x18(%rsp)
+    4a0d:	0f 1f 00                                        	nopl   (%rax)
+    4a10:	8b 44 24 10                                     	mov    0x10(%rsp),%eax
+    4a14:	83 44 24 0c 01                                  	addl   $0x1,0xc(%rsp)
+    4a19:	45 89 e5                                        	mov    %r12d,%r13d
+    4a1c:	44 01 e0                                        	add    %r12d,%eax
+    4a1f:	89 c0                                           	mov    %eax,%eax
+    4a21:	48 89 c3                                        	mov    %rax,%rbx
+    4a24:	4c 29 e8                                        	sub    %r13,%rax
+    4a27:	4d 8d 34 47                                     	lea    (%r15,%rax,2),%r14
+    4a2b:	0f 1f 44 00 00                                  	nopl   0x0(%rax,%rax,1)
+    4a30:	43 0f bf 3c 6e                                  	movswl (%r14,%r13,2),%edi
+    4a35:	0f af fd                                        	imul   %ebp,%edi
+    4a38:	e8 e3 08 00 00                                  	call   5320 <pqcrystals_kyber512_ref_montgomery_reduce>
+    4a3d:	43 0f b7 0c 6f                                  	movzwl (%r15,%r13,2),%ecx
+    4a42:	29 c1                                           	sub    %eax,%ecx
+    4a44:	66 43 89 0c 6e                                  	mov    %cx,(%r14,%r13,2)
+    4a49:	66 43 01 04 6f                                  	add    %ax,(%r15,%r13,2)
+    4a4e:	49 83 c5 01                                     	add    $0x1,%r13
+    4a52:	41 39 dd                                        	cmp    %ebx,%r13d
+    4a55:	72 d9                                           	jb     4a30 <pqcrystals_kyber512_ref_ntt+0x70>
+    4a57:	41 8d 44 24 01                                  	lea    0x1(%r12),%eax
+    4a5c:	8b 74 24 18                                     	mov    0x18(%rsp),%esi
+    4a60:	39 c3                                           	cmp    %eax,%ebx
+    4a62:	b8 00 00 00 00                                  	mov    $0x0,%eax
+    4a67:	0f 43 44 24 14                                  	cmovae 0x14(%rsp),%eax
+    4a6c:	41 01 f4                                        	add    %esi,%r12d
+    4a6f:	41 01 c4                                        	add    %eax,%r12d
+    4a72:	41 81 fc ff 00 00 00                            	cmp    $0xff,%r12d
+    4a79:	77 15                                           	ja     4a90 <pqcrystals_kyber512_ref_ntt+0xd0>
+    4a7b:	8b 44 24 0c                                     	mov    0xc(%rsp),%eax
+    4a7f:	48 8d 15 7a 56 00 00                            	lea    0x567a(%rip),%rdx        # a100 <pqcrystals_kyber512_ref_zetas>
+    4a86:	0f bf 2c 42                                     	movswl (%rdx,%rax,2),%ebp
+    4a8a:	eb 84                                           	jmp    4a10 <pqcrystals_kyber512_ref_ntt+0x50>
+    4a8c:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    4a90:	d1 6c 24 10                                     	shrl   $1,0x10(%rsp)
+    4a94:	83 6c 24 1c 01                                  	subl   $0x1,0x1c(%rsp)
+    4a99:	74 14                                           	je     4aaf <pqcrystals_kyber512_ref_ntt+0xef>
+    4a9b:	8b 44 24 0c                                     	mov    0xc(%rsp),%eax
+    4a9f:	48 8d 35 5a 56 00 00                            	lea    0x565a(%rip),%rsi        # a100 <pqcrystals_kyber512_ref_zetas>
+    4aa6:	0f bf 2c 46                                     	movswl (%rsi,%rax,2),%ebp
+    4aaa:	e9 49 ff ff ff                                  	jmp    49f8 <pqcrystals_kyber512_ref_ntt+0x38>
+    4aaf:	48 83 c4 28                                     	add    $0x28,%rsp
+    4ab3:	5b                                              	pop    %rbx
+    4ab4:	5d                                              	pop    %rbp
+    4ab5:	41 5c                                           	pop    %r12
+    4ab7:	41 5d                                           	pop    %r13
+    4ab9:	41 5e                                           	pop    %r14
+    4abb:	41 5f                                           	pop    %r15
+    4abd:	c3                                              	ret
+
+Disassembly of section .fini:

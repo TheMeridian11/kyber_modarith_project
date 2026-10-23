@@ -1,0 +1,72 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0003/build/bench-exp005-512:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002220 <pqcrystals_kyber512_ref_indcpa_dec>:
+    2220:	f3 0f 1e fa                                     	endbr64
+    2224:	41 57                                           	push   %r15
+    2226:	41 56                                           	push   %r14
+    2228:	41 55                                           	push   %r13
+    222a:	49 89 d5                                        	mov    %rdx,%r13
+    222d:	41 54                                           	push   %r12
+    222f:	55                                              	push   %rbp
+    2230:	48 89 fd                                        	mov    %rdi,%rbp
+    2233:	53                                              	push   %rbx
+    2234:	48 89 f3                                        	mov    %rsi,%rbx
+    2237:	48 81 ec 18 0c 00 00                            	sub    $0xc18,%rsp
+    223e:	64 48 8b 04 25 28 00 00 00                      	mov    %fs:0x28,%rax
+    2247:	48 89 84 24 08 0c 00 00                         	mov    %rax,0xc08(%rsp)
+    224f:	31 c0                                           	xor    %eax,%eax
+    2251:	4c 8d a4 24 00 04 00 00                         	lea    0x400(%rsp),%r12
+    2259:	49 89 e6                                        	mov    %rsp,%r14
+    225c:	4c 8d bc 24 00 08 00 00                         	lea    0x800(%rsp),%r15
+    2264:	4c 89 e7                                        	mov    %r12,%rdi
+    2267:	e8 14 02 00 00                                  	call   2480 <pqcrystals_kyber512_ref_polyvec_decompress>
+    226c:	48 8d b3 80 02 00 00                            	lea    0x280(%rbx),%rsi
+    2273:	4c 89 f7                                        	mov    %r14,%rdi
+    2276:	48 8d 9c 24 00 02 00 00                         	lea    0x200(%rsp),%rbx
+    227e:	e8 fd 0a 00 00                                  	call   2d80 <pqcrystals_kyber512_ref_poly_decompress>
+    2283:	4c 89 ee                                        	mov    %r13,%rsi
+    2286:	4c 89 ff                                        	mov    %r15,%rdi
+    2289:	e8 42 03 00 00                                  	call   25d0 <pqcrystals_kyber512_ref_polyvec_frombytes>
+    228e:	4c 89 e7                                        	mov    %r12,%rdi
+    2291:	e8 6a 03 00 00                                  	call   2600 <pqcrystals_kyber512_ref_polyvec_ntt>
+    2296:	4c 89 e2                                        	mov    %r12,%rdx
+    2299:	4c 89 fe                                        	mov    %r15,%rsi
+    229c:	48 89 df                                        	mov    %rbx,%rdi
+    229f:	e8 9c 03 00 00                                  	call   2640 <pqcrystals_kyber512_ref_polyvec_basemul_acc_montgomery>
+    22a4:	48 89 df                                        	mov    %rbx,%rdi
+    22a7:	e8 44 26 00 00                                  	call   48f0 <pqcrystals_kyber512_ref_poly_invntt_tomont>
+    22ac:	4c 89 f6                                        	mov    %r14,%rsi
+    22af:	48 89 da                                        	mov    %rbx,%rdx
+    22b2:	48 89 df                                        	mov    %rbx,%rdi
+    22b5:	e8 76 27 00 00                                  	call   4a30 <pqcrystals_kyber512_ref_poly_sub>
+    22ba:	48 89 df                                        	mov    %rbx,%rdi
+    22bd:	e8 fe 26 00 00                                  	call   49c0 <pqcrystals_kyber512_ref_poly_reduce>
+    22c2:	48 89 de                                        	mov    %rbx,%rsi
+    22c5:	48 89 ef                                        	mov    %rbp,%rdi
+    22c8:	e8 23 11 00 00                                  	call   33f0 <pqcrystals_kyber512_ref_poly_tomsg>
+    22cd:	48 8b 84 24 08 0c 00 00                         	mov    0xc08(%rsp),%rax
+    22d5:	64 48 2b 04 25 28 00 00 00                      	sub    %fs:0x28,%rax
+    22de:	75 12                                           	jne    22f2 <pqcrystals_kyber512_ref_indcpa_dec+0xd2>
+    22e0:	48 81 c4 18 0c 00 00                            	add    $0xc18,%rsp
+    22e7:	5b                                              	pop    %rbx
+    22e8:	5d                                              	pop    %rbp
+    22e9:	41 5c                                           	pop    %r12
+    22eb:	41 5d                                           	pop    %r13
+    22ed:	41 5e                                           	pop    %r14
+    22ef:	41 5f                                           	pop    %r15
+    22f1:	c3                                              	ret
+    22f2:	e8 e9 ee ff ff                                  	call   11e0 <__stack_chk_fail@plt>
+
+Disassembly of section .fini:

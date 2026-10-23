@@ -89,3 +89,33 @@ python3 -B analysis/review_final_session.py --output /tmp/exp009-session1-review
 ```
 
 The figure generator reanalyses the retained raw data and checks the accepted review, so it does not require ignored binaries. Repeating the full identity audit does require the original build files or a separately documented rebuild. The first-session graph is a progress artifact for later thesis composition. I will show all three session estimates and their descriptive range in the final performance figures after the remaining sessions are accepted; I will not substitute this preliminary figure for that closing evidence.
+
+## ACT-0020 final three-session and tradeoff figures
+
+I retain the preliminary ACT-0019 artifact as history and use the following completed results for the closing thesis comparison. Each figure has vector SVG/PDF and 300-dpi PNG, with plotted data and [provenance](../analysis/figures/ACT-0020/provenance.json). I inspected all three rendered PNGs and regenerated the thirteen figure/data/provenance files byte-for-byte; [review](evidence/ACT-0020/figure-review.json).
+
+### Three session estimates
+
+[SVG](../analysis/figures/ACT-0020/exp009-three-session-effects.svg), [PDF](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf), [PNG](../analysis/figures/ACT-0020/exp009-three-session-effects.png), [81 session estimates](../analysis/figures/ACT-0020/exp009-three-session-effects.csv).
+
+**Draft caption.** I compare original-to-EXP-003, original-to-EXP-005 and EXP-003-to-EXP-005 operation-time reductions for Kyber512/768/1024 across all three predeclared EXP-009 sessions. A coloured marker is one session's median of 12 within-block effects, each calculated from two process medians of 1000 timings. The black diamond is the median of those three session estimates. The horizontal span is their observed range, not a confidence interval. Positive means faster; all adverse operation/parameter groups are shown. The first two contrast rows share a scale, and the bottom row expands the marginal effects. Vertical marker offsets improve visibility and carry no numerical meaning. These three separate invocations on one WSL host do not establish independent-host performance or population significance.
+
+### Complete paired spread
+
+[SVG](../analysis/figures/ACT-0020/exp009-all-paired-effects.svg), [PDF](../analysis/figures/ACT-0020/exp009-all-paired-effects.pdf), [PNG](../analysis/figures/ACT-0020/exp009-all-paired-effects.png), [all 972 paired effects](../analysis/figures/ACT-0020/exp009-all-paired-effects.csv).
+
+**Draft caption.** I show every paired effect across 12 matched blocks per parameter in each of the three sessions. Colours/shapes identify sessions; slight vertical offsets distinguish blocks. Horizontal spans are the full observed block-effect ranges. The black diamond remains the median of three session estimates, not a pooled median of 36 pairs. No durations or adverse pairs are excluded and no timer overhead is subtracted. This spread plot complements the session-estimate figure; its ranges are not confidence intervals, and inner timing observations are not treated as independent experiments. The three contrasts share measurements and are not independent datasets.
+
+### Keygen code and local-stack cost
+
+[SVG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.svg), [PDF](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf), [PNG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.png), [six variant/parameter rows](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.csv).
+
+**Draft caption.** I show EXP-005's additional keygen function-body bytes (17/33/40) and local-stack bytes (16/16/0) relative to EXP-003 for Kyber512/768/1024. I verify the earlier reviewed facts against identical normalized keygen bodies in all three closing sessions. Local stack includes saved registers and excludes the entry return address and every callee frame; this is not peak KEM memory. Keygen canary/probe instructions remain present. The inherited general-dot canary change is separate and retained in the security matrix. The chart is a scoped implementation-cost comparison, not a numerical security score.
+
+I regenerate these figures into a new directory using the pinned environment described above:
+
+```sh
+/tmp/kyber-thesis-figures/bin/python -B analysis/build_final_comparison_figures.py --output /tmp/exp009-final-figure-copy
+```
+
+The generator verifies the accepted audit, manifests and raw-derived three-session estimates. It does not require the ignored local executables. [The complete result](final_comparison.md), [candidate rationale](final_candidate.md) and [security matrix](final_security_summary.md) supply the interpretation. Earlier incremental/count/security graphics remain useful for the research progression; the final cumulative result is measured directly, not assembled from their percentages.

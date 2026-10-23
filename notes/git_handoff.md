@@ -2,62 +2,74 @@
 
 ## Current verified state
 
-I work on reduction-counters at 8a5e36e5d041507cc5649c7d43edb8468000f476. The supplied push output reports success, and my local origin/reduction-counters ref equals that commit. The branch now tracks origin/reduction-counters. I inspected refs/config and verified loose objects without running Git or contacting the remote. Local main and origin/main remain dac387fe75fa260ccecd1211c57b716025ed2ad4, an ancestor 34 commits behind the working branch. [ACT-0019 evidence](evidence/ACT-0019/source-and-branch-review.json).
+I work on reduction-counters at 99733b9f5401236708ca25be9efd807cff60d7ce. The supplied push output reports success and the local origin/reduction-counters ref equals that commit. This backs up ACT-0019 and EXP-009/RUN-0001, but not the two later uncommitted result directories. Local main and origin/main remain dac387fe75fa260ccecd1211c57b716025ed2ad4, an ancestor 35 commits behind. I verified local objects/refs without running Git or contacting the remote. [Evidence](evidence/ACT-0020/source-and-branch-review.json).
 
-The push backed up committed ACT-0018 support and EXP-008 results. EXP-009/RUN-0001 was untracked then and is not included in that source commit. I now accept session 1 and add its review and preliminary figure. A working branch is normal; main integration can wait until the closing evaluation is accepted.
+All three sessions are accepted and the [final candidate is EXP-005](final_candidate.md). The 910 archived files in RUN-0002/RUN-0003 and the ACT-0020 reports/graphs still need the user commit and push. The ignored build directories remain local; their commands and binary identities are retained. All original raw bytes and all frozen measurement support are preserved.
 
-## Review and commit session 1
+## Commit and back up the closing evidence
 
-I perform all Git commands manually from the repository root and stop if one fails. I review these changes, including the raw RUN-0001 results:
+I perform Git commands manually, review the staged content and stop if a command fails:
 
 ```sh
 git diff --check
-git add -- README.md \
-  notes/project_log.md notes/experiment_register.md \
-  notes/practical_completion.md notes/implementation_security.md \
-  notes/git_handoff.md notes/thesis_figures.md \
-  notes/thesis_writing_plan.md notes/reduction_map.md \
-  notes/runs/EXP-009-RUN-0001.md notes/evidence/ACT-0019/ \
-  analysis/review_final_session.py analysis/build_final_session_figures.py \
-  analysis/figures/ACT-0019/ results/EXP-009/RUN-0001/
+git add -- README.md notes/ analysis/ \
+  results/EXP-009/RUN-0002/ results/EXP-009/RUN-0003/
 git diff --cached --check
 git diff --cached --stat
 git diff --cached
-git commit -m "Review EXP-009 session one and record direct comparison results"
+git commit -m "Complete EXP-009 comparisons and select EXP-005 for the thesis"
+git push
 git status --short
 ```
 
-The ignored build directory stays local; manifests retain its binary hashes and commands. All 455 archived run files are included. The existing .gitattributes preserves raw bytes and suppresses only raw-log whitespace diagnostics; I do not rewrite raw logs. These ACT-0019 analysis/figure scripts are outside the frozen measurement support set. The protocol, runner, analyser, benchmark and pinned experiment notes remain byte-identical to session 1. I still commit this handoff before measuring because the collector requires a clean tree outside results/.
+A normal push sends committed history. It does not include any untracked result files merely because a benchmark finished. I preserve all cited experiment commits and do not use force push to resolve a rejection. No further timing session is required by the completed protocol.
 
-## Remaining sessions, launched separately
+## Manual selected-source handoff
 
-I let the machine return to comparable quiet conditions, with a genuine break between invocations. I run session 2:
+The current implementation/kyber-optimised-ref directory still contains EXP-006. I checked all 35 source identities against [the selected snapshot](../analysis/final_candidate.json); only indcpa.c, polyvec.c and polyvec.h differ. The selected EXP-005 bytes have already been validated and measured in all closing sessions.
 
-```sh
-python3 -B scripts/run_final_comparison.py --experiment EXP-009 --run RUN-0002 --session 2 --cpu 0
-echo $?
-```
-
-I check for completed status and exit code 0. After another break, I launch session 3:
+After committing the evidence above and checking the tree, I can restore those exact three historical files as a separate, reviewable source commit. This is restoration of the measured candidate, not a new arithmetic treatment. The assistant has not executed this step:
 
 ```sh
-python3 -B scripts/run_final_comparison.py --experiment EXP-009 --run RUN-0003 --session 3 --cpu 0
-echo $?
+git restore --source=4bd813ed71a90c7722275dc802336852214a5388 --worktree -- \
+  implementation/kyber-optimised-ref/indcpa.c \
+  implementation/kyber-optimised-ref/polyvec.c \
+  implementation/kyber-optimised-ref/polyvec.h
+python3 -B - <<'PY'
+from pathlib import Path
+import hashlib, json
+root = Path.cwd()
+pin = json.loads((root / "analysis/final_candidate.json").read_text())
+directory = root / "implementation/kyber-optimised-ref"
+actual = {p.relative_to(directory).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+          for p in directory.rglob("*") if p.is_file()
+          and (p.suffix in (".c", ".h") or p.name == "Makefile")}
+assert actual == pin["source_file_sha256"], "Selected-source identity mismatch; stop and inspect"
+print("Selected EXP-005 source identity: pass (35 files)")
+PY
+git diff --check
+git diff -- implementation/kyber-optimised-ref/
 ```
 
-I do not change support, arithmetic, compiler, flags or predeclared budgets between sessions. If I can accurately report them, the existing --host-os, --power-mode and --background-load options record manual conditions; otherwise they remain unknown. Session 1's unknown fields are preserved. No change to the protocol is needed.
+I request the final handoff review after this identity check, before labelling the working checkout or practical handoff complete. That review updates the current-status documentation from EXP-006 to the actually verified selected source, checks reproduction instructions and records the final commit scope. I then commit the exact restored files and the corresponding reviewed documentation together, and make a normal push. There is no need to invent new optimisations or rerun a valid session merely because its effect is small. If the restored source does not match all 35 pinned files, I stop and resolve the discrepancy before making equivalence claims.
 
-Untracked result files do not block the collector, so I can retain successful session 2 and proceed separately to session 3 without another support commit or interim selection. If an attempt fails, I keep that directory and use the next unused run ID with the same session number; later IDs advance accordingly. I do not reuse an ID or replace a valid session based on its effect. I request review of both remaining sessions before combining or choosing a candidate. The frozen [protocol](experiments/EXP-009-final-comparison.md) contains the all-three-session analysis command.
+## Reproduce the accepted analysis
 
-## Backup push
-
-After the review/results commit, I can back up this new work using the upstream already configured:
+The retained-data analysis does not need ignored binaries or another benchmark run. I use a new output directory:
 
 ```sh
-git push
+python3 -B scripts/analyse_final_comparison.py \
+  --runs results/EXP-009/RUN-0001 results/EXP-009/RUN-0002 results/EXP-009/RUN-0003 \
+  --output /tmp/exp009-final-analysis-copy
 ```
 
-This sends committed history only. It does not back up later untracked session results or ignored binaries. I can commit later results and repeat the normal push. I preserve the cited commits and do not use force push. The configured origin is https://github.com/TheMeridian11/kyber_modarith_project.git. No push or other Git command is executed by the assistant.
+The complete identity audit also needs the exact retained tools, binaries and restored source files:
+
+```sh
+python3 -B analysis/review_final_comparison.py --output /tmp/exp009-final-audit-copy
+```
+
+[Figure instructions](thesis_figures.md) use the pinned plotting environment and a new output directory. ACT-0020 reproduced all three combined-analysis files, all three audit reports and all thirteen final figure/data/provenance files byte-for-byte. This demonstrates reproduction from retained evidence, not a new clean-environment performance study. The frozen protocol/experiment files remain unchanged so those identities remain verifiable.
 
 ## Final integration later
 

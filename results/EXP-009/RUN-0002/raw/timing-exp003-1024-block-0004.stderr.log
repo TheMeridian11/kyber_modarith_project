@@ -1,0 +1,8 @@
+timer=CLOCK_MONOTONIC_RAW
+unit=ns
+clock_resolution_ns=1
+empty_timer_pair_min_ns=11
+iterations=1000
+warmup=100
+seed=2030
+input_mode=derand-shake256-v1

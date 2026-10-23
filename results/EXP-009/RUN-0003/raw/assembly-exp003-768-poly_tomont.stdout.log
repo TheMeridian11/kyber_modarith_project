@@ -1,0 +1,35 @@
+
+/home/meridian/Honours_2026_PQC/kyber_modarith_project/results/EXP-009/RUN-0003/build/bench-exp003-768:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004ab0 <pqcrystals_kyber768_ref_poly_tomont>:
+    4ab0:	f3 0f 1e fa                                     	endbr64
+    4ab4:	55                                              	push   %rbp
+    4ab5:	48 8d af 00 02 00 00                            	lea    0x200(%rdi),%rbp
+    4abc:	53                                              	push   %rbx
+    4abd:	48 89 fb                                        	mov    %rdi,%rbx
+    4ac0:	48 83 ec 08                                     	sub    $0x8,%rsp
+    4ac4:	0f 1f 40 00                                     	nopl   0x0(%rax)
+    4ac8:	0f bf 3b                                        	movswl (%rbx),%edi
+    4acb:	48 83 c3 02                                     	add    $0x2,%rbx
+    4acf:	69 ff 49 05 00 00                               	imul   $0x549,%edi,%edi
+    4ad5:	e8 c6 09 00 00                                  	call   54a0 <pqcrystals_kyber768_ref_montgomery_reduce>
+    4ada:	66 89 43 fe                                     	mov    %ax,-0x2(%rbx)
+    4ade:	48 39 eb                                        	cmp    %rbp,%rbx
+    4ae1:	75 e5                                           	jne    4ac8 <pqcrystals_kyber768_ref_poly_tomont+0x18>
+    4ae3:	48 83 c4 08                                     	add    $0x8,%rsp
+    4ae7:	5b                                              	pop    %rbx
+    4ae8:	5d                                              	pop    %rbp
+    4ae9:	c3                                              	ret
+
+Disassembly of section .fini:

@@ -1,0 +1,19 @@
+{
+  "record_type": "final-three-session-analysis",
+  "analysis_script_sha256": "5a0a9cc8e3dd7e0db825d97b108e2c75f11b5b2254655cc7488b3feb26f19403",
+  "inputs": {
+    "results/EXP-009/RUN-0001/manifest.json": "a068bcb78596f81035d666fe32159a4a817b662043913027baa32dac13ceaee9",
+    "results/EXP-009/RUN-0002/manifest.json": "9725df8bf9cba81670b04645aa095045f4875958c3b6e142802d676493582645",
+    "results/EXP-009/RUN-0003/manifest.json": "ba987a8954b10cbaaa12388e7466d428d08ceda73156953ba5b03e0f15230586"
+  },
+  "source_commits": [
+    "8a5e36e5d041507cc5649c7d43edb8468000f476",
+    "99733b9f5401236708ca25be9efd807cff60d7ce",
+    "99733b9f5401236708ca25be9efd807cff60d7ce"
+  ],
+  "interpretation": "Three session estimates and their descriptive range; not a confidence interval or population guarantee.",
+  "outputs": {
+    "three-session-effects.csv": "f296a5565cb8d058f9e38007ef99543bed20a5655625c858f61c41977e04d87c",
+    "session-effects.csv": "ed4121ba8996918224b99389f914436014955813abc54227ca9b991227212334"
+  }
+}

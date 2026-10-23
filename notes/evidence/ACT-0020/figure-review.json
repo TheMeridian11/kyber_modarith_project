@@ -1,0 +1,36 @@
+{
+  "activity_id": "ACT-0020",
+  "render_review": "All three generated PNGs inspected: axes, nine-panel labels, adverse effects, legends, range definitions and keygen tradeoff limits readable; no clipping observed.",
+  "all_outputs_reproduced_byte_for_byte": true,
+  "reproduced_analysis_files": 3,
+  "reproduced_figure_files": 13,
+  "reproduced_audit_reports": 3,
+  "input_coverage": {
+    "session_estimates": 81,
+    "paired_effects": 972,
+    "keygen_tradeoff_rows": 6
+  },
+  "reproduced_outputs": {
+    "analysis/final-comparison-EXP-009": {
+      "provenance.json": "9d321b08ab80ee727446462f39d2cebe227e4b1ee236fec10b17316e61fb0153",
+      "three-session-effects.csv": "f296a5565cb8d058f9e38007ef99543bed20a5655625c858f61c41977e04d87c",
+      "session-effects.csv": "ed4121ba8996918224b99389f914436014955813abc54227ca9b991227212334"
+    },
+    "analysis/figures/ACT-0020": {
+      "provenance.json": "6a1c78d69a1df7467e3aa5ce8d1b2c00906553be16f43c4929445b70d16f6054",
+      "exp005-keygen-tradeoffs.pdf": "3f21d627698be3a2eaa7b190ce99b6cee3379848007fa679d58d440fdf64355b",
+      "exp009-three-session-effects.csv": "ed4121ba8996918224b99389f914436014955813abc54227ca9b991227212334",
+      "exp009-three-session-effects.png": "05b7486f6a30a254d64885eaa8ad64929b054ce43d128bba8587e5fb0a18d0df",
+      "exp009-all-paired-effects.csv": "73a8599a2d975e1f450a1fc00ba481dd79d56ef3f77b595c92fd87e0a5f49fa8",
+      "exp005-keygen-tradeoffs.png": "d25aaa14f5f25b05a7dc02aae43d96c76e29e0e787bcb48bc21ea5d65ee035e3",
+      "exp005-keygen-tradeoffs.csv": "069e4efaad805064db138f0eac0e4d6983c53f15c90eb286291255835e7f19a7",
+      "exp009-all-paired-effects.svg": "8a34465b28915a3a267a62ddbee0016ecfcfaf96bb6430cc00434a947922d245",
+      "exp009-three-session-effects.pdf": "fe62e894351d40b3402268ba5a5e91f49fbdab2461916267db048c1e5218c5c6",
+      "exp009-all-paired-effects.png": "ed1cea4b50b5b09c6755fd7115b1cb60e38e4005b947dc5409f31e4a357951c0",
+      "exp005-keygen-tradeoffs.svg": "a55df29b59df4ca706031f9b33d62863ba0166cc099589f5ffc01d58f4d19737",
+      "exp009-all-paired-effects.pdf": "01b2b21ac7976fcc1da9d9a223b1cb53a4f4afc7e5705422538e3a8e837146f2",
+      "exp009-three-session-effects.svg": "eda4721d734201f39c019022dec247179feb5454bb26022ccd0bdb19cea5b4c8"
+    }
+  },
+  "interpretation": "All sessions and adverse pairs shown; observed ranges are descriptive, not confidence intervals."
+}
