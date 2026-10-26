@@ -4,6 +4,8 @@ This honours project evaluates changes to modular-reduction scheduling and inter
 
 The original source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned to [3edd5af59919](notes/source_revisions.md). The results concern that implementation and the recorded platform; they do not establish final-standard ML-KEM conformance or superiority over other optimised implementations.
 
+Validation combined bounds on intermediate values with deterministic comparisons against the original implementation, invalid-input checks and undefined-behaviour sanitizer tests. Separate instrumented builds counted reduction calls, while ordinary builds supplied performance measurements. Benchmarks ran under Ubuntu WSL on an Intel Core i9-12900KS, using matched input fixtures and controlled process ordering. Raw measurements, build identities and analysis scripts are retained so the reported tables and figures can be traced back to the recorded runs.
+
 ## Main findings
 
 Five arithmetic treatments were evaluated. The selected implementation combines fused base multiplication, wider vector-dot-product accumulation, staged inverse-transform reduction and deferred reduction of the key-generation error vector. A further keygen-specific treatment reduced call counts but produced mixed performance, demonstrating that fewer reductions alone do not guarantee faster execution.
