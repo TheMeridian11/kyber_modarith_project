@@ -4,32 +4,46 @@ This honours project evaluates changes to modular-reduction scheduling and inter
 
 The original source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber). The results only apply to that exact implementation and do not prove that the code meets the final ML-KEM standard or outperforms other optimised versions.
 
-Validation combined bounds on intermediate values with deterministic comparisons against the original implementation, invalid-input checks and undefined-behaviour sanitizer tests. Separate instrumented builds counted reduction calls, while ordinary builds supplied performance measurements. Benchmarks ran under Ubuntu WSL on an Intel Core i9-12900KS, using matched input fixtures and controlled process ordering. Raw measurements, build identities and analysis scripts are retained so the reported tables and figures can be traced back to the recorded runs.
+To verify the code, I checked that internal values stayed within the required limits and compared outputs directly against the original implementation. I also tested invalid inputs and ran sanitizers to check for undefined behaviour. I used separate builds with counters to count reduction calls, and ordinary builds to measure speed. All benchmarks ran on an Intel Core i9-12900KS using Ubuntu WSL, with identical inputs within each matched comparison and a controlled execution order. I saved the raw data, build details and analysis scripts so every chart and table can be traced back to its test runs.
 
 ## Findings
 
-The selected implementation (EXP-005) combines fused base multiplication, wider vector-dot accumulation, staged inverse-transform reduction and deferred reduction of the keygen error vector. The preceding candidate (EXP-003) contains the first three changes. A further keygen-specific trial reduced call counts but gave mixed timings: fewer reductions did not always mean faster execution.
+I developed the optimisations in stages. The two versions in the final comparison were:
 
-The table reports the selected implementation's percentage time reduction against the original reference. Each value is the median of session estimates, each based on 12 matched block effects. The three-session closing comparison and five-session random-seed follow-up are separate studies.
+- **EXP-003:** combines fused base multiplication, wider vector-dot accumulation and a staged reduction schedule in the inverse transform.
+- **EXP-005:** keeps all of those changes and also delays reduction of the key-generation error vector until the existing final public-key reduction.
 
-| Study | Parameter | Key generation | Encapsulation | Decapsulation |
+I compared the original implementation with both versions across three separate sessions. This [main performance comparison](notes/final_comparison.md) is recorded as EXP-009. EXP-003 and EXP-005 identify the implementations; EXP-009 identifies the experiment that compared them.
+
+The table shows the percentage reduction in execution time compared with the original. Positive values mean faster execution. Each session used 12 matched blocks, comparing process medians with the same input sequence. I calculated the median percentage reduction for each session, then took the median of the three session results.
+
+| Implementation | Parameter | Key generation | Encapsulation | Decapsulation |
 |---|---|---:|---:|---:|
-| Closing comparison (EXP-009) | Kyber512 | 10.72% | 16.09% | 15.96% |
-| Closing comparison (EXP-009) | Kyber768 | 13.44% | 19.08% | 18.80% |
-| Closing comparison (EXP-009) | Kyber1024 | 17.47% | 19.30% | 19.71% |
-| Random-seed follow-up (EXP-010) | Kyber512 | 10.93% | 16.09% | 16.06% |
-| Random-seed follow-up (EXP-010) | Kyber768 | 13.62% | 19.22% | 19.01% |
-| Random-seed follow-up (EXP-010) | Kyber1024 | 17.84% | 19.87% | 20.18% |
+| EXP-003 | Kyber512 | 5.97% | 15.39% | 15.59% |
+| EXP-005 | Kyber512 | 10.72% | 16.09% | 15.96% |
+| EXP-003 | Kyber768 | 13.18% | 18.48% | 18.64% |
+| EXP-005 | Kyber768 | 13.44% | 19.08% | 18.80% |
+| EXP-003 | Kyber1024 | 16.07% | 19.48% | 20.00% |
+| EXP-005 | Kyber1024 | 17.47% | 19.30% | 19.71% |
 
-The follow-up used 60 saved random seeds and supports the substantial gains over the original. Additional keygen benefit over the preceding candidate persisted. The small Kyber1024 decapsulation cost also repeated, while encapsulation differences were mixed. [Candidate selection and tradeoffs](notes/final_candidate.md) explain why both implementations remain useful.
+Both versions were faster than the original in every matched operation comparison. EXP-003 already provides substantial improvements, including the benefit of the inverse-transform change. The results for EXP-005 include those earlier improvements, so they should not all be credited to its final key-generation change.
 
-Reviewed arithmetic bounds, compatibility and exercised sanitizer checks support correctness within their stated scope. Dynamic secret-flow checks and a finite statistical timing screen found no targeted dependency or class-dependent timing difference in the tested cases. [The security conclusion](notes/final_security_summary.md) retains the code/local-stack and inherited local-canary tradeoffs. These single-platform findings do not establish a whole-program constant-time proof, production certification or final-standard ML-KEM conformance.
+**I selected EXP-005 as the final implementation because it provided further key-generation improvements over EXP-003.** In their direct comparison, key-generation time fell by another **5.26%, 0.49% and 1.52%** for Kyber512, Kyber768 and Kyber1024 respectively. These percentages come from matched comparisons between the two versions, rather than subtracting the table entries above. There were tradeoffs: Kyber1024 encapsulation was **0.15% slower** and decapsulation was **0.36% slower** than EXP-003 in the main study, and the keygen code grew with some additional local stack use. The [candidate decision](notes/final_candidate.md) explains these costs and why EXP-003 remains a useful alternative for some workloads.
+
+A further keygen-specific trial, EXP-006, reduced call counts but produced mixed timings. This was an important finding: removing more reductions did not always make the code faster.
+
+The arithmetic bounds, output comparisons and sanitizer checks support correctness within the cases and assumptions reviewed. Secret-flow checks and a finite statistical timing test found no targeted dependency or class-dependent timing difference in the tested cases. The [security conclusion](notes/final_security_summary.md) also records the changes in code size, local stack use and inherited stack-canary coverage. These checks do not prove whole-program constant-time behaviour, production readiness or final-standard ML-KEM conformance.
+
+### Additional check with random inputs
+
+After the main comparison and candidate selection, I ran a separate follow-up using **60 saved random seeds across five sessions**, recorded as [EXP-010](notes/random_seed_followup.md). It used the same implementations to check whether the performance findings held across different input fixtures. The large improvements over the original and the additional key-generation benefit repeated, supporting the main findings and the choice of EXP-005. The small Kyber1024 decapsulation cost also repeated, while its encapsulation difference was mixed and close to zero. This follow-up adds supporting evidence; its results and dot-and-box graphs are reported separately from the main comparison.
 
 ## Read the project
 
 | Route | Start here |
 |---|---|
-| Read the findings | [Closing comparison](notes/final_comparison.md), [random-seed follow-up](notes/random_seed_followup.md), [candidate decision](notes/final_candidate.md), [figures and captions](notes/thesis_figures.md) |
+| Read the main findings | [Original, EXP-003 and EXP-005 comparison](notes/final_comparison.md), [candidate decision](notes/final_candidate.md), [figures and captions](notes/thesis_figures.md) |
+| Read the additional check | [Random-seed follow-up and dot-and-box graphs](notes/random_seed_followup.md) |
 | Reproduce the results | [Analysis, audit and script guide](notes/git_reproduce.md), [benchmark conditions](notes/benchmark_conditions.md), [safe figure reproduction](notes/thesis_figures.md#reproduce) |
 | Inspect the research record | [Experiment register](notes/experiment_register.md), [activity log](notes/project_log.md), [methods and record conventions](notes/research_workflow.md), [reduction map](notes/reduction_map.md), [literature](notes/literature.md) |
 
