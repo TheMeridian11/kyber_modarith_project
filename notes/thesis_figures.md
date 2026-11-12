@@ -2,15 +2,16 @@
 
 ## Choosing figures for the thesis
 
-The accepted set covers the initial arithmetic trials, security assessments, completed three-session comparison and five-session random-seed follow-up. Use the completed comparison and follow-up for the main performance argument; the preliminary first-session plot remains part of the research record.
+Use the completed three-session comparison (EXP-009) for the main performance results and the choice between EXP-003 and EXP-005. The arithmetic and security figures explain how the changes were developed and checked. The five-session random-seed follow-up (EXP-010) provides an additional check of those findings using the same implementations. The preliminary first-session plot remains part of the research record.
 
 | Purpose | Recommended figure |
 |---|---|
-| Closing performance comparison | [Three-session estimates (PDF)](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf) |
-| Robustness across random input fixtures | [Candidates against the original (PDF)](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf) |
-| Additional benefit and costs of the selected candidate | [Direct candidate contrast (PDF)](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf) and [code/local-stack costs (PDF)](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf) |
+| Main comparison of the original, EXP-003 and EXP-005 | [Three-session estimates (PDF)](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf) |
+| Additional benefit and costs of selecting EXP-005 over EXP-003 | Bottom contrast row of the [three-session estimates (PDF)](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf) and [code/local-stack costs (PDF)](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf) |
 | Arithmetic motivation and research progression | [Reduction counts (PDF)](../analysis/figures/ACT-0016/reduction-counts.pdf) and [incremental effects (PDF)](../analysis/figures/ACT-0016/incremental-effects-overview.pdf) |
 | Bounded security findings | [Secret-flow coverage (PDF)](../analysis/figures/ACT-0017/exp007-secret-flow.pdf) and [timing-screen diagnostics (PDF)](../analysis/figures/ACT-0018/exp008-timing-screen.pdf) |
+
+For the supplementary random-input check, use the dot-and-box plots of [both candidates against the original (PDF)](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf) and the [direct candidate contrast (PDF)](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf). Present these after the main results, with their separate interpretation of which findings repeated and which small differences were less consistent.
 
 PDF is the usual thesis export; SVG and 300-dpi PNG alternatives, plotted data and provenance are linked below. Tables preserve unrounded values; display labels are rounded. When adapting a figure, keep the slower or mixed outcomes and the limits explained in its caption. [Reproduction commands](#reproduce) generate fresh copies without replacing accepted artifacts.
 

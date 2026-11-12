@@ -1,6 +1,6 @@
 # Experiment register
 
-Use this register to find the arithmetic trials, security assessments and two completed performance studies. The arithmetic changes build on earlier changes. Experiment-ID links open the historical plans, while evidence links open the accepted results. The lifecycle and decision columns give the current interpretation, even when an older plan still describes work in the future tense.
+Use this register to find the arithmetic trials, security assessments, main performance comparison (EXP-009) and supplementary random-seed check (EXP-010). The arithmetic changes build on earlier changes. Experiment-ID links open the historical plans, while evidence links open the accepted results. The lifecycle and decision columns give the current interpretation, even when an older plan still describes work in the future tense.
 
 | ID | Question or treatment | Lifecycle | Evidence and result | Decision |
 |---|---|---|---|---|

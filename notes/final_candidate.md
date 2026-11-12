@@ -2,7 +2,7 @@
 
 ## Decision and exact identity
 
-**EXP-005 is the final thesis candidate**, selected after all three predeclared comparison sessions and retained after the separate five-session random-seed follow-up. It combines the earlier arithmetic changes with the key-generation error-vector reduction deferral. EXP-003 remains a substantial comparator and a reasonable alternative for workloads prioritising Kyber1024 decapsulation or a simpler keygen path. The follow-up makes the smaller encapsulation difference less consistent than in the original study. EXP-006 is retained as the mixed/adverse trial.
+**EXP-005 is the final thesis candidate**, selected after all three predeclared sessions of the main comparison (EXP-009). It combines the earlier arithmetic changes with the key-generation error-vector reduction deferral. EXP-003 remains a substantial comparator and a reasonable alternative for workloads prioritising Kyber1024 decapsulation or a simpler keygen path. EXP-006 is retained as the mixed/adverse trial.
 
 The selected source is the 35-file implementation/kyber-optimised-ref snapshot at **[4bd813ed71a9](source_revisions.md)**, pinned file-by-file in the [selection manifest](../analysis/final_candidate.json). This is cumulative EXP-001 fused base multiplication, EXP-002 wide vector dot product, EXP-003 staged inverse NTT and EXP-005 keygen error-vector reduction deferral. The original is upstream [3edd5af59919](source_revisions.md). I do not describe this historical Kyber implementation as certified final-standard ML-KEM.
 
@@ -22,7 +22,7 @@ I judge this repeated keygen benefit useful for the reference-C study, particula
 
 ## Costs retained in the decision
 
-EXP-005's Kyber1024 encapsulation and decapsulation session medians are slower than EXP-003 in all three sessions. The combined medians are **−0.15%** and **−0.36%**, with observed session ranges **−0.19 to −0.01%** and **−0.58 to −0.30%**. These effects are small in this setting, but consistent enough to report rather than dismiss. A workload dominated by those operations may reasonably prefer EXP-003. I do not label the differences insignificant: no calibrated significance test was specified.
+In the main EXP-009 comparison, EXP-005's Kyber1024 encapsulation and decapsulation session medians are slower than EXP-003 in all three sessions. The combined medians are **−0.15%** and **−0.36%**, with observed session ranges **−0.19 to −0.01%** and **−0.58 to −0.30%**. These effects are small in this setting, but consistent enough to report rather than dismiss. These results support considering EXP-003 for workloads dominated by those operations. I do not label the differences insignificant: no calibrated significance test was specified. The later random-seed check, described below, confirms the decapsulation cost but makes the smaller encapsulation difference less consistent across studies.
 
 Kyber512/768 control-operation medians are mildly positive, but EXP-005 changes only the keygen call path. I do not attribute those movements to removed arithmetic in encapsulation or decapsulation. Compiler layout and environmental effects are possible explanations, not established mechanisms. Some individual pairs are worse than their session summaries. All remain visible in the full data and all-pairs figure.
 
@@ -46,7 +46,7 @@ For the raw error-vector change, I checked the bounds at this call site and how 
 
 ## Random-seed follow-up
 
-The [accepted EXP-010 study](random_seed_followup.md) repeats the same three-source comparison with 60 randomly selected block seeds across five sessions. Every original-reference pair favours both candidates. EXP-005's additional keygen medians are +5.24%/+0.20%/+1.69%, positive in all five session estimates for each parameter. The Kyber768 increment is smaller than before and includes adverse individual blocks; the candidate is not uniformly faster than EXP-003 in every observation.
+After candidate selection, the [accepted EXP-010 study](random_seed_followup.md) provided a supplementary check using the same three implementations, with 60 randomly selected block seeds across five sessions. Every original-reference pair favours both candidates. EXP-005's additional keygen medians are +5.24%/+0.20%/+1.69%, positive in all five session estimates for each parameter. The Kyber768 increment is smaller than before and includes adverse individual blocks; the candidate is not uniformly faster than EXP-003 in every observation.
 
 Kyber1024 decapsulation retains a cost of 0.405% in the five-session median, with all five session estimates negative. Kyber1024 encapsulation has a small +0.091% median, three positive and two negative sessions, and 31 faster versus 29 slower blocks. The earlier three-session encapsulation penalty is therefore retained as an EXP-009 observation, not generalised as a consistent cross-study cost. Kyber768 decapsulation also has one slightly negative session. These findings support retaining EXP-005 for its additional keygen benefit while qualifying the smaller control-operation effects. Source, generated-code costs and the security assessment remain unchanged; the follow-up does not add leakage evidence.
 

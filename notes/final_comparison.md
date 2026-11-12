@@ -1,8 +1,6 @@
 # EXP-009 — Complete three-session result
 
-All three sessions planned before collection were accepted in ACT-0020, completing the direct comparison. EXP-005 is the final thesis candidate with the explicit tradeoffs in [the decision record](final_candidate.md). EXP-003 remains a retained comparator and a reasonable alternative for workloads prioritising Kyber1024 encapsulation/decapsulation or the simpler keygen call path. EXP-006 remains the adverse/secondary research result.
-
-This document retains the EXP-009 findings. The subsequent [five-session random-seed follow-up](random_seed_followup.md), accepted in ACT-0026, supports the large cumulative gains and additional keygen benefit, but qualifies the smaller tradeoffs: Kyber1024 decapsulation remains slower than EXP-003, while encapsulation becomes mixed and close to zero. The current candidate decision takes both records into account. I keep their measurements separate and unchanged.
+This is the main performance comparison of the original implementation, EXP-003 and EXP-005. All three sessions planned before collection were accepted in ACT-0020. These results support selecting EXP-005 as the final thesis candidate, with the explicit tradeoffs in [the decision record](final_candidate.md). In this study, EXP-003 has small Kyber1024 encapsulation/decapsulation advantages and a simpler keygen call path, so it remains a useful comparator and workload-dependent alternative. EXP-006 remains the adverse/secondary research result.
 
 ## Evidence and method
 
@@ -78,4 +76,6 @@ Exact source and normal-code matches support reuse of accepted arithmetic, byte-
 
 The complete [three-session effects](../analysis/figures/ACT-0020/exp009-three-session-effects.svg), [all paired effects](../analysis/figures/ACT-0020/exp009-all-paired-effects.svg) and [keygen tradeoff](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.svg) figures are available as vector PDF/SVG, 300-dpi PNG and machine-readable data. [Captions and reproduction](thesis_figures.md) identify units, experimental units and scope. Earlier preliminary figures remain unchanged as historical artifacts.
 
-The collection planned in advance and analysis are complete. ACT-0022 verified the restored 35-file EXP-005 source; the [repository record](git_reproduce.md) records subsequent integration and follow-up reproduction. Thesis composition can proceed from these accepted results and the separately reported EXP-010 study. Literature claims that require full-text sources still need separate verification.
+The subsequent [five-session random-seed follow-up (EXP-010)](random_seed_followup.md), accepted in ACT-0026, provides a supplementary check using the same implementations. It supports the large cumulative gains and additional keygen benefit, but qualifies the smaller tradeoffs: Kyber1024 decapsulation remains slower than EXP-003, while encapsulation becomes mixed and close to zero. The candidate decision retains EXP-009 as its main comparison and takes these later findings into account. I keep both studies' measurements separate and unchanged.
+
+The collection planned in advance and analysis are complete. ACT-0022 verified the restored 35-file EXP-005 source; the [repository record](git_reproduce.md) records subsequent integration and follow-up reproduction. Thesis composition can proceed from these main results, with the separately reported EXP-010 study as supporting evidence. Literature claims that require full-text sources still need separate verification.
