@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment": "EXP-010",
+  "record_type": "random-seed-follow-up",
+  "sessions": 5,
+  "blocks": 12,
+  "iterations": 1000,
+  "warmup": 100,
+  "cpu": 0,
+  "timer": "CLOCK_MONOTONIC_RAW",
+  "units": "ns",
+  "timeout_seconds": 120,
+  "variants": [
+    "baseline",
+    "exp003",
+    "exp005"
+  ],
+  "comparisons": [
+    [
+      "baseline",
+      "exp003"
+    ],
+    [
+      "baseline",
+      "exp005"
+    ],
+    [
+      "exp003",
+      "exp005"
+    ]
+  ],
+  "seed_plan_path": "tests/random_seed_plan.json",
+  "seed_plan_sha256": "487cea3b41de4c182b8d9fc325328beef0fb02de265dfde5e88a96c7f7ad96ef",
+  "accepted_inputs": {
+    "tests/final_comparison_protocol.json": "6c1651d1859676f2c3eab73b32b8b5c7854c8f0bba6fb6e28fa9325559d43d1e",
+    "analysis/final_candidate.json": "30c94828d86ee0660b0bd7e7fcab9d7ecf81dc617cd5ad6191a9282c23897541"
+  },
+  "fixture_rule": "Saved block seed shared by all variants and encoded with parameter, phase and iteration by derand-shake256-v1",
+  "parameter_order": "Rotate 512/768/1024 by (block-1) modulo 3",
+  "stopping": "Five separately launched complete sessions; retain failed attempts; no effect-dependent reruns or extension",
+  "analysis": "Process medians -> paired block effects -> session medians -> median of five session estimates",
+  "box_definition": "Inclusive interpolated quartiles of 60 block effects; pooled block median; full min-max whiskers; all dots retained; descriptive only",
+  "exclusions": "No trimming or timer overhead subtraction; any failed execution, source/assembly identity, round trip or integrity check invalidates the attempt"
+}

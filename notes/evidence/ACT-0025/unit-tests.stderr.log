@@ -1,0 +1,16 @@
+test_completed_session_cannot_be_replaced (__main__.RandomSeedTests.test_completed_session_cannot_be_replaced) ... ok
+test_effects_are_paired_and_adverse_effects_retained (__main__.RandomSeedTests.test_effects_are_paired_and_adverse_effects_retained) ... ok
+test_failures_and_development_runs_cannot_be_analysed (__main__.RandomSeedTests.test_failures_and_development_runs_cannot_be_analysed) ... ok
+test_full_raw_reanalysis_and_tamper_rejection (__main__.RandomSeedTests.test_full_raw_reanalysis_and_tamper_rejection) ... ok
+test_plan_hash_and_budget_are_enforced (__main__.RandomSeedTests.test_plan_hash_and_budget_are_enforced) ... ok
+test_record_paths_cannot_escape_run (__main__.RandomSeedTests.test_record_paths_cannot_escape_run) ... ok
+test_reject_duplicate_out_of_range_or_rounded_seeds (__main__.RandomSeedTests.test_reject_duplicate_out_of_range_or_rounded_seeds) ... ok
+test_reject_unbalanced_order_or_missing_session (__main__.RandomSeedTests.test_reject_unbalanced_order_or_missing_session) ... ok
+test_reject_unmatched_or_missing_observations (__main__.RandomSeedTests.test_reject_unmatched_or_missing_observations) ... ok
+test_saved_plan_unique_uint64_and_balanced (__main__.RandomSeedTests.test_saved_plan_unique_uint64_and_balanced) ... ok
+test_session_summary_is_not_pooled_box_median (__main__.RandomSeedTests.test_session_summary_is_not_pooled_box_median) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 2.328s
+
+OK

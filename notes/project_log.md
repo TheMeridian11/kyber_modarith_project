@@ -141,3 +141,15 @@ Records: [Editorial and preservation review](evidence/ACT-0023/documentation-rev
 The documentation received a final consistency review. Repeated full commit IDs were replaced by shorter linked references, with the complete identities retained in a source revision index. The benchmark conditions record now consolidates the nine performance runs' recorded environment and protocols, separates retrospective host/workload information from current observations, and identifies unrecorded controls. Selected source, raw results, existing audit evidence, scientific findings and the three frozen protocols were preserved. The completed practical evidence supports writing Methods, Results and Discussion; literature-dependent claims and the thesis argument still require completion.
 
 Records: [Benchmark conditions](benchmark_conditions.md), [revision index](source_revisions.md), [documentation and preservation review](evidence/ACT-0024/documentation-and-conditions-review.json).
+
+## ACT-0025 — Random-seed follow-up protocol and support
+
+EXP-010 extends the completed comparison with randomly selected input fixtures. A saved plan fixes 60 distinct unsigned 64-bit seeds and balanced, shuffled implementation orders before collection. Five separately launched sessions each contain 12 matched blocks per parameter, using the original, EXP-003 and selected EXP-005 sources. The optimisation code and C timing harness are unchanged.
+
+The runner records complete provenance and refuses reused completed sessions. The analyser checks raw observations, seeds, execution order, assembly and derived tables before reporting the median of five session estimates. Two dot-and-box figures are prepared: both candidates against the original, and the direct candidate contrast. Their pooled block boxes describe observed spread; the session-based summary is marked separately. The spread includes both input and measurement variation and is not a confidence interval or input-only variance estimate.
+
+Eleven support tests and the read-only preflight passed. A separately labelled development run completed nine builds, 108 matching assembly-body checks and 108 benchmark processes, checking 1080 exchanges including warm-up. Both synthetic graph layouts were visually reviewed and all eight graph/data exports reproduced byte-for-byte. Preservation checks matched all 97 recorded files, including the 35 selected source files, baseline source, C benchmark and previous result manifests. The development run used cached, hash-verified historical sources and stubbed Git checks; formal Git provenance gates remain part of user-run collection.
+
+Formal collection has not begun. Development checks are recorded separately and do not support new performance or security claims. The original EXP-009 evidence, final candidate and conclusions remain unchanged pending review of the follow-up results.
+
+Records: [EXP-010 protocol and execution](experiments/EXP-010-random-seeds.md), [saved seed plan](../tests/random_seed_plan.json), [support verification](evidence/ACT-0025/support-review.json).

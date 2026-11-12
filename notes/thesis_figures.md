@@ -107,3 +107,11 @@ I regenerate these figures into a new directory using the pinned environment des
 ```
 
 The generator verifies the accepted audit, manifests and raw-derived three-session estimates. It does not require the ignored local executables. [The complete result](final_comparison.md), [candidate rationale](final_candidate.md) and [security matrix](final_security_summary.md) supply the interpretation. Earlier incremental/count/security graphics remain useful for the research progression; the final cumulative result is measured directly, not assembled from their percentages.
+
+## EXP-010 planned random-seed dot-and-box figures
+
+The [follow-up protocol](experiments/EXP-010-random-seeds.md) fixes five sessions and 60 randomly selected block seeds. No formal EXP-010 graph or result exists yet. The [generator](../analysis/build_random_seed_figures.py) will produce a nine-panel original-reference comparison and a separate nine-panel direct EXP-005-to-EXP-003 comparison after validating all five runs. Each output has SVG/PDF/300-dpi PNG, all plotted rows, box statistics and provenance. Commands are in the protocol.
+
+**Planned caption.** Each coloured marker is one matched comparison of process medians, with 1000 timings per process. Colour and shape identify five separately launched sessions; all 60 effects per group remain visible. Boxes show inclusive-interpolated quartiles and the pooled block median, with full observed min–max whiskers. Black diamonds show the median of five session medians, preserving the declared summary unit. Positive means faster; all adverse values remain. Boxes and ranges are descriptive, not confidence intervals. Offsets distinguish points without numerical meaning. The spread includes input and measurement variation on one host and does not isolate input-only variance, establish portability or supply new leakage evidence.
+
+Development rendering checks use explicitly labelled synthetic values outside the formal figure directories. They are support evidence only and must not be used as thesis results. Existing ACT-0020 figures remain the accepted closing-study figures.

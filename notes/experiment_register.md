@@ -1,6 +1,6 @@
 # Experiment register
 
-The five arithmetic treatments were evaluated as cumulative changes to the pinned reference implementation. The closing comparison selected EXP-005 with explicit performance and implementation-security tradeoffs. EXP-003 remains a substantial comparator; EXP-006 remains a mixed/adverse finding. All planned collection and final-source review are complete.
+The five arithmetic treatments were evaluated as cumulative changes to the pinned reference implementation. The closing comparison selected EXP-005 with explicit performance and implementation-security tradeoffs. EXP-003 remains a substantial comparator; EXP-006 remains a mixed/adverse finding. The original collection and final-source review are complete. A separate random-seed follow-up is planned as EXP-010.
 
 | ID | Question or treatment | Lifecycle | Evidence and result | Decision |
 |---|---|---|---|---|
@@ -14,6 +14,7 @@ The five arithmetic treatments were evaluated as cumulative changes to the pinne
 | [EXP-007](experiments/EXP-007-secret-flow.md) | Assess dynamic secret flow in original/EXP-005/EXP-006 | closed | [RUN-0001](runs/EXP-007-RUN-0001.md) accepted: 144 quiet target processes, 18 expected positive detections, quiet defined/negative controls; 129 matching assembly bodies | no dependency observed in exercised paths; no whole-KEM or instruction-latency claim |
 | [EXP-008](experiments/EXP-008-timing-leakage.md) | Screen secret-class timing in original/EXP-003/EXP-005 | closed | [RUN-0001](runs/EXP-008-RUN-0001.md) accepted: 288 quiet target processes, maximum absolute t 2.91016 below 10, all 36 controls meet criteria; 1944 statistics reproduced | no difference detected within budget; retain finite-path/class/platform limits |
 | [EXP-009](experiments/EXP-009-final-comparison.md) | Direct original/EXP-003/EXP-005 comparison across sessions | closed | [All three sessions](final_comparison.md) accepted: 972000 duration rows; identical frozen support/source/tool conditions; every original-reference pair improves | select [EXP-005](final_candidate.md) for repeated additional keygen benefit; retain Kyber1024 control-operation regressions and EXP-003 as alternative |
+| [EXP-010](experiments/EXP-010-random-seeds.md) | Check performance robustness across randomly selected input fixtures | planned | Saved plan: 60 distinct random seeds, five sessions of 12 matched blocks; support and dot-and-box generator prepared; no formal measurements yet | retain source and EXP-009 findings; evaluate the follow-up separately after all five sessions |
 
 K is 2, 3 or 4. EXP-002 includes EXP-001, EXP-003 includes EXP-002 and EXP-005 includes EXP-003. Their incremental effects are conditional on the preceding implementation, not independent main effects. Separate-run median gains are not added or multiplied to obtain the total improvement over the original.
 

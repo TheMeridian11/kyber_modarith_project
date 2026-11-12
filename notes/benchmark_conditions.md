@@ -80,6 +80,7 @@ The [fixed protocol](../tests/final_comparison_protocol.json) gives the complete
 | EXP-000/RUN-0003 pilot | Five original-reference processes; 15 processes and 45000 duration rows across all parameters | Seed 1 reused; no candidate comparison |
 | EXP-001/002/003/005/006, each RUN-0002 | Five matched predecessor/candidate pairs; 30 processes and 90000 rows per study across all parameters | Predecessor first in blocks 1/3/5, candidate first in 2/4; fixed parameter order 512/768/1024; seed 1 reused |
 | EXP-009/RUN-0001–0003 | Three sessions of 12 three-variant blocks; 324 processes and 972000 rows in total | Balanced variant orders, rotating parameter order and session/block seeds |
+| EXP-010 (planned; no collected runs) | Five sessions of 12 three-variant blocks; planned 540 processes and 1620000 rows | 60 saved random uint64 seeds, matched within each block; balanced orders shuffled before timing; rotating parameter order |
 
 The earlier studies quantify conditional incremental changes. The [final comparison](final_comparison.md) supplies direct cumulative effects against the original and the additional EXP-003-to-EXP-005 effect. Their estimates must not be substituted for one another.
 

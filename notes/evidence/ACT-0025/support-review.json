@@ -1,0 +1,103 @@
+{
+  "activity_id": "ACT-0025",
+  "experiment": "EXP-010",
+  "formal_measurements_collected": false,
+  "lifecycle": "planned; support verified",
+  "unit_tests_passed": 11,
+  "checks": {
+    "unit-tests": {
+      "command": [
+        "-B",
+        "tests/test_random_seed_comparison.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    "preflight": {
+      "command": [
+        "-B",
+        "scripts/run_random_seed_comparison.py",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    "integration-smoke": {
+      "command": [
+        "-B",
+        "tests/test_random_seed_comparison.py",
+        "--integration-smoke",
+        "--output",
+        "/tmp/kyber-exp010-support-final"
+      ],
+      "exit_code": 0
+    }
+  },
+  "development_smoke": {
+    "development_only": true,
+    "formal_measurements": false,
+    "builds": 9,
+    "assembly_bodies": 108,
+    "processes": 108,
+    "measured_exchanges": 864,
+    "warmup_exchanges": 216,
+    "git_commands_executed": false,
+    "historical_restore": "hash-verified cached source copied in temporary directory",
+    "formal_analyser_rejects_development": true,
+    "manifest_sha256": "c115ef7e898b9f7ab29c5bbe639b9a3482b44a5ad3ecc21f34584c6f09e4add9"
+  },
+  "synthetic_plot_check": {
+    "development_only": true,
+    "input": "synthetic values; not measured results",
+    "plotted_points_original_reference": 1080,
+    "plotted_points_direct": 540,
+    "negative_values_included": true,
+    "reproduced_files": 8,
+    "byte_identical": true,
+    "matplotlib": "3.10.8",
+    "outputs": {
+      "exp010-original-reference-dot-box.svg": "963389d205e6f63e1987dae21828fabb89699eb00e458952460cf8cb6f03c69d",
+      "exp010-original-reference-dot-box.csv": "ae6939c62c18d8226edcb27d0672b29a1bada8d4ecf65914ff4869081667f161",
+      "exp010-direct-candidate-dot-box.png": "6c06c282759532acd0b0d9a42c67f673b1b666a86de87acfb11ab2571a622ac0",
+      "exp010-original-reference-dot-box.png": "0d2291b62e947e19749233ec6140e4fb44a4dafdf6365f063184c0cd3fcd6716",
+      "exp010-direct-candidate-dot-box.pdf": "b6b17b55391ab8a8ef1468735f2d290c7d658e9a2473745051c7dfec9f92370d",
+      "exp010-direct-candidate-dot-box.svg": "7d5bf3085a8895cb952130b6893221d3f2b4006bee27a36a40466f54c33987c1",
+      "exp010-direct-candidate-dot-box.csv": "59be0b1a40a1dbc2a21e308752eef56ac517d147ee60a6baed7aa5a4b2c55c43",
+      "exp010-original-reference-dot-box.pdf": "8b65d5715c632f99bc06c042a7534366210ac63eec0296421344f624bfd60094"
+    }
+  },
+  "both_synthetic_plot_pngs_visually_reviewed": true,
+  "preserved_files": 97,
+  "preservation_all_match": true,
+  "optimisation_source_files": 35,
+  "c_benchmark_unchanged": true,
+  "existing_result_manifests_unchanged": true,
+  "git_commands_executed": false,
+  "seed_plan_sha256": "487cea3b41de4c182b8d9fc325328beef0fb02de265dfde5e88a96c7f7ad96ef",
+  "limitations": [
+    "Formal Git-clean-tree and historical Git restoration gates are exercised by the user at formal collection; development smoke substitutes hash-verified cached snapshots and stubs Git checks.",
+    "Synthetic plot values and small development timings are not research results.",
+    "Five formal sessions remain to be collected; combined analysis and thesis interpretation follow their review."
+  ],
+  "support_sha256": {
+    "scripts/random_seed_common.py": "ed4360474a4ce8cd9536198e8e052d05deadbe735055c813927340c6e6676b7a",
+    "scripts/run_random_seed_comparison.py": "a94f807fb1fdb1d2efc27666e1589f3889675f67201a16a1cd69f93f45ac909a",
+    "scripts/analyse_random_seed_comparison.py": "a6e158f9a26cd2fbe3859398a2ad1dfc4012de87ceb8567406c3a2411e5c37a8",
+    "tests/test_random_seed_comparison.py": "a8c4b9db98b4fbb14638d95b0fd5bc96a1d2d4ffcc2747c449bfc0c73af79542",
+    "tests/random_seed_protocol.json": "cff8de8e6119d475bf818b826a91ba17f4f447bd420fac5ecd0fae86ebe9284a",
+    "tests/random_seed_plan.json": "487cea3b41de4c182b8d9fc325328beef0fb02de265dfde5e88a96c7f7ad96ef",
+    "analysis/build_random_seed_figures.py": "eb39248fb7b41fbecf5972ed757f7f6796227abf448f40ce6d652a004d0ed543",
+    "notes/experiments/EXP-010-random-seeds.md": "a80a71d3f4a80a29c157bcfaf641ff5d1d3fba548dabff23a16810fba2220c6d"
+  },
+  "evidence_sha256": {
+    "check_synthetic_figures.py": "466b88ff4fc8caaae7ebdbe9cd11b73f55e5f7e998941f59dbea5c34566bb10c",
+    "integration-smoke.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "integration-smoke.stdout.log": "eafed05eb80dfddfa6cf939e072a3d0227b39a80e69c4d0f6c0514b9d81678db",
+    "preflight.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight.stdout.log": "4b0a861126eb00cdb634db72878856284cbac58c63fba4dd4179e6d9f6f96c64",
+    "preservation-before.json": "727da7240227937574a95051bd58bce9610a2337af472c2d07421f7d8d4c7ec7",
+    "support-smoke.tar.gz": "6161f80c38c64f9261cb9e5eef8b134fd69def9139e76dbef162b1b7a84e7e0d",
+    "synthetic-plot-check.tar.gz": "be7ee759e41346e70d873e558e6c3469b8952b93f842651e2356f287066c453f",
+    "unit-tests.stderr.log": "e152ab3b60bd1d42d7b8a9c4e9ca6fba84e723b1f133560d59e8a1cf1b08dec9",
+    "unit-tests.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

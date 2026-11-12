@@ -49,4 +49,6 @@ The selected working source matches all 35 EXP-005 files pinned in [final_candid
 - analysis/: reproducible calculations, figures and plot data.
 - notes/: methods, experiment/run records, interpretation and retained audit evidence.
 
-All planned experimental collection and final-source review are complete. EXP-004 remains a deferred interaction study, not an omitted failure. The earlier variants, mixed results and failed development attempts remain traceable in the detailed records. Three hash-pinned protocol documents retain their precollection wording; the accepted run records give their completed outcomes.
+The original experimental programme and final-source review are complete. EXP-004 remains a deferred interaction study, not an omitted failure. The earlier variants, mixed results and failed development attempts remain traceable in the detailed records. Three hash-pinned protocol documents retain their precollection wording; the accepted run records give their completed outcomes.
+
+An additional [random-seed follow-up, EXP-010](notes/experiments/EXP-010-random-seeds.md), is prepared for collection. It compares the same three implementations using 60 saved random seeds across five separately launched sessions, with matched inputs and balanced order. Dot-and-box graphs will display every trial and distinguish observed block spread from the median of five session estimates. No EXP-010 performance result is available yet; the accepted findings above remain those of EXP-009.
