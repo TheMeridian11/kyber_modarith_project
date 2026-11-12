@@ -4,18 +4,18 @@ I completed this comparison and accepted its [RUN-0002 results](runs/EXP-001-RUN
 
 ## Fixed starting protocol
 
-I use scripts/run_comparison.py and the unchanged benchmarks/bench_kem.c. The runner builds both variants with the same reviewed GCC executable and normal -O3 flags. Counters and sanitizers are absent. It checks current source hashes against RUN-0001 and compares basemul and montgomery_reduce assembly in each timing binary with the reviewed instructions before collecting any timings.
+I use scripts/run_comparison.py and the unchanged benchmarks/bench_kem.c. The runner builds both variants with the same reviewed GCC executable and normal -O3 flags. These timing builds contain neither reduction counters nor sanitizers. It checks current source hashes against RUN-0001 and compares basemul and montgomery_reduce assembly in each timing binary with the reviewed instructions before collecting any timings.
 
 For each of Kyber512, Kyber768 and Kyber1024:
 
 - Five matched process pairs use the same logical CPU, compiler, flags and public fixtures.
 - Each process performs 100 warm-up exchanges and 1000 measured exchanges. Keygen, encapsulation and decapsulation are timed separately.
 - The order is baseline then candidate in blocks 1, 3 and 5, and candidate then baseline in blocks 2 and 4. Both members of each pair run consecutively.
-- The outer loop is block, followed by parameter sets 512, 768 and 1024. Five blocks give three baseline-first and two candidate-first pairs per parameter set; this small order imbalance is explicit.
+- The outer loop is block, followed by parameter sets 512, 768 and 1024. Five blocks give three baseline-first and two candidate-first pairs per parameter set. This small order imbalance is explicit.
 - Seed 1 and the existing SHAKE256 fixture rule are reused across variants and blocks. There are 1000 measured fixture indices per parameter set, not 5000 independent inputs.
 - All observations are retained. No timer-overhead subtraction, outlier removal, selective retry or early stopping is used.
 
-This produces 30 measured processes, 90000 operation durations, 90 per-process summary rows, 45 paired comparison rows and nine aggregate rows. It doubles the baseline pilot's observation count because it measures two implementations. The 90000 durations are inner observations within the 30 measured processes. The prior pilot remains context; the primary comparison uses the freshly measured baseline in each pair.
+This produces 30 measured processes, 90000 operation durations, 90 per-process summary rows, 45 paired comparison rows and nine aggregate rows. It doubles the baseline pilot's observation count because it measures two implementations. The 90000 durations come from repeated measurements inside the 30 processes. The earlier pilot provides background, but each pair compares the candidate with a baseline measured during this run.
 
 The timer remains CLOCK_MONOTONIC_RAW in nanoseconds. Fixture generation, warm-up, CSV formatting and secret comparisons remain outside measured intervals. Deterministic APIs exclude operating-system randomness. These timings do not include invalid-ciphertext performance or establish timing-leakage resistance.
 
@@ -43,12 +43,12 @@ I compare process medians within each parameter/operation/block:
 
 derived/process-summary.csv retains each process's median/minimum/maximum. derived/paired-comparison.csv retains every paired effect and which variant ran first. derived/comparison.csv reports the median paired effect and its observed minimum/maximum, alongside the two variants' medians of process medians.
 
-The primary estimate is the median of the paired effects. It is not generally the ratio of the two medians of process medians. The minimum/maximum describe these five pairs; they are not confidence intervals. Inner timing rows and repeated processes may share input, thermal and scheduling conditions, so I do not treat them as independent experiments.
+I calculate the main estimate by taking the median of the paired effects. Dividing the two variants' medians of process medians would generally give a different result. The minimum/maximum show the spread of these five pairs. They are not confidence intervals. Inner timing rows and repeated processes may share input, thermal and scheduling conditions, so I do not treat them as independent experiments.
 
 The interpretation considers consistency across pairs and both orders. Small or order-dependent effects remain qualified; repetitions are not added to obtain a preferred result. The accepted [run review](runs/EXP-001-RUN-0002.md) applies these criteria to all five pairs.
 
 ## Support verification
 
-[Development evidence](evidence/ACT-0007/comparison-smoke.json) records six real builds and two short blocks with twelve exchanges per process. All 432 operation rows passed; all twelve function assembly comparisons matched. Known synthetic improvement/regression pairs verified effect direction and aggregation. Missing variants, duplicate groups, unequal sample counts and a changed source hash were rejected.
+[Development evidence](evidence/ACT-0007/comparison-smoke.json) records six real builds and two short blocks with twelve exchanges per process. All 432 operation rows passed. All twelve function assembly comparisons matched. Known synthetic improvement/regression pairs verified effect direction and aggregation. Missing variants, duplicate groups, unequal sample counts and a changed source hash were rejected.
 
-The development run used temporary files, bypassed Git-state checks through mocks and did not invoke the metadata collector. It is support verification, not a committed benchmark or evidence of a speedup. That development check preceded formal execution. ACT-0008 now records verification of the completed RUN-0002, including its clean-source provenance checks and retained artifacts.
+The development run used temporary files, bypassed Git-state checks through mocks and did not invoke the metadata collector. It checks that the measurement tools work. It is not a committed benchmark and does not establish a speedup. That development check preceded formal execution. ACT-0008 now records verification of the completed RUN-0002, including its clean-source provenance checks and retained artifacts.

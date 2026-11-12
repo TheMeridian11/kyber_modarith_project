@@ -19,7 +19,7 @@ I test whether combining products before Montgomery reduction improves key gener
 
 ## Isolated change and hypothesis
 
-The treatment replaced only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I retain the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
+The treatment replaced only the body of basemul in implementation/kyber-optimised-ref/ntt.c. I keep the initial reduction of a[1]*b[1], accumulate each output's remaining products in int32_t, then apply one Montgomery reduction to each accumulator. This changes five reducer invocations to three per coefficient pair. The NTT, inverse NTT, Barrett reducer, vector accumulation and final vector reduction remain unchanged.
 
 A polynomial contains 128 such pairs, so its base multiplication changes from 640 to 384 Montgomery calls. A K-element dot product changes from 640K to 384K calls. For keygen, encapsulation and decapsulation, predicted savings are respectively 256K^2, 256K(K+1) and 256K(K+2). Decapsulation includes re-encryption.
 
@@ -31,7 +31,7 @@ A polynomial contains 128 such pairs, so its base multiplication changes from 64
 
 These predictions were specified before execution. RUN-0001 now confirms every entry with ten observations per operation and parameter set. Barrett counts remain exactly as recorded in RUN-0004. The C counter supplies observations independently of these predictions.
 
-The local kernel uses 40% fewer reductions. The complete KEM still performs hashing, sampling, transforms and other work, so this is not a 40% runtime forecast. Register use, instruction scheduling, compiler optimisation and measurement variation may yield a smaller benefit, no benefit or a regression.
+This small arithmetic function uses 40% fewer reductions. However, the complete KEM also performs hashing, sampling, transforms and other work, so I cannot predict a 40% runtime improvement. Register use, instruction scheduling, compiler optimisation and measurement variation may lead to a smaller benefit, no benefit or even a slowdown.
 
 ## Algebra and Montgomery representation
 
@@ -49,7 +49,7 @@ Within the reducer's input contract, modular linearity permits:
 
 The initial computation of t is retained. Removing it would introduce the wrong power of R. The candidate must not simply reduce the ordinary three-factor product.
 
-The original and candidate raw basemul outputs can differ by a multiple of q. I require equal residues at this internal boundary, then byte-identical public keys, secret keys, ciphertexts and shared secrets at the API boundary. The existing final poly_reduce in polyvec_basemul_acc_montgomery maps both sums to the same centred representatives.
+The original and candidate raw basemul outputs can differ by a multiple of q. I require equal residues at this internal boundary. At the API boundary, public keys, secret keys, ciphertexts and shared secrets must be identical byte for byte. The existing final poly_reduce in polyvec_basemul_acc_montgomery maps both sums to the same centred representatives.
 
 ## Caller ranges and intermediate bounds
 
@@ -75,7 +75,7 @@ I use the conservative envelope |a_i| <= 4095, |b_i| <= 1664 and |zeta| <= 1664.
 
 Every new product is explicitly evaluated in int32_t, and each fused sum remains int32_t until reduction. These bounds are below INT32_MAX and within the existing Montgomery input contract [-109084672, 109084671]. The output sums fit int16_t before the unchanged Barrett reduction.
 
-This establishes a caller-specific argument for the proposed change. It is not a general contract for arbitrary int16_t pairs. A later optimisation that widens the inputs or removes an upstream reduction must redo the argument. I do not pass a wide accumulator to barrett_reduce, whose input type is int16_t.
+This explains why the change is valid for the callers I reviewed. It does not establish that the function works for arbitrary int16_t input pairs. A later optimisation that widens the inputs or removes an upstream reduction must redo the argument. I do not pass a wide accumulator to barrett_reduce, whose input type is int16_t.
 
 The unchanged reducer depends on GCC's documented signed narrowing and arithmetic right-shift behaviour. Those implementation-defined assumptions are retained, not newly removed or made portable. See [GCC integer semantics](https://gcc.gnu.org/onlinedocs/gcc/Integers-implementation.html). Compiler/target changes require review.
 
@@ -89,12 +89,12 @@ The unchanged reducer depends on GCC's documented signed narrowing and arithmeti
 | Invalid inputs and rejection | Arithmetic disagreement can change decryption, re-encryption or the selected rejection secret | RUN-0001 responses to the tested corrupted/random ciphertexts and malformed keys agree byte for byte |
 | Secret-dependent timing | Branches, divisions or data-indexed memory could introduce leakage | Reviewed basemul and reducer have fixed arithmetic/offsets and no conditional branches or divisions; statistical leakage testing remains not-run |
 | Compiler behaviour | Source-level control flow alone does not establish machine-code behaviour | Both variants reviewed for all three parameter sets with GCC 13.3.0; the comparison runner checks the actual timing builds against those instruction sequences |
-| Memory behaviour | New buffers or changed indexing could introduce corruption | No array layout, allocation or indexing change; only scalar temporaries; no observed local stack-setup increase |
+| Memory behaviour | New buffers or changed indexing could introduce corruption | No array layout, allocation or indexing change; only scalar temporaries. No observed local stack-setup increase |
 | Broader leakage | Power, EM, fault behaviour and complete constant-time guarantees are not established by these tests | Not assessed; do not generalise timing/correctness results to those properties |
 
 The KEM verification, rejection-key derivation and conditional selection functions remain untouched. This does not itself prove equivalence: the candidate's preceding arithmetic must supply the same values. The validation specifically compares rejection outputs as well as successful exchanges.
 
-I do not mark security as passed merely because the program is faster or its secrets match on valid exchanges. The evidence record keeps algebra/range review, sampled correctness, sanitizer results, generated-code review and statistical leakage assessment separate.
+I do not treat faster execution or matching shared secrets on valid exchanges as enough to pass the security assessment. The evidence record keeps algebra/range review, sampled correctness, sanitizer results, generated-code review and statistical leakage assessment separate.
 
 ## Validation protocol and accepted execution
 
@@ -127,29 +127,29 @@ A completed run requires all commands and per-parameter checks to pass, exact tr
 
 ## Measurement and decision plan
 
-Candidate validation and scoped generated-code review are accepted. scripts/run_comparison.py measures fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
+Candidate validation and review of the generated code for the specified functions are accepted. scripts/run_comparison.py measures fresh alternating baseline/candidate timing blocks with the same compiler flags, public fixture rule, logical CPU, warm-up and input mode. The starting budget is five process repetitions of 1000 exchanges per parameter set. Instrumented and sanitized builds cannot supply timing results.
 
 RUN-0002 compared process-level medians within matched blocks and preserved every raw observation. Small uncertain effects remain inconclusive; a stronger claim would require additional planned complete blocks. I do not selectively repeat or remove outliers. A regression, no detectable effect or inconclusive result remains reportable. Any failed arithmetic or compatibility gate stops performance collection.
 
-The change adds two int32_t local accumulators and one int16_t temporary. It does not add heap allocation or change key/ciphertext storage. Both normal-build basemul bodies save four registers and reserve eight additional stack bytes. The candidate uses registers for the accumulators; no local stack-setup increase was observed. This does not measure whole-program peak stack usage.
+The change adds two int32_t local accumulators and one int16_t temporary. It does not add heap allocation or change key/ciphertext storage. Both normal-build basemul bodies save four registers and reserve eight additional stack bytes. The candidate uses registers for the accumulators. No local stack-setup increase was observed. This does not measure whole-program peak stack usage.
 
 ## Execution evidence and decision
 
 - Proposal algebra and caller-bound review: recorded with the stated assumptions.
 - Candidate implementation: only basemul differs from the baseline at this stage.
 - Candidate tests/counts/sanitizer checks: RUN-0001 passes, including exact sampled invalid-input/rejection compatibility and all predicted counts.
-- Candidate assembly review: completed in ACT-0007 for normal-build basemul and its reducer in all parameter sets; no new branch/index-based leakage mechanism found in that scope.
+- Candidate assembly review: completed in ACT-0007 for normal-build basemul and its reducer in all parameter sets. No new branch/index-based leakage mechanism found in that scope.
 - Statistical timing-leakage assessment: not run on standalone EXP-001; later cumulative variants have separate EXP-008 evidence.
 - Performance comparison: RUN-0002 accepted; effects and limits recorded below.
 - Retention decision: keep as a validated research reference; Kyber768 encapsulation/decapsulation performance remains inconclusive.
 
-[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour; they do not test or validate the proposed candidate. That development check preceded candidate implementation. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
+[Development support evidence](../evidence/ACT-0006/validation-support-smoke.json) records six builds of unchanged reference arithmetic, two public KEM fixtures per build and successful kernel-oracle/normal-versus-UBSan transcript checks. It also records rejection of an altered transcript and baseline counts presented as candidate predictions. These checks validate support behaviour. They do not test or validate the proposed candidate. That development check preceded candidate implementation. The subsequent committed RUN-0001 and [ACT-0007 review](../runs/EXP-001-RUN-0001.md) now supply candidate evidence.
 
 ### ACT-0007 interpretation
 
-The observed count reductions agree with the proposed mechanism: two fewer Montgomery calls per coefficient pair, and approximately 15.4% to 23.1% fewer Montgomery calls across full KEM operations. Product multiplications in basemul remain five. The unchanged hashing, transforms, sampling and other work prevent translating call savings directly into a runtime prediction.
+The measured counts agree with how the change should work: two fewer Montgomery calls per coefficient pair, and approximately 15.4% to 23.1% fewer Montgomery calls across full KEM operations. Product multiplications in basemul remain five. The unchanged hashing, transforms, sampling and other work prevent translating call savings directly into a runtime prediction.
 
-The reviewed basemul symbol shrinks from 138 to 114 bytes in every normal build; its reducer remains 22 bytes. Fixed-offset memory accesses, direct reducer calls and 32-bit accumulator additions match the proposal. No conditional branches or divisions occur in these reviewed bodies. The caller-range argument and compiler assumptions remain essential; tests and assembly inspection do not establish whole-program constant-time behaviour or all-input safety.
+The reviewed basemul symbol shrinks from 138 to 114 bytes in every normal build; its reducer remains 22 bytes. Fixed-offset memory accesses, direct reducer calls and 32-bit accumulator additions match the proposal. No conditional branches or divisions occur in these reviewed bodies. The argument still depends on the callers' input ranges and the compiler assumptions. Tests and assembly inspection do not prove that the whole program runs in constant time or is safe for every possible input.
 
 ACT-0007 accepted the implementation for performance evaluation; ACT-0008 now records the measured outcome and retention decision. The [matched timing protocol](../paired_timing.md) defines five pairs per parameter set, complete raw retention, paired process-median effects and explicit WSL/order/uncertainty limitations. RUN-0001 contains no timing result. Its original manifest remains immutable; the later review separately resolves its assembly-review action.
 
@@ -163,6 +163,6 @@ RUN-0002 used source [d407b5134f14](../source_revisions.md) and saved results in
 | Kyber768 | 1.68% | 0.87% | 0.86% |
 | Kyber1024 | 7.43% | 8.55% | 8.43% |
 
-Every Kyber512/Kyber1024 pair favoured the candidate, including both orders. Kyber768 keygen was faster in five of five pairs, while its encap/decap each had one slower pair. I retain those two sub-one-percent effects as inconclusive. The [run review](../runs/EXP-001-RUN-0002.md) records all observed ranges, order checks and WSL limitations. These descriptive results do not establish significance, cross-session reproducibility or complete constant-time security.
+Every Kyber512/Kyber1024 pair favoured the candidate, including both orders. Kyber768 keygen was faster in five of five pairs, while its encap/decap each had one slower pair. I keep those two sub-one-percent effects as inconclusive. The [run review](../runs/EXP-001-RUN-0002.md) records all observed ranges, order checks and WSL limitations. These descriptive results do not establish significance, cross-session reproducibility or complete constant-time security.
 
-I retain this implementation as a research reference and proceed to EXP-002 without an obligatory repeat solely to make the small effects positive. Any later claim of a reliable small Kyber768 gain needs more evidence. Reduction-call percentages are not runtime percentages, and the cause of the parameter-dependent differences has not been isolated.
+I keep this implementation as a research reference and proceed to EXP-002 without an obligatory repeat solely to make the small effects positive. Any later claim of a reliable small Kyber768 gain needs more evidence. Reduction-call percentages are not runtime percentages, and the cause of the parameter-dependent differences has not been isolated.

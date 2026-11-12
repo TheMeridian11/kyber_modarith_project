@@ -2,4 +2,4 @@
 
 The current guide is [Repository state and reproducibility](git_reproduce.md).
 
-This compatibility page preserves links from historical experiment records, including the frozen EXP-009 protocol. Their staging and collection instructions describe the recorded workflow; the current guide distinguishes retained-data reproduction from new collection.
+I keep this short page so links in older experiment records still work, including the frozen EXP-009 protocol. Their staging and collection instructions describe how the work was carried out at the time. The current guide explains how to reproduce saved results and how that differs from collecting new measurements.

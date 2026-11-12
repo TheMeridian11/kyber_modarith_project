@@ -2,13 +2,13 @@
 
 ## Outcome
 
-All five predeclared sessions were accepted in ACT-0026. The follow-up supports the substantial cumulative performance gains reported in EXP-009 on the recorded platform. Both optimised implementations beat the original in every one of their 540 matched operation/block comparisons. The selected EXP-005 implementation retains additional key-generation benefit in every session median for all three parameter sets.
+All five sessions planned before collection were accepted in ACT-0026. The follow-up supports the substantial cumulative performance gains reported in EXP-009 on the recorded platform. Both optimised implementations beat the original in every one of their 540 matched operation/block comparisons. The selected EXP-005 implementation retains additional key-generation benefit in every session median for all three parameter sets.
 
-The smaller direct effects require a more qualified conclusion. Kyber1024 decapsulation remains slower than EXP-003, while the earlier small Kyber1024 encapsulation penalty does not recur consistently. EXP-005 remains the selected candidate, with EXP-003 retained as an alternative where Kyber1024 decapsulation or the simpler keygen path is the priority. Neither candidate is the fastest in every individual observation.
+The smaller differences between the two candidates need a more careful interpretation. Kyber1024 decapsulation remains slower than EXP-003, while the earlier small Kyber1024 encapsulation penalty does not recur consistently. EXP-005 remains the selected candidate, with EXP-003 retained as an alternative where Kyber1024 decapsulation or the simpler keygen path is the priority. Neither candidate is the fastest in every individual observation.
 
 ## Evidence and acceptance
 
-The [frozen protocol](experiments/EXP-010-random-seeds.md) and [saved plan](../tests/random_seed_plan.json) preceded collection. Their original prospective wording and bytes remain unchanged. Sixty distinct random uint64 seeds are spread over five separately launched sessions, with 12 matched blocks per parameter in each session. A block uses the same seed for all three implementations; the unchanged SHAKE256 fixture generator includes the parameter, phase and iteration. Each of the six variant orders occurs twice per parameter/session.
+The [frozen protocol](experiments/EXP-010-random-seeds.md) and [saved plan](../tests/random_seed_plan.json) preceded collection. I keep their original wording about planned work and leave the files unchanged. Sixty distinct random uint64 seeds are spread over five separately launched sessions, with 12 matched blocks per parameter in each session. A block uses the same seed for all three implementations; the unchanged SHAKE256 fixture generator includes the parameter, phase and iteration. Each of the six variant orders occurs twice per parameter/session.
 
 | Session | Retained record | Build / measurement processes | Duration rows | Review |
 |---|---|---:|---:|---|
@@ -20,17 +20,17 @@ The [frozen protocol](experiments/EXP-010-random-seeds.md) and [saved plan](../t
 
 The [reproducible audit](../analysis/review_random_seed_comparison.py) and [review record](evidence/ACT-0026/exp010-five-session-review.json) verify 1125 successful steps, 2250 raw output files, 45 warning-free builds, 45 retained executable hashes and 540 normalised production-function bodies. Source snapshots, all 31 recorded support files, compiler/flags, seed/order schedules and recorded affinity match the declared study. All 35 working optimisation files still match the selected source pin.
 
-Across the five sessions, 540 fresh measurement processes contain 540000 measured exchanges and 1620000 duration rows. Every measured round-trip flag is successful. Another 54000 warm-up exchanges are checked by the unchanged hash-verified harness before measurement; their success follows the successful process exits, not separate warm-up CSV records.
+Across the five sessions, 540 fresh measurement processes contain 540000 measured exchanges and 1620000 duration rows. Every measured round-trip flag is successful. Another 54000 warm-up exchanges are checked by the unchanged hash-verified harness before measurement; I establish their success from the successful process exits, rather than from separate warm-up CSV records.
 
-The audit independently sorts the raw integer durations and uses rational arithmetic for process medians, paired ratios, session medians and interpolated quartiles. All 1620 paired effects, 135 session estimates and 27 combined summaries agree with the saved analysis. The 15 per-session derived tables reproduce byte-for-byte. EXP-009's raw data also reproduce its existing summary tables; no new measurements or Git commands were executed during this review.
+The audit independently sorts the raw integer durations and uses rational arithmetic for process medians, paired ratios, session medians and interpolated quartiles. All 1620 paired effects, 135 session estimates and 27 combined summaries agree with the saved analysis. The 15 per-session derived tables reproduce byte-for-byte. EXP-009's raw data also reproduce its existing summary tables. No new measurements or Git commands were executed during this review.
 
 ## Estimator and conditions
 
-Each process contributes the median of 1000 timings. Within a matched block, percentage time reduction is `100 × (1 − candidate median / reference median)`. The session estimate is the median of its 12 block effects; the final estimate is the median of five session estimates. Positive values mean faster. No observations were trimmed, excluded or adjusted by timer overhead.
+Each process contributes the median of 1000 timings. Within a matched block, percentage time reduction is `100 × (1 − candidate median / reference median)`. The session estimate is the median of its 12 block effects. The final estimate is the median of five session estimates. Positive values mean faster. No observations were trimmed, excluded or adjusted by timer overhead.
 
 The recorded environment matches the earlier study: Intel Core i9-12900KS, Ubuntu 24.04.2 under WSL2, GCC 13.3.0, CLOCK_MONOTONIC_RAW nanoseconds and guest logical CPU 0. All runs use the same recorded source/support commit. Timer resolution is 1 ns in every process; the minimum empty-pair diagnostics range from 11 to 19 ns across the study, without subtraction. Power plan, background workload, breaks, physical core placement, frequency and temperature remain unrecorded for these sessions. The earlier retrospective workload account is not automatically applied to this follow-up. See [benchmark conditions](benchmark_conditions.md).
 
-EXP-009 and EXP-010 remain separate studies. The following tables compare their declared three-session and five-session summaries; they do not pool the sessions or reinterpret inner durations as independent experimental repetitions. Differences between columns are percentage points, not additional relative speedups or estimates of a causal seed effect.
+EXP-009 and EXP-010 remain separate studies. The following tables compare their declared three-session and five-session summaries. They do not pool the sessions or reinterpret inner durations as independent experimental repetitions. The differences between columns are in percentage points. They are not additional relative speedups and do not tell me how much of the change was caused by the seeds.
 
 ## Cumulative inverse-transform candidate versus original
 
@@ -64,7 +64,7 @@ EXP-005 includes EXP-003 and the keygen error-vector reduction deferral. All 45 
 | Kyber1024 | encap | +19.302% | +19.866% | +0.565 | +19.644 to +20.019% |
 | Kyber1024 | decap | +19.711% | +20.182% | +0.471 | +19.952 to +20.236% |
 
-The selected implementation's nine summaries differ from the earlier values by at most 0.565 percentage points. This supports a similar scale of improvement under the additional sampled inputs and measurement conditions. It does not establish numerical equivalence or attribute the small shifts to the random seeds.
+The selected implementation's nine summaries differ from the earlier values by at most 0.565 percentage points. This supports a similar scale of improvement under the additional sampled inputs and measurement conditions. It does not prove that the numerical results are equivalent or that the random seeds caused the small shifts.
 
 ## Additional selected-candidate effect
 
@@ -110,5 +110,5 @@ The follow-up strengthens the observed robustness of the large original-referenc
 
 A thesis-ready statement is: “A separate five-session random-input follow-up reproduced the substantial cumulative performance gains on the same WSL platform. The selected implementation reduced key-generation time by 10.93–17.84%, encapsulation by 16.09–19.87% and decapsulation by 16.06–20.18% across the three parameter sets, using medians of five session estimates. Every matched original-reference comparison favoured both optimised implementations. Additional key-generation benefit over the preceding candidate persisted, while small control-operation differences were less uniform: the Kyber1024 decapsulation penalty repeated, but its earlier encapsulation penalty did not recur consistently.”
 
-These are descriptive, single-platform findings. One seed occurs in one matched block, so input variation cannot be separated from changing measurement conditions. Shared seeds and measurements also couple parameter groups and contrasts. Five invocations do not establish statistical independence, population significance, portability or a universal speedup. The follow-up adds identity checks and round trips, not a new leakage test, constant-time proof or final ML-KEM conformance result. The [existing security conclusion](final_security_summary.md) retains its original limits. No optimisation change or additional outcome-dependent session is warranted by this review.
+These are descriptive, single-platform findings. Each seed occurs in one matched block, so I cannot separate variation caused by the inputs from changes in measurement conditions. Parameter groups and comparisons also share seeds and measurements, which makes them related. Five invocations do not establish statistical independence, population significance, portability or a universal speedup. The follow-up adds identity checks and round trips, not a new leakage test, constant-time proof or final ML-KEM conformance result. The [existing security conclusion](final_security_summary.md) retains its original limits. No optimisation change or additional outcome-dependent session is warranted by this review.
 

@@ -24,7 +24,7 @@
 ## Arithmetic contract and validation
 
 - Input/output ranges and representation scale:
-- Intermediate bounds, multiplication widths and narrowing:
+- Bounds on intermediate values, multiplication widths and conversions to narrower types:
 - Serialization and invalid-input requirements:
 - Interactions with other variants:
 - Functional checks and pass criteria:
@@ -38,7 +38,7 @@
 - Timer, units and RNG/input mode:
 - Warm-up, iterations, independent runs and ordering:
 - Run/block identification and environment controls:
-- Primary metric, uncertainty and practical decision criterion:
+- Main measurement, its uncertainty and the rule for deciding whether the change is useful:
 - Exclusion, interruption and rerun rules:
 - Memory measurements and method:
 - Analysis script and chart commands:
@@ -63,4 +63,4 @@ Use not-run/pass/fail/inconclusive and link evidence. Record the analysis-code r
 
 ## Amendments
 
-I append sequential amendments linked to activity IDs and commits, preserving which decisions preceded data collection. I do not rewrite a prediction to match a result.
+Add amendments in order and link each one to its activity ID and commit. Keep it clear which decisions were made before data collection. Do not rewrite a prediction to make it match the result.

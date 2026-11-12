@@ -1,6 +1,6 @@
 # EXP-NNN RUN-NNNN Run record
 
-This template specifies a readable run record and the fields required to interpret an execution manifest. No values here are observations. Unavailable fields say unknown/not-collected with a reason.
+Use this template to describe a run and provide the information needed to interpret its execution manifest. The template itself contains no observations. If a value is unavailable, write unknown/not-collected and explain why.
 
 The initial metadata collector writes metadata.json for a metadata-only snapshot. It does not fill the build or execution evidence described below. Its record type remains metadata-only, benchmark_executed is false, and execution checks remain not-run.
 
@@ -42,7 +42,7 @@ The initial metadata collector writes metadata.json for a metadata-only snapshot
 - Expected/actual observation counts:
 - Missing data, interruptions and anomalies:
 
-I preserve the tested command's exit status rather than the success of a later logging command. Unperformed checks are not-run. Failed and partial outputs remain evidence.
+Record the exit status of the command being tested, rather than the status of a later logging command. Mark checks that were not performed as not-run. Keep failed and partial outputs as evidence.
 
 ## Derived analysis
 
@@ -53,4 +53,4 @@ I preserve the tested command's exit status rather than the success of a later l
 - Metric, uncertainty method and comparison-block handling:
 - Interpretation and linked experiment decision:
 
-Raw observations are immutable. Reanalysis creates separately identifiable outputs or revisions. The results-saving commit is not the source commit that generated the measurements.
+Do not edit raw observations. Save any new analysis as separately identifiable outputs or revisions. The results-saving commit is not the source commit that generated the measurements.

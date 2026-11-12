@@ -16,9 +16,9 @@ EXP-001 has already been timed. I tested whether accumulating across the vector 
 
 ## Change and prediction
 
-A vector dot product sums K polynomial products. EXP-001 performs three Montgomery reductions for each coefficient pair in each component, or 384K per dot product. I sum the ordinary products across all K components first, then using three reductions per pair, or 384 per dot product for every parameter set.
+A vector dot product sums K polynomial products. EXP-001 performs three Montgomery reductions for each coefficient pair in each component, or 384K per dot product. I first sum the ordinary products across all K components, then use three reductions per pair. This gives 384 reductions per dot product for every parameter set.
 
-This changes only polyvec_basemul_acc_montgomery and adds its required ntt.h/reduce.h includes in the candidate polyvec.c. I retain the accepted EXP-001 ntt.c unchanged. The new KEM vector path computes directly and no longer calls the per-polynomial basemul path. Consequently, these are successive treatments, not independent savings to add together. Standalone basemul retains its accepted EXP-001 implementation.
+This changes only polyvec_basemul_acc_montgomery and adds its required ntt.h/reduce.h includes in the candidate polyvec.c. I keep the accepted EXP-001 ntt.c unchanged. The new KEM vector path computes directly and no longer calls the per-polynomial basemul path. The changes therefore build on each other. Their savings cannot be added as though they came from independent changes. Standalone basemul retains its accepted EXP-001 implementation.
 
 | Parameter set | K | Dot-product calls: original / EXP-001 / EXP-002 |
 |---|---:|---:|
@@ -34,7 +34,7 @@ Relative to EXP-001, predicted savings are 384(K-1) per dot product. There are K
 | Kyber768 | 9600 -> 7296 | 11904 -> 8832 | 16896 -> 13056 |
 | Kyber1024 | 14336 -> 9728 | 17024 -> 11264 | 23296 -> 16384 |
 
-These source-derived predictions are now confirmed by all 90 RUN-0001 observations. Barrett counts remain 2048/4736/6656, 3072/6400/8576 and 4096/8064/10496 for keygen/encap/decap. The final poly_reduce is retained. Reduced call counts do not predict a particular runtime percentage.
+These predictions calculated from the source are now confirmed by all 90 RUN-0001 observations. Barrett counts remain 2048/4736/6656, 3072/6400/8576 and 4096/8064/10496 for keygen/encap/decap. The final poly_reduce is retained. Reduced call counts do not predict a particular runtime percentage.
 
 ## Algebra and range argument
 
@@ -56,11 +56,11 @@ The current KEM callers retain |a| <= 4095, |b| <= 1664 and |zeta| <= 1664. This
 
 All products and accumulations use int32_t. Every input to montgomery_reduce remains within [-109084672, 109084671], and all new arithmetic fits int32_t. Narrowing occurs only after reduction to a bounded int16_t output. I do not pass an unreduced wide accumulator to barrett_reduce.
 
-This is a contract for these callers and K values, not arbitrary int16_t vector inputs. Changing K, removing a preceding reduction or widening deserialised inputs requires a new argument.
+These bounds apply to the reviewed callers and K values. They do not cover arbitrary int16_t vector inputs. I would need to check the bounds again if I changed K, removed an earlier reduction or allowed wider deserialised inputs.
 
 ## Implemented treatment
 
-I applied the following include block and complete function replacement in implementation/kyber-optimised-ref/polyvec.c, preserving the remainder. This is the retained implementation record; it does not need to be applied again:
+I applied the following include block and complete function replacement in implementation/kyber-optimised-ref/polyvec.c, preserving the remainder. This is the retained implementation record. It does not need to be applied again:
 
 ~~~c
 #include <stdint.h>
@@ -114,17 +114,17 @@ This replacement has been applied and passed the recorded validation. The source
 
 | Concern | Assessment and required evidence |
 |---|---|
-| Montgomery scale | Preserve the inner M(S11); check an independent ordinary-modular oracle and byte-identical API transcripts. |
+| Montgomery scale | Preserve the inner M(S11); check an independent ordinary-modular oracle and require the API transcripts to match byte for byte. |
 | Overflow and narrowing | The larger vector sums require the new bounds above. Run normal and UBSan builds; retain explicit casts and final poly_reduce. |
 | Twiddle and coefficient indexing | Pair indices select coefficients 2*pair and 2*pair+1 in 0..255; zeta indices are 64..127. Test all pairs and both signs. |
-| Timing behaviour | Loop bounds, vector indices and the parity branch depend only on public indices and K. The reviewed assembly branches on public pair termination/parity and uses public coefficient/twiddle indices; no new secret-dependent branch/address was identified in the inspected scope. |
+| Timing behaviour | Loop bounds, vector indices and the parity branch depend only on public indices and K. The reviewed assembly branches on public pair termination/parity and uses public coefficient/twiddle indices. No new secret-dependent branch/address was identified in the inspected scope. |
 | Invalid inputs and rejection | Recheck corrupted/random ciphertexts, malformed secret keys and noncanonical public keys against the original reference. Preserve rejection and encoding code. |
 | Memory | The source replaces a 512-byte temporary polynomial with scalar accumulators. Reviewed local stack including saved registers falls from 552/568/568 to 72 bytes; dot-function sizes rise from 132/173/155 to 285/355/413 bytes. These exclude callee stack and are not whole-program measurements. No heap allocation is added. |
 | Stack hardening | The old function has a canary check; the new scalar implementation does not under the same flags. No protection flag was disabled. I record reduced local corruption-detection coverage, without treating the tests as a proof of memory safety or security. |
 | Portability | Existing GCC signed-narrowing/shift assumptions remain. No cross-compiler guarantee is inferred. |
 | Broader leakage | Statistical timing leakage, whole-program constant-time proof, power/EM leakage and fault resistance are not established by these checks. |
 
-A faster result cannot override a failed arithmetic, compatibility or security gate. Sampled tests and source bounds complement each other; neither becomes a blanket security certificate.
+A candidate must pass the arithmetic, compatibility and security checks before its speed matters. Sampled tests and source bounds check different aspects of the change. Neither provides a general security certificate.
 
 ## Validation and timing
 

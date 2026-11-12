@@ -1,6 +1,6 @@
 # Baseline reduction counting
 
-I use benchmarks/count_reductions.c and scripts/run_counts.py to count Montgomery and Barrett reduction-function invocations during key generation, encapsulation and valid-ciphertext decapsulation. This is a separate instrumented build; it produces no performance measurements.
+I use benchmarks/count_reductions.c and scripts/run_counts.py to count Montgomery and Barrett reduction-function invocations during key generation, encapsulation and valid-ciphertext decapsulation. I use a separate build with counters added for this task. It does not produce performance measurements.
 
 ## How the counters work
 
@@ -23,11 +23,11 @@ The executable first checks that one direct call to each reducer increments the 
 | Build | Existing explicit GCC flags plus -fno-lto and two namespaced --wrap options |
 | Timing | No timer, warm-up, CPU affinity requirement or speed interpretation |
 
-Ten distinct fixture indices provide a small check of the fixed-loop prediction. Thousands of repetitions would add little information about these counts. Count constancy across this sample is not proof of constant-time execution.
+I use ten distinct fixture indices to check the counts predicted from the fixed loops. Thousands of repetitions would add little information about these counts. Seeing the same counts in this sample does not prove that execution time is constant.
 
 I compare observations with the source-derived table in [EXP-000](experiments/EXP-000-baseline.md). Predictions are stored separately from observations. A mismatch, changing count, malformed CSV or failed exchange stops acceptance and preserves the raw evidence for investigation.
 
-The C harness computes observations without using the predicted totals. The Python summary reports observed calls per operation after checking consistency across fixtures. Function invocations are not instruction counts, and fewer calls do not guarantee a runtime improvement.
+The C harness computes observations without using the predicted totals. The Python summary reports observed calls per operation after checking consistency across fixtures. These counts measure function calls, not machine instructions. Fewer calls do not guarantee that the code runs faster.
 
 ## Recorded execution
 

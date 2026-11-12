@@ -2,17 +2,17 @@
 
 ## Choose the task
 
-Reproducing retained data is different from collecting new measurements. The table identifies the existing tools and their requirements; their recorded paths and code are retained.
+Reproduction uses the measurements I already saved. Collecting new measurements is a separate task. The table below shows which tools to use and what each one needs. Their recorded paths and code stay unchanged.
 
 | Task | Tools | Required material |
 |---|---|---|
-| Recalculate the completed performance tables | [EXP-009 analyser](../scripts/analyse_final_comparison.py), [EXP-010 analyser](../scripts/analyse_random_seed_comparison.py) | Raw records, manifests and recorded support; no ignored executables |
+| Recalculate the completed performance tables | [EXP-009 analyser](../scripts/analyse_final_comparison.py), [EXP-010 analyser](../scripts/analyse_random_seed_comparison.py) | Raw records, manifests and recorded support. No ignored executables |
 | Regenerate plots and plotted CSVs | The six [figure generators](thesis_figures.md#reproduce) | Retained data/reviews and pinned plotting dependencies; use fresh destinations |
 | Check source/build identities and independent calculations | [EXP-009 full review](../analysis/review_final_comparison.py), [EXP-010 full review](../analysis/review_random_seed_comparison.py), [timing-screen review](../analysis/review_timing_leakage.py) | Recorded ignored binaries/restored sources and the tools required by each audit; the timing review also reads its retained development archive |
 | Inspect historical collection procedures | `scripts/run_*.py` and the [experiment register](experiment_register.md) | The appropriate recorded source/support revision, exact source gates and a fresh run ID for any new collection |
 | Check the analysis and validation machinery | Python and C files under `tests/` | The dependencies declared by each test; development checks are distinct from formal observations |
 
-Older runners also provide functions imported by current analysers. Retain them even when no further collection is planned. Historical collection commands are not guaranteed to work against today's selected checkout; the [record conventions](research_workflow.md) explain the source and preservation rules.
+Some current analysers import functions from older runners. Keep those runners even if no more measurements are planned. Historical collection commands are not guaranteed to work against today's selected checkout; the [record conventions](research_workflow.md) explain the source and preservation rules.
 
 ## Reproduce the completed tables
 
@@ -43,7 +43,7 @@ python3 -B analysis/review_random_seed_comparison.py \
   --output "$repro_root/exp010-audit.json"
 ```
 
-Removing ignored build directories preserves retained-data analysis but removes the original executables needed for these full identity audits. A rebuild requires separate provenance and does not automatically recreate the recorded binary identity.
+The saved data can still be analysed if ignored build directories are removed. However, those directories contain the original executables needed for full identity checks. If an executable is rebuilt, record the new build separately. It will not automatically match the original binary.
 
 ## Selected source and historical checkpoints
 
@@ -55,6 +55,6 @@ ACT-0020 reproduced the closing-study tables, audits and figures. ACT-0026 repro
 
 ## Revision references and preservation
 
-Readable notes use descriptive implementation names and short linked revisions where needed; the [revision index](source_revisions.md) retains full commit IDs. Manifests, source pins and prior audits keep exact hashes. Source/support commits identify what was used to collect data; results commits identify later archival states.
+Readable notes use descriptive implementation names and short linked revisions where needed; the [revision index](source_revisions.md) retains full commit IDs. Manifests, source pins and prior audits keep exact hashes. Source/support commits identify the files used to collect the data. Results commits identify the later versions that saved the observations.
 
 Preserve raw records, metadata, previous audits, accepted figure bundles and protocol versions. Existing ignored executables retain their recorded identities. Editorial corrections belong in new commits, with no rewriting of experimental history or relabelling of development data as formal results.

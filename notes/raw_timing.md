@@ -18,12 +18,12 @@ I use benchmarks/bench_kem.c and scripts/run_timing.py to measure the unchanged 
 | CPU | One allowed logical CPU, explicitly selected or lowest allowed by default |
 | Build flags | Same explicit GCC flags as the accepted functional builds |
 | Output | 15 raw CSV files; 45000 measurements; 45 summary rows |
-| Exclusions | None; no timer-overhead subtraction |
+| Exclusions | None. No timer-overhead subtraction |
 | Timing/safety instrumentation | None |
 
 The fixture input is exactly 32 bytes: ASCII kyber-bench-v1 in bytes 0..13, KYBER_K in byte 14, phase in byte 15, the unsigned seed in bytes 16..23 and iteration index in bytes 24..31. Integers use little-endian encoding. Phase 0 identifies warm-up and phase 1 identifies measured samples. SHAKE256 produces 96 bytes: 64 for key-generation coins and 32 for encapsulation coins. Each repetition uses the same measured fixture sequence.
 
-These fixtures are public benchmark inputs. Their purpose is reproducibility; they are not randomness for deployed cryptographic use.
+These fixtures are public test inputs. They let me repeat the same benchmark. They must not be used as the random inputs for a deployed cryptographic system.
 
 ## Measurement meaning
 
@@ -31,9 +31,9 @@ Each iteration measures key generation, then encapsulation, then valid-ciphertex
 
 The deterministic API mode measures the KEM computation without operating-system randomness calls. The subsequent candidate comparisons use the same mode. These numbers are not full RNG-inclusive API latency or CPU-cycle counts.
 
-The timer includes interruption and scheduling effects. The stderr log records reported clock resolution and the minimum of 1000 empty timer-pair probes as a diagnostic. I do not subtract that minimum from operation durations, and reported resolution is not a guarantee of accuracy.
+The recorded time includes delays caused by interruptions and process scheduling. The stderr log records reported clock resolution and the minimum of 1000 empty timer-pair probes as a diagnostic. I do not subtract that minimum from operation durations, and reported resolution is not a guarantee of accuracy.
 
-Logical CPU affinity limits guest scheduling movement. It does not establish physical-core placement under WSL or control host frequency, thermal behaviour or background load. Unknown manual conditions remain explicit in metadata. This pilot informed the initial five-pair comparison budget; the final comparison later used three sessions of twelve matched blocks.
+Pinning the process to a logical CPU limits how it moves between CPUs inside the WSL guest. It does not tell me which physical core Windows uses, or control the host's frequency, temperature or background workload. Unknown manual conditions remain explicit in metadata. This pilot informed the initial five-pair comparison budget. The final comparison later used three sessions of twelve matched blocks.
 
 ## Execution and acceptance
 
@@ -50,9 +50,9 @@ A completed pilot requires exit code 0, manifest status completed, provenance_re
 
 Each CSV has parameter_set, operation, iteration, elapsed_ns and roundtrip_ok. The final field reports the complete exchange check, not independent proof of each operation. The runner rejects missing, reordered, failed or invalid rows.
 
-The manifest records source and support-file hashes, build commands/flags, binary hashes, execution order, selected CPU, protocol and data hashes. Completed CSV files are under raw/. If a process fails, its partial CSV may remain in the corresponding stdout.log; I retain it. metadata.json remains the pre-execution snapshot.
+The manifest records source and support-file hashes, build commands/flags, binary hashes, execution order, selected CPU, protocol and data hashes. Completed CSV files are under raw/. If a process fails, its partial CSV may remain in the corresponding stdout.log; I keep it. metadata.json remains the pre-execution snapshot.
 
-derived/summary.csv is generated from the retained raw measurements and contains per-process/operation median, minimum and maximum. It does not pool all repetitions into an apparent sample of independent experiments, discard outliers or claim a speedup.
+derived/summary.csv is generated from the retained raw measurements and contains per-process/operation median, minimum and maximum. It keeps the repetitions separate rather than treating them as independent experiments. It also keeps outliers and makes no claim of a speedup.
 
 ## Development evidence
 
@@ -62,6 +62,6 @@ ACT-0004 records short real compile/execution checks of all three binaries, with
 
 ## Accepted pilot and collection budget
 
-ACT-0005 verified all 45000 raw observations and recomputed all 45 summary rows. I retain five fresh processes of 1000 exchanges as the initial comparison budget. There are 1000 fixture indices per parameter set reused across repetitions, so repeated rows must not be treated as independent experimental runs. The [review](runs/EXP-000-RUN-0003.md) records durations, descriptive variation and limitations.
+ACT-0005 verified all 45000 raw observations and recomputed all 45 summary rows. I keep five fresh processes of 1000 exchanges as the initial comparison budget. There are 1000 fixture indices per parameter set reused across repetitions, so repeated rows must not be treated as independent experimental runs. The [review](runs/EXP-000-RUN-0003.md) records durations, descriptive variation and limitations.
 
 The original summary uses CRLF and remains unchanged because its hash identifies the saved evidence. The writer now specifies LF for future summaries; the CSV-format correction changes neither timing code nor parsed numeric values.

@@ -1,6 +1,6 @@
 # Practical completion record
 
-The original experimental programme, selected-source review and separate random-seed follow-up are complete. The selected implementation is EXP-005; the [candidate decision](final_candidate.md) records its identity, rationale and tradeoffs.
+I have completed the original experiments, checked the selected source and finished the separate random-seed follow-up. The selected implementation is EXP-005; the [candidate decision](final_candidate.md) records its identity, rationale and tradeoffs.
 
 | Completed work | Authoritative record |
 |---|---|
@@ -10,6 +10,6 @@ The original experimental programme, selected-source review and separate random-
 | Five-session random-seed robustness follow-up | [EXP-010 results](random_seed_followup.md) |
 | Selected-source identity and reproducible outputs | [Source review](evidence/ACT-0022/selected-source-review.json), [follow-up verification](evidence/ACT-0026/final-verification.json), [reproduction guide](git_reproduce.md) |
 
-The remaining work is thesis composition: describe the completed methods, present the measured and adverse findings, discuss limitations, and verify literature-dependent claims against full text. The [writing plan](thesis_writing_plan.md) maps those tasks to the original research questions.
+The remaining work is to write the thesis. This includes explaining the methods, presenting both the improvements and adverse findings, discussing the limitations, and checking literature-dependent claims against the full text. The [writing plan](thesis_writing_plan.md) maps those tasks to the original research questions.
 
 EXP-004 was a deferred interaction study, not an unfinished required experiment. VTune was excluded. A fresh-platform evaluation, AVX2 transfer, whole-program constant-time proof, physical/fault testing and final ML-KEM certification remain outside the established results. No further measurement is required by the completed protocols.

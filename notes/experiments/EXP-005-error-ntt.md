@@ -12,7 +12,7 @@
 - Accepted timing: [EXP-005/RUN-0002](../runs/EXP-005-RUN-0002.md), using the [predeclared protocol](../error_ntt_timing.md); source [4bd813ed71a9](../source_revisions.md) and results [eb4c34586c75](../source_revisions.md).
 - Idea origin: the previously noted optional error-vector pilot, developed through local inspection of LIT-003: indcpa_keypair_derand, polyvec_ntt, poly_ntt, ntt, poly_tomont, poly_add, poly_reduce, params.h and cbd.c. No novelty claim or attribution of this exact edit to an unreviewed paper is made.
 
-I allocate EXP-005 because EXP-004 is already reserved for a distinct optional interaction/combination question. EXP-004 remains deferred; I do not silently repurpose that record or add a redundant combination run. EXP-005 estimates an incremental treatment conditional on the retained preceding variants.
+I allocate EXP-005 because EXP-004 is already reserved for a distinct optional interaction/combination question. EXP-004 remains deferred; I do not silently repurpose that record or add a redundant combination run. EXP-005 measures the next change on top of the earlier variants that I kept.
 
 ## Hypothesis and isolated change
 
@@ -20,7 +20,7 @@ In EXP-003 key generation, both skpv and the error vector e pass through polyvec
 
 The treatment calls ntt directly only for each polynomial of e. This leaves its transformed coefficients unreduced until the existing public-key reduction. The forward transform and its Montgomery calls are unchanged; the intervening addition preserves residues as long as its signed representation does not overflow. The skpv reduction, all encryption/decryption forward reductions, the vector-dot-product exit reduction and the inverse-transform schedule remain unchanged.
 
-The hypothesis is a key-generation duration reduction from removing K*256 Barrett calls. Encap and decap have no predicted arithmetic benefit and remain comparison controls. Compiler/layout effects or noise can still change any measured duration. No runtime percentage is inferred from call counts.
+I expect key generation to take less time after removing K*256 Barrett calls. I do not expect a direct arithmetic benefit in encap or decap, so they remain comparison controls. Compiler behaviour, code layout or measurement noise may still change any of the timings. The call counts do not predict a runtime percentage.
 
 | Parameter | Error coefficient bound ETA1 | Keygen Barrett EXP-003 -> EXP-005 | Calls removed | Encap / decap Barrett, unchanged | Montgomery keygen / encap / decap, unchanged |
 |---|---:|---:|---:|---:|---:|
@@ -28,7 +28,7 @@ The hypothesis is a key-generation duration reduction from removing K*256 Barret
 | Kyber768 | 2 | 3072 -> 2304 | 768 | 3328 / 4736 | 7296 / 8832 / 13056 |
 | Kyber1024 | 2 | 4096 -> 3072 | 1024 | 4224 / 5888 | 9728 / 11264 / 16384 |
 
-I specified these source-derived predictions before execution. RUN-0001 now confirms all ninety instrumented observations against them. They remove one quarter of EXP-003 keygen Barrett calls, not one quarter of keygen time.
+I specified these predictions calculated from the source before execution. RUN-0001 now confirms all ninety instrumented observations against them. They remove one quarter of EXP-003 keygen Barrett calls, not one quarter of keygen time.
 
 ## Caller contract, scale and conservative bounds
 
@@ -46,7 +46,7 @@ The unchanged forward NTT has seven stages at lengths 128,64,32,16,8,4,2. Let B 
 | 4 | 16643 | 27693952 | 19971 |
 | 2 | 19971 | 33231744 | 23299 |
 
-All products fit int32_t and the documented Montgomery interval. All additions/subtractions stored in int16_t fit its range. The final raw error transform is bounded by 23299 for Kyber512 or 23298 for Kyber768/1024. These are conservative envelopes, not measured maxima or optimal bounds. The internal forward NTT already executes with these unreduced intermediates in EXP-003; the proposed change removes only the reduction after that transform.
+All products fit int32_t and the documented Montgomery interval. All additions/subtractions stored in int16_t fit its range. The final raw error transform is bounded by 23299 for Kyber512 or 23298 for Kyber768/1024. These are conservative upper bounds. They are not the largest values observed in testing, and I do not claim they are the tightest possible bounds. The internal forward NTT already executes with these unreduced intermediates in EXP-003; the proposed change removes only the reduction after that transform.
 
 The other operand pkpv has just passed through poly_tomont, whose Montgomery outputs are bounded by 3328. Adding the raw error therefore yields at most 26627 or 26626, below 32767. The existing final polyvec_reduce is retained, so Barrett receives representable int16_t values and returns centred coefficients. Serialization receives the same canonical residues as before. Error e has no other consumer in this function and the input/output objects remain distinct.
 
@@ -88,13 +88,13 @@ The preflight requires the exact reviewed indcpa.c hash 900541c7291e25feb86e0d42
 | Inherited assumptions | Signed narrowing/right-shift behaviour in existing reducers remains tied to the recorded GCC/x86-64 target. Preserve earlier EXP-001/002/003 bounds and the EXP-002 dot-product canary tradeoff. |
 | Wider security | Larger internal representatives change stored values; public control flow alone does not assess power/EM or fault behaviour. No whole-program constant-time proof, statistical leakage result, portability, memory-safety certification, final ML-KEM conformance or production approval is established. |
 
-I reject or revise a candidate that fails the arithmetic/compatibility/security gate before timing. This experiment optimises implementation scheduling; it changes no cryptographic parameter, noise distribution or algorithmic security level. I do not infer implementation security from speed.
+I reject or revise a candidate that fails the arithmetic/compatibility/security gate before timing. This experiment optimises implementation scheduling. It changes no cryptographic parameter, noise distribution or algorithmic security level. I do not infer implementation security from speed.
 
 ## Validation support and execution
 
-Validation uses tests/test_error_ntt.c and scripts/run_error_ntt_validation.py. The test checks 47 full error-polynomial patterns: zero, dense extremes, both signs for eight index-bit patterns, both signs at ten boundary positions and eight deterministic interiors. The input range is the applicable ETA1. An ordinary modular forward-transform oracle calls neither reducer; it shares the twiddle table/transform layout, so it checks arithmetic equivalence rather than independently certifying the full specification.
+Validation uses tests/test_error_ntt.c and scripts/run_error_ntt_validation.py. The test checks 47 full error-polynomial patterns: zero, dense extremes, both signs for eight index-bit patterns, both signs at ten boundary positions and eight deterministic interiors. The input range is the applicable ETA1. An ordinary modular forward-transform oracle calls neither reducer. It shares the twiddle table/transform layout, so it checks arithmetic equivalence rather than independently certifying the full specification.
 
-For each vector, I compare raw ntt and centred poly_ntt residues and bounds, then add four offset patterns covering the conservative post-poly_tomont range [-3328,3328]. After the retained poly_reduce, both paths must give identical centred coefficients and serialized polynomial bytes. Per build this gives 12032 forward coefficient checks, 48128 addition/final-reduction coefficient checks and 188 serialization comparisons. The test explicitly checks representability before calling the addition. These targeted cases supplement the range proof; they are not exhaustive input coverage.
+For each vector, I compare raw ntt and centred poly_ntt residues and bounds, then add four offset patterns covering the conservative post-poly_tomont range [-3328,3328]. After the retained poly_reduce, both paths must give identical centred coefficients and serialized polynomial bytes. Per build this gives 12032 forward coefficient checks, 48128 addition/final-reduction coefficient checks and 188 serialization comparisons. The test explicitly checks representability before calling the addition. These targeted cases add testing evidence to the range proof. They do not cover every possible input.
 
 The formal run uses the original reference and actual candidate, all three parameters, normal and UBSan modes, and 100 established deterministic KEM fixtures per build. It also runs the existing candidate upstream suites and ten count fixtures per parameter. It extracts indcpa_keypair_derand, ntt, Montgomery and Barrett bodies from all six normal binaries. The expected total is 60 steps, including 24 assembly extractions. Unchanged standalone basemul/dot/inverse oracle suites are not repeated; their source identities and accepted evidence are preserved. No timings are collected.
 
@@ -111,13 +111,13 @@ The execution manifest retains assembly review pending as originally written. [A
 
 ## Historical development support status (ACT-0012)
 
-[ACT-0012 support evidence](../evidence/ACT-0012/error-ntt-validation-support-smoke.json) records twelve actual builds of only the existing original reference and accepted EXP-003, each with two KEM fixtures. The new oracle, addition/serialization checks and four-way transcripts pass for every parameter, with no compiler or exercised UBSan diagnostics. It verifies the test design through existing functions; it does not execute an edited EXP-005 key-generation call path.
+[ACT-0012 support evidence](../evidence/ACT-0012/error-ntt-validation-support-smoke.json) records twelve actual builds of only the existing original reference and accepted EXP-003, each with two KEM fixtures. The new oracle, addition/serialization checks and four-way transcripts pass for every parameter, with no compiler or exercised UBSan diagnostics. It verifies the test design through existing functions. It does not execute an edited EXP-005 key-generation call path.
 
-Before candidate implementation, the unapplied-change guard rejected the then-current EXP-003 source before metadata collection/run allocation, a changed preserved arithmetic hash was rejected, and old EXP-003 counts failed the new predicted keygen counts. The interval induction and count formulas were checked independently. The support check exercised existing arithmetic only; it supplied no formal EXP-005 candidate correctness, count, assembly or performance evidence. The subsequent candidate validation is recorded below.
+Before candidate implementation, the unapplied-change guard rejected the then-current EXP-003 source before metadata collection/run allocation, a changed preserved arithmetic hash was rejected, and old EXP-003 counts failed the new predicted keygen counts. The interval induction and count formulas were checked independently. The support check exercised existing arithmetic only. It supplied no formal EXP-005 candidate correctness, count, assembly or performance evidence. The subsequent candidate validation is recorded below.
 
 ## Accepted validation and security findings (ACT-0013)
 
-I verified all sixty steps, 120 raw streams, eighteen binaries, seven support files and exact committed source identities. All twelve normal/UBSan builds pass the targeted error-NTT/addition/serialization checks and 100 KEM fixtures; the four-way transcripts match for every parameter, including tested malformed/noncanonical cases. Three upstream suites and all ninety instrumented observations pass. No sanitizer diagnostics were emitted on the exercised paths. The [run review](../runs/EXP-005-RUN-0001.md) retains scope, hashes and limitations.
+I checked all sixty steps, 120 raw streams, eighteen binaries, seven support files and exact committed source identities. All twelve normal/UBSan builds pass the targeted error-NTT/addition/serialization checks and 100 KEM fixtures; the four-way transcripts match for every parameter, including tested malformed/noncanonical cases. Three upstream suites and all ninety instrumented observations pass. No sanitizer diagnostics were emitted on the exercised paths. The [run review](../runs/EXP-005-RUN-0001.md) retains scope, hashes and limitations.
 
 The range/scale argument remains valid for the exact applied call site: raw e is bounded by 23299/23298, the post-addition bound is 26627/26626, and the existing final reduction restores identical centred residues. skpv and all wide-dot/inverse input contracts remain unchanged. These claims depend on current noise bounds and consumers; sampled tests and UBSan do not establish arbitrary-input narrowing safety.
 
@@ -129,10 +129,10 @@ At ACT-0013 I accepted the validation gate and prepared [RUN-0002](../error_ntt_
 
 ## Accepted initial timing (ACT-0014)
 
-I accept [RUN-0002](../runs/EXP-005-RUN-0002.md) after verifying all sixty steps, source/tool/binary identities, 120 raw streams and exact reproduction of all 90000 durations into the three derived CSVs. Median paired keygen reductions against fresh EXP-003 are +5.18%/+0.48%/+1.36% for Kyber512/768/1024; all fifteen keygen pairs are positive and both order groups favour EXP-005. The Kyber768 effect is small and comparable to unchanged-operation movements, so its magnitude/mechanism needs confirmation.
+I accept [RUN-0002](../runs/EXP-005-RUN-0002.md) after verifying all sixty steps, source/tool/binary identities, 120 raw streams and exact reproduction of all 90000 durations into the three derived CSVs. Median paired keygen reductions against fresh EXP-003 are +5.18%/+0.48%/+1.36% for Kyber512/768/1024. All fifteen keygen pairs are positive and both order groups favour EXP-005. The Kyber768 effect is small and comparable to unchanged-operation movements, so its magnitude/mechanism needs confirmation.
 
-Encap/decap medians are +0.78%/+0.54%, +0.89%/+0.42% and -0.12%/-0.50%. The Kyber1024 encap result is mixed and decap is slower in four of five pairs. I retain those outcomes rather than claiming every operation improved. Unchanged normalised encryption/decryption bodies and shifted IND-CPA entry addresses demonstrate a layout change, without proving a timing cause. Count savings, wrapper bypass, code growth and environment can contribute together; an individual Barrett-call cost is not measured.
+Encap/decap medians are +0.78%/+0.54%, +0.89%/+0.42% and -0.12%/-0.50%. The Kyber1024 encap result is mixed and decap is slower in four of five pairs. I keep those outcomes rather than claiming every operation improved. Unchanged normalised encryption/decryption bodies and shifted IND-CPA entry addresses demonstrate a layout change, without proving a timing cause. Fewer calls, bypassing the wrapper, code growth and the environment may all contribute to the timings. I did not measure the cost of an individual Barrett call.
 
-The timing-build keygen/NTT/reducer bodies match all 24 accepted validation bodies. This preserves the earlier correctness/range/security review under verified identities; it adds no secret-class leakage measurement or whole-program proof. EXP-005 was retained with its bounds, code/stack/canary observations and single-session limits. The later [security assessment](../final_security_summary.md) and [three-session comparison](../final_comparison.md) support the final decision.
+The timing-build keygen/NTT/reducer bodies match all 24 accepted validation bodies. This preserves the earlier correctness/range/security review under verified identities. It adds no secret-class leakage measurement or whole-program proof. EXP-005 was retained with its bounds, code/stack/canary observations and single-session limits. The later [security assessment](../final_security_summary.md) and [three-session comparison](../final_comparison.md) support the final decision.
 
 The final arithmetic trial, [EXP-006](EXP-006-keygen-dot.md), tested keygen-only dot-output reduction deferral while preserving the general dot's centred inverse-input contract. Its mixed outcome closed the optimisation search; EXP-005 was subsequently selected as the final candidate.

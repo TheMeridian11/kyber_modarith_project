@@ -1,10 +1,10 @@
 # Source and archive revision index
 
-Readable notes use short linked revision identifiers. This index retains the full identifiers needed to recover source and archive states. The original manifests, source-selection file and earlier audit records retain their exact identities; no Git history is rewritten.
+The notes use short, linked revision identifiers to make them easier to read. This index keeps the full identifiers needed to recover the source and saved results. The original manifests, source-selection file and earlier review records keep their exact identities. Git history is not rewritten.
 
 For thesis prose, use descriptive implementation names and explain the arithmetic change. Give the pinned upstream revision and final evaluated source identity once in Methods or a reproducibility appendix. Individual results-saving commits belong in the supporting repository, not repeated throughout the chapters.
 
-Source/support revisions identify the state used for collection; results archive revisions identify later preservation. A results commit is not the source that generated those measurements. Protocol files and their full IDs are preserved; where a later annotation or support revision exists, the manifest identifies the collection-time version, as explained in the [record conventions](research_workflow.md#preservation-and-reproduction). All five EXP-010 manifests record the source/support identity listed below. This index describes recorded states rather than current Git refs.
+Source/support revisions identify the state used for collection; results archive revisions identify later preservation. A commit that saves results is not necessarily the source version that produced them. Protocol files and their full IDs are preserved; where a later annotation or support revision exists, the manifest identifies the collection-time version, as explained in the [record conventions](research_workflow.md#preservation-and-reproduction). All five EXP-010 manifests record the source/support identity listed below. This index describes the states recorded at those checkpoints. It does not report the current Git refs.
 
 ## Revision index
 

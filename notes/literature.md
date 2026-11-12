@@ -1,6 +1,6 @@
 # Literature and idea provenance
 
-These entries record source provenance and the scope of each literature review. Thesis citations use APA 7 references and verified locators. Bibliographic verification, abstract/source-code inspection and full-text review are distinct; outstanding checks remain explicit.
+These entries record where each source came from and how much of it I reviewed. Thesis citations use APA 7 references and checked page, section or code locations. I distinguish checking publication details from reading an abstract, inspecting source code or reading the full text. Any remaining checks are listed explicitly.
 
 ## LIT-001 Modular arithmetic optimisation
 
@@ -25,8 +25,8 @@ National Institute of Standards and Technology. (2024). *Module-lattice-based ke
 pq-crystals. (n.d.). *Kyber* (Commit [3edd5af59919](source_revisions.md)) [Computer software]. GitHub. https://github.com/pq-crystals/kyber/tree/3edd5af5991927164edd4aacebfcbee00b8064e7
 
 - Inspected: local pinned source and provenance; upstream README in the earlier review.
-- Relationship: EXP-000 and every implementation comparison. ACT-0012 traced EXP-005's error-vector consumer and conservative forward-NTT/addition bounds directly through indcpa.c, polyvec.c, poly.c, ntt.c, reduce.c, params.h and cbd.c; no new external literature was retrieved for that local-source argument.
-- ACT-0014: I traced EXP-006's keygen-only wide-dot output through poly_tomont, raw-error addition and the retained final public-key reduction. The proposal preserves general dot/inverse caller contracts. Its bounds/counts are local-source reasoning, not a result taken from an unreviewed publication.
+- Relationship: EXP-000 and every implementation comparison. ACT-0012 traced EXP-005's error-vector consumer and conservative forward-NTT/addition bounds directly through indcpa.c, polyvec.c, poly.c, ntt.c, reduce.c, params.h and cbd.c. No new external literature was retrieved for that local-source argument.
+- ACT-0014: I traced EXP-006's keygen-only wide-dot output through poly_tomont, raw-error addition and the retained final public-key reduction. The proposal preserves general dot/inverse caller contracts. The bounds and counts come from my local source analysis, rather than from a publication whose full text was not reviewed.
 - Reproduction: preserve pinned source, project/harness revisions, build commands and binary hashes.
 
 ## LIT-004 Statistical timing evidence
@@ -46,7 +46,7 @@ Free Software Foundation. (n.d.). *Program instrumentation options*. In *Using t
 - Inspected in ACT-0010: the official entries for signed-integer-overflow instrumentation/integer promotions and stack-protector variants. This was a targeted documentation check, not a review of the entire manual.
 - Relationship: EXP-003/EXP-005 explicit narrowing bounds cannot be replaced by a passing UBSan run. GCC describes overflow checks in terms of promoted arithmetic and gives an example where a small signed object's increment is not an overflow of that promoted arithmetic.
 - Stack context: protection selection can depend on local arrays/actual stack allocation. This supports interpretation of the EXP-002 observation, while the actual presence/absence of its canary comes from the saved assembly.
-- Scope: compiler documentation supports the interpretation of these checks; it does not validate the cryptographic implementation or prove constant-time behaviour.
+- Scope: compiler documentation supports the interpretation of these checks. It does not validate the cryptographic implementation or prove constant-time behaviour.
 
 ## LIT-006 Dynamic secret-flow checking
 
@@ -55,7 +55,7 @@ Valgrind Developers. (n.d.). *Memcheck: A memory error detector*. In *Valgrind u
 Related primary demonstration: https://github.com/agl/ctgrind
 
 - Inspected in ACT-0014: Memcheck section 4.2.2 on uninitialised-value uses and origin diagnostics; the ctgrind author's repository description of marking secrets and detecting their use in branches/addresses.
-- Relationship: [EXP-007](runs/EXP-007-RUN-0001.md) complements generated-code inspection and timing measurements by classifying public/secret values, marking secret operands and inspecting executed-path diagnostics. A generic undefined-value warning needs diagnosis; it is not automatically a cryptographic vulnerability.
+- Relationship: [EXP-007](runs/EXP-007-RUN-0001.md) complements generated-code inspection and timing measurements by classifying public/secret values, marking secret operands and inspecting executed-path diagnostics. An undefined-value warning needs investigation. It does not automatically mean there is a cryptographic vulnerability.
 - Implementation decision: use the verified Memcheck client-request interface. ACT-0016 records header/runtime inspection and harness sensitivity; ACT-0017 accepts formal dynamic collection.
 - Scope: this technique does not certify all paths, hardware instruction timing, physical leakage or exhaustive memory safety. Public-matrix rejection branches require correct public-input classification.
 
@@ -72,13 +72,13 @@ Intel Corporation. (n.d.). *Hotspots analysis*. In *Intel VTune Profiler user gu
 
 I inspected the official Memcheck manual (sections 4.2.2 and 4.7) and the actual Ubuntu valgrind 1:3.22.0-0ubuntu3 package headers. In usr/include/valgrind/memcheck.h, VALGRIND_MAKE_MEM_UNDEFINED and VALGRIND_MAKE_MEM_DEFINED map to Memcheck client requests; valgrind.h supplies RUNNING_ON_VALGRIND. I inspected the emitted XML protocol 4, error kinds UninitCondition/UninitValue, completion states, origin stacks and occurrence counts in real positive-control executions. Exact package/header/runtime hashes and retained reports are in [ACT-0016 support evidence](evidence/ACT-0016/secret-flow-support-smoke.json). This is interface/source and local execution evidence, not a new whole-program proof or a full-text paper review. [Official manual](https://valgrind.org/docs/manual/mc-manual.html).
 
-The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer complementary questions; the subsequent EXP-008 protocol fixes its budget and dudect reference revision. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
+The [EXP-007 protocol](experiments/EXP-007-secret-flow.md) makes my use of undefined-value propagation explicit and distinguishes defined twins from marked secrets. Dynamic dependency checks and statistical timing tests answer different, complementary questions. The subsequent EXP-008 protocol fixes the measurement budget and the dudect reference revision. I do not claim that throughput plots or quiet Memcheck reports establish absence of every side channel.
 
 ## ACT-0017 pinned timing-method review
 
 I inspected the full dudect header and repository license at [dc269651fb25](source_revisions.md). Source locators: t_push/t_compute/t_init for Welford/Welch accumulation, cpucycles for the upstream timer, update_statistics/prepare_percentiles for cropping and the online second-order view, and report/dudect_main for threshold 10 and sequential interpretation. I preserve exact source/license hashes in tests/timing_leakage_protocol.json and the original files under tests/reference/dudect/. This is a source-code review, not a newly obtained full-paper review. [Pinned primary source](https://github.com/oreparaz/dudect/blob/dc269651fb2567e46755cfb2a13d3875592968b5/src/dudect.h).
 
-EXP-008 uses a custom finite dudect-style screen. It retains balanced classes, observable kernels, Welch testing and threshold 10, but changes the timer to fenced RDTSCP, archives every interval, uses two fixed looks and three specified views, and does not use the upstream 100 cropped views or open-ended stopping. The pooled second-moment transform also differs from the upstream online per-class centring. I document these differences and do not call the experiment unmodified dudect or claim identical power/error calibration. An independent C oracle uses the unmodified pinned t_push/t_compute to verify my Python Welch calculation.
+EXP-008 uses a custom finite dudect-style screen. It retains balanced classes, observable kernels, Welch testing and threshold 10, but changes the timer to fenced RDTSCP, archives every interval, uses two fixed looks and three specified views, and does not use the upstream 100 cropped views or open-ended stopping. The pooled second-moment transform also differs from the upstream online per-class centring. I document these differences because the experiment does not use unmodified dudect. I do not claim that it has identical detection power or error calibration. An independent C oracle uses the unmodified pinned t_push/t_compute to verify my Python Welch calculation.
 
 Intel Corporation. (2016). *Intel 64 and IA-32 architectures software developer's manual, Volume 2B: Instruction set reference, M-U* (Order 253667-060US). https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf
 
@@ -94,5 +94,5 @@ ACT-0017 accepts formal EXP-007 dynamic-flow evidence and records separate stati
 - Claim supported in my own words:
 - Verified page/section/code locator:
 - Linked experiments:
-- Platform/protocol differences from my study:
+- Platform/protocol differences from this study:
 - Unverified claims and outstanding checks:

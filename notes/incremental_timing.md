@@ -4,17 +4,17 @@ I completed this protocol after [EXP-002/RUN-0001 validation and assembly](runs/
 
 ## What is compared
 
-I use scripts/run_incremental_comparison.py with the existing timing harness, CSV parser and paired-effect calculations. The control is fused-basemul (EXP-001); the candidate is wide-dot (EXP-002). I rebuild and time both in the same session. Historical EXP-001 durations do not substitute for a fresh control.
+I use scripts/run_incremental_comparison.py with the existing timing harness, CSV parser and paired-effect calculations. The control is fused-basemul (EXP-001); the candidate is wide-dot (EXP-002). I rebuild and time both in the same session. I measure EXP-001 again so the comparison uses a fresh control, rather than durations from an earlier run.
 
 The runner restores the 35 accepted EXP-001 source files from [d407b5134f14](source_revisions.md) into the new run's ignored build/exp001-source directory using read-only git show. Each file must match the SHA-256 in the accepted EXP-001 manifest. This does not check out a branch, modify the current arithmetic, or alter Git history/index state. The current candidate must match EXP-002/RUN-0001. Both source identities are recorded separately from the new support/run source commit.
 
-Both variants use the same reviewed GCC executable, normal -O3 flags and uninstrumented harness. Before measurement, their actual vector-dot-product and Montgomery-reducer assembly must match the ACT-0009 review. The comparison preserves instruction offsets, sizes, operands and symbolic branch targets while normalising resolved code/data locations. Objdump uses --insn-width=16 for new logs. A mismatch stops the attempt and preserves its evidence.
+Both variants use the same reviewed GCC executable, normal -O3 flags and uninstrumented harness. Before measurement, their actual vector-dot-product and Montgomery-reducer assembly must match the ACT-0009 review. The comparison keeps instruction offsets, sizes, operands and symbolic branch targets. It normalises resolved code/data locations so address relocation alone does not cause a mismatch. Objdump uses --insn-width=16 for new logs. A mismatch stops the attempt and preserves its evidence.
 
 ## Measurement and interpretation
 
-I retain the [established paired timing protocol](paired_timing.md): five pairs per parameter set, 100 warm-up and 1000 measured exchanges per process, seed 1, logical CPU 0, and CLOCK_MONOTONIC_RAW nanoseconds. Blocks 1/3/5 run EXP-001 first; blocks 2/4 run EXP-002 first. Each pair is adjacent, with parameter order 512/768/1024 inside each block. The three-versus-two order imbalance remains explicit.
+I keep the [established paired timing protocol](paired_timing.md): five pairs per parameter set, 100 warm-up and 1000 measured exchanges per process, seed 1, logical CPU 0, and CLOCK_MONOTONIC_RAW nanoseconds. Blocks 1/3/5 run EXP-001 first; blocks 2/4 run EXP-002 first. Each pair is adjacent, with parameter order 512/768/1024 inside each block. This gives three pairs in one order and two in the other, so the ordering is not perfectly balanced.
 
-There are 30 processes and 90000 operation durations, producing 90 process summaries, 45 paired effects and nine aggregate rows. This is the same practical automated budget as the first comparison. Fixtures repeat across blocks; these rows are not 90000 independent experiments. No full validation is repeated for this timing step.
+There are 30 processes and 90000 operation durations, producing 90 process summaries, 45 paired effects and nine aggregate rows. This is the same practical automated budget as the first comparison. The same test inputs repeat across blocks. The rows therefore do not represent 90000 independent experiments. No full validation is repeated for this timing step.
 
 - Speedup = EXP-001 process median / EXP-002 process median; above 1 favours EXP-002.
 - Improvement (%) = 100 * (1 - EXP-002 process median / EXP-001 process median); positive means EXP-002 took less time.
@@ -22,7 +22,7 @@ There are 30 processes and 90000 operation durations, producing 90 process summa
 
 The derived CSVs use exp001_ and exp002_ column prefixes so the control cannot be confused with the original baseline. I inspect all pairs and both execution orders before classifying improvement, regression or an inconclusive effect. I preserve negative observations and do not rerun merely to obtain a favourable result. Any further repetition needs a stated reason. I do not add these percentages to EXP-001's historical baseline comparison; a claim against the original reference requires suitable direct evidence.
 
-Input generation, output checks and CSV formatting remain outside measured operations. Operating-system randomness is excluded by the deterministic API mode. No timer-overhead subtraction or outlier removal is used. Unknown host power/background/core placement stays unknown; guest affinity does not establish physical-core placement. Timing gains do not resolve the security limitations or local stack-canary change recorded in the validation review.
+Input generation, output checks and CSV formatting remain outside measured operations. Operating-system randomness is excluded by the deterministic API mode. No timer-overhead subtraction or outlier removal is used. Unknown host power/background/core placement stays unknown; guest affinity does not establish physical-core placement. Faster timings do not remove the security limitations or the local stack-canary change described in the validation review.
 
 ## Run and preserve
 

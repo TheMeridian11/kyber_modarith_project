@@ -18,9 +18,9 @@ echo $?
 python3 -m json.tool results/EXP-000/RUN-0002/manifest.json
 ```
 
-The default timeout is 120 seconds for each build or test. I may supply --host-os, --power-mode and --background-load with facts I have verified. Unspecified values remain unknown. A timeout limit is execution control, not a measured performance result.
+The default timeout is 120 seconds for each build or test. I may supply --host-os, --power-mode and --background-load with facts I have verified. Unspecified values remain unknown. The timeout limits how long a command may run. It is not a performance measurement.
 
-The collector requires committed files outside results/ and refuses an existing run directory. The validation runner reserves the ID itself; a separate collector invocation would preallocate it.
+The collector requires committed files outside results/ and refuses an existing run directory. The validation runner reserves the ID itself. Running the collector separately would reserve it too early.
 
 ## Output and build policy
 
@@ -31,7 +31,7 @@ The collector requires committed files outside results/ and refuses an existing 
 
 The build flags match the pinned upstream functional-test flags. The command explicitly selects KYBER_K=2, 3 or 4. Fresh output paths avoid reusing stale binaries. I use a defined PATH, LC_ALL and TMPDIR environment for child processes; arbitrary inherited include/library overrides are not forwarded.
 
-The original source trees and Makefiles remain unchanged. The manifest retains executable hashes and build commands even though generated binaries are ignored. The initial metadata file continues to say metadata-only and not-run; actual execution belongs in manifest.json.
+The original source trees and Makefiles remain unchanged. The manifest retains executable hashes and build commands even though generated binaries are ignored. The initial metadata file continues to say metadata-only and not-run because it describes the state before execution. manifest.json records what actually ran.
 
 ## Acceptance and failure handling
 
@@ -43,7 +43,7 @@ I accept the run only if:
 4. provenance_recheck is pass.
 5. benchmark_executed remains false, with arithmetic_safety and timing_behaviour still not-run.
 
-Any failure stops subsequent builds/tests and retains completed and partial evidence. A negative subprocess exit code represents termination by a signal. Ordinary interruption is recorded; an abrupt system shutdown or uncatchable termination may leave status running, which is incomplete and must not be accepted.
+If a step fails, the runner stops the remaining builds/tests and saves both completed and partial evidence. A negative subprocess exit code represents termination by a signal. Ordinary interruption is recorded; an abrupt system shutdown or uncatchable termination may leave status running, which is incomplete and must not be accepted.
 
 I preserve failed/incomplete directories and use a new run ID after correcting the cause. I do not reuse RUN-0002 if an attempt has already reserved it.
 

@@ -12,7 +12,7 @@
 - Accepted timing: [EXP-006/RUN-0002](../runs/EXP-006-RUN-0002.md). Subsequent study: [EXP-007 secret-flow assessment](EXP-007-secret-flow.md).
 - Origin: local inspection of indcpa.c, polyvec.c, poly.c and reduce.c, extending the consumer-specific reasoning in EXP-005. I make no novelty claim or attribution of this exact proposal to an unreviewed paper.
 
-I make this the final planned optimisation trial before freezing the candidate set. A correct but slower result completes the experiment and can be rejected for performance. It does not require another optimisation. The [practical completion checklist](../practical_completion.md) then requires the focused security assessment, final comparisons and reproducibility outputs.
+I make this the final planned optimisation trial before freezing the candidate set. The experiment is still complete if the code is correct but slower. In that case, I can reject the change on performance grounds without needing to try another optimisation. The [practical completion checklist](../practical_completion.md) then requires the focused security assessment, final comparisons and reproducibility outputs.
 
 ## Question and isolated change
 
@@ -20,7 +20,7 @@ In EXP-005, key generation calls polyvec_basemul_acc_montgomery, which ends with
 
 The treatment introduced a separate keygen-only function containing the existing wide-dot arithmetic and ending in poly_tomont instead of poly_reduce. The keygen call replaces the old dot-plus-tomont pair. The general dot function stays unchanged because encryption/decryption callers feed the centred result into the EXP-003 inverse transform. The new API includes the scale conversion and is not interchangeable with that general API.
 
-Duplicating the small kernel intentionally isolates this caller-specific contract. It can increase code size, change inlining, call placement, register use or instruction-cache behaviour. The measured tradeoffs below test this hypothesis; fewer reductions do not guarantee faster code. No allocation, parameter, noise distribution, cryptographic security level or protection flag changes.
+I duplicate the small kernel so the keygen-specific input and output requirements stay separate from those of the general function. It can increase code size, change inlining, call placement, register use or instruction-cache behaviour. The measurements below test whether the change is worthwhile. Fewer reductions do not guarantee faster code. No allocation, parameter, noise distribution, cryptographic security level or protection flag changes.
 
 | Parameter | Keygen Barrett EXP-005 -> predicted EXP-006 | Calls removed | Encap / decap Barrett, unchanged | Montgomery keygen / encap / decap, unchanged |
 |---|---:|---:|---:|---:|
@@ -28,7 +28,7 @@ Duplicating the small kernel intentionally isolates this caller-specific contrac
 | Kyber768 | 2304 -> 1536 | 768 | 3328 / 4736 | 7296 / 8832 / 13056 |
 | Kyber1024 | 3072 -> 2048 | 1024 | 4224 / 5888 | 9728 / 11264 / 16384 |
 
-These were source-derived predictions before execution. RUN-0001 now confirms all ninety instrumented observations against them. Saving K*256 calls removes one third of EXP-005 keygen Barrett calls, not one third of keygen time. Encap and decap remain control operations with no predicted direct arithmetic benefit.
+These were predictions calculated from the source before execution. RUN-0001 now confirms all ninety instrumented observations against them. Saving K*256 calls removes one third of EXP-005 keygen Barrett calls, not one third of keygen time. Encap and decap remain control operations with no predicted direct arithmetic benefit.
 
 ## Range, representation and consumer argument
 
@@ -44,11 +44,11 @@ The three Montgomery calls per coefficient pair therefore remain within contract
 
 Montgomery reduction contributes R^-1 with R=2^16. The wide-dot result has the original R^-1 scale, including the Montgomery-scaled twiddle. Barrett only changes the representative. Keeping exactly one poly_tomont changes the result to the same ordinary dot-product scale as the old keygen path. The error NTT scale is unchanged. Thus the sum modulo q and final public-key bytes should agree; skpv and secret-key serialization are unchanged.
 
-This proof is conditional on the documented callers and target arithmetic assumptions. The actual matrix has the tighter 3328 bound; I do not broaden this keygen API into a general replacement. The general dot's centred output, encryption/decryption paths, malformed-input handling and EXP-003's inverse-input bound remain intact. Input/output objects at the keygen call are distinct. New callers or changed bounds require a new argument.
+This proof depends on the documented callers and the arithmetic assumptions for this target. The actual matrix has the tighter 3328 bound; I do not broaden this keygen API into a general replacement. The general dot's centred output, encryption/decryption paths, malformed-input handling and EXP-003's inverse-input bound remain intact. Input/output objects at the keygen call are distinct. New callers or changed bounds require a new argument.
 
 ## Implemented treatment — historical source
 
-The historical EXP-006 treatment consists of the following three changes, with all other source bytes preserved. RUN-0001 verifies their exact source hashes. The selected final checkout uses EXP-005; these snippets document the evaluated adverse trial.
+The historical EXP-006 treatment consists of the following three changes, with all other source bytes preserved. RUN-0001 verifies their exact source hashes. The selected final checkout uses EXP-005. These snippets document the evaluated adverse trial.
 
 ### 1. Add the dedicated function to polyvec.c
 
@@ -166,13 +166,13 @@ The runner requires committed source/support and a clean tree outside results/. 
 
 ## Accepted correctness and security/assembly findings (ACT-0015)
 
-I verified all 69 steps, 138 raw streams, eighteen binaries, seven support files and committed source identities. Twelve normal/UBSan builds pass the targeted dot/addition/serialization checks and four-way 100-fixture KEM transcript comparisons per parameter, including the tested invalid/noncanonical cases. Three upstream suites and ninety count observations pass. Keygen Barrett is now 1024/1536/2048; all Montgomery and encap/decap counts remain unchanged. The [run review](../runs/EXP-006-RUN-0001.md) records exact hashes, scope and limitations.
+I checked all 69 steps, 138 raw streams, eighteen binaries, seven support files and committed source identities. Twelve normal/UBSan builds pass the targeted dot/addition/serialization checks and four-way 100-fixture KEM transcript comparisons per parameter, including the tested invalid/noncanonical cases. Three upstream suites and ninety count observations pass. Keygen Barrett is now 1024/1536/2048. All Montgomery and encap/decap counts remain unchanged. The [run review](../runs/EXP-006-RUN-0001.md) records exact hashes, scope and limitations.
 
-The applied transformation preserves the conditional range and scale argument above. The wide dot's raw outputs fit int16_t, retained poly_tomont stays within its input/output bounds, and the final public-key addition/reduction gives matching tested coefficients/bytes. General dot and inverse-input centring remain untouched. Passing UBSan does not replace the narrowing argument or prove arbitrary-input safety.
+The applied transformation preserves the conditional range and scale argument above. The wide dot's raw outputs fit int16_t, retained poly_tomont stays within its input/output bounds, and the final public-key addition/reduction gives matching tested coefficients/bytes. General dot and inverse-input centring remain untouched. Passing UBSan does not replace the checks needed when converting values to narrower types. It also does not prove safety for arbitrary inputs.
 
 The new dedicated dot matches the general dot's normal instructions after function-symbol renaming except its final tail jump from poly_reduce to poly_tomont, after restoring its stack frame. Branches and addresses follow public pair parity/positions and a fixed 128-pair loop. The general dot, poly_tomont and both reducers retain EXP-005 normalised bodies. The changed keygen call path preserves skpv reduction, raw-error NTT, final addition/reduction and serialization.
 
-Keygen bodies change 442->423, 512->521 and 988->980 bytes; new dot bodies add 285/355/413 bytes. The scoped sum therefore grows 266/364/405 bytes, without claiming that this is total executable growth. Keygen local stack including saved registers changes 5272->5272, 9384->9368 and 15032->15032, excluding return address/callees. Each new dot uses 72 local bytes including saves and no canary, matching the preserved general dot's pattern. Keygen canaries, endbr64 and page probes remain; no protection flag is disabled. Kyber768's matrix calls become unrolled and Kyber1024 retains public-matrix rejection sampling, so timing reflects compiler/call-layout effects as well as removed reductions.
+Keygen bodies change 442->423, 512->521 and 988->980 bytes; new dot bodies add 285/355/413 bytes. The scoped sum therefore grows 266/364/405 bytes, without claiming that this is total executable growth. Keygen local stack including saved registers changes 5272->5272, 9384->9368 and 15032->15032, excluding return address/callees. Each new dot uses 72 local bytes including saves and no canary, matching the preserved general dot's pattern. Keygen canaries, endbr64 and page probes remain. No protection flag is disabled. Kyber768's matrix calls become unrolled and Kyber1024 retains public-matrix rejection sampling, so timing reflects compiler/call-layout effects as well as removed reductions.
 
 No new secret-coefficient-dependent branch/address choice is observed in the scoped changed path. This does not establish whole-program constant time, statistical leakage resistance, power/EM/fault resistance, exhaustive memory safety, signed portability or final ML-KEM conformance. The inherited EXP-002 dot-canary tradeoff remains recorded. The subsequent [EXP-007 dynamic-flow study](../runs/EXP-007-RUN-0001.md) includes EXP-006; EXP-008 does not directly test it. VTune remains outside scope.
 
@@ -182,4 +182,4 @@ Six development timing builds match all 33 reviewed bodies and twelve short proc
 
 I accept [RUN-0002](../runs/EXP-006-RUN-0002.md) from source [02cdbb13b49e](../source_revisions.md), archived in [42d68a7da90f](../source_revisions.md). All 90000 raw durations and derived summaries reproduce exactly, and all 33 reviewed bodies match. Keygen paired medians are -2.55%/+0.22%/+1.67% for Kyber512/768/1024; encap is -2.39%/-0.82%/-0.43%, decap -1.89%/-0.72%/-0.02%. Only ten of 45 pairs are positive. Kyber512 regressions and Kyber1024 keygen improvement persist in both order groups; the small/mixed effects require caution.
 
-The intended reduction-count saving is confirmed, but it is insufficient to predict overall speed. I do not attribute the regressions to a proven layout/cache mechanism or dismiss them as known noise. Existing arithmetic/security evidence remains valid within scope; throughput observations are not a leakage test. This mixed result closed the arithmetic search and retained EXP-006 as a secondary comparison. The later [security summary](../final_security_summary.md) and [final comparison](../final_comparison.md) record their distinct variant coverage and support EXP-005 selection. [Thesis figures](../thesis_figures.md) retain the adverse result alongside the successes.
+The measurements confirm the expected reduction-call saving. However, that saving alone does not predict the overall speed. I do not attribute the regressions to a proven layout/cache mechanism or dismiss them as known noise. Existing arithmetic/security evidence remains valid within scope; throughput observations are not a leakage test. This mixed result closed the arithmetic search and retained EXP-006 as a secondary comparison. The later [security summary](../final_security_summary.md) and [final comparison](../final_comparison.md) record their distinct variant coverage and support EXP-005 selection. [Thesis figures](../thesis_figures.md) retain the adverse result alongside the successes.
