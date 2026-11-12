@@ -1,14 +1,26 @@
 # Thesis figures, tables and reproduction
 
-## Current artifacts
+## Choosing figures for the thesis
 
-The figure set begins with ACT-0016 incremental measurements and counts and ends with the complete ACT-0020 comparison below. Each figure has SVG and PDF vector exports plus a 300-dpi PNG. Render checks and corrections are recorded with the corresponding provenance. The tables contain unrounded values; display labels are rounded for readability. The figures include slower and mixed outcomes.
+The accepted set covers the initial arithmetic trials, security assessments, completed three-session comparison and five-session random-seed follow-up. Use the completed comparison and follow-up for the main performance argument; the preliminary first-session plot remains part of the research record.
 
-| Figure | Vector master | Raster preview | Supporting data |
+| Purpose | Recommended figure |
+|---|---|
+| Closing performance comparison | [Three-session estimates (PDF)](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf) |
+| Robustness across random input fixtures | [Candidates against the original (PDF)](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf) |
+| Additional benefit and costs of the selected candidate | [Direct candidate contrast (PDF)](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf) and [code/local-stack costs (PDF)](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf) |
+| Arithmetic motivation and research progression | [Reduction counts (PDF)](../analysis/figures/ACT-0016/reduction-counts.pdf) and [incremental effects (PDF)](../analysis/figures/ACT-0016/incremental-effects-overview.pdf) |
+| Bounded security findings | [Secret-flow coverage (PDF)](../analysis/figures/ACT-0017/exp007-secret-flow.pdf) and [timing-screen diagnostics (PDF)](../analysis/figures/ACT-0018/exp008-timing-screen.pdf) |
+
+PDF is the usual thesis export; SVG and 300-dpi PNG alternatives, plotted data and provenance are linked below. Tables preserve unrounded values; display labels are rounded. Keep the adverse outcomes and caption limits when adapting a figure. [Reproduction commands](#reproduce) generate fresh copies without replacing accepted artifacts.
+
+## ACT-0016 incremental measurements and counts
+
+| Figure | Vector exports | Raster preview | Supporting data |
 |---|---|---|---|
-| EXP-006 paired effects | [SVG](../analysis/figures/ACT-0016/exp006-paired-effects.svg), [PDF](../analysis/figures/ACT-0016/exp006-paired-effects.pdf) | [PNG](../analysis/figures/ACT-0016/exp006-paired-effects.png) | [All 45 pairs](../analysis/figures/ACT-0016/exp006-paired-effects.csv) |
-| Incremental results across experiments | [SVG](../analysis/figures/ACT-0016/incremental-effects-overview.svg), [PDF](../analysis/figures/ACT-0016/incremental-effects-overview.pdf) | [PNG](../analysis/figures/ACT-0016/incremental-effects-overview.png) | [45 parameter/operation/experiment groups](../analysis/figures/ACT-0016/incremental-effects.csv) |
-| Modular-reduction counts | [SVG](../analysis/figures/ACT-0016/reduction-counts.svg), [PDF](../analysis/figures/ACT-0016/reduction-counts.pdf) | [PNG](../analysis/figures/ACT-0016/reduction-counts.png) | [54 count groups](../analysis/figures/ACT-0016/reduction-counts.csv) |
+| EXP-006 paired effects | [PDF](../analysis/figures/ACT-0016/exp006-paired-effects.pdf), [SVG](../analysis/figures/ACT-0016/exp006-paired-effects.svg) | [PNG](../analysis/figures/ACT-0016/exp006-paired-effects.png) | [All 45 pairs](../analysis/figures/ACT-0016/exp006-paired-effects.csv) |
+| Incremental results across experiments | [PDF](../analysis/figures/ACT-0016/incremental-effects-overview.pdf), [SVG](../analysis/figures/ACT-0016/incremental-effects-overview.svg) | [PNG](../analysis/figures/ACT-0016/incremental-effects-overview.png) | [45 parameter/operation/experiment groups](../analysis/figures/ACT-0016/incremental-effects.csv) |
+| Modular-reduction counts | [PDF](../analysis/figures/ACT-0016/reduction-counts.pdf), [SVG](../analysis/figures/ACT-0016/reduction-counts.svg) | [PNG](../analysis/figures/ACT-0016/reduction-counts.png) | [54 count groups](../analysis/figures/ACT-0016/reduction-counts.csv) |
 
 ACT-0017 corrects trailing whitespace in the three initial SVG files and updates their provenance. The original PNG/PDF/CSV bytes and all 22 data inputs are unchanged. The [original provenance](evidence/ACT-0017/figure-provenance-before-correction.json) is retained, and [correction evidence](evidence/ACT-0017/figure-review.json) records old/new hashes. The ACT-0016 whitespace check omitted SVG files, so its broad passing statement was incomplete. The generator now canonicalises SVG line endings, and the final check includes SVG.
 
@@ -22,91 +34,45 @@ The [provenance manifest](../analysis/figures/ACT-0016/provenance.json) records 
 
 **Reduction counts.** The figure shows observed Montgomery and Barrett calls per complete keygen, encapsulation and decapsulation operation in the separate instrumented builds. Each group contains ten deterministic fixtures with agreeing counts. Stage labels identify actual cumulative implementations, with the original reference shown separately. Lines connect discrete implementation stages; they are not a calendar-time trend. Function-call savings are not instruction counts, proportional speed predictions or security evidence. EXP-006 remains visible even though it was not adopted as the general final candidate.
 
-## Reproduce
-
-I use Python 3.12, Matplotlib 3.10.8 and the exact dependency versions in [requirements-figures.txt](../analysis/requirements-figures.txt). The ACT-0016 environment used existing pip to install into an isolated temporary virtual environment; no system Python package was changed. From the repository root, with Python venv and pip available:
-
-```sh
-python3 -m venv --without-pip /tmp/kyber-thesis-figures
-python3 -m pip --python /tmp/kyber-thesis-figures/bin/python install -r analysis/requirements-figures.txt
-/tmp/kyber-thesis-figures/bin/python -B analysis/build_thesis_figures.py
-```
-
-[build_thesis_figures.py](../analysis/build_thesis_figures.py) verifies every pinned input hash, checks completed run/provenance status, verifies recorded derived-file hashes, recomputes all 225 paired percentage effects and 45 group medians/extrema, and checks 54 count groups. It writes only derived figure/table files, not results/. The optional --output selects another figure directory; otherwise it regenerates analysis/figures/ACT-0016. SVG IDs are deterministic and PDF/SVG calendar metadata is omitted. Package and Python versions remain recorded. The raw data and full precision are preserved independently of the graphic format.
-
 ## ACT-0017 formal secret-flow coverage figure
 
-I generated [SVG](../analysis/figures/ACT-0017/exp007-secret-flow.svg), [PDF](../analysis/figures/ACT-0017/exp007-secret-flow.pdf) and [PNG](../analysis/figures/ACT-0017/exp007-secret-flow.png) versions of the accepted EXP-007 coverage matrix, with [99 marked-mode process outcomes](../analysis/figures/ACT-0017/exp007-secret-flow.csv) and [provenance](../analysis/figures/ACT-0017/provenance.json). I visually inspected the rendering.
+[PDF](../analysis/figures/ACT-0017/exp007-secret-flow.pdf), [SVG](../analysis/figures/ACT-0017/exp007-secret-flow.svg), [PNG](../analysis/figures/ACT-0017/exp007-secret-flow.png), [99 marked-mode process outcomes](../analysis/figures/ACT-0017/exp007-secret-flow.csv), [provenance](../analysis/figures/ACT-0017/provenance.json). The rendering was visually reviewed.
 
 **Caption.** The figure shows marked-mode outcomes for eight target path/operand-role cases and three controls across original/EXP-005/EXP-006 and all parameter sets. All 72 target processes and nine negative controls are quiet; all nine branch and nine address positive controls are detected. Each target process exercises eight fixtures, with 128 pairs per basemul fixture. The 99 defined twins are also quiet and retained in the raw run. Colour identifies expected outcomes; it is not a numerical security rating. Quiet means no marked-secret branch/address dependency observed on the exercised paths. This is neither a statistical timing result nor whole-program constant-time proof.
 
-I reproduce it using the same figure environment:
-
-```sh
-/tmp/kyber-thesis-figures/bin/python -B analysis/build_security_figures.py
-```
-
-The initial exports remain under ACT-0016 with their explicit ACT-0017 whitespace revision; the new security figure is under ACT-0017. ACT-0018 below adds the audited formal EXP-008 timing plot. I retain the existing incremental heatmap to explain that EXP-003's sizeable inverse-NTT benefit is already part of EXP-005. The final original/EXP-003/EXP-005 figures below use directly measured matched data.
-
 ## ACT-0018 formal timing-screen diagnostics
 
-I generated [SVG](../analysis/figures/ACT-0018/exp008-timing-screen.svg), [PDF](../analysis/figures/ACT-0018/exp008-timing-screen.pdf) and [PNG](../analysis/figures/ACT-0018/exp008-timing-screen.png), with [all 1944 statistics](../analysis/figures/ACT-0018/exp008-timing-screen.csv) and [provenance](../analysis/figures/ACT-0018/provenance.json). I inspected the PNG and independently regenerated all five outputs byte-for-byte.
+[PDF](../analysis/figures/ACT-0018/exp008-timing-screen.pdf), [SVG](../analysis/figures/ACT-0018/exp008-timing-screen.svg), [PNG](../analysis/figures/ACT-0018/exp008-timing-screen.png), [all 1944 statistics](../analysis/figures/ACT-0018/exp008-timing-screen.csv), [provenance](../analysis/figures/ACT-0018/provenance.json). The PNG was visually reviewed and all five outputs independently regenerated byte-for-byte.
 
 **Caption.** The figure shows the maximum absolute Welch statistic for each target path and implementation/parameter combination in EXP-008/RUN-0001. Each cell covers two synthetic profiles, two process repetitions, two fixed looks and three views (24 statistics); no target statistic exceeds the predeclared diagnostic threshold 10. Every process retains 50000 analysis observations plus 2000 calibration observations. The lower panel shows each negative control's maximum across its six statistics, and each deliberate positive control's final uncropped mean statistic, matching their acceptance rules. All 18 positives are detected and all 18 negatives are quiet. Timing uses TSC ticks. These are bounded empirical observations, not calibrated family-wise inference, tiny-leak sensitivity guarantees, an implementation ranking or a whole-program constant-time proof.
 
-I reproduce the audit with local ignored build files still present, then generate the figure into a new directory using the pinned plotting environment:
-
-```sh
-/tmp/kyber-thesis-figures/bin/python -B analysis/review_timing_leakage.py --out /tmp/exp008-review-copy.json
-/tmp/kyber-thesis-figures/bin/python -B analysis/build_timing_leakage_figures.py --output /tmp/exp008-figure-copy
-```
-
-The retained review supplies all plot data even if ignored binaries later disappear; repeating the full identity audit requires those exact binaries or a separately documented rebuild. The final figures below show EXP-009's three sessions and all three direct contrasts. Development measurements remain separate from formal performance evidence.
-
 ## ACT-0019 preliminary direct-performance figure
 
-I generated [SVG](../analysis/figures/ACT-0019/exp009-session1-effects.svg), [PDF](../analysis/figures/ACT-0019/exp009-session1-effects.pdf) and [300-dpi PNG](../analysis/figures/ACT-0019/exp009-session1-effects.png) exports of the accepted first EXP-009 session. I retain [all 324 plotted pairs](../analysis/figures/ACT-0019/exp009-session1-effects.csv), [input/code/output provenance](../analysis/figures/ACT-0019/provenance.json) and [render/reproduction review](evidence/ACT-0019/figure-review.json). I inspected the rendering and regenerated all five outputs byte-for-byte.
+[PDF](../analysis/figures/ACT-0019/exp009-session1-effects.pdf), [SVG](../analysis/figures/ACT-0019/exp009-session1-effects.svg), [PNG](../analysis/figures/ACT-0019/exp009-session1-effects.png), [all 324 plotted pairs](../analysis/figures/ACT-0019/exp009-session1-effects.csv), [provenance](../analysis/figures/ACT-0019/provenance.json). The [review](evidence/ACT-0019/figure-review.json) records visual inspection and byte-for-byte reproduction of all five outputs. Use the complete three-session figure for the closing result.
 
 **Caption.** The figure shows the direct original-to-EXP-003, original-to-EXP-005 and EXP-003-to-EXP-005 time reductions for EXP-009/RUN-0001, session 1 of the three predeclared sessions. Each dot is a within-block comparison of process medians, each based on 1000 operation timings. Diamonds show medians of 12 paired effects; horizontal spans show their observed ranges, not confidence intervals. The three parameter sets and all operations are shown, including mixed and negative effects. Positive means faster. The top two comparison rows share a scale; the bottom row expands the marginal effects. Point jitter follows block order only to improve visibility and has no numerical meaning. No durations are excluded. These single-host WSL results are preliminary; no cross-session repeatability or final candidate ranking is established here.
 
-I reproduce the raw/build audit while the exact local ignored binaries and restored sources remain available, then generate into a new directory with the previously pinned plotting environment:
-
-```sh
-python3 -B analysis/review_final_session.py --output /tmp/exp009-session1-review-copy.json
-/tmp/kyber-thesis-figures/bin/python -B analysis/build_final_session_figures.py --output /tmp/exp009-session1-figure-copy
-```
-
-The figure generator reanalyses the retained raw data and checks the accepted review, so it does not require ignored binaries. Repeating the full identity audit does require the original build files or a separately documented rebuild. This first-session graph is retained as a preliminary artifact. The final comparison uses all three session estimates and their descriptive range in the figures below.
-
 ## ACT-0020 final three-session and tradeoff figures
 
-I retain the preliminary ACT-0019 artifact as history and use the following completed results for the closing thesis comparison. Each figure has vector SVG/PDF and 300-dpi PNG, with plotted data and [provenance](../analysis/figures/ACT-0020/provenance.json). I inspected all three rendered PNGs and regenerated the thirteen figure/data/provenance files byte-for-byte; [review](evidence/ACT-0020/figure-review.json).
+These completed results support the closing comparison. The [provenance](../analysis/figures/ACT-0020/provenance.json) identifies inputs and outputs; the [review](evidence/ACT-0020/figure-review.json) records inspection of all three renderings and byte-for-byte reproduction of thirteen files. The [complete result](final_comparison.md), [candidate rationale](final_candidate.md) and [security matrix](final_security_summary.md) provide the interpretation. Cumulative effects are measured directly, not assembled from earlier incremental percentages.
 
 ### Three session estimates
 
-[SVG](../analysis/figures/ACT-0020/exp009-three-session-effects.svg), [PDF](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf), [PNG](../analysis/figures/ACT-0020/exp009-three-session-effects.png), [81 session estimates](../analysis/figures/ACT-0020/exp009-three-session-effects.csv).
+[PDF](../analysis/figures/ACT-0020/exp009-three-session-effects.pdf), [SVG](../analysis/figures/ACT-0020/exp009-three-session-effects.svg), [PNG](../analysis/figures/ACT-0020/exp009-three-session-effects.png), [81 session estimates](../analysis/figures/ACT-0020/exp009-three-session-effects.csv).
 
 **Caption.** The figure compares original-to-EXP-003, original-to-EXP-005 and EXP-003-to-EXP-005 operation-time reductions for Kyber512/768/1024 across all three predeclared EXP-009 sessions. A coloured marker is one session's median of 12 within-block effects, each calculated from two process medians of 1000 timings. The black diamond is the median of those three session estimates. The horizontal span is their observed range, not a confidence interval. Positive means faster; all adverse operation/parameter groups are shown. The first two contrast rows share a scale, and the bottom row expands the marginal effects. Vertical marker offsets improve visibility and carry no numerical meaning. These three separate invocations on one WSL host do not establish independent-host performance or population significance.
 
 ### Complete paired spread
 
-[SVG](../analysis/figures/ACT-0020/exp009-all-paired-effects.svg), [PDF](../analysis/figures/ACT-0020/exp009-all-paired-effects.pdf), [PNG](../analysis/figures/ACT-0020/exp009-all-paired-effects.png), [all 972 paired effects](../analysis/figures/ACT-0020/exp009-all-paired-effects.csv).
+[PDF](../analysis/figures/ACT-0020/exp009-all-paired-effects.pdf), [SVG](../analysis/figures/ACT-0020/exp009-all-paired-effects.svg), [PNG](../analysis/figures/ACT-0020/exp009-all-paired-effects.png), [all 972 paired effects](../analysis/figures/ACT-0020/exp009-all-paired-effects.csv).
 
 **Caption.** The figure shows every paired effect across 12 matched blocks per parameter in each of the three sessions. Colours/shapes identify sessions; slight vertical offsets distinguish blocks. Horizontal spans are the full observed block-effect ranges. The black diamond remains the median of three session estimates, not a pooled median of 36 pairs. No durations or adverse pairs are excluded and no timer overhead is subtracted. This spread plot complements the session-estimate figure; its ranges are not confidence intervals, and inner timing observations are not treated as independent experiments. The three contrasts share measurements and are not independent datasets.
 
 ### Keygen code and local-stack cost
 
-[SVG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.svg), [PDF](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf), [PNG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.png), [six variant/parameter rows](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.csv).
+[PDF](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.pdf), [SVG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.svg), [PNG](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.png), [six variant/parameter rows](../analysis/figures/ACT-0020/exp005-keygen-tradeoffs.csv).
 
-**Caption.** The figure shows EXP-005's additional keygen function-body bytes (17/33/40) and local-stack bytes (16/16/0) relative to EXP-003 for Kyber512/768/1024. I verify the earlier reviewed facts against identical normalized keygen bodies in all three closing sessions. Local stack includes saved registers and excludes the entry return address and every callee frame; this is not peak KEM memory. Keygen canary/probe instructions remain present. The inherited general-dot canary change is separate and retained in the security matrix. The chart is a scoped implementation-cost comparison, not a numerical security score.
-
-I regenerate these figures into a new directory using the pinned environment described above:
-
-```sh
-/tmp/kyber-thesis-figures/bin/python -B analysis/build_final_comparison_figures.py --output /tmp/exp009-final-figure-copy
-```
-
-The generator verifies the accepted audit, manifests and raw-derived three-session estimates. It does not require the ignored local executables. [The complete result](final_comparison.md), [candidate rationale](final_candidate.md) and [security matrix](final_security_summary.md) supply the interpretation. Earlier incremental/count/security graphics remain useful for the research progression; the final cumulative result is measured directly, not assembled from their percentages.
+**Caption.** The figure shows EXP-005's additional keygen function-body bytes (17/33/40) and local-stack bytes (16/16/0) relative to EXP-003 for Kyber512/768/1024. The reviewed costs agree with identical normalized keygen bodies in all three closing sessions. Local stack includes saved registers and excludes the entry return address and every callee frame; this is not peak KEM memory. Keygen canary/probe instructions remain present. The inherited general-dot canary change is separate and retained in the security matrix. The chart is a scoped implementation-cost comparison, not a numerical security score.
 
 ## ACT-0026 accepted random-seed dot-and-box figures
 
@@ -114,8 +80,8 @@ All five sessions of the [follow-up protocol](experiments/EXP-010-random-seeds.m
 
 | Figure | Exports | Plotted observations |
 |---|---|---|
-| Both candidates versus the original | [SVG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.svg), [PDF](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf), [PNG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-original-reference-dot-box.csv) | 1080 effects: 60 for each of 18 candidate/parameter/operation groups |
-| Selected candidate versus the inverse-transform candidate | [SVG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.svg), [PDF](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf), [PNG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.csv) | 540 effects: 60 for each of nine parameter/operation groups |
+| Both candidates versus the original | [PDF](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf), [SVG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.svg), [PNG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-original-reference-dot-box.csv) | 1080 effects: 60 for each of 18 candidate/parameter/operation groups |
+| Selected candidate versus the inverse-transform candidate | [PDF](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf), [SVG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.svg), [PNG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.csv) | 540 effects: 60 for each of nine parameter/operation groups |
 
 The [box statistics](../analysis/figures/EXP-010/box-statistics.csv), [five-session summaries](../analysis/figures/EXP-010/five-session-effects.csv) and [input/code/output provenance](../analysis/figures/EXP-010/provenance.json) retain the exact plotted quantities. EXP-003 is cumulative through the inverse-transform treatment, and EXP-005 adds the keygen error-vector treatment.
 
@@ -123,13 +89,56 @@ The [box statistics](../analysis/figures/EXP-010/box-statistics.csv), [five-sess
 
 The original-reference figure shows every effect above zero. The direct figure retains the additional keygen benefit alongside mixed small effects and the repeated Kyber1024 decapsulation cost. Kyber1024 encapsulation is mixed around zero, qualifying the earlier small penalty. The [full record](random_seed_followup.md) gives the exact medians and signs; the visual spread alone is not a significance test.
 
-For reproduction, use the pinned plotting requirements and a new output directory:
+ACT-0025's explicitly labelled synthetic rendering checks remain support evidence only. These ACT-0026-reviewed figures use actual measurements. The earlier closing-study artifacts remain separate and are not pooled with the follow-up.
+
+## Reproduce
+
+Run these commands from the repository root in Ubuntu/WSL with Python 3.12 and pip available. The [requirements](../analysis/requirements-figures.txt) pin Matplotlib 3.10.8 and its dependencies. A fresh temporary directory keeps generated copies separate from the accepted artifacts; installing into its `plot-deps` directory leaves system packages unchanged.
 
 ```sh
-PYTHONPATH=/tmp/kyber-exp010-plot-deps python3 -B analysis/build_random_seed_figures.py \
-  --runs results/EXP-010/RUN-0001 results/EXP-010/RUN-0002 \
-         results/EXP-010/RUN-0003 results/EXP-010/RUN-0004 results/EXP-010/RUN-0005 \
-  --output /tmp/exp010-figures-copy
+repro_root=$(mktemp -d /tmp/kyber-figures.XXXXXX)
+figure_deps="$repro_root/plot-deps"
+python3 -m pip install --target "$figure_deps" -r analysis/requirements-figures.txt
 ```
 
-The temporary dependency setup is documented in the [protocol](experiments/EXP-010-random-seeds.md). ACT-0025's explicitly labelled synthetic rendering checks remain support evidence only. These ACT-0026-reviewed figures use the actual measurements. Existing ACT-0020 figures remain the original closing-study artifacts and are not overwritten or pooled with the follow-up.
+Run the required generators below in the same shell. Each destination is new. The commands recalculate figures from retained data; they collect no new measurements.
+
+```sh
+PYTHONPATH="$figure_deps" python3 -B analysis/build_thesis_figures.py \
+  --output "$repro_root/act0016"
+
+PYTHONPATH="$figure_deps" python3 -B analysis/build_timing_leakage_figures.py \
+  --output "$repro_root/exp008"
+
+PYTHONPATH="$figure_deps" python3 -B analysis/build_final_session_figures.py \
+  --output "$repro_root/exp009-session1"
+
+PYTHONPATH="$figure_deps" python3 -B analysis/build_final_comparison_figures.py \
+  --output "$repro_root/exp009-final"
+
+PYTHONPATH="$figure_deps" python3 -B analysis/build_random_seed_figures.py \
+  --runs results/EXP-010/RUN-0001 results/EXP-010/RUN-0002 \
+         results/EXP-010/RUN-0003 results/EXP-010/RUN-0004 results/EXP-010/RUN-0005 \
+  --output "$repro_root/exp010"
+```
+
+The older [secret-flow generator](../analysis/build_security_figures.py) has a fixed output location and no `--output` option. Run an unchanged copy with its two input files in the temporary directory so it cannot overwrite the accepted coverage figure:
+
+```sh
+security_copy="$repro_root/exp007-copy"
+mkdir -p "$security_copy/analysis" \
+         "$security_copy/notes/evidence/ACT-0017" \
+         "$security_copy/results/EXP-007/RUN-0001"
+
+cp analysis/build_security_figures.py "$security_copy/analysis/"
+cp notes/evidence/ACT-0017/exp-007-run-0001-review.json \
+   "$security_copy/notes/evidence/ACT-0017/"
+cp results/EXP-007/RUN-0001/manifest.json \
+   "$security_copy/results/EXP-007/RUN-0001/"
+
+PYTHONPATH="$figure_deps" python3 -B "$security_copy/analysis/build_security_figures.py"
+```
+
+Its regenerated files appear under `$security_copy/analysis/figures/ACT-0017`. All six generators check their retained inputs or accepted reviews and record output provenance. The initial generator also checks the pinned 22-file input set and recalculates 225 paired effects, 45 group summaries and 54 count groups. Deterministic SVG IDs and omitted PDF/SVG calendar metadata support byte comparison under the recorded environment; package and Python versions remain in provenance where recorded.
+
+These figure commands do not require the ignored original executables. Full source/build-identity audits are separate checks that require those local artifacts or a separately documented rebuild; see the [reproduction guide](git_reproduce.md). Keep the generator scripts, pinned requirements, inputs, reviews and plotted data alongside the exports so the figures remain reproducible.

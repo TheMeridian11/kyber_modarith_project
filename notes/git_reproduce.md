@@ -1,54 +1,60 @@
 # Repository state and reproducibility
 
-## Selected source and history
+## Choose the task
 
-The selected working implementation is cumulative EXP-005. All 35 source files match [final_candidate.json](../analysis/final_candidate.json) and the historical snapshot at [4bd813ed71a9](source_revisions.md). The [final source review](evidence/ACT-0022/selected-source-review.json) also matches those identities to the accepted security runs and all three final comparison sessions.
+Reproducing retained data is different from collecting new measurements. The table identifies the existing tools and their requirements; their recorded paths and code are retained.
 
-Final source restoration and documentation were committed at [b2bd620d3eac](source_revisions.md). ACT-0023 inspected the local refs: main, reduction-counters, origin/main and origin/reduction-counters all point to that commit. ACT-0024 confirmed the same local ref identities before its documentation edits. No remote query was made during either editorial review. The 4474 archived result files are tracked. Historical experiment commits and the adverse EXP-006 result remain preserved.
+| Task | Tools | Required material |
+|---|---|---|
+| Recalculate the completed performance tables | [EXP-009 analyser](../scripts/analyse_final_comparison.py), [EXP-010 analyser](../scripts/analyse_random_seed_comparison.py) | Raw records, manifests and recorded support; no ignored executables |
+| Regenerate plots and plotted CSVs | The six [figure generators](thesis_figures.md#reproduce) | Retained data/reviews and pinned plotting dependencies; use fresh destinations |
+| Check source/build identities and independent calculations | [EXP-009 full review](../analysis/review_final_comparison.py), [EXP-010 full review](../analysis/review_random_seed_comparison.py), [timing-screen review](../analysis/review_timing_leakage.py) | Recorded ignored binaries/restored sources and the tools required by each audit; the timing review also reads its retained development archive |
+| Inspect historical collection procedures | `scripts/run_*.py` and the [experiment register](experiment_register.md) | The appropriate recorded source/support revision, exact source gates and a fresh run ID for any new collection |
+| Check the analysis and validation machinery | Python and C files under `tests/` | The dependencies declared by each test; development checks are distinct from formal observations |
 
-The source restoration changed three files: indcpa.c restored the general dot followed by poly_tomont; polyvec.c and polyvec.h removed the EXP-006-only function and declaration. Its 2 insertions and 41 deletions recovered the already measured candidate. The selection manifest retains its original checkout-at-selection field as historical evidence.
+Older runners also provide functions imported by current analysers. Retain them even when no further collection is planned. Historical collection commands are not guaranteed to work against today's selected checkout; the [record conventions](research_workflow.md) explain the source and preservation rules.
 
-## Reproduce the final tables
+## Reproduce the completed tables
 
-From the repository root, use a new output directory:
+Run from the repository root in Ubuntu/WSL with Python 3.12. Create a fresh scratch directory; each analyser creates its own new subdirectory.
 
 ```sh
+repro_root=$(mktemp -d /tmp/kyber-reproduce.XXXXXX)
+
 python3 -B scripts/analyse_final_comparison.py \
   --runs results/EXP-009/RUN-0001 results/EXP-009/RUN-0002 results/EXP-009/RUN-0003 \
-  --output /tmp/exp009-final-analysis-copy
-```
+  --output "$repro_root/exp009-analysis"
 
-This reconstructs the final tables from retained measurements without ignored binaries or a new benchmark run. It is retained-data reproduction, not a fresh-environment performance study.
-
-The complete source/tool/binary identity audit requires the recorded build directories and exact tools:
-
-```sh
-python3 -B analysis/review_final_comparison.py --output /tmp/exp009-final-audit-copy
-```
-
-[Figure instructions](thesis_figures.md) describe the pinned plotting environment and new output directories. ACT-0020 reproduced the three combined-analysis files, three audit reports and thirteen final figure/data/provenance files byte-for-byte.
-
-## Random-seed follow-up
-
-All five EXP-010 sessions are accepted in ACT-0026, with the source/support checkpoint recorded as [397cd83520c6](source_revisions.md). This is a recorded collection identity, not a claim about current local or remote refs. The [result record](random_seed_followup.md) reports 1620000 audited duration rows and separates the follow-up from EXP-009. The original results, source files and graphs remain unchanged. Current archival/remote status must be established through the normal manual Git workflow; no Git command was executed during this review.
-
-To reproduce the analysis into a new directory:
-
-```sh
 python3 -B scripts/analyse_random_seed_comparison.py \
   --runs results/EXP-010/RUN-0001 results/EXP-010/RUN-0002 \
          results/EXP-010/RUN-0003 results/EXP-010/RUN-0004 results/EXP-010/RUN-0005 \
-  --output /tmp/exp010-analysis-copy
+  --output "$repro_root/exp010-analysis"
 ```
 
-The full [review script](../analysis/review_random_seed_comparison.py) additionally checks the retained ignored binaries and restored sources and independently recalculates the arithmetic. It therefore requires those build artifacts. The analysis and [graph reproduction](thesis_figures.md#act-0026-accepted-random-seed-dot-and-box-figures) require retained data but do not rerun benchmarks. All five analysis files and eleven graph/data/provenance files reproduced byte-for-byte in ACT-0026.
+These commands read existing measurements and write copies beneath `repro_root`. They do not rerun benchmarks or overwrite the accepted outputs. Keep the two studies separate. [EXP-009](final_comparison.md) and [EXP-010](random_seed_followup.md) give their interpretations; [the figure guide](thesis_figures.md#reproduce) gives plotting setup and safe output paths.
 
-## Revision references
+Full local-artifact audits are optional additional checks. With the original ignored build artifacts still present, use new destinations under the same scratch directory:
 
-The [revision index](source_revisions.md) keeps the full commit IDs used by these records. Short linked IDs in the readable notes preserve traceability without repeating long hashes. This file provides reproduction and archive guidance; it is not a list of unfinished Git work. References to staging instructions in frozen protocols describe their collection-time workflow; this file now records the completed state.
+```sh
+python3 -B analysis/review_final_comparison.py \
+  --output "$repro_root/exp009-audit"
 
-## Preservation rules
+python3 -B analysis/review_random_seed_comparison.py \
+  --output "$repro_root/exp010-audit.json"
+```
 
-Existing ignored executables are not relabelled by source restoration. Their accepted identities remain those in the run manifests. Historical runners keep their original source gates and frozen support; replay uses the documented source revision and a new run ID. No replay is required for the completed study.
+Removing ignored build directories preserves retained-data analysis but removes the original executables needed for these full identity audits. A rebuild requires separate provenance and does not automatically recreate the recorded binary identity.
 
-Documentation corrections use new commits. Cited experiment history, raw observations and audit records are preserved. Routine commit/push command sequences are omitted from the research narrative; normal Git review remains the repository-maintenance process.
+## Selected source and historical checkpoints
+
+All 35 selected implementation files match [final_candidate.json](../analysis/final_candidate.json), the EXP-005 snapshot identified in the [revision index](source_revisions.md). [ACT-0022](evidence/ACT-0022/selected-source-review.json) verified the restoration of the already measured candidate; [ACT-0026](evidence/ACT-0026/final-verification.json) confirmed it remained unchanged during follow-up review.
+
+ACT-0023 and ACT-0024 recorded local refs and 4474 archived result files for the original programme. Those are historical observations, not the current branch, remote or whole-project file count. The later EXP-010 source/support checkpoint is recorded in all five manifests. Current commit/push state is established through the normal manual Git workflow.
+
+ACT-0020 reproduced the closing-study tables, audits and figures. ACT-0026 reproduced the five follow-up analysis files and eleven figure/data/provenance files byte-for-byte. The [activity log](project_log.md) links the detailed verification records.
+
+## Revision references and preservation
+
+Readable notes use descriptive implementation names and short linked revisions where needed; the [revision index](source_revisions.md) retains full commit IDs. Manifests, source pins and prior audits keep exact hashes. Source/support commits identify what was used to collect data; results commits identify later archival states.
+
+Preserve raw records, metadata, previous audits, accepted figure bundles and protocol versions. Existing ignored executables retain their recorded identities. Editorial corrections belong in new commits, with no rewriting of experimental history or relabelling of development data as formal results.

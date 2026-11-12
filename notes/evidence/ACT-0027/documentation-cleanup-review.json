@@ -1,0 +1,187 @@
+{
+  "activity_id": "ACT-0027",
+  "record_type": "documentation-cleanup-review",
+  "status": "verified",
+  "scope": "Documentation links, navigation, editorial condensation and retained-data reproduction instructions; no new scientific conclusions.",
+  "git_operations_performed": false,
+  "measurement_collection_performed": false,
+  "preservation": {
+    "comparison": "SHA-256 and byte size for ordinary files; symlink target where applicable. Git internals excluded.",
+    "existing_files_checked": 8219,
+    "edited_existing_markdown_files": 14,
+    "unchanged_existing_files": 8205,
+    "unchanged_file_set_digest_sha256": "89bfb7545158a93b2d2780b5cabc4e1365049b12b506728168ed4cc7b51bdca5",
+    "unchanged_file_set_digest_definition": "SHA-256 of JSON mapping relative path to original sha256/bytes or symlink target, sorted keys and compact separators; excludes the edited document list below.",
+    "missing_original_files": [],
+    "unexpected_changes": [],
+    "all_experiment_protocol_files_preserved": true,
+    "code_results_figures_and_prior_evidence_preserved": true,
+    "selected_source_hashes_verified": 35
+  },
+  "documents": {
+    "updated": [
+      {
+        "path": "README.md",
+        "before_sha256": "91f4cde804489653267d15b0c1f67fe1d6aceecd5d0ea10aa88539547c2587c4",
+        "after_sha256": "4f6bdae749f3d32a92d6bbf9d68f14a7571a3b049bc0a79cbec22086b91b6690"
+      },
+      {
+        "path": "notes/experiment_register.md",
+        "before_sha256": "5e4bd8900e1eb5b8ad86b93e865b64a1050a18c7f4af70d09ac3b24d7a0508a8",
+        "after_sha256": "36603642e43c2883e19be68b8bdb921f26fdc66d386c047ceeba5436c0383968"
+      },
+      {
+        "path": "notes/final_security_summary.md",
+        "before_sha256": "e1bcb12d01c318b0a4f356531803f7d8da9861d6ab5c74f187e709e2744b5f0b",
+        "after_sha256": "f3b9490f14a2f4d46264da8e93ba44252348f4cc10e2b2ded54ed9908f764013"
+      },
+      {
+        "path": "notes/git_reproduce.md",
+        "before_sha256": "bec4bd33923485180b8ad2712865bc7376f1e99aacc9ef951ef0cf5094ed83d8",
+        "after_sha256": "70674c40490cdd2b83e2cb117d7bc359277b90b3c11d477623d7b4f65a81c5cf"
+      },
+      {
+        "path": "notes/implementation_security.md",
+        "before_sha256": "5b80506b91293b30672c121d37fc32a30d4f9c2c5b78964336fca998b10d6d9b",
+        "after_sha256": "63f87578017904e21cbc59683d8c907f9851bde145442492f3585d44335f13b3"
+      },
+      {
+        "path": "notes/practical_completion.md",
+        "before_sha256": "c26dd91d26f8d1a761717c8fbea73b2a9fd8a741437cc2843ff66b6c3dda79b3",
+        "after_sha256": "cb114b62a52031a1c0ff712de03b2f75cf83f548f4b2ff2f822c079e739f58b4"
+      },
+      {
+        "path": "notes/project_log.md",
+        "before_sha256": "f6fcd526a16039dcde8ac0e248c2a40a4715d57940710f34aa6d242ead8a0efe",
+        "after_sha256": "4a7006c2dcfc71cb5c580fd83141672564f78a400b38c70f48d72a399e35ee18"
+      },
+      {
+        "path": "notes/research_workflow.md",
+        "before_sha256": "84c8018e69aef9529d5d9d424054b840a5a2233fa05231739702496d47bfa2a4",
+        "after_sha256": "02123ee716f367ccef37d26951f7ce7e817c4fd76090d29d8f4ba8e1b7dd621b"
+      },
+      {
+        "path": "notes/runs/EXP-009-RUN-0001.md",
+        "before_sha256": "d5a4fd2839a99de4c3f602286d1302f344d98cea98bf7d79356e4ec902efd13c",
+        "after_sha256": "0f686e90325f7de1f6aea943f00b61372e9657b85922f3455d63f9e483f9f122"
+      },
+      {
+        "path": "notes/runs/EXP-009-RUN-0002.md",
+        "before_sha256": "b814f30aa09b1e7eb50867fc3e455d8609ef2f40f483b905977fd9dfb8169bbf",
+        "after_sha256": "78b053e870791eb820c07c833b7e3909fc96bdae138bb6a26b529a95b116c0a7"
+      },
+      {
+        "path": "notes/runs/EXP-009-RUN-0003.md",
+        "before_sha256": "0cec3fd86c6331d6760e830fdecd4b5cad88da8b7fb78a7f28655ce0e6727426",
+        "after_sha256": "0e98c1e80191b91d534129478f707ac9dd5ac4f31c82c3cb0bdee469f6c00fe3"
+      },
+      {
+        "path": "notes/source_revisions.md",
+        "before_sha256": "c45d5520ded7e12e421a2b41a1b0243c22339736d833ca0187bd96b74e7184f6",
+        "after_sha256": "91f141a97983ef29624bbf7aa59e8a5eff4e58766664d3c586e3ba44192f72c8"
+      },
+      {
+        "path": "notes/thesis_figures.md",
+        "before_sha256": "0964ade1e9c5aacd4d7e1fd7a258d72df6c9d9afd49a176df1014628d488498e",
+        "after_sha256": "6cb806ee5c6660029df6dbaa5e195ca5c39677e82619c8dbdc7d9db36191fd7b"
+      },
+      {
+        "path": "notes/thesis_writing_plan.md",
+        "before_sha256": "e86387ed6ea80b5ca9c5a94671416ce3aead24813175bc356a34051665f08e20",
+        "after_sha256": "d22462e900a4e7ae906ba52b413f0f6bfcd4595b32280c088f52d07f73460f99"
+      }
+    ],
+    "added": [
+      "notes/git_handoff.md",
+      "notes/evidence/ACT-0027/documentation-cleanup-review.json"
+    ],
+    "original_edited_document_bytes": 129963,
+    "final_edited_document_bytes": 121854
+  },
+  "checks": {
+    "markdown_files_checked": 57,
+    "local_links_and_heading_targets_checked": 700,
+    "broken_local_links": [],
+    "readme_numeric_values_verified_against_accepted_csvs": 18,
+    "edited_document_whitespace_errors": [],
+    "shell_blocks_syntax_checked": [
+      "thesis_figures.md:block-1",
+      "thesis_figures.md:block-2",
+      "thesis_figures.md:block-3",
+      "git_reproduce.md:block-1",
+      "git_reproduce.md:block-2"
+    ]
+  },
+  "reproduction": {
+    "commands": "The retained-data analysis block and both figure-generation blocks in the revised guides; fresh /tmp output directories.",
+    "plotting_environment": "Used the existing pinned plotting installation. Dependency installation command syntax checked; no reinstallation or network access.",
+    "plotting_requirements_sha256": "39d8b5f8b8a048e8506b4330755b94af4be8cf96115a807e1e66f7e234bc6e7b",
+    "secret_flow_method": "Unchanged generator and its two recorded input files copied to an isolated temporary tree because the generator has a fixed relative output path.",
+    "command_groups": [
+      {
+        "task": "retained-data-analysis",
+        "exit_code": 0
+      },
+      {
+        "task": "five-output-option-figure-generators",
+        "exit_code": 0
+      },
+      {
+        "task": "isolated-secret-flow-generator",
+        "exit_code": 0
+      }
+    ],
+    "artifacts": [
+      {
+        "retained_directory": "analysis/final-comparison-EXP-009",
+        "files": 3,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/random-seed-EXP-010",
+        "files": 5,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/ACT-0016",
+        "files": 13,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/ACT-0017",
+        "files": 5,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/ACT-0018",
+        "files": 5,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/ACT-0019",
+        "files": 5,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/ACT-0020",
+        "files": 13,
+        "same_file_set": true,
+        "byte_identical": true
+      },
+      {
+        "retained_directory": "analysis/figures/EXP-010",
+        "files": 11,
+        "same_file_set": true,
+        "byte_identical": true
+      }
+    ],
+    "byte_identical_files": 60,
+    "full_binary_identity_audits": "Not rerun for this editorial change; optional audit commands syntax checked. Original local build files preserved."
+  }
+}

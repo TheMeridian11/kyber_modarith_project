@@ -1,6 +1,6 @@
 # Experiment register
 
-The five arithmetic treatments were evaluated as cumulative changes to the pinned reference implementation. The closing comparison selected EXP-005 with explicit performance and implementation-security tradeoffs. EXP-003 remains a substantial comparator; EXP-006 remains a mixed/adverse finding. The original collection and final-source review are complete. The separate random-seed follow-up, EXP-010, is also complete and supports the substantial cumulative gains while qualifying smaller direct effects.
+This register indexes the cumulative arithmetic trials, security assessments and two completed performance studies. Experiment-ID links lead to the historical plans; evidence links lead to accepted results. Lifecycle and decision columns give the current interpretation, even where a preserved plan uses prospective wording.
 
 | ID | Question or treatment | Lifecycle | Evidence and result | Decision |
 |---|---|---|---|---|

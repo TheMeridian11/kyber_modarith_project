@@ -1,56 +1,47 @@
 # Kyber modular-arithmetic optimisation
 
-This honours project evaluates changes to modular-reduction scheduling and intermediate arithmetic in the reference C implementation of Kyber. The study covers key generation, encapsulation and decapsulation for Kyber512, Kyber768 and Kyber1024, with separate correctness, performance and implementation-security assessments.
+This honours project evaluates modular-reduction scheduling in a pinned reference-C implementation of Kyber. It covers key generation, encapsulation and decapsulation for Kyber512, Kyber768 and Kyber1024, with separate correctness, performance and implementation-security assessments. Measurements used an Intel Core i9-12900KS running Ubuntu WSL and GCC 13.3.0.
 
-The original source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned to [3edd5af59919](notes/source_revisions.md). The results concern that implementation and the recorded platform; they do not establish final-standard ML-KEM conformance or superiority over other optimised implementations.
+## Findings
 
-Validation combined bounds on intermediate values with deterministic comparisons against the original implementation, invalid-input checks and undefined-behaviour sanitizer tests. Separate instrumented builds counted reduction calls, while ordinary builds supplied performance measurements. Benchmarks ran under Ubuntu WSL on an Intel Core i9-12900KS, using matched input fixtures and controlled process ordering. Raw measurements, build identities and analysis scripts are retained so the reported tables and figures can be traced back to the recorded runs.
+The selected implementation (EXP-005) combines fused base multiplication, wider vector-dot accumulation, staged inverse-transform reduction and deferred reduction of the keygen error vector. The preceding candidate (EXP-003) contains the first three changes. A further keygen-specific trial reduced call counts but gave mixed timings: fewer reductions did not always mean faster execution.
 
-## Main findings
+The table reports the selected implementation's percentage time reduction against the original reference. Each value is the median of session estimates, each based on 12 matched block effects. The three-session closing comparison and five-session random-seed follow-up are separate studies.
 
-Five arithmetic treatments were evaluated. The selected implementation combines fused base multiplication, wider vector-dot-product accumulation, staged inverse-transform reduction and deferred reduction of the key-generation error vector. A further keygen-specific treatment reduced call counts but produced mixed performance, demonstrating that fewer reductions alone do not guarantee faster execution.
-
-The final comparison used three separately launched sessions, each with 12 matched blocks for the original reference and two cumulative candidates. The table shows percentage time reductions against the original. Each value is the median of three session estimates; each session estimate is the median of its 12 paired effects.
-
-| Implementation | Parameter | Key generation | Encapsulation | Decapsulation |
+| Study | Parameter | Key generation | Encapsulation | Decapsulation |
 |---|---|---:|---:|---:|
-| EXP-003 | Kyber512 | 5.97% | 15.39% | 15.59% |
-| EXP-003 | Kyber768 | 13.18% | 18.48% | 18.64% |
-| EXP-003 | Kyber1024 | 16.07% | 19.48% | 20.00% |
-| EXP-005 | Kyber512 | 10.72% | 16.09% | 15.96% |
-| EXP-005 | Kyber768 | 13.44% | 19.08% | 18.80% |
-| EXP-005 | Kyber1024 | 17.47% | 19.30% | 19.71% |
+| Closing comparison (EXP-009) | Kyber512 | 10.72% | 16.09% | 15.96% |
+| Closing comparison (EXP-009) | Kyber768 | 13.44% | 19.08% | 18.80% |
+| Closing comparison (EXP-009) | Kyber1024 | 17.47% | 19.30% | 19.71% |
+| Random-seed follow-up (EXP-010) | Kyber512 | 10.93% | 16.09% | 16.06% |
+| Random-seed follow-up (EXP-010) | Kyber768 | 13.62% | 19.22% | 19.01% |
+| Random-seed follow-up (EXP-010) | Kyber1024 | 17.84% | 19.87% | 20.18% |
 
-EXP-003 is the cumulative implementation through the inverse-transform change. EXP-005 includes those changes and adds the keygen error-vector treatment. EXP-005 is the selected version: its additional keygen reductions over EXP-003 are 5.26%, 0.49% and 1.52%. Kyber1024 encapsulation and decapsulation are 0.15% and 0.36% slower than EXP-003 in the combined medians; these tradeoffs remain part of the result. The [complete comparison](notes/final_comparison.md) reports all sessions, block effects and conditions, and the [selection rationale](notes/final_candidate.md) explains the decision.
+The follow-up used 60 saved random seeds and supports the substantial gains over the original. Additional keygen benefit over the preceding candidate persisted. The small Kyber1024 decapsulation cost also repeated, while encapsulation differences were mixed. [Candidate selection and tradeoffs](notes/final_candidate.md) explain why both implementations remain useful.
 
-Correctness and compatibility checks passed within the tested inputs and reviewed arithmetic contracts. Dynamic secret-flow tests observed no marked-secret branch/address dependencies on the exercised paths, and the finite statistical screen detected no class-dependent timing difference. These findings, the inherited local-canary change and the code/local-stack costs are documented in the [security assessment](notes/final_security_summary.md). They do not constitute a whole-program constant-time proof or production certification.
+Reviewed arithmetic bounds, compatibility and exercised sanitizer checks support correctness within their stated scope. Dynamic secret-flow checks and a finite statistical timing screen found no targeted dependency or class-dependent timing difference in the tested cases. [The security conclusion](notes/final_security_summary.md) retains the code/local-stack and inherited local-canary tradeoffs. These single-platform findings do not establish a whole-program constant-time proof, production certification or final-standard ML-KEM conformance.
 
-## Research record
+## Read the project
 
-- [Experiment register](notes/experiment_register.md): treatments, outcomes and detailed experiment/run records.
-- [Activity log](notes/project_log.md): concise chronology of the research decisions and findings.
-- [Methods and record conventions](notes/research_workflow.md): provenance, measurement units and acceptance rules.
-- [Benchmark conditions](notes/benchmark_conditions.md): recorded environment and protocols, retrospective host details and remaining unknowns.
-- [Source revision index](notes/source_revisions.md): full commit IDs behind the shortened references.
-- [Reduction map](notes/reduction_map.md) and [literature record](notes/literature.md): arithmetic boundaries and idea provenance.
-- [Thesis figures and reproduction](notes/thesis_figures.md): PDF/SVG/PNG outputs, captions and plot data.
-- [Repository state and reproducibility](notes/git_reproduce.md): selected source and retained-data analysis commands.
-- [Completion record](notes/practical_completion.md) and [thesis writing plan](notes/thesis_writing_plan.md).
+| Route | Start here |
+|---|---|
+| Read the findings | [Closing comparison](notes/final_comparison.md), [random-seed follow-up](notes/random_seed_followup.md), [candidate decision](notes/final_candidate.md), [figures and captions](notes/thesis_figures.md) |
+| Reproduce the results | [Analysis, audit and script guide](notes/git_reproduce.md), [benchmark conditions](notes/benchmark_conditions.md), [safe figure reproduction](notes/thesis_figures.md#reproduce) |
+| Inspect the research record | [Experiment register](notes/experiment_register.md), [activity log](notes/project_log.md), [methods and record conventions](notes/research_workflow.md), [reduction map](notes/reduction_map.md), [literature](notes/literature.md) |
 
-## Source and repository layout
+The [thesis writing plan](notes/thesis_writing_plan.md) maps the evidence to the original research questions; the [completion record](notes/practical_completion.md) identifies the remaining writing work.
 
-The selected working source matches all 35 EXP-005 files pinned in [final_candidate.json](analysis/final_candidate.json), originally measured from [4bd813ed71a9](notes/source_revisions.md). The [repository record](notes/git_reproduce.md) documents the integrated source/results history and reproduction checks.
+## Source and layout
 
-- external/kyber-official/: pinned upstream source.
-- implementation/kyber-baseline-ref/: unchanged comparison source.
-- implementation/kyber-optimised-ref/: selected cumulative EXP-005 source.
-- scripts/, benchmarks/, tests/: collection, validation and measurement support.
-- results/: raw observations, manifests and per-run derived data.
-- analysis/: reproducible calculations, figures and plot data.
-- notes/: methods, experiment/run records, interpretation and retained audit evidence.
+The original [pq-crystals/kyber](https://github.com/pq-crystals/kyber) revision and evaluated source snapshots are recorded in the [revision index](notes/source_revisions.md). All 35 selected source files match [the source pin](analysis/final_candidate.json).
 
-The original experimental programme and final-source review are complete. EXP-004 remains a deferred interaction study, not an omitted failure. The earlier variants, mixed results and failed development attempts remain traceable in the detailed records. The frozen experiment protocols retain their precollection wording; the accepted result records give their completed outcomes.
+| Directory | Purpose |
+|---|---|
+| `implementation/` | Original reference and selected optimised implementation |
+| `external/` | Pinned upstream checkout |
+| `scripts/`, `benchmarks/`, `tests/` | Collection support, measurement harnesses and validation |
+| `results/` | Raw observations, manifests and per-run derived tables |
+| `analysis/` | Analysers, independent reviews, figure generators and outputs |
+| `notes/` | Interpretation, methods and detailed historical evidence |
 
-The separate [random-seed follow-up, EXP-010](notes/random_seed_followup.md), is complete: 60 saved random seeds, five separately launched sessions and 1.62 million recorded durations. Every matched original-reference comparison favoured both optimised implementations. The selected implementation's five-session median time reductions are 10.93–17.84% for key generation, 16.09–19.87% for encapsulation and 16.06–20.18% for decapsulation across the three parameter sets. These are separate follow-up estimates; the table above remains the original EXP-009 result.
-
-The additional keygen benefit over EXP-003 persists, at 5.24%, 0.20% and 1.69%. The Kyber1024 decapsulation cost repeats at 0.41%, while encapsulation is mixed and close to zero rather than a consistent penalty. The [dot-and-box graphs](notes/thesis_figures.md#act-0026-accepted-random-seed-dot-and-box-figures) retain every effect and distinguish observed block spread from the median of five session estimates. This supports performance robustness on the recorded platform; the descriptive spread is not a confidence interval or new leakage evidence.
+Code, historical protocols and adverse findings remain available for reproducibility. The experiment register links accepted outcomes separately from precollection plans; the original programme and random-seed follow-up are complete.

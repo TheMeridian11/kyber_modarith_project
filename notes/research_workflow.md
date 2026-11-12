@@ -33,7 +33,9 @@ A clean tree and a binary hash alone do not establish build provenance. The mani
 
 Raw results, metadata snapshots, manifests, previous audit records and published figure/data artifacts remain unchanged. Derived corrections are recorded separately. Rebuildable binaries are ignored by Git; their commands and hashes remain in the manifests. Retained-data analysis can be repeated without recollecting measurements, while full binary-identity audits require the recorded executables or a separately documented rebuild.
 
-The EXP-007/008/009 protocol Markdown files are hash-pinned inputs to existing collection and audit code. EXP-010's protocol Markdown is also part of its recorded support identity, and its JSON protocol pins the saved random-seed plan. Their historical wording and bytes are retained verbatim. The corresponding accepted result records report the completed findings. Editorial revisions to other narratives do not modify numerical observations or change what was planned before measurement.
+Protocol versions are part of the recorded support identity. EXP-008/009/010 retain the collection-time Markdown bytes; EXP-010's JSON protocol also pins the saved random-seed plan. EXP-007's current protocol includes a later ACT-0017 result section, so its collection-time identity must be recovered from the source revision recorded in its manifest. Some older support scripts likewise have later revisions. A current file is not a substitute for a recorded historical version merely because the path is the same.
+
+All experiment protocol files are preserved during editorial cleanup. Accepted result records state the completed findings separately. Use the [reproduction guide](git_reproduce.md) for retained-data analysis and the historical timing guides for their experiment-specific collection gates; editorial revisions do not change what was planned before measurement.
 
 ## Measurement and interpretation
 
