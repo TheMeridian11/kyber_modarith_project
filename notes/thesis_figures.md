@@ -108,10 +108,28 @@ I regenerate these figures into a new directory using the pinned environment des
 
 The generator verifies the accepted audit, manifests and raw-derived three-session estimates. It does not require the ignored local executables. [The complete result](final_comparison.md), [candidate rationale](final_candidate.md) and [security matrix](final_security_summary.md) supply the interpretation. Earlier incremental/count/security graphics remain useful for the research progression; the final cumulative result is measured directly, not assembled from their percentages.
 
-## EXP-010 planned random-seed dot-and-box figures
+## ACT-0026 accepted random-seed dot-and-box figures
 
-The [follow-up protocol](experiments/EXP-010-random-seeds.md) fixes five sessions and 60 randomly selected block seeds. No formal EXP-010 graph or result exists yet. The [generator](../analysis/build_random_seed_figures.py) will produce a nine-panel original-reference comparison and a separate nine-panel direct EXP-005-to-EXP-003 comparison after validating all five runs. Each output has SVG/PDF/300-dpi PNG, all plotted rows, box statistics and provenance. Commands are in the protocol.
+All five sessions of the [follow-up protocol](experiments/EXP-010-random-seeds.md) are accepted in ACT-0026. The [generator](../analysis/build_random_seed_figures.py) validates the raw-data runs before plotting. Both renderings were visually reviewed, and all eleven figure/data/provenance files reproduced byte-for-byte. The five combined-analysis files also reproduced. [Reproduction evidence](evidence/ACT-0026/artifact-reproduction.json), [figure review](evidence/ACT-0026/figure-review.json), [complete interpretation](random_seed_followup.md).
 
-**Planned caption.** Each coloured marker is one matched comparison of process medians, with 1000 timings per process. Colour and shape identify five separately launched sessions; all 60 effects per group remain visible. Boxes show inclusive-interpolated quartiles and the pooled block median, with full observed min–max whiskers. Black diamonds show the median of five session medians, preserving the declared summary unit. Positive means faster; all adverse values remain. Boxes and ranges are descriptive, not confidence intervals. Offsets distinguish points without numerical meaning. The spread includes input and measurement variation on one host and does not isolate input-only variance, establish portability or supply new leakage evidence.
+| Figure | Exports | Plotted observations |
+|---|---|---|
+| Both candidates versus the original | [SVG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.svg), [PDF](../analysis/figures/EXP-010/exp010-original-reference-dot-box.pdf), [PNG](../analysis/figures/EXP-010/exp010-original-reference-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-original-reference-dot-box.csv) | 1080 effects: 60 for each of 18 candidate/parameter/operation groups |
+| Selected candidate versus the inverse-transform candidate | [SVG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.svg), [PDF](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.pdf), [PNG](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.png), [CSV](../analysis/figures/EXP-010/exp010-direct-candidate-dot-box.csv) | 540 effects: 60 for each of nine parameter/operation groups |
 
-Development rendering checks use explicitly labelled synthetic values outside the formal figure directories. They are support evidence only and must not be used as thesis results. Existing ACT-0020 figures remain the accepted closing-study figures.
+The [box statistics](../analysis/figures/EXP-010/box-statistics.csv), [five-session summaries](../analysis/figures/EXP-010/five-session-effects.csv) and [input/code/output provenance](../analysis/figures/EXP-010/provenance.json) retain the exact plotted quantities. EXP-003 is cumulative through the inverse-transform treatment, and EXP-005 adds the keygen error-vector treatment.
+
+**Caption.** Each coloured marker is one matched comparison of process medians, with 1000 timings per process. Colour and shape identify five separately launched sessions; all 60 effects per group are plotted. Boxes show inclusive-interpolated quartiles and the pooled block median, with full observed min–max whiskers. Black diamonds show the median of five session medians, preserving the declared summary unit. Positive means faster; all adverse values remain. Boxes and ranges are descriptive, not confidence intervals. Offsets distinguish points without numerical meaning. Panels share a vertical scale within each figure; the direct-candidate figure uses a separate scale to expose the smaller effects. The spread includes input and measurement variation on one host and does not isolate input-only variance, establish portability or supply new leakage evidence.
+
+The original-reference figure shows every effect above zero. The direct figure retains the additional keygen benefit alongside mixed small effects and the repeated Kyber1024 decapsulation cost. Kyber1024 encapsulation is mixed around zero, qualifying the earlier small penalty. The [full record](random_seed_followup.md) gives the exact medians and signs; the visual spread alone is not a significance test.
+
+For reproduction, use the pinned plotting requirements and a new output directory:
+
+```sh
+PYTHONPATH=/tmp/kyber-exp010-plot-deps python3 -B analysis/build_random_seed_figures.py \
+  --runs results/EXP-010/RUN-0001 results/EXP-010/RUN-0002 \
+         results/EXP-010/RUN-0003 results/EXP-010/RUN-0004 results/EXP-010/RUN-0005 \
+  --output /tmp/exp010-figures-copy
+```
+
+The temporary dependency setup is documented in the [protocol](experiments/EXP-010-random-seeds.md). ACT-0025's explicitly labelled synthetic rendering checks remain support evidence only. These ACT-0026-reviewed figures use the actual measurements. Existing ACT-0020 figures remain the original closing-study artifacts and are not overwritten or pooled with the follow-up.

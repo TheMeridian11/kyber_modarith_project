@@ -1,0 +1,66 @@
+{
+  "activity_id": "ACT-0026",
+  "new_measurements_collected": false,
+  "reproduction_directory": "/tmp/kyber-exp010-act0026-tv4pcrde",
+  "checks": {
+    "analysis/random-seed-EXP-010": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/analyse_random_seed_comparison.py",
+        "--runs",
+        "results/EXP-010/RUN-0001",
+        "results/EXP-010/RUN-0002",
+        "results/EXP-010/RUN-0003",
+        "results/EXP-010/RUN-0004",
+        "results/EXP-010/RUN-0005",
+        "--output",
+        "/tmp/kyber-exp010-act0026-tv4pcrde/analysis"
+      ],
+      "exit_code": 0,
+      "stdout": "Verified five sessions, 60 seeds and all raw observations; wrote descriptive summaries.\n",
+      "stderr": "",
+      "files": {
+        "box-statistics.csv": "d8f25f2e11dea6a36225c912ab8b07142162712e9620ca4c5a2bdca3d23c2938",
+        "five-session-effects.csv": "d8462222d4a849fe6b0fcc10b047493c803663b8008291b785f8be4a599da0cb",
+        "paired-effects.csv": "59ba1c5182e27c0ec24ae721d57e2ef054439ec01bd197a968d67640ee5942aa",
+        "provenance.json": "cdaef5c864f3b29b9213695214660f45e0fd20bb48df1819122a8fbf5634badb",
+        "session-effects.csv": "6f1fb70c7da920b1639553da9bf379ddc1ce2e55364505783850f4fac7cc87f7"
+      },
+      "byte_identical": true
+    },
+    "analysis/figures/EXP-010": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "analysis/build_random_seed_figures.py",
+        "--runs",
+        "results/EXP-010/RUN-0001",
+        "results/EXP-010/RUN-0002",
+        "results/EXP-010/RUN-0003",
+        "results/EXP-010/RUN-0004",
+        "results/EXP-010/RUN-0005",
+        "--output",
+        "/tmp/kyber-exp010-act0026-tv4pcrde/figures"
+      ],
+      "exit_code": 0,
+      "stdout": "Generated two dot-and-box figures in SVG/PDF/PNG, plot data and provenance.\n",
+      "stderr": "",
+      "files": {
+        "box-statistics.csv": "d8f25f2e11dea6a36225c912ab8b07142162712e9620ca4c5a2bdca3d23c2938",
+        "exp010-direct-candidate-dot-box.csv": "c810a48cb43800264cd93e627599a7c768e6127a086941b71f594b2810926ed1",
+        "exp010-direct-candidate-dot-box.pdf": "74befe17094d056116a067a1168421421be9ea3c9a25f8d9a4427b5b01a5910c",
+        "exp010-direct-candidate-dot-box.png": "22b07114143a5566349c65191e687e08d638298c33bd1554fa03f152977bc488",
+        "exp010-direct-candidate-dot-box.svg": "23127c7bbdee81d38c51f54ee4930fe2e984957c048b5997bc6f87d70b93de72",
+        "exp010-original-reference-dot-box.csv": "08f9bd1a213824486464697907b45e0c267cacb5784addee2d599d6eab521d54",
+        "exp010-original-reference-dot-box.pdf": "42c75563c001a9e945f0e286b6584cd3843443151e8ab6f5af171514441b8cd3",
+        "exp010-original-reference-dot-box.png": "78ee30f0daf6fea752b29777277ebb4695c10fe63a82d4eb5b0cdb572e91d959",
+        "exp010-original-reference-dot-box.svg": "2a610d36f155c5816975047359c3f3d41ca6e6d3d0eabf0a82197faeb205fff5",
+        "five-session-effects.csv": "d8462222d4a849fe6b0fcc10b047493c803663b8008291b785f8be4a599da0cb",
+        "provenance.json": "34d4fae9f48881fa0d71e356ead7009940a2bca67dab565fcc17de6a0fe0215a"
+      },
+      "byte_identical": true
+    }
+  },
+  "visual_review": "accepted; see figure-review.json"
+}

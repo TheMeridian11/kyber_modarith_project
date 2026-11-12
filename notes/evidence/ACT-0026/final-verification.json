@@ -1,0 +1,72 @@
+{
+  "activity_id": "ACT-0026",
+  "status": "pass",
+  "preserved_file_count": 7040,
+  "preservation_all_match": true,
+  "preservation_scope": "All pre-existing results excluding ignored build directories, analysis outputs/code, scripts, tests, benchmarks, implementation files, prior evidence and experiment protocols.",
+  "selected_optimisation_files": 35,
+  "source_unchanged": true,
+  "frozen_support_files": 31,
+  "all_recorded_support_matches": true,
+  "old_and_new_raw_results_unchanged": true,
+  "existing_figures_unchanged": true,
+  "original_programme_not_pooled_with_followup": true,
+  "formal_measurements_executed_by_review": false,
+  "git_commands_executed": false,
+  "user_deleted_presentation_directory_absent": true,
+  "presentation_restored": false,
+  "audit_reproduced_byte_for_byte": true,
+  "audit_repeat_command": [
+    "/usr/bin/python3",
+    "-B",
+    "analysis/review_random_seed_comparison.py",
+    "--output",
+    "/tmp/kyber-exp010-review-repeat-18sl63s1/review.json"
+  ],
+  "audit_repeat_exit_code": 0,
+  "audit_repeat_stdout": "Accepted all five sessions: 1620000 raw duration rows, 45 binaries, 540 assembly bodies; independent arithmetic and saved graph data agree.\n",
+  "python_ast_check": "pass",
+  "whitespace_check": "pass",
+  "checked_local_markdown_links": 313,
+  "broken_links_in_reviewed_documents": [],
+  "modified_documents": [
+    "README.md",
+    "notes/benchmark_conditions.md",
+    "notes/experiment_register.md",
+    "notes/project_log.md",
+    "notes/final_candidate.md",
+    "notes/thesis_figures.md",
+    "notes/source_revisions.md",
+    "notes/practical_completion.md",
+    "notes/research_workflow.md",
+    "notes/git_reproduce.md",
+    "notes/final_comparison.md",
+    "notes/thesis_writing_plan.md"
+  ],
+  "new_report_and_audit": [
+    "notes/random_seed_followup.md",
+    "analysis/review_random_seed_comparison.py"
+  ],
+  "reviewed_file_sha256": {
+    "README.md": "91f4cde804489653267d15b0c1f67fe1d6aceecd5d0ea10aa88539547c2587c4",
+    "notes/benchmark_conditions.md": "d98cc830d3f8c1b8fea009e93adf6102ef24d22c6ee86342ad886e68125fdb66",
+    "notes/experiment_register.md": "5e4bd8900e1eb5b8ad86b93e865b64a1050a18c7f4af70d09ac3b24d7a0508a8",
+    "notes/project_log.md": "f6fcd526a16039dcde8ac0e248c2a40a4715d57940710f34aa6d242ead8a0efe",
+    "notes/final_candidate.md": "fe28c6e92aa7929c8e0f776af48d13d93c8486d19174120e0362394a6287120b",
+    "notes/thesis_figures.md": "0964ade1e9c5aacd4d7e1fd7a258d72df6c9d9afd49a176df1014628d488498e",
+    "notes/source_revisions.md": "c45d5520ded7e12e421a2b41a1b0243c22339736d833ca0187bd96b74e7184f6",
+    "notes/practical_completion.md": "c26dd91d26f8d1a761717c8fbea73b2a9fd8a741437cc2843ff66b6c3dda79b3",
+    "notes/research_workflow.md": "84c8018e69aef9529d5d9d424054b840a5a2233fa05231739702496d47bfa2a4",
+    "notes/git_reproduce.md": "bec4bd33923485180b8ad2712865bc7376f1e99aacc9ef951ef0cf5094ed83d8",
+    "notes/final_comparison.md": "10a35bffea0a902735b40d44b3050b5e46f7142ca25e9e4b9f9152d2f8cfe8fd",
+    "notes/thesis_writing_plan.md": "e86387ed6ea80b5ca9c5a94671416ce3aead24813175bc356a34051665f08e20",
+    "notes/random_seed_followup.md": "97c08e84125d8c1247a3dfea84bcefe1e1e54dfeaa604150b4462eb0b5133732",
+    "analysis/review_random_seed_comparison.py": "b65d7f385fa9c6fb7953ce04ed695f2fab92e8dfb8ade0f1b41868fbb72d4a32"
+  },
+  "evidence_sha256": {
+    "artifact-reproduction.json": "0161da453139292cc59c28ebd0c2219c19510fa1e4bf5c4a2cf9d57bc71dee45",
+    "exp010-five-session-review.json": "e585c77edcae5ef627dbea1d870292cba4527e0f5b0e5a13cf9c6a8a19857c45",
+    "figure-review.json": "34bba9b504152f522e82339261a2ff4204a6cd3f9179ac10a99a6ba2286d356a",
+    "preservation-before.json": "97df3bf6440d68f55ef60f27c5759ce1842fcb6604b7ea07f1db5245eb2c3ae0"
+  }
+}

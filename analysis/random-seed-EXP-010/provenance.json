@@ -1,0 +1,34 @@
+{
+  "record_type": "random-seed-five-session-analysis",
+  "experiment": "EXP-010",
+  "sessions": 5,
+  "unique_block_seeds": 60,
+  "duration_rows": 1620000,
+  "seed_plan_sha256": "487cea3b41de4c182b8d9fc325328beef0fb02de265dfde5e88a96c7f7ad96ef",
+  "inputs": {
+    "results/EXP-010/RUN-0001/manifest.json": "c3148f798a49e04a63a9e198de6790d7629684513e089b2b508a7f22391a89e0",
+    "results/EXP-010/RUN-0002/manifest.json": "13c68e07396703d0f205c919a53c3459aee710cbc10832371e538427044700e9",
+    "results/EXP-010/RUN-0003/manifest.json": "c3ea88a47fd1891118f5d808f62ba507ecb9b60612a0cc703879de16ea9f0224",
+    "results/EXP-010/RUN-0004/manifest.json": "f1c29d5f49dbb58868b3d84acc00b81ddc86bf6da150beaa162dcaef5527a954",
+    "results/EXP-010/RUN-0005/manifest.json": "fa5949325f72b1b09035ec2b38dd39969c29f7c45e8f54f1ad18b7c1a9e94d06"
+  },
+  "analysis_sha256": {
+    "scripts/analyse_random_seed_comparison.py": "a6e158f9a26cd2fbe3859398a2ad1dfc4012de87ceb8567406c3a2411e5c37a8",
+    "scripts/random_seed_common.py": "ed4360474a4ce8cd9536198e8e052d05deadbe735055c813927340c6e6676b7a",
+    "scripts/analyse_final_comparison.py": "5a0a9cc8e3dd7e0db825d97b108e2c75f11b5b2254655cc7488b3feb26f19403"
+  },
+  "source_commits": [
+    "397cd83520c6dc4c9cc2d4760494935e59ec3a21",
+    "397cd83520c6dc4c9cc2d4760494935e59ec3a21",
+    "397cd83520c6dc4c9cc2d4760494935e59ec3a21",
+    "397cd83520c6dc4c9cc2d4760494935e59ec3a21",
+    "397cd83520c6dc4c9cc2d4760494935e59ec3a21"
+  ],
+  "interpretation": "Median of five session medians. Pooled box statistics describe observed block spread only; no confidence interval, input-only variance or portability claim.",
+  "outputs": {
+    "box-statistics.csv": "d8f25f2e11dea6a36225c912ab8b07142162712e9620ca4c5a2bdca3d23c2938",
+    "paired-effects.csv": "59ba1c5182e27c0ec24ae721d57e2ef054439ec01bd197a968d67640ee5942aa",
+    "five-session-effects.csv": "d8462222d4a849fe6b0fcc10b047493c803663b8008291b785f8be4a599da0cb",
+    "session-effects.csv": "6f1fb70c7da920b1639553da9bf379ddc1ce2e55364505783850f4fac7cc87f7"
+  }
+}

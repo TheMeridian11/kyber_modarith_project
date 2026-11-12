@@ -1,0 +1,36 @@
+{
+  "experiment": "EXP-010",
+  "record_type": "random-seed-dot-box-figures",
+  "seed_plan_sha256": "487cea3b41de4c182b8d9fc325328beef0fb02de265dfde5e88a96c7f7ad96ef",
+  "sessions": 5,
+  "unique_block_seeds": 60,
+  "inputs": {
+    "results/EXP-010/RUN-0001/manifest.json": "c3148f798a49e04a63a9e198de6790d7629684513e089b2b508a7f22391a89e0",
+    "results/EXP-010/RUN-0002/manifest.json": "13c68e07396703d0f205c919a53c3459aee710cbc10832371e538427044700e9",
+    "results/EXP-010/RUN-0003/manifest.json": "c3ea88a47fd1891118f5d808f62ba507ecb9b60612a0cc703879de16ea9f0224",
+    "results/EXP-010/RUN-0004/manifest.json": "f1c29d5f49dbb58868b3d84acc00b81ddc86bf6da150beaa162dcaef5527a954",
+    "results/EXP-010/RUN-0005/manifest.json": "fa5949325f72b1b09035ec2b38dd39969c29f7c45e8f54f1ad18b7c1a9e94d06"
+  },
+  "code_sha256": {
+    "analysis/build_random_seed_figures.py": "eb39248fb7b41fbecf5972ed757f7f6796227abf448f40ce6d652a004d0ed543",
+    "scripts/analyse_random_seed_comparison.py": "a6e158f9a26cd2fbe3859398a2ad1dfc4012de87ceb8567406c3a2411e5c37a8",
+    "scripts/random_seed_common.py": "ed4360474a4ce8cd9536198e8e052d05deadbe735055c813927340c6e6676b7a",
+    "scripts/analyse_final_comparison.py": "5a0a9cc8e3dd7e0db825d97b108e2c75f11b5b2254655cc7488b3feb26f19403"
+  },
+  "python": "3.12.3",
+  "matplotlib": "3.10.8",
+  "quantiles": "statistics.quantiles(n=4, method='inclusive'); whiskers=min/max; all points retained",
+  "interpretation": "Pooled boxes describe spread; diamonds retain the median of five session estimates. No confidence intervals or input-only variance claim.",
+  "outputs": {
+    "box-statistics.csv": "d8f25f2e11dea6a36225c912ab8b07142162712e9620ca4c5a2bdca3d23c2938",
+    "exp010-direct-candidate-dot-box.csv": "c810a48cb43800264cd93e627599a7c768e6127a086941b71f594b2810926ed1",
+    "exp010-direct-candidate-dot-box.pdf": "74befe17094d056116a067a1168421421be9ea3c9a25f8d9a4427b5b01a5910c",
+    "exp010-direct-candidate-dot-box.png": "22b07114143a5566349c65191e687e08d638298c33bd1554fa03f152977bc488",
+    "exp010-direct-candidate-dot-box.svg": "23127c7bbdee81d38c51f54ee4930fe2e984957c048b5997bc6f87d70b93de72",
+    "exp010-original-reference-dot-box.csv": "08f9bd1a213824486464697907b45e0c267cacb5784addee2d599d6eab521d54",
+    "exp010-original-reference-dot-box.pdf": "42c75563c001a9e945f0e286b6584cd3843443151e8ab6f5af171514441b8cd3",
+    "exp010-original-reference-dot-box.png": "78ee30f0daf6fea752b29777277ebb4695c10fe63a82d4eb5b0cdb572e91d959",
+    "exp010-original-reference-dot-box.svg": "2a610d36f155c5816975047359c3f3d41ca6e6d3d0eabf0a82197faeb205fff5",
+    "five-session-effects.csv": "d8462222d4a849fe6b0fcc10b047493c803663b8008291b785f8be4a599da0cb"
+  }
+}

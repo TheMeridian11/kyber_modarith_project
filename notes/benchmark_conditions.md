@@ -2,7 +2,7 @@
 
 ## Evidence and scope
 
-This record describes the nine accepted performance runs: the original-reference pilot (EXP-000/RUN-0003), the five incremental comparisons (EXP-001/002/003/005/006, each RUN-0002), and the three final sessions (EXP-009/RUN-0001–0003). Their retained metadata and manifests agree on the environment, compiler identity and common build flags below. The [conditions review](evidence/ACT-0024/documentation-and-conditions-review.json) identifies each input and its hash.
+This record describes fourteen accepted performance runs: the original-reference pilot (EXP-000/RUN-0003), the five incremental comparisons (EXP-001/002/003/005/006, each RUN-0002), the three final sessions (EXP-009/RUN-0001–0003), and the five random-seed follow-up sessions (EXP-010/RUN-0001–0005). Their retained metadata and manifests agree on the environment, compiler identity and common build flags below. The [original conditions review](evidence/ACT-0024/documentation-and-conditions-review.json) covers the first nine runs; the [follow-up review](evidence/ACT-0026/exp010-five-session-review.json) covers the additional five.
 
 **Recorded** means captured during collection. **Retrospective** means recalled afterwards. **Current observation** describes the host inspected during this documentation review. These categories are kept separate: the original metadata's unknown manual fields have not been overwritten. metadata.json is a pre-execution snapshot; completed builds and measurements are established by manifest.json and the raw records.
 
@@ -80,9 +80,19 @@ The [fixed protocol](../tests/final_comparison_protocol.json) gives the complete
 | EXP-000/RUN-0003 pilot | Five original-reference processes; 15 processes and 45000 duration rows across all parameters | Seed 1 reused; no candidate comparison |
 | EXP-001/002/003/005/006, each RUN-0002 | Five matched predecessor/candidate pairs; 30 processes and 90000 rows per study across all parameters | Predecessor first in blocks 1/3/5, candidate first in 2/4; fixed parameter order 512/768/1024; seed 1 reused |
 | EXP-009/RUN-0001–0003 | Three sessions of 12 three-variant blocks; 324 processes and 972000 rows in total | Balanced variant orders, rotating parameter order and session/block seeds |
-| EXP-010 (planned; no collected runs) | Five sessions of 12 three-variant blocks; planned 540 processes and 1620000 rows | 60 saved random uint64 seeds, matched within each block; balanced orders shuffled before timing; rotating parameter order |
+| EXP-010/RUN-0001–0005 | Five accepted sessions of 12 three-variant blocks; 540 processes and 1620000 rows | 60 saved random uint64 seeds, matched within each block; balanced orders shuffled before timing; rotating parameter order |
 
 The earlier studies quantify conditional incremental changes. The [final comparison](final_comparison.md) supplies direct cumulative effects against the original and the additional EXP-003-to-EXP-005 effect. Their estimates must not be substituted for one another.
+
+## Recorded random-seed follow-up conditions
+
+All five EXP-010 sessions use the same recorded source/support checkpoint, [397cd83520c6](source_revisions.md), with identical evaluated source files, 31 recorded support-file identities, compiler/tool hashes and normal build flags. Nine fresh builds per session give 45 recorded executable identities, all verified against the retained local files. All 540 extracted production-function bodies match the previously accepted code. The selected working source remains the same 35-file EXP-005 snapshot.
+
+Each session contains 12 matched blocks per parameter, 100 warm-up and 1000 measured exchanges per process. The saved 60-seed plan uses distinct random uint64 values rather than EXP-009's sequential seed bases; it preserves identical fixtures within each matched comparison. Variant order is shuffled in advance while retaining each of the six permutations twice per parameter/session. The summary is the median of five session medians. Box plots describe the pooled 60 block effects and are not confidence intervals.
+
+All 540 processes report a 1 ns timer resolution. The ranges of minimum empty timer-pair costs are 11–12, 11–19, 11, 11 and 11–12 ns for sessions 1–5 respectively. No overhead is subtracted and no timings are removed. The recorded guest environment, affinity and compiler match the table above. Manual host OS, power mode, background load and physical placement fields remain unknown in all five metadata files; their session notes also leave breaks and thermal conditions unrecorded. The retrospective account below concerns EXP-009 and is not evidence of EXP-010's workload, power or break conditions.
+
+The [accepted follow-up](random_seed_followup.md) reports results separately from EXP-009. Repeating on this one WSL machine does not establish independent hosts or separate input variation from environmental variation.
 
 ## Retrospective account and current host observations
 

@@ -153,3 +153,13 @@ Eleven support tests and the read-only preflight passed. A separately labelled d
 Formal collection has not begun. Development checks are recorded separately and do not support new performance or security claims. The original EXP-009 evidence, final candidate and conclusions remain unchanged pending review of the follow-up results.
 
 Records: [EXP-010 protocol and execution](experiments/EXP-010-random-seeds.md), [saved seed plan](../tests/random_seed_plan.json), [support verification](evidence/ACT-0025/support-review.json).
+
+## ACT-0026 — Random-seed follow-up accepted
+
+All five predeclared EXP-010 sessions were accepted. Review covered 1125 successful steps, 2250 raw files, 45 warning-free builds, 45 executable hashes, 540 matching assembly bodies and 1620000 duration rows. Independent rational arithmetic verified the paired effects, session estimates and box statistics; all 15 per-session tables, five combined-analysis files and eleven figure/data/provenance files reproduced byte-for-byte. Both dot-and-box renderings were visually reviewed. The selected 35-file source and frozen collection support remained unchanged.
+
+Both candidates beat the original in every matched operation/block comparison: 540 positive pairs per candidate. EXP-005's median-of-five-session reductions were 10.93–17.84% for keygen, 16.09–19.87% for encap and 16.06–20.18% for decap across Kyber512/768/1024. This supports the scale and direction of the original gains without pooling the two studies. Additional keygen reductions over EXP-003 were 5.24%/0.20%/1.69%, with positive medians in all five sessions for each parameter.
+
+The follow-up refines the smaller tradeoffs. Kyber1024 decap remained slower than EXP-003 in every session, with a combined change of −0.405%. Kyber1024 encap was mixed: +0.091% overall, three positive and two negative sessions, and 31 faster versus 29 slower blocks. Its earlier small penalty therefore does not generalise consistently across the two studies. Kyber768 decap also had one slightly negative session. All adverse observations remain retained. EXP-005 remains selected, with EXP-003 an alternative for Kyber1024 decap or a simpler keygen path. Single-host conditions, unrecorded manual controls and inseparable input/measurement variation limit the conclusion; no new leakage claim is made.
+
+Records: [complete follow-up and thesis interpretation](random_seed_followup.md), [raw-data and source/build audit](evidence/ACT-0026/exp010-five-session-review.json), [artifact reproduction](evidence/ACT-0026/artifact-reproduction.json), [figure review](evidence/ACT-0026/figure-review.json), [preservation verification](evidence/ACT-0026/final-verification.json).

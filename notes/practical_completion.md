@@ -11,11 +11,12 @@ The planned experimental programme, final source review and repository integrati
 | Dynamic secret-flow assessment | 144 quiet target processes; all 18 deliberate positive controls detected | [EXP-007 result](runs/EXP-007-RUN-0001.md) |
 | Statistical timing screen | No target threshold crossing within the finite budget; all positive/negative controls meet criteria | [EXP-008 result](runs/EXP-008-RUN-0001.md) |
 | Final performance comparison | Three sessions completed; 972000 duration rows audited | [Complete comparison](final_comparison.md) |
+| Random-seed robustness follow-up | Five sessions completed; 60 saved random seeds and 1620000 duration rows audited; large original-reference gains repeat, smaller direct effects qualified | [Accepted follow-up](random_seed_followup.md) |
 | Candidate selection | Repeated additional keygen benefit balanced against small regressions and code/local-stack costs | [Selection rationale](final_candidate.md) |
 | Reproducible outputs | Final tables, audit reports and figures regenerate byte-for-byte | [Figures and captions](thesis_figures.md) |
 | Final source | Exact 35-file selected snapshot verified and integrated | [Source review](evidence/ACT-0022/selected-source-review.json) |
 
-The numerical and security findings retain their recorded scope. No further performance session or optimisation is required by the completed protocol. A fresh-environment rerun, formal constant-time proof, physical/fault testing, final ML-KEM certification and an AVX2 transfer study are not established by this work.
+The numerical and security findings retain their recorded scope. The original programme and separately declared random-seed follow-up are complete; no further performance session or optimisation is required by either protocol. ACT-0026 confirms the same selected source, reproduces the new dot-and-box graphs and retains the mixed/adverse observations. A fresh-environment rerun, formal constant-time proof, physical/fault testing, final ML-KEM certification and an AVX2 transfer study are not established by this work.
 
 ## Thesis preparation
 

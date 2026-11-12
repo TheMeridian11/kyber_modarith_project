@@ -4,7 +4,7 @@ Readable notes use short linked revision identifiers. This index retains the ful
 
 For thesis prose, use descriptive implementation names and explain the arithmetic change. Give the pinned upstream revision and final evaluated source identity once in Methods or a reproducibility appendix. Individual results-saving commits belong in the supporting repository, not repeated throughout the chapters.
 
-Source/support revisions identify the state used for collection; results archive revisions identify later preservation. A results commit is not the source that generated those measurements. The three frozen EXP-007/008/009 protocols retain their original bytes, including full IDs.
+Source/support revisions identify the state used for collection; results archive revisions identify later preservation. A results commit is not the source that generated those measurements. Frozen experiment protocols retain their original bytes, including full IDs. The EXP-010 source/support identity below is recorded in all five manifests; this review did not query or change Git refs.
 
 ## Revision index
 
@@ -16,6 +16,7 @@ Source/support revisions identify the state used for collection; results archive
 | 2a8388c1701dcf66cb5dfa6906921f63bc574c55 | Original-reference reduction-count results archive |
 | 337e4ba6ff1fc8783c47ea7c34dc2ee52c1e8712 | EXP-001 timing results archive |
 | 3757df58a02408fb9a701869cc1f3ac6f6159a8d | Original-reference reduction-count source/support |
+| 397cd83520c6dc4c9cc2d4760494935e59ec3a21 | All five EXP-010 random-seed sessions: recorded source/support checkpoint; selected arithmetic unchanged |
 | 3edd5af5991927164edd4aacebfcbee00b8064e7 | Pinned upstream Kyber reference |
 | 42d68a7da90f5d19d0539a0e8825a24852121e41 | EXP-006 timing results archive |
 | 4bd813ed71a90c7722275dc802336852214a5388 | Selected EXP-005 source snapshot; initial EXP-005 timing source/support |
@@ -49,4 +50,4 @@ Source/support revisions identify the state used for collection; results archive
 | e1d3734be7d890e0697678a8ae336e0a8a210f92 | Original-reference functional-validation results archive |
 | eb4c34586c7531bc87dcd165e952d3278cea0b5e | EXP-005 initial timing results archive |
 
-See the [repository and reproduction record](git_handoff.md), [experiment register](experiment_register.md) and [selected-source manifest](../analysis/final_candidate.json) for context and file-level identities.
+See the [repository and reproduction record](git_reproduce.md), [experiment register](experiment_register.md) and [selected-source manifest](../analysis/final_candidate.json) for context and file-level identities.

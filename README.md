@@ -34,12 +34,12 @@ Correctness and compatibility checks passed within the tested inputs and reviewe
 - [Source revision index](notes/source_revisions.md): full commit IDs behind the shortened references.
 - [Reduction map](notes/reduction_map.md) and [literature record](notes/literature.md): arithmetic boundaries and idea provenance.
 - [Thesis figures and reproduction](notes/thesis_figures.md): PDF/SVG/PNG outputs, captions and plot data.
-- [Repository state and reproducibility](notes/git_handoff.md): selected source and retained-data analysis commands.
+- [Repository state and reproducibility](notes/git_reproduce.md): selected source and retained-data analysis commands.
 - [Completion record](notes/practical_completion.md) and [thesis writing plan](notes/thesis_writing_plan.md).
 
 ## Source and repository layout
 
-The selected working source matches all 35 EXP-005 files pinned in [final_candidate.json](analysis/final_candidate.json), originally measured from [4bd813ed71a9](notes/source_revisions.md). The [repository record](notes/git_handoff.md) documents the integrated source/results history and reproduction checks.
+The selected working source matches all 35 EXP-005 files pinned in [final_candidate.json](analysis/final_candidate.json), originally measured from [4bd813ed71a9](notes/source_revisions.md). The [repository record](notes/git_reproduce.md) documents the integrated source/results history and reproduction checks.
 
 - external/kyber-official/: pinned upstream source.
 - implementation/kyber-baseline-ref/: unchanged comparison source.
@@ -49,6 +49,8 @@ The selected working source matches all 35 EXP-005 files pinned in [final_candid
 - analysis/: reproducible calculations, figures and plot data.
 - notes/: methods, experiment/run records, interpretation and retained audit evidence.
 
-The original experimental programme and final-source review are complete. EXP-004 remains a deferred interaction study, not an omitted failure. The earlier variants, mixed results and failed development attempts remain traceable in the detailed records. Three hash-pinned protocol documents retain their precollection wording; the accepted run records give their completed outcomes.
+The original experimental programme and final-source review are complete. EXP-004 remains a deferred interaction study, not an omitted failure. The earlier variants, mixed results and failed development attempts remain traceable in the detailed records. The frozen experiment protocols retain their precollection wording; the accepted result records give their completed outcomes.
 
-An additional [random-seed follow-up, EXP-010](notes/experiments/EXP-010-random-seeds.md), is prepared for collection. It compares the same three implementations using 60 saved random seeds across five separately launched sessions, with matched inputs and balanced order. Dot-and-box graphs will display every trial and distinguish observed block spread from the median of five session estimates. No EXP-010 performance result is available yet; the accepted findings above remain those of EXP-009.
+The separate [random-seed follow-up, EXP-010](notes/random_seed_followup.md), is complete: 60 saved random seeds, five separately launched sessions and 1.62 million recorded durations. Every matched original-reference comparison favoured both optimised implementations. The selected implementation's five-session median time reductions are 10.93–17.84% for key generation, 16.09–19.87% for encapsulation and 16.06–20.18% for decapsulation across the three parameter sets. These are separate follow-up estimates; the table above remains the original EXP-009 result.
+
+The additional keygen benefit over EXP-003 persists, at 5.24%, 0.20% and 1.69%. The Kyber1024 decapsulation cost repeats at 0.41%, while encapsulation is mixed and close to zero rather than a consistent penalty. The [dot-and-box graphs](notes/thesis_figures.md#act-0026-accepted-random-seed-dot-and-box-figures) retain every effect and distinguish observed block spread from the median of five session estimates. This supports performance robustness on the recorded platform; the descriptive spread is not a confidence interval or new leakage evidence.

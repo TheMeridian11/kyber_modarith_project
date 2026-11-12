@@ -28,6 +28,21 @@ python3 -B analysis/review_final_comparison.py --output /tmp/exp009-final-audit-
 
 [Figure instructions](thesis_figures.md) describe the pinned plotting environment and new output directories. ACT-0020 reproduced the three combined-analysis files, three audit reports and thirteen final figure/data/provenance files byte-for-byte.
 
+## Random-seed follow-up
+
+All five EXP-010 sessions are accepted in ACT-0026, with the source/support checkpoint recorded as [397cd83520c6](source_revisions.md). This is a recorded collection identity, not a claim about current local or remote refs. The [result record](random_seed_followup.md) reports 1620000 audited duration rows and separates the follow-up from EXP-009. The original results, source files and graphs remain unchanged. Current archival/remote status must be established through the normal manual Git workflow; no Git command was executed during this review.
+
+To reproduce the analysis into a new directory:
+
+```sh
+python3 -B scripts/analyse_random_seed_comparison.py \
+  --runs results/EXP-010/RUN-0001 results/EXP-010/RUN-0002 \
+         results/EXP-010/RUN-0003 results/EXP-010/RUN-0004 results/EXP-010/RUN-0005 \
+  --output /tmp/exp010-analysis-copy
+```
+
+The full [review script](../analysis/review_random_seed_comparison.py) additionally checks the retained ignored binaries and restored sources and independently recalculates the arithmetic. It therefore requires those build artifacts. The analysis and [graph reproduction](thesis_figures.md#act-0026-accepted-random-seed-dot-and-box-figures) require retained data but do not rerun benchmarks. All five analysis files and eleven graph/data/provenance files reproduced byte-for-byte in ACT-0026.
+
 ## Revision references
 
 The [revision index](source_revisions.md) keeps the full commit IDs used by these records. Short linked IDs in the readable notes preserve traceability without repeating long hashes. This file provides reproduction and archive guidance; it is not a list of unfinished Git work. References to staging instructions in frozen protocols describe their collection-time workflow; this file now records the completed state.

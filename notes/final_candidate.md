@@ -2,7 +2,7 @@
 
 ## Decision and exact identity
 
-**EXP-005 is the final thesis candidate**, selected after all three predeclared comparison sessions. It combines the earlier arithmetic changes with the key-generation error-vector reduction deferral. EXP-003 remains a substantial comparator and a reasonable alternative for workloads prioritising Kyber1024 encapsulation/decapsulation or a simpler keygen path. EXP-006 is retained as the mixed/adverse trial.
+**EXP-005 is the final thesis candidate**, selected after all three predeclared comparison sessions and retained after the separate five-session random-seed follow-up. It combines the earlier arithmetic changes with the key-generation error-vector reduction deferral. EXP-003 remains a substantial comparator and a reasonable alternative for workloads prioritising Kyber1024 decapsulation or a simpler keygen path. The follow-up makes the smaller encapsulation difference less consistent than in the original study. EXP-006 is retained as the mixed/adverse trial.
 
 The selected source is the 35-file implementation/kyber-optimised-ref snapshot at **[4bd813ed71a9](source_revisions.md)**, pinned file-by-file in the [selection manifest](../analysis/final_candidate.json). This is cumulative EXP-001 fused base multiplication, EXP-002 wide vector dot product, EXP-003 staged inverse NTT and EXP-005 keygen error-vector reduction deferral. The original is upstream [3edd5af59919](source_revisions.md). I do not describe this historical Kyber implementation as certified final-standard ML-KEM.
 
@@ -44,8 +44,14 @@ EXP-005 retains the keygen canary load/check/failure call, endbr64 and stack pro
 
 The raw error-vector change has a caller-specific bound/consumer argument and sampled equivalence evidence. It does not permit removing reductions globally, widening the admissible input contract arbitrarily or claiming unchanged physical leakage when intermediate bit patterns change. EXP-008 directly tested original/EXP-003/EXP-005; EXP-007 directly tested original/EXP-005/EXP-006. I retain that distinction and all unassessed physical, fault, full-program and other-platform properties.
 
+## Random-seed follow-up
+
+The [accepted EXP-010 study](random_seed_followup.md) repeats the same three-source comparison with 60 randomly selected block seeds across five sessions. Every original-reference pair favours both candidates. EXP-005's additional keygen medians are +5.24%/+0.20%/+1.69%, positive in all five session estimates for each parameter. The Kyber768 increment is smaller than before and includes adverse individual blocks; the candidate is not uniformly faster than EXP-003 in every observation.
+
+Kyber1024 decapsulation retains a cost of 0.405% in the five-session median, with all five session estimates negative. Kyber1024 encapsulation has a small +0.091% median, three positive and two negative sessions, and 31 faster versus 29 slower blocks. The earlier three-session encapsulation penalty is therefore retained as an EXP-009 observation, not generalised as a consistent cross-study cost. Kyber768 decapsulation also has one slightly negative session. These findings support retaining EXP-005 for its additional keygen benefit while qualifying the smaller control-operation effects. Source, generated-code costs and the security assessment remain unchanged; the follow-up does not add leakage evidence.
+
 ## Thesis emphasis and stopping decision
 
 I give EXP-003 substantial emphasis because its inverse-transform scheduling produced a clear incremental encapsulation/decapsulation benefit and is already part of EXP-005. The final cumulative improvement must not be attributed wholly to EXP-005's last change. EXP-006 is also valuable evidence: fewer reductions alone did not ensure better measured performance. Together, the progression, adverse trial and layered security assessment answer the study's performance/correctness/tradeoff questions.
 
-All predeclared performance and security collection is complete. The stopping decision retains both candidates and the adverse trial without adding outcome-dependent timing sessions or hybrid variants. ACT-0022 verified the restored source; the ACT-0023 repository check records its completed integration. The [repository record](git_handoff.md) documents the source and reproduction commands.
+The original predeclared performance/security collection and the separately declared EXP-010 follow-up are complete. The stopping decision retains both candidates and the adverse trial without adding outcome-dependent timing sessions or hybrid variants. ACT-0022 verified the restored source; ACT-0026 confirms that it is unchanged. The [repository record](git_reproduce.md) documents the source and reproduction commands.

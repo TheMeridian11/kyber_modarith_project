@@ -1,0 +1,48 @@
+{
+  "activity_id": "ACT-0026",
+  "experiment": "EXP-010",
+  "status": "accepted",
+  "figures": [
+    "analysis/figures/EXP-010/exp010-original-reference-dot-box.png",
+    "analysis/figures/EXP-010/exp010-direct-candidate-dot-box.png"
+  ],
+  "visual_review": {
+    "both_pngs_inspected": true,
+    "labels_legends_captions_readable": true,
+    "no_observed_clipping": true,
+    "adverse_effects_visible": true,
+    "zero_lines_present": true,
+    "session_markers_distinguishable": true,
+    "box_and_session_summary_definitions_explicit": true
+  },
+  "data_review": {
+    "original_reference_points": 1080,
+    "direct_candidate_points": 540,
+    "box_groups": 27,
+    "observations_per_group": 60,
+    "all_five_sessions_present": true,
+    "no_dropped_effects": true,
+    "quartiles": "Inclusive linear interpolation, independently recalculated with rational arithmetic.",
+    "whiskers": "Full observed minimum and maximum.",
+    "diamond": "Median of five session medians; distinct from the pooled block median.",
+    "confidence_intervals": false
+  },
+  "raw_data_audit": "notes/evidence/ACT-0026/exp010-five-session-review.json",
+  "reproduced_files": 11,
+  "byte_identical": true,
+  "existing_figures_modified": false,
+  "output_sha256": {
+    "box-statistics.csv": "d8f25f2e11dea6a36225c912ab8b07142162712e9620ca4c5a2bdca3d23c2938",
+    "exp010-direct-candidate-dot-box.csv": "c810a48cb43800264cd93e627599a7c768e6127a086941b71f594b2810926ed1",
+    "exp010-direct-candidate-dot-box.pdf": "74befe17094d056116a067a1168421421be9ea3c9a25f8d9a4427b5b01a5910c",
+    "exp010-direct-candidate-dot-box.png": "22b07114143a5566349c65191e687e08d638298c33bd1554fa03f152977bc488",
+    "exp010-direct-candidate-dot-box.svg": "23127c7bbdee81d38c51f54ee4930fe2e984957c048b5997bc6f87d70b93de72",
+    "exp010-original-reference-dot-box.csv": "08f9bd1a213824486464697907b45e0c267cacb5784addee2d599d6eab521d54",
+    "exp010-original-reference-dot-box.pdf": "42c75563c001a9e945f0e286b6584cd3843443151e8ab6f5af171514441b8cd3",
+    "exp010-original-reference-dot-box.png": "78ee30f0daf6fea752b29777277ebb4695c10fe63a82d4eb5b0cdb572e91d959",
+    "exp010-original-reference-dot-box.svg": "2a610d36f155c5816975047359c3f3d41ca6e6d3d0eabf0a82197faeb205fff5",
+    "five-session-effects.csv": "d8462222d4a849fe6b0fcc10b047493c803663b8008291b785f8be4a599da0cb",
+    "provenance.json": "34d4fae9f48881fa0d71e356ead7009940a2bca67dab565fcc17de6a0fe0215a"
+  },
+  "interpretation": "Both candidates improve every original-reference pair; the direct contrast retains adverse points, persistent keygen gains, mixed Kyber1024 encapsulation and a repeated Kyber1024 decapsulation cost."
+}
