@@ -2,7 +2,7 @@
 
 This honours project evaluates changes to modular-reduction scheduling and intermediate arithmetic in the reference C implementation of Kyber. The study covers key generation, encapsulation and decapsulation for Kyber512, Kyber768 and Kyber1024, with separate correctness, performance and implementation-security assessments.
 
-The original source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber), pinned to [3edd5af59919](notes/source_revisions.md). The results concern that implementation and the recorded platform; they do not establish final-standard ML-KEM conformance or superiority over other optimised implementations.
+The original source is [pq-crystals/kyber](https://github.com/pq-crystals/kyber). The results concern that implementation and the recorded platform; they do not establish final-standard ML-KEM conformance or superiority over other optimised implementations.
 
 Validation combined bounds on intermediate values with deterministic comparisons against the original implementation, invalid-input checks and undefined-behaviour sanitizer tests. Separate instrumented builds counted reduction calls, while ordinary builds supplied performance measurements. Benchmarks ran under Ubuntu WSL on an Intel Core i9-12900KS, using matched input fixtures and controlled process ordering. Raw measurements, build identities and analysis scripts are retained so the reported tables and figures can be traced back to the recorded runs.
 
